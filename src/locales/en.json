@@ -1,0 +1,77 @@
+{
+  "tables": {
+    "title": "Tables",
+    "id": "ID",
+    "number": "Number",
+    "capacity": "Capacity",
+    "location": "Location",
+    "state": "State",
+    "active": "Active",
+    "kitchenOrderCurrentId": "Kitchen Order Current ID"
+  },
+  "dishes": {
+    "title": "Dishes",
+    "id": "ID",
+    "code": "Code",
+    "name": "Name",
+    "description": "Description",
+    "price": "Price",
+    "outstanding": "Outstanding",
+    "categoryId": "Category ID",
+    "categoryName": "Category Name"
+  },
+  "dishesCategories": {
+    "title": "Dishes Categories",
+    "id": "ID",
+    "name": "Name",
+    "order": "Order",
+    "active": "Active"
+  },
+  "kitchenOrders": {
+    "title": "Kitchen Orders",
+    "id": "ID",
+    "number": "Number",
+    "tableId": "Table ID",
+    "tableNumber": "Table Number",
+    "typeService": "Type Service",
+    "state": "State",
+    "observations": "Observations",
+    "userId": "User ID",
+    "dateCreated": "Date Created",
+    "hourReady": "Hour Ready",
+    "hourDelivered": "Hour Delivered",
+    "preparationTime": "Preparation Time"
+  },
+  "kitchenOrderItems": {
+    "title": "Kitchen Order Items",
+    "id": "ID",
+    "kitchenOrderId": "Kitchen Order ID",
+    "dishId": "Dish ID",
+    "dishName": "Dish Name",
+    "quantity": "Quantity",
+    "unitPrice": "Unit Price",
+    "totalPrice": "Total Price",
+    "state": "State",
+    "observations": "Observations"
+  },
+  "kitchenLocks": {
+    "title": "Kitchen Locks",
+    "id": "ID",
+    "restaurantId": "Restaurant ID",
+    "stateLocked": "State Locked",
+    "hashPassword": "Hash Password",
+    "lastLocked": "Last Locked",
+    "lastUnlocked": "Last Unlocked",
+    "failedAttempts": "Failed Attempts",
+    "lockedUntil": "Locked Until"
+  },
+  "historyStateKitchenOrders": {
+    "title": "History State Kitchen Orders",
+    "id": "ID",
+    "kitchenOrderId": "Kitchen Order ID",
+    "previousState": "Previous State",
+    "newState": "New State",
+    "dateChange": "Date Change",
+    "observation": "Observation"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "tables": {
+    "title": "餐桌",
+    "id": "編號 (ID)",
+    "number": "枱號",
+    "capacity": "容納人數",
+    "location": "位置",
+    "state": "狀態",
+    "active": "啟用",
+    "kitchenOrderCurrentId": "當前廚房訂單編號"
+  },
+  "dishes": {
+    "title": "菜式",
+    "id": "編號 (ID)",
+    "code": "代碼",
+    "name": "菜名",
+    "description": "描述",
+    "price": "價錢",
+    "outstanding": "精選",
+    "categoryId": "分類編號",
+    "categoryName": "分類名稱"
+  },
+  "dishesCategories": {
+    "title": "菜式分類",
+    "id": "編號 (ID)",
+    "name": "名稱",
+    "order": "排序",
+    "active": "啟用"
+  },
+  "kitchenOrders": {
+    "title": "廚房訂單",
+    "id": "編號 (ID)",
+    "number": "單號",
+    "tableId": "枱編號",
+    "tableNumber": "枱號",
+    "typeService": "服務類型",
+    "state": "狀態",
+    "observations": "備註",
+    "userId": "用戶編號",
+    "dateCreated": "創建日期",
+    "hourReady": "出菜時間",
+    "hourDelivered": "送達時間",
+    "preparation_time": "製作時長"
+  },
+  "kitchenOrderItems": {
+    "title": "廚房訂單項目",
+    "id": "編號 (ID)",
+    "kitchenOrderId": "廚房訂單編號",
+    "dishId": "菜式編號",
+    "dishName": "菜名",
+    "quantity": "數量",
+    "unitPrice": "單價",
+    "totalPrice": "總價",
+    "state": "狀態",
+    "observations": "備註"
+  },
+  "kitchenLocks": {
+    "title": "廚房鎖定",
+    "id": "編號 (ID)",
+    "restaurantId": "餐廳編號",
+    "stateLocked": "鎖定狀態",
+    "hashPassword": "密碼雜湊",
+    "lastLocked": "最後鎖定時間",
+    "lastUnlocked": "最後解鎖時間",
+    "failedAttempts": "嘗試失敗次數",
+    "lockedUntil": "鎖定直到"
+  },
+  "historyStateKitchenOrders": {
+    "title": "廚房訂單狀態歷史",
+    "id": "編號 (ID)",
+    "kitchenOrderId": "廚房訂單編號",
+    "previousState": "先前狀態",
+    "newState": "新狀態",
+    "dateChange": "變更日期",
+    "observation": "備註"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "tables": {
+    "title": "Mesas",
+    "id": "ID",
+    "number": "Número",
+    "capacity": "Capacidad",
+    "location": "Ubicación",
+    "state": "Estado",
+    "active": "Activo",
+    "kitchenOrderCurrentId": "ID Comanda Actual"
+  },
+  "dishes": {
+    "title": "Platos",
+    "id": "ID",
+    "code": "Código",
+    "name": "Nombre",
+    "description": "Descripción",
+    "price": "Precio",
+    "outstanding": "Destacado",
+    "categoryId": "ID Categoría",
+    "categoryName": "Nombre Categoría"
+  },
+  "dishesCategories": {
+    "title": "Categorías de Platos",
+    "id": "ID",
+    "name": "Nombre",
+    "order": "Orden",
+    "active": "Activo"
+  },
+  "kitchenOrders": {
+    "title": "Comandas de Cocina",
+    "id": "ID",
+    "number": "Número",
+    "tableId": "ID Mesa",
+    "tableNumber": "Número Mesa",
+    "typeService": "Tipo Servicio",
+    "state": "Estado",
+    "observations": "Observaciones",
+    "userId": "ID Usuario",
+    "dateCreated": "Fecha Creación",
+    "hourReady": "Hora Listo",
+    "hourDelivered": "Hora Entregado",
+    "preparationTime": "Tiempo Preparación"
+  },
+  "kitchenOrderItems": {
+    "title": "Items de Comanda Cocina",
+    "id": "ID",
+    "kitchenOrderId": "ID Comanda Cocina",
+    "dishId": "ID Plato",
+    "dishName": "Nombre Plato",
+    "quantity": "Cantidad",
+    "unitPrice": "Precio Unitario",
+    "totalPrice": "Precio Total",
+    "state": "Estado",
+    "observations": "Observaciones"
+  },
+  "kitchenLocks": {
+    "title": "Bloqueos de Cocina",
+    "id": "ID",
+    "restaurantId": "ID Restaurante",
+    "stateLocked": "Estado Bloqueado",
+    "hashPassword": "Hash Contraseña",
+    "lastLocked": "Último Bloqueo",
+    "lastUnlocked": "Último Desbloqueo",
+    "failedAttempts": "Intentos Fallidos",
+    "lockedUntil": "Bloqueado Hasta"
+  },
+  "historyStateKitchenOrders": {
+    "title": "Historial de Estados de Comandas de Cocina",
+    "id": "ID",
+    "kitchenOrderId": "ID Comanda Cocina",
+    "previousState": "Estado Anterior",
+    "newState": "Estado Nuevo",
+    "dateChange": "Fecha Cambio",
+    "observation": "Observación"
+  }
+}
