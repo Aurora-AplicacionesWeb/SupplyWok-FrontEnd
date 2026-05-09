@@ -1,0 +1,25 @@
+:root {
+  --primary-color: #C21204;
+  --secondary-color: #E9B824;
+  --text-color: #1a1a1a;
+  --bg-color: #EDEBE5;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', system-ui, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', system-ui, sans-serif;
+}
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
