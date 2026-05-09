@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 
 /**
- * @component SidebarMenuComponent
+ * @component SidebarMenu
  * @summary Main navigation sidebar for the application, displaying the branding and main modules.
  * @author Aurora Development Team
  */
