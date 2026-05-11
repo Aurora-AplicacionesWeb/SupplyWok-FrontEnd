@@ -1,5 +1,6 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import { useRoute } from 'vue-router';
 
 /**
  * @component SidebarMenu
@@ -15,8 +16,7 @@ import { ref } from 'vue';
  * @property {string} iconOn - Path to the active icon image.
  */
 
-/** @type {import('vue').Ref<string>} Reactive state for the currently active menu item ID. */
-const activeItem = ref('dashboard');
+const route = useRoute();
 
 /** @type {import('vue').Ref<string>} Reactive state for the restaurant name. */
 const restaurantName = ref('GRAN DRAGÓN CHIFA');
@@ -26,26 +26,19 @@ const currentPlan = ref('Premium');
 
 /** @type {MenuItem[]} Array containing the main navigation items. */
 const menuItems = [
-  { id: 'dashboard', i18nKey: 'shared.sidebar.dashboard', iconOff: '/images/icons/dashboard-icon.svg', iconOn: '/images/icons/dashboard-on-icon.svg' },
-  { id: 'inventory', i18nKey: 'shared.sidebar.inventory', iconOff: '/images/icons/inventory-icon.svg', iconOn: '/images/icons/inventory-on-icon.svg' },
-  { id: 'orders', i18nKey: 'shared.sidebar.orders', iconOff: '/images/icons/orders-icon.svg', iconOn: '/images/icons/orders-on-icon.svg' },
-  { id: 'kitchen-tickets', i18nKey: 'shared.sidebar.kitchen-tickets', iconOff: '/images/icons/kitchen-ticket-icon.svg', iconOn: '/images/icons/kitchen-tickets-on-icon.svg' },
-  { id: 'suppliers', i18nKey: 'shared.sidebar.suppliers', iconOff: '/images/icons/suppliers-icon.svg', iconOn: '/images/icons/suppliers-on-icon.svg' },
-  { id: 'tables-and-occupancy', i18nKey: 'shared.sidebar.tables-and-occupancy', iconOff: '/images/icons/tables-and-occupancy-icon.svg', iconOn: '/images/icons/tables-and-occupancy-on-icon.svg' },
-  { id: 'alerts', i18nKey: 'shared.sidebar.alerts', iconOff: '/images/icons/alerts-icon.svg', iconOn: '/images/icons/alerts-on-icon.svg' },
-  { id: 'reports', i18nKey: 'shared.sidebar.reports', iconOff: '/images/icons/reports-icon.svg', iconOn: '/images/icons/reports-on-icon.svg' },
-  { id: 'configuration', i18nKey: 'shared.sidebar.configuration', iconOff: '/images/icons/configuration-icon.svg', iconOn: '/images/icons/configuration-on-icon.svg' },
-  { id: 'subscription', i18nKey: 'shared.sidebar.subscription', iconOff: '/images/icons/subscripcion-icon.svg', iconOn: '/images/icons/subscription-on-icon.svg' }
+  { id: 'dashboard', path: '/dashboard', i18nKey: 'shared.sidebar.dashboard', iconOff: '/images/icons/dashboard-icon.svg', iconOn: '/images/icons/dashboard-on-icon.svg' },
+  { id: 'inventory', path: '/inventory', i18nKey: 'shared.sidebar.inventory', iconOff: '/images/icons/inventory-icon.svg', iconOn: '/images/icons/inventory-on-icon.svg' },
+  { id: 'orders', path: '/orders', i18nKey: 'shared.sidebar.orders', iconOff: '/images/icons/orders-icon.svg', iconOn: '/images/icons/orders-on-icon.svg' },
+  { id: 'kitchen-tickets', path: '/kitchen-tickets', i18nKey: 'shared.sidebar.kitchen-tickets', iconOff: '/images/icons/kitchen-ticket-icon.svg', iconOn: '/images/icons/kitchen-tickets-on-icon.svg' },
+  { id: 'suppliers', path: '/suppliers', i18nKey: 'shared.sidebar.suppliers', iconOff: '/images/icons/suppliers-icon.svg', iconOn: '/images/icons/suppliers-on-icon.svg' },
+  { id: 'tables-and-occupancy', path: '/tables-and-occupancy', i18nKey: 'shared.sidebar.tables-and-occupancy', iconOff: '/images/icons/tables-and-occupancy-icon.svg', iconOn: '/images/icons/tables-and-occupancy-on-icon.svg' },
+  { id: 'alerts', path: '/alerts', i18nKey: 'shared.sidebar.alerts', iconOff: '/images/icons/alerts-icon.svg', iconOn: '/images/icons/alerts-on-icon.svg' },
+  { id: 'reports', path: '/reports', i18nKey: 'shared.sidebar.reports', iconOff: '/images/icons/reports-icon.svg', iconOn: '/images/icons/reports-on-icon.svg' },
+  { id: 'configuration', path: '/configuration', i18nKey: 'shared.sidebar.configuration', iconOff: '/images/icons/configuration-icon.svg', iconOn: '/images/icons/configuration-on-icon.svg' },
+  { id: 'subscription', path: '/subscription', i18nKey: 'shared.sidebar.subscription', iconOff: '/images/icons/subscripcion-icon.svg', iconOn: '/images/icons/subscription-on-icon.svg' }
 ];
 
-/**
- * Sets the given item ID as the active selection in the menu.
- * @param {string} itemId - The ID of the menu item to activate.
- * @returns {void}
- */
-const selectItem = (itemId) => {
-  activeItem.value = itemId;
-};
+const activePath = computed(() => route.path);
 </script>
 
 <template>
@@ -72,16 +65,16 @@ const selectItem = (itemId) => {
           v-for="item in menuItems" 
           :key="item.id"
           class="sidebar__item"
-          :class="{ 'sidebar__item--active': activeItem === item.id }"
+          :class="{ 'sidebar__item--active': activePath === item.path }"
         >
-          <button class="sidebar__button" @click="selectItem(item.id)">
+          <RouterLink class="sidebar__button" :to="item.path">
             <img 
-              :src="activeItem === item.id ? item.iconOn : item.iconOff" 
+              :src="activePath === item.path ? item.iconOn : item.iconOff" 
               :alt="`${$t(item.i18nKey)} icon`" 
               class="sidebar__icon"
             />
             <span class="sidebar__label">{{ $t(item.i18nKey) }}</span>
-          </button>
+          </RouterLink>
         </li>
       </ul>
     </nav>
@@ -194,6 +187,7 @@ const selectItem = (itemId) => {
   border: none;
   cursor: pointer;
   text-align: left;
+  text-decoration: none;
   transition: all 0.2s ease;
 }
 

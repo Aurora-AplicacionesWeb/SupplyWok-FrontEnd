@@ -1,8 +1,7 @@
 <script setup>
-
-import Layout from "./shared/presentation/components/layout.vue";
+import Layout from './shared/presentation/components/layout.vue';
 </script>
 
 <template>
- <layout/>
+  <Layout />
 </template>
