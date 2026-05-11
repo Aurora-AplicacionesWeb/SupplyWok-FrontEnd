@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
-import { PurchaseOrderApi } from '../../../copy-frontend-supplywok/src/supply-and-purchasing/infrastructure/purchase-order-api.js';
-import { PurchaseOrderAssembler } from '../../../copy-frontend-supplywok/src/supply-and-purchasing/infrastructure/purchase-order.assembler.js';
-import i18n from '../../../copy-frontend-supplywok/src/i18n.js';
+import { PurchaseOrderApi } from '../infrastructure/purchase-order-api.js';
+import { PurchaseOrderAssembler } from '../infrastructure/purchase-order.assembler.js';
+import i18n from '../../i18n.js';
 
 const purchaseOrderApi = new PurchaseOrderApi();
 const translate = (key) => i18n.global.t(key);
@@ -141,7 +141,7 @@ const usePurchaseOrderStore = defineStore('supply-and-purchasing', () => {
     /**
      * Validates a purchase order entity before persistence.
      *
-     * @param {import('../../../copy-frontend-supplywok/src/supply-and-purchasing/domain/model/purchase-order.entity.js').PurchaseOrder} purchaseOrder - Purchase order entity to validate.
+     * @param {import('../domain/model/purchase-order.entity.js').PurchaseOrder} purchaseOrder - Purchase order entity to validate.
      * @returns {boolean} Whether the purchase order is valid.
      */
     function validatePurchaseOrder(purchaseOrder) {
@@ -183,7 +183,7 @@ const usePurchaseOrderStore = defineStore('supply-and-purchasing', () => {
     /**
      * Creates a purchase order through infrastructure and appends it to local state.
      *
-     * @param {import('../../../copy-frontend-supplywok/src/supply-and-purchasing/domain/model/purchase-order.entity.js').PurchaseOrder} purchaseOrder - Purchase order entity to persist.
+     * @param {import('../domain/model/purchase-order.entity.js').PurchaseOrder} purchaseOrder - Purchase order entity to persist.
      * @returns {Promise<boolean>}
      */
     async function addPurchaseOrder(purchaseOrder) {

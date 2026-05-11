@@ -4,7 +4,7 @@ import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
-import { PurchaseOrder } from '../../../../copy-frontend-supplywok/src/supply-and-purchasing/domain/model/purchase-order.entity.js';
+import { PurchaseOrder } from '../../domain/model/purchase-order.entity.js';
 import usePurchaseOrderStore from '../../application/purchase-order.store.js';
 
 const emit = defineEmits(['saved']);
