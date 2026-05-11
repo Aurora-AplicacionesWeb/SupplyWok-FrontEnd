@@ -1,6 +1,6 @@
-const ordersPage = () => import('../../../copy-frontend-supplywok/src/supply-and-purchasing/presentation/pages/orders-page.vue');
-const purchaseOrderFormPage = () => import('../../../copy-frontend-supplywok/src/supply-and-purchasing/presentation/pages/purchase-order-form-page.vue');
-const suppliersPage = () => import('../../../copy-frontend-supplywok/src/supply-and-purchasing/presentation/pages/suppliers-page.vue');
+const ordersPage = () => import('./pages/orders-page.vue');
+const purchaseOrderFormPage = () => import('./pages/purchase-order-form-page.vue');
+const suppliersPage = () => import('./pages/suppliers-page.vue');
 
 /**
  * Supply and Purchasing presentation routes.
