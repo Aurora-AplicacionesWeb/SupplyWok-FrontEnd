@@ -15,6 +15,9 @@
   },
   "shared": {
     "sidebar": {
+      "restaurant": "餐厅",
+      "supplier": "供应商",
+      "current-plan": "当前计划",
       "dashboard": "仪表板",
       "inventory": "库存",
       "orders": "订单",
@@ -24,7 +27,11 @@
       "alerts": "警报",
       "reports": "报告",
       "configuration": "配置",
-      "subscription": "订阅"
+      "subscription": "订阅",
+      "clients": "我的客户",
+      "forecast": "需求预测",
+      "catalog": "产品目录",
+      "delivery": "配送计划"
     }
   }
 }

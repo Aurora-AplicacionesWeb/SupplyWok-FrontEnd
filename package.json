@@ -9,13 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "pinia": "^3.0.4",
     "@primeuix/themes": "^2.0.3",
     "axios": "^1.15.2",
     "primeflex": "^4.0.0",
     "primeicons": "^7.0.0",
     "primevue": "^4.5.5",
     "vue": "^3.5.32",
-    "vue-i18n": "^11.4.0"
+    "vue-i18n": "^11.4.0",
+    "vue-router": "^4.6.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.6",

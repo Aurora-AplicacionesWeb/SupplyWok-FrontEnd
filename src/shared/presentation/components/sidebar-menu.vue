@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import {useI18n} from "vue-i18n";
 
 /**
  * @component SidebarMenu
@@ -21,22 +22,39 @@ const activeItem = ref('dashboard');
 /** @type {import('vue').Ref<string>} Reactive state for the restaurant name. */
 const restaurantName = ref('GRAN DRAGÓN CHIFA');
 
+const {t}=useI18n();
+
 /** @type {import('vue').Ref<string>} Reactive state for the current subscription plan. */
 const currentPlan = ref('Premium');
 
+const userRole = ref('supplier')
+
 /** @type {MenuItem[]} Array containing the main navigation items. */
-const menuItems = [
-  { id: 'dashboard', i18nKey: 'shared.sidebar.dashboard', iconOff: '/images/icons/dashboard-icon.svg', iconOn: '/images/icons/dashboard-on-icon.svg' },
-  { id: 'inventory', i18nKey: 'shared.sidebar.inventory', iconOff: '/images/icons/inventory-icon.svg', iconOn: '/images/icons/inventory-on-icon.svg' },
-  { id: 'orders', i18nKey: 'shared.sidebar.orders', iconOff: '/images/icons/orders-icon.svg', iconOn: '/images/icons/orders-on-icon.svg' },
-  { id: 'kitchen-tickets', i18nKey: 'shared.sidebar.kitchen-tickets', iconOff: '/images/icons/kitchen-ticket-icon.svg', iconOn: '/images/icons/kitchen-tickets-on-icon.svg' },
-  { id: 'suppliers', i18nKey: 'shared.sidebar.suppliers', iconOff: '/images/icons/suppliers-icon.svg', iconOn: '/images/icons/suppliers-on-icon.svg' },
-  { id: 'tables-and-occupancy', i18nKey: 'shared.sidebar.tables-and-occupancy', iconOff: '/images/icons/tables-and-occupancy-icon.svg', iconOn: '/images/icons/tables-and-occupancy-on-icon.svg' },
-  { id: 'alerts', i18nKey: 'shared.sidebar.alerts', iconOff: '/images/icons/alerts-icon.svg', iconOn: '/images/icons/alerts-on-icon.svg' },
-  { id: 'reports', i18nKey: 'shared.sidebar.reports', iconOff: '/images/icons/reports-icon.svg', iconOn: '/images/icons/reports-on-icon.svg' },
-  { id: 'configuration', i18nKey: 'shared.sidebar.configuration', iconOff: '/images/icons/configuration-icon.svg', iconOn: '/images/icons/configuration-on-icon.svg' },
-  { id: 'subscription', i18nKey: 'shared.sidebar.subscription', iconOff: '/images/icons/subscripcion-icon.svg', iconOn: '/images/icons/subscription-on-icon.svg' }
-];
+const menuItems = {
+  restaurant: [
+  { id: 'dashboard', i18nKey: 'shared.sidebar.dashboard', iconOff: '/images/icons/dashboard-icon.svg', iconOn: '/images/icons/dashboard-on-icon.svg', path: '/restaurant/dashboard' },
+  { id: 'inventory', i18nKey: 'shared.sidebar.inventory', iconOff: '/images/icons/inventory-icon.svg', iconOn: '/images/icons/inventory-on-icon.svg', path: '/restaurant/inventory' },
+  { id: 'orders', i18nKey: 'shared.sidebar.orders', iconOff: '/images/icons/orders-icon.svg', iconOn: '/images/icons/orders-on-icon.svg', path: '/restaurant/orders' },
+  { id: 'kitchen-tickets', i18nKey: 'shared.sidebar.kitchen-tickets', iconOff: '/images/icons/kitchen-ticket-icon.svg', iconOn: '/images/icons/kitchen-tickets-on-icon.svg', path: '/restaurant/kitchen' },
+  { id: 'suppliers', i18nKey: 'shared.sidebar.suppliers', iconOff: '/images/icons/suppliers-icon.svg', iconOn: '/images/icons/suppliers-on-icon.svg', path: '/restaurant/suppliers' },
+  { id: 'tables-and-occupancy', i18nKey: 'shared.sidebar.tables-and-occupancy', iconOff: '/images/icons/tables-and-occupancy-icon.svg', iconOn: '/images/icons/tables-and-occupancy-on-icon.svg', path: '/restaurant/tables' },
+  { id: 'alerts', i18nKey: 'shared.sidebar.alerts', iconOff: '/images/icons/alerts-icon.svg', iconOn: '/images/icons/alerts-on-icon.svg', path: '/restaurant/alerts' },
+  { id: 'reports', i18nKey: 'shared.sidebar.reports', iconOff: '/images/icons/reports-icon.svg', iconOn: '/images/icons/reports-on-icon.svg', path: '/restaurant/reports' },
+  { id: 'configuration', i18nKey: 'shared.sidebar.configuration', iconOff: '/images/icons/configuration-icon.svg', iconOn: '/images/icons/configuration-on-icon.svg', path: '/restaurant/configuration' },
+  { id: 'subscription', i18nKey: 'shared.sidebar.subscription', iconOff: '/images/icons/subscripcion-icon.svg', iconOn: '/images/icons/subscription-on-icon.svg', path: '/restaurant/subscription' },
+
+  ],
+  supplier:[
+    { id: 'dashboard', i18nKey: 'shared.sidebar.dashboard', iconOff: '/images/icons/dashboard-icon.svg', iconOn: '/images/icons/dashboard-on-icon.svg', path: '/supplier/dashboard' },
+    { id: 'orders', i18nKey: 'shared.sidebar.orders', iconOff: '/images/icons/orders-icon.svg', iconOn: '/images/icons/orders-on-icon.svg', path: '/supplier/orders' },
+    { id: 'clients', i18nKey: 'shared.sidebar.clients', iconOff: '/images/icons/clients-icon.svg', iconOn: '/images/icons/clients-icon.svg', path: '/supplier/clients' },
+    { id: 'forecast', i18nKey: 'shared.sidebar.forecast', iconOff: '/images/icons/forecast-icon.svg', iconOn: '/images/icons/forecast-icon.svg', path: '/supplier/forecast' },
+    { id: 'catalog', i18nKey: 'shared.sidebar.catalog', iconOff: '/images/icons/catalog-icon.svg', iconOn: '/images/icons/catalog-icon.svg', path: '/supplier/catalog' },
+    { id: 'alerts', i18nKey: 'shared.sidebar.alerts', iconOff: '/images/icons/alerts-icon.svg', iconOn: '/images/icons/alerts-on-icon.svg', path: '/supplier/alerts' },
+    { id: 'configuration', i18nKey: 'shared.sidebar.configuration', iconOff: '/images/icons/configuration-icon.svg', iconOn: '/images/icons/configuration-on-icon.svg', path: '/supplier/configuration' },
+    { id: 'subscription', i18nKey: 'shared.sidebar.subscription', iconOff: '/images/icons/subscripcion-icon.svg', iconOn: '/images/icons/subscription-on-icon.svg', path: '/supplier/subscription' }
+  ]
+};
 
 /**
  * Sets the given item ID as the active selection in the menu.
@@ -49,7 +67,7 @@ const selectItem = (itemId) => {
 </script>
 
 <template>
-  <aside class="sidebar">
+  <aside class="sidebar":class="{ 'sidebar--supplier': userRole === 'supplier' }">
     <!-- Branding Section -->
     <div class="sidebar__brand">
       <img src="/images/supplywok-logo.png" alt="SupplyWok Logo" class="sidebar__logo" />
@@ -61,23 +79,23 @@ const selectItem = (itemId) => {
 
     <!-- Status Tags Section -->
     <div class="sidebar__status">
-      <span class="sidebar__tag sidebar__tag--role">Restaurant</span>
-      <span class="sidebar__tag sidebar__tag--plan">Current plan: {{ currentPlan }}</span>
+      <span class="sidebar__tag sidebar__tag--role">{{ userRole === 'supplier' ? t('shared.sidebar.supplier') : t('shared.sidebar.restaurant')}}</span>
+      <span class="sidebar__tag sidebar__tag--plan">{{t('shared.sidebar.current-plan')}} {{ currentPlan }}</span>
     </div>
 
     <!-- Navigation Menu -->
     <nav class="sidebar__nav" aria-label="Main Navigation">
       <ul class="sidebar__menu">
-        <li 
-          v-for="item in menuItems" 
+        <li
+          v-for="item in menuItems[userRole]"
           :key="item.id"
           class="sidebar__item"
           :class="{ 'sidebar__item--active': activeItem === item.id }"
         >
           <button class="sidebar__button" @click="selectItem(item.id)">
-            <img 
-              :src="activeItem === item.id ? item.iconOn : item.iconOff" 
-              :alt="`${$t(item.i18nKey)} icon`" 
+            <img
+              :src="activeItem === item.id ? item.iconOn : item.iconOff"
+              :alt="`${$t(item.i18nKey)} icon`"
               class="sidebar__icon"
             />
             <span class="sidebar__label">{{ $t(item.i18nKey) }}</span>
@@ -242,5 +260,10 @@ const selectItem = (itemId) => {
 
 .sidebar__item--active .sidebar__icon {
   opacity: 1;
+}
+
+.sidebar--supplier .sidebar__tag--role,
+.sidebar--supplier .sidebar__item--active::before {
+  background-color: #B76A13;
 }
 </style>

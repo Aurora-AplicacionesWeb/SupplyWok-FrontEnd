@@ -15,6 +15,9 @@
   },
   "shared": {
     "sidebar": {
+      "restaurant": "Restaurante",
+      "supplier": "Proveedor",
+      "current-plan": "Plan actual:",
       "dashboard": "Dashboard",
       "inventory": "Inventario",
       "orders": "Pedidos",
@@ -24,7 +27,11 @@
       "alerts": "Alertas",
       "reports": "Reportes",
       "configuration": "Configuración",
-      "subscription": "Suscripción"
+      "subscription": "Suscripción",
+      "clients": "Mis Clientes",
+      "forecast": "Pronóstico de Demanda",
+      "catalog": "Catálogo de Productos",
+      "delivery": "Planificación de Entregas"
     }
   }
 }
