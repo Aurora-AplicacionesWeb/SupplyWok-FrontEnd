@@ -95,7 +95,7 @@ const selectItem = (itemId) => {
           <button class="sidebar__button" @click="selectItem(item.id)">
             <img
               :src="activeItem === item.id ? item.iconOn : item.iconOff"
-              :alt="`${$t(item.i18nKey)} icon`"
+              :alt="`${ t(item.i18nKey)} icon`"
               class="sidebar__icon"
             />
             <span class="sidebar__label">{{ $t(item.i18nKey) }}</span>
