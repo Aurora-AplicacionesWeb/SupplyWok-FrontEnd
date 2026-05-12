@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import restaurantManagementRoutes from './restaurant-management/presentation/restaurant-management-routes.js';
 import supplyAndPurchasingRoutes from './supply-and-purchasing/presentation/supply-and-purchasing-routes.js';
 
 const placeholderPage = () => import('./shared/presentation/views/placeholder-page.vue');
@@ -7,18 +8,19 @@ const pageNotFound = () => import('./shared/presentation/views/page-not-found.vu
 const placeholderRoutes = [
     { path: '/dashboard', name: 'dashboard', component: placeholderPage, meta: { title: 'Dashboard' } },
     { path: '/inventory', name: 'inventory', component: placeholderPage, meta: { title: 'Inventory' } },
-    { path: '/kitchen-tickets', name: 'kitchen-tickets', component: placeholderPage, meta: { title: 'Kitchen Tickets' } },
     { path: '/alerts', name: 'alerts', component: placeholderPage, meta: { title: 'Alerts' } },
     { path: '/reports', name: 'reports', component: placeholderPage, meta: { title: 'Reports' } },
     { path: '/configuration', name: 'configuration', component: placeholderPage, meta: { title: 'Configuration' } },
     { path: '/subscription', name: 'subscription', component: placeholderPage, meta: { title: 'Subscription' } },
-    { path: '/tables-and-occupancy', name: 'tables-and-occupancy', component: placeholderPage, meta: { title: 'Tables and Occupancy' } }
+    { path: '/kitchen-tickets', name: 'kitchen-tickets', component: placeholderPage, meta: { title: 'Kitchen Tickets' } },
+
 ];
 
 const routes = [
     { path: '/', redirect: '/orders' },
     ...placeholderRoutes,
     ...supplyAndPurchasingRoutes,
+    ...restaurantManagementRoutes,
     { path: '/:pathMatch(.*)*', name: 'not-found', component: pageNotFound, meta: { title: 'Page Not Found' } }
 ];
 

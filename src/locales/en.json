@@ -113,5 +113,189 @@
       "unit-required": "Unit is required.",
       "unit-price-invalid": "Price must be a valid number greater than zero."
     }
+  },
+  "tables": {
+    "title": "Tables",
+    "id": "ID",
+    "number": "Number",
+    "capacity": "Capacity",
+    "location": "Location",
+    "state": "State",
+    "active": "Active",
+    "kitchenOrderCurrentId": "Kitchen Order Current ID"
+  },
+  "dishes": {
+    "title": "Dishes",
+    "id": "ID",
+    "code": "Code",
+    "name": "Name",
+    "description": "Description",
+    "price": "Price",
+    "outstanding": "Outstanding",
+    "categoryId": "Category ID",
+    "categoryName": "Category Name"
+  },
+  "dishesCategories": {
+    "title": "Dishes Categories",
+    "id": "ID",
+    "name": "Name",
+    "order": "Order",
+    "active": "Active"
+  },
+  "kitchenOrders": {
+    "title": "Kitchen Orders",
+    "id": "ID",
+    "number": "Number",
+    "tableId": "Table ID",
+    "tableNumber": "Table Number",
+    "typeService": "Type Service",
+    "state": "State",
+    "observations": "Observations",
+    "userId": "User ID",
+    "dateCreated": "Date Created",
+    "hourReady": "Hour Ready",
+    "hourDelivered": "Hour Delivered",
+    "preparationTime": "Preparation Time"
+  },
+  "kitchenOrderItems": {
+    "title": "Kitchen Order Items",
+    "id": "ID",
+    "kitchenOrderId": "Kitchen Order ID",
+    "dishId": "Dish ID",
+    "dishName": "Dish Name",
+    "quantity": "Quantity",
+    "unitPrice": "Unit Price",
+    "totalPrice": "Total Price",
+    "state": "State",
+    "observations": "Observations"
+  },
+  "kitchenLocks": {
+    "title": "Kitchen Locks",
+    "id": "ID",
+    "restaurantId": "Restaurant ID",
+    "stateLocked": "State Locked",
+    "hashPassword": "Hash Password",
+    "lastLocked": "Last Locked",
+    "lastUnlocked": "Last Unlocked",
+    "failedAttempts": "Failed Attempts",
+    "lockedUntil": "Locked Until"
+  },
+  "restaurantManagement": {
+    "dishMenuPage": {
+      "kicker": "Menu",
+      "title": "Dish Menu",
+      "description": "Browse all available dishes. Click on a dish to add it to a new order.",
+      "searchPlaceholder": "Search dishes...",
+      "addToOrder": "Add to Order",
+      "price": "Price",
+      "outstanding": "Featured",
+      "noDishes": "No dishes available",
+      "category": "Category",
+      "categories": {
+        "rice": "Rice",
+        "noodles": "Noodles",
+        "soups": "Soups",
+        "special_dishes": "Special Dishes",
+        "desserts": "Desserts",
+        "drinks": "Drinks"
+      }
+    },
+    "createKitchenOrderPage": {
+      "kicker": "New Order",
+      "title": "Create Kitchen Order",
+      "description": "Create a new kitchen order for table service or to take home.",
+      "tableSelection": "Table Selection",
+      "serviceType": "Service Type",
+      "tableService": "Table Service",
+      "toTakeHome": "To Take Home",
+      "selectTable": "Select a table",
+      "table": "Table",
+      "dishes": "Dishes",
+      "selectedDishes": "Selected Dishes",
+      "observations": "Observations",
+      "observationsPlaceholder": "Any special instructions...",
+      "totalItems": "Total Items",
+      "totalAmount": "Total Amount",
+      "createOrder": "Create Order",
+      "noItems": "No dishes added yet",
+      "addDishes": "Add from Menu",
+      "quantity": "Qty",
+      "item": "Item",
+      "unitPrice": "Price",
+      "freeTables": "Free Tables",
+      "back": "Back to Kitchen Tickets",
+      "updateOrder": "Update Order"
+    },
+    "kitchenTicketsPage": {
+      "kicker": "Kitchen",
+      "title": "Kitchen Tickets",
+      "description": "Manage kitchen orders and update their status.",
+      "pending": "Pending",
+      "inPreparation": "In Preparation",
+      "ready": "Ready",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled",
+      "allOrders": "All Orders",
+      "markInPreparation": "Start Preparing",
+      "markReady": "Mark as Ready",
+      "markDelivered": "Mark as Delivered",
+      "cancel": "Cancel",
+      "newTicket": "New Ticket",
+      "noOrders": "No orders in this status",
+      "orderNumber": "Order",
+      "tableNumber": "Table",
+      "typeService": "Service",
+      "items": "Items",
+      "observations": "Obs",
+      "dateCreated": "Created",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this order?"
+    },
+    "tablesAndOccupancyPage": {
+      "kicker": "Tables",
+      "title": "Tables and Occupancy",
+      "description": "View the occupancy status of all tables in the restaurant.",
+      "free": "Available",
+      "occupied": "Busy",
+      "all": "All",
+      "capacity": "Capacity",
+      "location": "Location",
+      "tableNumber": "Table",
+      "state": "Status",
+      "noTables": "No tables available",
+      "totalTables": "Total Tables",
+      "freeTables": "Available",
+      "occupiedTables": "Busy",
+      "searchPlaceholder": "Search tables by number or location...",
+      "allLocations": "All Locations",
+      "locations": {
+        "main_hall": "Main Hall",
+        "terrace": "Terrace",
+        "bar": "Bar"
+      }
+    },
+    "shared": {
+      "status": {
+        "pending": "Pending",
+        "in_preparation": "In Preparation",
+        "ready": "Ready",
+        "delivered": "Delivered",
+        "cancelled": "Cancelled"
+      },
+      "serviceType": {
+        "table_service": "Table Service",
+        "to_take_home": "To Take Home"
+      }
+    }
+  },
+  "historyStateKitchenOrders": {
+    "title": "History State Kitchen Orders",
+    "id": "ID",
+    "kitchenOrderId": "Kitchen Order ID",
+    "previousState": "Previous State",
+    "newState": "New State",
+    "dateChange": "Date Change",
+    "observation": "Observation"
   }
 }

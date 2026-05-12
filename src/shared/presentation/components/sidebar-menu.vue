@@ -26,16 +26,16 @@ const currentPlan = ref('Premium');
 
 /** @type {MenuItem[]} Array containing the main navigation items. */
 const menuItems = [
-  { id: 'dashboard', path: '/dashboard', i18nKey: 'shared.sidebar.dashboard', iconOff: '/images/icons/dashboard-icon.svg', iconOn: '/images/icons/dashboard-on-icon.svg' },
-  { id: 'inventory', path: '/inventory', i18nKey: 'shared.sidebar.inventory', iconOff: '/images/icons/inventory-icon.svg', iconOn: '/images/icons/inventory-on-icon.svg' },
-  { id: 'orders', path: '/orders', i18nKey: 'shared.sidebar.orders', iconOff: '/images/icons/orders-icon.svg', iconOn: '/images/icons/orders-on-icon.svg' },
-  { id: 'kitchen-tickets', path: '/kitchen-tickets', i18nKey: 'shared.sidebar.kitchen-tickets', iconOff: '/images/icons/kitchen-ticket-icon.svg', iconOn: '/images/icons/kitchen-tickets-on-icon.svg' },
-  { id: 'suppliers', path: '/suppliers', i18nKey: 'shared.sidebar.suppliers', iconOff: '/images/icons/suppliers-icon.svg', iconOn: '/images/icons/suppliers-on-icon.svg' },
-  { id: 'tables-and-occupancy', path: '/tables-and-occupancy', i18nKey: 'shared.sidebar.tables-and-occupancy', iconOff: '/images/icons/tables-and-occupancy-icon.svg', iconOn: '/images/icons/tables-and-occupancy-on-icon.svg' },
-  { id: 'alerts', path: '/alerts', i18nKey: 'shared.sidebar.alerts', iconOff: '/images/icons/alerts-icon.svg', iconOn: '/images/icons/alerts-on-icon.svg' },
-  { id: 'reports', path: '/reports', i18nKey: 'shared.sidebar.reports', iconOff: '/images/icons/reports-icon.svg', iconOn: '/images/icons/reports-on-icon.svg' },
-  { id: 'configuration', path: '/configuration', i18nKey: 'shared.sidebar.configuration', iconOff: '/images/icons/configuration-icon.svg', iconOn: '/images/icons/configuration-on-icon.svg' },
-  { id: 'subscription', path: '/subscription', i18nKey: 'shared.sidebar.subscription', iconOff: '/images/icons/subscripcion-icon.svg', iconOn: '/images/icons/subscription-on-icon.svg' }
+  { id: 'dashboard', path: '/dashboard', i18nKey: 'Dashboard', iconOff: '/images/icons/dashboard-icon.svg', iconOn: '/images/icons/dashboard-on-icon.svg' },
+  { id: 'inventory', path: '/inventory', i18nKey: 'Inventory', iconOff: '/images/icons/inventory-icon.svg', iconOn: '/images/icons/inventory-on-icon.svg' },
+  { id: 'orders', path: '/orders', i18nKey: 'Orders', iconOff: '/images/icons/orders-icon.svg', iconOn: '/images/icons/orders-on-icon.svg' },
+  { id: 'kitchen-tickets', path: '/kitchen-tickets', i18nKey: 'Kitchen Tickets', iconOff: '/images/icons/kitchen-ticket-icon.svg', iconOn: '/images/icons/kitchen-tickets-on-icon.svg' },
+  { id: 'suppliers', path: '/suppliers', i18nKey: 'Suppliers', iconOff: '/images/icons/suppliers-icon.svg', iconOn: '/images/icons/suppliers-on-icon.svg' },
+  { id: 'tables-and-occupancy', path: '/tables-and-occupancy', i18nKey: 'Tables And Occupancy', iconOff: '/images/icons/tables-and-occupancy-icon.svg', iconOn: '/images/icons/tables-and-occupancy-on-icon.svg' },
+  { id: 'alerts', path: '/alerts', i18nKey: 'Alerts', iconOff: '/images/icons/alerts-icon.svg', iconOn: '/images/icons/alerts-on-icon.svg' },
+  { id: 'reports', path: '/reports', i18nKey: 'Reports', iconOff: '/images/icons/reports-icon.svg', iconOn: '/images/icons/reports-on-icon.svg' },
+  { id: 'configuration', path: '/configuration', i18nKey: 'Configuration', iconOff: '/images/icons/configuration-icon.svg', iconOn: '/images/icons/configuration-on-icon.svg' },
+  { id: 'subscription', path: '/subscription', i18nKey: 'Subscription', iconOff: '/images/icons/subscripcion-icon.svg', iconOn: '/images/icons/subscription-on-icon.svg' }
 ];
 
 const activePath = computed(() => route.path);

@@ -1,5 +1,6 @@
 <script setup>
 import SidebarMenu from './sidebar-menu.vue';
+import LanguageSwitcher from './language-switcher.vue';
 </script>
 
 <template>
@@ -8,6 +9,7 @@ import SidebarMenu from './sidebar-menu.vue';
     <div class="layout__main">
       <header class="layout__header">
         <strong class="layout__brand">SupplyWok</strong>
+        <LanguageSwitcher />
       </header>
       <main class="layout__content">
         <router-view />
@@ -50,5 +52,6 @@ import SidebarMenu from './sidebar-menu.vue';
   flex: 1;
   background-color: #EDEBE5;
   padding: 24px;
+  overflow-y: auto;
 }
 </style>

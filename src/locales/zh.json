@@ -113,5 +113,189 @@
       "unit-required": "单位为必填项。",
       "unit-price-invalid": "价格必须是大于零的有效数字。"
     }
+  },
+  "tables": {
+    "title": "餐桌",
+    "id": "編號 (ID)",
+    "number": "枱號",
+    "capacity": "容納人數",
+    "location": "位置",
+    "state": "狀態",
+    "active": "啟用",
+    "kitchenOrderCurrentId": "當前廚房訂單編號"
+  },
+  "dishes": {
+    "title": "菜式",
+    "id": "編號 (ID)",
+    "code": "代碼",
+    "name": "菜名",
+    "description": "描述",
+    "price": "價錢",
+    "outstanding": "精選",
+    "categoryId": "分類編號",
+    "categoryName": "分類名稱"
+  },
+  "dishesCategories": {
+    "title": "菜式分類",
+    "id": "編號 (ID)",
+    "name": "名稱",
+    "order": "排序",
+    "active": "啟用"
+  },
+  "kitchenOrders": {
+    "title": "廚房訂單",
+    "id": "編號 (ID)",
+    "number": "單號",
+    "tableId": "枱編號",
+    "tableNumber": "枱號",
+    "typeService": "服務類型",
+    "state": "狀態",
+    "observations": "備註",
+    "userId": "用戶編號",
+    "dateCreated": "創建日期",
+    "hourReady": "出菜時間",
+    "hourDelivered": "送達時間",
+    "preparation_time": "製作時長"
+  },
+  "kitchenOrderItems": {
+    "title": "廚房訂單項目",
+    "id": "編號 (ID)",
+    "kitchenOrderId": "廚房訂單編號",
+    "dishId": "菜式編號",
+    "dishName": "菜名",
+    "quantity": "數量",
+    "unitPrice": "單價",
+    "totalPrice": "總價",
+    "state": "狀態",
+    "observations": "備註"
+  },
+  "kitchenLocks": {
+    "title": "廚房鎖定",
+    "id": "編號 (ID)",
+    "restaurantId": "餐廳編號",
+    "stateLocked": "鎖定狀態",
+    "hashPassword": "密碼雜湊",
+    "lastLocked": "最後鎖定時間",
+    "lastUnlocked": "最後解鎖時間",
+    "failedAttempts": "嘗試失敗次數",
+    "lockedUntil": "鎖定直到"
+  },
+  "restaurantManagement": {
+    "dishMenuPage": {
+      "kicker": "菜單",
+      "title": "菜式菜單",
+      "description": "瀏覽所有可用菜式。點擊菜式添加到新訂單。",
+      "searchPlaceholder": "搜索菜式...",
+      "addToOrder": "添加到訂單",
+      "price": "價錢",
+      "outstanding": "精選",
+      "noDishes": "暫無可用菜式",
+      "category": "分類",
+      "categories": {
+        "rice": "米飯",
+        "noodles": "麵條",
+        "soups": "湯品",
+        "special_dishes": "特色菜",
+        "desserts": "甜點",
+        "drinks": "飲料"
+      }
+    },
+    "createKitchenOrderPage": {
+      "kicker": "新訂單",
+      "title": "創建廚房訂單",
+      "description": "創建新的堂食或外賣廚房訂單。",
+      "tableSelection": "選擇餐桌",
+      "serviceType": "服務類型",
+      "tableService": "堂食",
+      "toTakeHome": "外賣",
+      "selectTable": "選擇餐桌",
+      "table": "餐桌",
+      "dishes": "菜式",
+      "selectedDishes": "已選菜式",
+      "observations": "備註",
+      "observationsPlaceholder": "特殊要求...",
+      "totalItems": "總數量",
+      "totalAmount": "總金額",
+      "createOrder": "創建訂單",
+      "noItems": "尚未添加菜式",
+      "addDishes": "從菜單添加",
+      "quantity": "數量",
+      "item": "項目",
+      "unitPrice": "單價",
+      "freeTables": "空桌",
+      "back": "返回廚房訂單",
+      "updateOrder": "更新訂單"
+    },
+    "kitchenTicketsPage": {
+      "kicker": "廚房",
+      "title": "廚房訂單",
+      "description": "管理廚房訂單並更新其狀態。",
+      "pending": "待處理",
+      "inPreparation": "製作中",
+      "ready": "已完成",
+      "delivered": "已送達",
+      "cancelled": "已取消",
+      "allOrders": "所有訂單",
+      "markInPreparation": "開始製作",
+      "markReady": "標記為完成",
+      "markDelivered": "標記為送達",
+      "cancel": "取消",
+      "newTicket": "新票據",
+      "noOrders": "此狀態下無訂單",
+      "orderNumber": "訂單",
+      "tableNumber": "餐桌",
+      "typeService": "服務",
+      "items": "項目",
+      "observations": "備註",
+      "dateCreated": "創建時間",
+      "edit": "編輯",
+      "delete": "刪除",
+      "confirmDelete": "確定要刪除此訂單嗎？"
+    },
+    "tablesAndOccupancyPage": {
+      "kicker": "餐桌",
+      "title": "餐桌與 occupancy",
+      "description": "查看餐廳所有餐桌的佔用狀態。",
+      "free": "可用",
+      "occupied": "忙碌",
+      "all": "全部",
+      "capacity": "容納人數",
+      "location": "位置",
+      "tableNumber": "餐桌",
+      "state": "狀態",
+      "noTables": "暫無可用餐桌",
+      "totalTables": "總餐桌數",
+      "freeTables": "可用",
+      "occupiedTables": "忙碌",
+      "searchPlaceholder": "按餐桌號碼或位置搜索...",
+      "allLocations": "所有位置",
+      "locations": {
+        "main_hall": "主廳",
+        "terrace": "露台",
+        "bar": "酒吧"
+      }
+    },
+    "shared": {
+      "status": {
+        "pending": "待處理",
+        "in_preparation": "製作中",
+        "ready": "已完成",
+        "delivered": "已送達",
+        "cancelled": "已取消"
+      },
+      "serviceType": {
+        "table_service": "堂食",
+        "to_take_home": "外賣"
+      }
+    }
+  },
+  "historyStateKitchenOrders": {
+    "title": "廚房訂單狀態歷史",
+    "id": "編號 (ID)",
+    "kitchenOrderId": "廚房訂單編號",
+    "previousState": "先前狀態",
+    "newState": "新狀態",
+    "dateChange": "變更日期",
+    "observation": "備註"
   }
 }

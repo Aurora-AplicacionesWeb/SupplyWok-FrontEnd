@@ -113,5 +113,189 @@
       "unit-required": "La unidad es obligatoria.",
       "unit-price-invalid": "El precio debe ser un número válido mayor que cero."
     }
+  },
+  "tables": {
+    "title": "Mesas",
+    "id": "ID",
+    "number": "Número",
+    "capacity": "Capacidad",
+    "location": "Ubicación",
+    "state": "Estado",
+    "active": "Activo",
+    "kitchenOrderCurrentId": "ID Comanda Actual"
+  },
+  "dishes": {
+    "title": "Platos",
+    "id": "ID",
+    "code": "Código",
+    "name": "Nombre",
+    "description": "Descripción",
+    "price": "Precio",
+    "outstanding": "Destacado",
+    "categoryId": "ID Categoría",
+    "categoryName": "Nombre Categoría"
+  },
+  "dishesCategories": {
+    "title": "Categorías de Platos",
+    "id": "ID",
+    "name": "Nombre",
+    "order": "Orden",
+    "active": "Activo"
+  },
+  "kitchenOrders": {
+    "title": "Comandas de Cocina",
+    "id": "ID",
+    "number": "Número",
+    "tableId": "ID Mesa",
+    "tableNumber": "Número Mesa",
+    "typeService": "Tipo Servicio",
+    "state": "Estado",
+    "observations": "Observaciones",
+    "userId": "ID Usuario",
+    "dateCreated": "Fecha Creación",
+    "hourReady": "Hora Listo",
+    "hourDelivered": "Hora Entregado",
+    "preparationTime": "Tiempo Preparación"
+  },
+  "kitchenOrderItems": {
+    "title": "Items de Comanda Cocina",
+    "id": "ID",
+    "kitchenOrderId": "ID Comanda Cocina",
+    "dishId": "ID Plato",
+    "dishName": "Nombre Plato",
+    "quantity": "Cantidad",
+    "unitPrice": "Precio Unitario",
+    "totalPrice": "Precio Total",
+    "state": "Estado",
+    "observations": "Observaciones"
+  },
+  "kitchenLocks": {
+    "title": "Bloqueos de Cocina",
+    "id": "ID",
+    "restaurantId": "ID Restaurante",
+    "stateLocked": "Estado Bloqueado",
+    "hashPassword": "Hash Contraseña",
+    "lastLocked": "Último Bloqueo",
+    "lastUnlocked": "Último Desbloqueo",
+    "failedAttempts": "Intentos Fallidos",
+    "lockedUntil": "Bloqueado Hasta"
+  },
+  "restaurantManagement": {
+    "dishMenuPage": {
+      "kicker": "Menú",
+      "title": "Menú de Platos",
+      "description": "Explora todos los platos disponibles. Haz clic en un plato para agregarlo a una nueva orden.",
+      "searchPlaceholder": "Buscar platos...",
+      "addToOrder": "Agregar a Orden",
+      "price": "Precio",
+      "outstanding": "Destacado",
+      "noDishes": "No hay platos disponibles",
+      "category": "Categoría",
+      "categories": {
+        "rice": "Arroz",
+        "noodles": "Fideos",
+        "soups": "Sopas",
+        "special_dishes": "Platos Especiales",
+        "desserts": "Postres",
+        "drinks": "Bebidas"
+      }
+    },
+    "createKitchenOrderPage": {
+      "kicker": "Nueva Orden",
+      "title": "Crear Comanda de Cocina",
+      "description": "Crea una nueva comanda para mesa o para llevar.",
+      "tableSelection": "Selección de Mesa",
+      "serviceType": "Tipo de Servicio",
+      "tableService": "Servicio en Mesa",
+      "toTakeHome": "Para Llevar",
+      "selectTable": "Seleccionar una mesa",
+      "table": "Mesa",
+      "dishes": "Platos",
+      "selectedDishes": "Platos Seleccionados",
+      "observations": "Observaciones",
+      "observationsPlaceholder": "Instrucciones especiales...",
+      "totalItems": "Total Items",
+      "totalAmount": "Monto Total",
+      "createOrder": "Crear Comanda",
+      "noItems": "Aún no hay platos agregados",
+      "addDishes": "Agregar del Menú",
+      "quantity": "Cant",
+      "item": "Producto",
+      "unitPrice": "Precio",
+      "freeTables": "Mesas Libres",
+      "back": "Volver a Tickets de Cocina",
+      "updateOrder": "Actualizar Comanda"
+    },
+    "kitchenTicketsPage": {
+      "kicker": "Cocina",
+      "title": "Comandas de Cocina",
+      "description": "Gestiona las comandas y actualiza su estado.",
+      "pending": "Pendientes",
+      "inPreparation": "En Preparación",
+      "ready": "Listas",
+      "delivered": "Entregadas",
+      "cancelled": "Anuladas",
+      "allOrders": "Todas las Órdenes",
+      "markInPreparation": "Iniciar Preparación",
+      "markReady": "Marcar como Listo",
+      "markDelivered": "Marcar como Entregado",
+      "cancel": "Anular",
+      "newTicket": "Nuevo Ticket",
+      "noOrders": "No hay comandas en este estado",
+      "orderNumber": "Comanda",
+      "tableNumber": "Mesa",
+      "typeService": "Servicio",
+      "items": "Items",
+      "observations": "Obs",
+      "dateCreated": "Creado",
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "confirmDelete": "¿Estás seguro de eliminar esta orden?"
+    },
+    "tablesAndOccupancyPage": {
+      "kicker": "Mesas",
+      "title": "Mesas y Ocupación",
+      "description": "Visualiza el estado de ocupación de todas las mesas del restaurante.",
+      "free": "Disponible",
+      "occupied": "Ocupado",
+      "all": "Todas",
+      "capacity": "Capacidad",
+      "location": "Ubicación",
+      "tableNumber": "Mesa",
+      "state": "Estado",
+      "noTables": "No hay mesas disponibles",
+      "totalTables": "Total Mesas",
+      "freeTables": "Disponibles",
+      "occupiedTables": "Ocupadas",
+      "searchPlaceholder": "Buscar mesas por número o ubicación...",
+      "allLocations": "Todas las Ubicaciones",
+      "locations": {
+        "main_hall": "Salón Principal",
+        "terrace": "Terraza",
+        "bar": "Bar"
+      }
+    },
+    "shared": {
+      "status": {
+        "pending": "Pendiente",
+        "in_preparation": "En Preparación",
+        "ready": "Listo",
+        "delivered": "Entregado",
+        "cancelled": "Anulado"
+      },
+      "serviceType": {
+        "table_service": "Servicio en Mesa",
+        "to_take_home": "Para Llevar"
+      }
+    }
+  },
+  "historyStateKitchenOrders": {
+    "title": "Historial de Estados de Comandas de Cocina",
+    "id": "ID",
+    "kitchenOrderId": "ID Comanda Cocina",
+    "previousState": "Estado Anterior",
+    "newState": "Estado Nuevo",
+    "dateChange": "Fecha Cambio",
+    "observation": "Observación"
   }
 }
