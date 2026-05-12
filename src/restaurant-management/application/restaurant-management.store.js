@@ -163,7 +163,7 @@ const useRestaurantManagementStore = defineStore('restaurant-management', () => 
                 restaurantManagementApi.getKitchenOrders(),
                 restaurantManagementApi.getKitchenOrderItems()
             ]);
-            kitchenOrders.value = KitchenOrderAssembler.ToEntitiesFromResponse(ordersResponse);
+            kitchenOrders.value = KitchenOrderAssembler.toEntitiesFromResponse(ordersResponse);
             kitchenOrderItems.value = KitchenOrderItemAssembler.toEntitiesFromResponse(itemsResponse);
             mergeItemsIntoOrders();
         } catch (error) {

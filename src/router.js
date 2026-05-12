@@ -12,7 +12,6 @@ const placeholderRoutes = [
     { path: '/reports', name: 'reports', component: placeholderPage, meta: { title: 'Reports' } },
     { path: '/configuration', name: 'configuration', component: placeholderPage, meta: { title: 'Configuration' } },
     { path: '/subscription', name: 'subscription', component: placeholderPage, meta: { title: 'Subscription' } },
-    { path: '/kitchen-tickets', name: 'kitchen-tickets', component: placeholderPage, meta: { title: 'Kitchen Tickets' } },
 
 ];
 

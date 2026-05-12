@@ -35,7 +35,7 @@ import LanguageSwitcher from './language-switcher.vue';
 .layout__header {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   padding: 18px 24px;
   background-color: #fff;
   border-bottom: 1px solid #efe6da;

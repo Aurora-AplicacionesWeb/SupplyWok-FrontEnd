@@ -254,7 +254,7 @@
     },
     "tablesAndOccupancyPage": {
       "kicker": "餐桌",
-      "title": "餐桌與 occupancy",
+      "title": "桌子和占用率",
       "description": "查看餐廳所有餐桌的佔用狀態。",
       "free": "可用",
       "occupied": "忙碌",
