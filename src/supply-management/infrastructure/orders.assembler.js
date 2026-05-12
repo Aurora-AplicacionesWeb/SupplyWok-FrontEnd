@@ -1,8 +1,8 @@
-import { Order } from "../domain/order.js";
+import { Orders } from "../domain/model/orders.entity.js";
 
 export class OrdersAssembler {
     static toEntityFromResource(resource) {
-        return new Order({...resource});
+        return new Orders({...resource});
     }
     static toEntitiesFromResponse(response){
         if (response.status !== 200) {
