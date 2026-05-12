@@ -67,7 +67,7 @@ const selectItem = (itemId) => {
 </script>
 
 <template>
-  <aside class="sidebar":class="{ 'sidebar--supplier': userRole === 'supplier' }">
+  <aside class="sidebar" :class="{ 'sidebar--supplier': userRole === 'supplier' }">
     <!-- Branding Section -->
     <div class="sidebar__brand">
       <img src="/images/supplywok-logo.png" alt="SupplyWok Logo" class="sidebar__logo" />

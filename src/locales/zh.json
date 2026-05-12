@@ -17,7 +17,7 @@
     "sidebar": {
       "restaurant": "餐厅",
       "supplier": "供应商",
-      "current-plan": "当前计划",
+      "current-plan": "当前计划:",
       "dashboard": "仪表板",
       "inventory": "库存",
       "orders": "订单",
