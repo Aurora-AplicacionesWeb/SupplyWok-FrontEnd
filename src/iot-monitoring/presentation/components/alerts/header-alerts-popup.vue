@@ -29,13 +29,20 @@
 </template>
 
 <script setup>
+/**
+ * Dropdown/Popup component for displaying critical IoT alerts in the application header.
+ * Provides a notification icon with a badge and a scrollable list of recent alerts.
+ */
 import { ref } from 'vue';
-import AlertItem from './AlertItem.vue';
-import { useIotStore } from '../../../application/stores/useIotStore.js';
+import AlertItem from './alert-item.vue';
+import { iotStore } from '../../../application/iot-store.js';
 
-const store = useIotStore();
+const store = iotStore();
+
+/** Controls the visibility of the alerts popup. */
 const isOpen = ref(false);
 
+/** Toggles the popup panel open/closed. */
 const togglePanel = () => {
   isOpen.value = !isOpen.value;
 };

@@ -1,4 +1,18 @@
+/**
+ * Represents an IoT Sensor device in the system.
+ */
 export class Sensor {
+  /**
+   * Creates an instance of Sensor.
+   * @param {Object} sensor - The raw sensor data.
+   * @param {number} sensor.id - Unique identifier for the sensor.
+   * @param {string} sensor.name - Human-readable name.
+   * @param {number} sensor.minValue - Minimum threshold value.
+   * @param {number} sensor.maxValue - Maximum threshold value.
+   * @param {boolean} sensor.enabled - Whether the sensor is active.
+   * @param {number} sensor.lastValue - The most recent reading.
+   * @param {string} sensor.type - The type of sensor (e.g., 'kitchen-temperature').
+   */
   constructor(sensor) {
     this._id = sensor.id;
     this._name = sensor.name;

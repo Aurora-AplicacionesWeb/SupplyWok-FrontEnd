@@ -14,15 +14,21 @@
 </template>
 
 <script setup>
+/**
+ * Individual alert row component.
+ * Displays the alert title, message, severity badge, and relative time.
+ */
 import { computed } from 'vue';
 
 const props = defineProps({
+  /** The Alert entity instance to display. */
   alert: {
     type: Object,
     required: true
   }
 });
 
+/** Formats the alert timestamp to HH:mm. */
 const formattedTime = computed(() => {
   if (!props.alert?.timestamp) return '';
   const date = new Date(props.alert.timestamp);

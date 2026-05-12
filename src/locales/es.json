@@ -146,6 +146,7 @@
       "high-occupancy-title": "{sensorName} alcanzó una alta ocupación",
       "high-occupancy-msg": "Carga concentrada en {sensorName} ({lastValue}% ocupado)."
     }
+  },
   "tables": {
     "title": "Mesas",
     "id": "ID",

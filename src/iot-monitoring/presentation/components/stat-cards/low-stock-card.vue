@@ -10,8 +10,12 @@
 </template>
 
 <script setup>
-import IotStatCard from './IotStatCard.vue';
-import { useIotStore } from '../../../application/stores/useIotStore.js';
+/**
+ * Specialized Stat Card for displaying items with low stock.
+ * Shows an urgent badge if any item is below its minimum threshold.
+ */
+import IotStatCard from './iot-stat-card.vue';
+import { iotStore } from '../../../application/iot-store.js';
 
-const store = useIotStore();
+const store = iotStore();
 </script>

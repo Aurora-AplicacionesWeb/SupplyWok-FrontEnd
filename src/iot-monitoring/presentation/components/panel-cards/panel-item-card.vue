@@ -19,37 +19,49 @@
 </template>
 
 <script setup>
+/**
+ * Card component used within the IoT Panel to display sensor readings with a progress bar.
+ * Primarily used for temperature and occupancy metrics.
+ */
 import { computed } from 'vue';
 
 const props = defineProps({
+  /** Icon representing the sensor location or type. */
   iconSrc: {
     type: String,
     required: true
   },
+  /** i18n key for the sensor's title. */
   title: {
     type: String,
     required: true
   },
+  /** The current sensor reading value. */
   value: {
     type: Number,
     default: null
   },
+  /** Unit of measurement (e.g., '°C', '%'). */
   unit: {
     type: String,
     required: true
   },
+  /** Specific color for the value text. */
   valueColor: {
     type: String,
     default: ''
   },
+  /** Fill percentage for the progress bar (0-100). */
   progressPercent: {
     type: Number,
     required: true
   },
+  /** i18n key for the subtitle/range info. */
   subtitle: {
     type: String,
     required: true
   },
+  /** Optional interpolation parameters for the subtitle translation. */
   subtitleParams: {
     type: Object,
     default: () => ({})

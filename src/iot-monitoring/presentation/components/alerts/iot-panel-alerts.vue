@@ -9,10 +9,14 @@
 </template>
 
 <script setup>
-import AlertItem from './AlertItem.vue';
-import { useIotStore } from '../../../application/stores/useIotStore.js';
+/**
+ * Container component for the live alerts feed within the IoT Panel.
+ * Renders the 3 most recent alerts using AlertItem.
+ */
+import AlertItem from './alert-item.vue';
+import { iotStore } from '../../../application/iot-store.js';
 
-const store = useIotStore();
+const store = iotStore();
 </script>
 
 <style scoped>

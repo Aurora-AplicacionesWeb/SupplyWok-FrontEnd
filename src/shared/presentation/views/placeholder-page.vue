@@ -1,11 +1,11 @@
 <script setup>
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
-import LowStockCard from '../../../iot-monitoring/presentation/components/stat-cards/LowStockCard.vue';
-import TempAlertCard from '../../../iot-monitoring/presentation/components/stat-cards/TempAlertCard.vue';
-import ActiveTablesCard from '../../../iot-monitoring/presentation/components/stat-cards/ActiveTablesCard.vue';
-import IotPanelCard from '../../../iot-monitoring/presentation/components/panel-cards/IotPanelCard.vue';
-import HeaderAlertsPopup from '../../../iot-monitoring/presentation/components/alerts/HeaderAlertsPopup.vue';
+import LowStockCard from '../../../iot-monitoring/presentation/components/stat-cards/low-stock-card.vue';
+import TempAlertCard from '../../../iot-monitoring/presentation/components/stat-cards/temp-alert-card.vue';
+import ActiveTablesCard from '../../../iot-monitoring/presentation/components/stat-cards/active-tables-card.vue';
+import IotPanelCard from '../../../iot-monitoring/presentation/components/panel-cards/iot-panel-card.vue';
+import HeaderAlertsPopup from '../../../iot-monitoring/presentation/components/alerts/header-alerts-popup.vue';
 
 const route = useRoute();
 const pageTitle = computed(() => route.meta?.title ?? 'Module');

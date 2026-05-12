@@ -1,18 +1,29 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
-import { Alert } from '../../domain/model/alert.entity.js';
-import { IotMonitoringApi } from '../../infrastructure/api/iot-monitoring.api.js';
+import { Alert } from '../domain/model/alert.entity.js';
+import { IotMonitoringApi } from '../infrastructure/iot-monitoring.api.js';
 
-export const useIotStore = defineStore('iot', () => {
+/**
+ * Pinia store for managing IoT Monitoring state.
+ * Handles sensor data fetching, alert generation, and derived metrics.
+ */
+export const iotStore = defineStore('iot', () => {
   const api = new IotMonitoringApi();
 
+  // --- State ---
   const sensors = ref([]);
   const loading = ref(false);
   const error = ref(null);
 
-  // Computed properties
+  // --- Computed Properties (Getters) ---
+  
+  /** Total number of sensors registered. */
   const sensorsCount = computed(() => sensors.value.length);
 
+  /** 
+   * List of all active alerts generated from current sensor readings. 
+   * Sorted by severity (Critical first) and then by timestamp (newest first).
+   */
   const activeAlerts = computed(() => {
     const alerts = [];
     for (const sensor of sensors.value) {
@@ -21,7 +32,6 @@ export const useIotStore = defineStore('iot', () => {
         alerts.push(alert);
       }
     }
-    // Sort by severity (Critical first) then timestamp
     return alerts.sort((a, b) => {
       if (a.severity === 'Critical' && b.severity !== 'Critical') return -1;
       if (a.severity !== 'Critical' && b.severity === 'Critical') return 1;
@@ -29,6 +39,7 @@ export const useIotStore = defineStore('iot', () => {
     });
   });
 
+  /** The 3 most recent alerts for quick display. */
   const recentAlerts = computed(() => {
     const alerts = [...activeAlerts.value];
     return alerts
@@ -36,16 +47,19 @@ export const useIotStore = defineStore('iot', () => {
       .slice(0, 3);
   });
 
+  /** Top 5 critical alerts for summary views. */
   const topCriticalAlerts = computed(() => {
     return activeAlerts.value.slice(0, 5);
   });
 
+  /** Count of storage items with low stock levels. */
   const lowStockStorageCount = computed(() => {
     const storage = sensors.value.filter(s => s.type === 'storage-pressure');
     if (storage.length === 0) return 0;
     return storage.filter(s => s.lastValue <= s.minValue).length;
   });
 
+  /** Count of sensors with readings outside of defined thresholds. */
   const outOfRangeTemperatureCount = computed(() => {
     const tempSensors = sensors.value.filter(
       s => s.type === 'kitchen-temperature' || s.type === 'storage-temperature'
@@ -56,6 +70,7 @@ export const useIotStore = defineStore('iot', () => {
     ).length;
   });
 
+  /** Average temperature in the kitchen area. */
   const averageKitchenTemperature = computed(() => {
     const active = sensors.value.filter(
       s => s.type === 'kitchen-temperature' && s.enabled
@@ -65,6 +80,7 @@ export const useIotStore = defineStore('iot', () => {
     return Math.round((sum / active.length) * 10) / 10;
   });
 
+  /** Average temperature in cold storage areas. */
   const averageStorageTemperature = computed(() => {
     const active = sensors.value.filter(
       s => s.type === 'storage-temperature' && s.enabled
@@ -74,6 +90,7 @@ export const useIotStore = defineStore('iot', () => {
     return Math.round((sum / active.length) * 10) / 10;
   });
 
+  /** Percentage of tables currently occupied. */
   const occupiedTablePercentage = computed(() => {
     const tables = sensors.value.filter(s => s.type === 'table-pressure');
     if (tables.length === 0) return null;
@@ -81,7 +98,11 @@ export const useIotStore = defineStore('iot', () => {
     return Math.round((occupied / tables.length) * 100);
   });
 
-  // Actions
+  // --- Actions ---
+
+  /** 
+   * Fetches the latest sensor data from the API.
+   */
   const loadSensors = async () => {
     loading.value = true;
     error.value = null;
@@ -94,17 +115,22 @@ export const useIotStore = defineStore('iot', () => {
     }
   };
 
+  /**
+   * Helper to find a specific sensor by its ID.
+   * @param {number} id - Sensor ID.
+   */
   const getSensorById = (id) => {
     return computed(() => id ? sensors.value.find(sensor => sensor.id === id) : undefined);
   };
 
-  // The following mock API methods since IotMonitoringApi might not implement create/update/delete yet
+  /**
+   * Adds a new sensor to the local state (Mock API integration).
+   * @param {Object} sensor - New sensor data.
+   */
   const addSensor = async (sensor) => {
-    // Mock implementation for API without real endpoint
     loading.value = true;
     error.value = null;
     try {
-      // await api.createSensor(sensor);
       sensors.value.push(sensor);
     } catch (err) {
       error.value = formatError(err, 'Failed to create sensor');
@@ -113,11 +139,14 @@ export const useIotStore = defineStore('iot', () => {
     }
   };
 
+  /**
+   * Updates an existing sensor in the local state (Mock API integration).
+   * @param {Object} updatedSensor - Updated sensor data.
+   */
   const updateSensor = async (updatedSensor) => {
     loading.value = true;
     error.value = null;
     try {
-      // await api.updateSensor(updatedSensor);
       const index = sensors.value.findIndex(s => s.id === updatedSensor.id);
       if (index !== -1) {
         sensors.value.splice(index, 1, updatedSensor);
@@ -129,11 +158,14 @@ export const useIotStore = defineStore('iot', () => {
     }
   };
 
+  /**
+   * Deletes a sensor from the local state (Mock API integration).
+   * @param {number} id - Sensor ID to remove.
+   */
   const deleteSensor = async (id) => {
     loading.value = true;
     error.value = null;
     try {
-      // await api.deleteSensor(id);
       sensors.value = sensors.value.filter(s => s.id !== id);
     } catch (err) {
       error.value = formatError(err, 'Failed to delete sensor');
@@ -142,6 +174,10 @@ export const useIotStore = defineStore('iot', () => {
     }
   };
 
+  /**
+   * Formats error messages for UI display.
+   * @private
+   */
   const formatError = (err, fallback) => {
     if (err instanceof Error) {
       return err.message.includes('Resource not found') ? `${fallback}: Not found` : err.message;
@@ -149,7 +185,7 @@ export const useIotStore = defineStore('iot', () => {
     return fallback;
   };
 
-  // Initialize store by loading sensors
+  // Auto-initialize store
   loadSensors();
 
   return {

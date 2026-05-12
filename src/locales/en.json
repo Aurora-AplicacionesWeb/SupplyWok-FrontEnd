@@ -146,6 +146,7 @@
       "high-occupancy-title": "{sensorName} peaked at high occupancy",
       "high-occupancy-msg": "Load concentrated on {sensorName} ({lastValue}% occupied)."
     }
+  },
   "tables": {
     "title": "Tables",
     "id": "ID",

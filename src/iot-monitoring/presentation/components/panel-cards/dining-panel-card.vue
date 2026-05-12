@@ -10,8 +10,12 @@
 </template>
 
 <script setup>
-import PanelItemCard from './PanelItemCard.vue';
-import { useIotStore } from '../../../application/stores/useIotStore.js';
+/**
+ * Panel item specifically for Dining Room occupancy monitoring.
+ * Displays the current table occupancy percentage.
+ */
+import PanelItemCard from './panel-item-card.vue';
+import { iotStore } from '../../../application/iot-store.js';
 
-const store = useIotStore();
+const store = iotStore();
 </script>

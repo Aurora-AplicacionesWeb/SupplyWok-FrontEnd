@@ -21,10 +21,14 @@
 </template>
 
 <script setup>
-import KitchenPanelCard from './KitchenPanelCard.vue';
-import StoragePanelCard from './StoragePanelCard.vue';
-import DiningPanelCard from './DiningPanelCard.vue';
-import IotPanelAlerts from '../alerts/IotPanelAlerts.vue';
+/**
+ * Main IoT Dashboard Panel.
+ * Aggregates specific area panels (Kitchen, Storage, Dining) and the live alerts feed.
+ */
+import KitchenPanelCard from './kitchen-panel-card.vue';
+import StoragePanelCard from './storage-panel-card.vue';
+import DiningPanelCard from './dining-panel-card.vue';
+import IotPanelAlerts from '../alerts/iot-panel-alerts.vue';
 </script>
 
 <style scoped>

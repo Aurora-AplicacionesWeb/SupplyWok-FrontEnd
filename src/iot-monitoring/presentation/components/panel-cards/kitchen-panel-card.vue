@@ -11,12 +11,20 @@
 </template>
 
 <script setup>
+/**
+ * Panel item specifically for Kitchen temperature monitoring.
+ * Maps the average kitchen temperature to a progress percentage.
+ */
 import { computed } from 'vue';
-import PanelItemCard from './PanelItemCard.vue';
-import { useIotStore } from '../../../application/stores/useIotStore.js';
+import PanelItemCard from './panel-item-card.vue';
+import { iotStore } from '../../../application/iot-store.js';
 
-const store = useIotStore();
+const store = iotStore();
 
+/** 
+ * Computes progress based on kitchen temperature range (15°C - 30°C).
+ * @returns {number} 0-100 percentage.
+ */
 const progress = computed(() => {
   const val = store.averageKitchenTemperature;
   if (val === null) return 0;

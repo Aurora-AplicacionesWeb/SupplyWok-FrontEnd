@@ -146,6 +146,7 @@
       "high-occupancy-title": "{sensorName} 达到高入住率",
       "high-occupancy-msg": "负载集中在 {sensorName} ({lastValue}% 入住率)。"
     }
+  },
   "tables": {
     "title": "餐桌",
     "id": "編號 (ID)",

@@ -12,12 +12,20 @@
 </template>
 
 <script setup>
+/**
+ * Panel item specifically for Cold Storage temperature monitoring.
+ * Maps the average storage temperature to a progress percentage.
+ */
 import { computed } from 'vue';
-import PanelItemCard from './PanelItemCard.vue';
-import { useIotStore } from '../../../application/stores/useIotStore.js';
+import PanelItemCard from './panel-item-card.vue';
+import { iotStore } from '../../../application/iot-store.js';
 
-const store = useIotStore();
+const store = iotStore();
 
+/** 
+ * Computes progress based on cold storage temperature range (0°C - 15°C).
+ * @returns {number} 0-100 percentage.
+ */
 const progress = computed(() => {
   const val = store.averageStorageTemperature;
   if (val === null) return 0;

@@ -17,29 +17,39 @@
 </template>
 
 <script setup>
+/**
+ * Generic Stat Card for displaying simple IoT metrics.
+ * Supports an icon, a large value, a localized label, and an optional status badge.
+ */
 import { computed } from 'vue';
 
 const props = defineProps({
+  /** Source path for the card's icon. */
   iconSrc: {
     type: String,
     required: true
   },
+  /** The numerical or string value to display. */
   value: {
     type: [Number, String],
     default: null
   },
+  /** i18n key for the label below the value. */
   label: {
     type: String,
     required: true
   },
+  /** i18n key for the badge text. */
   badgeLabel: {
     type: String,
     default: ''
   },
+  /** Visual style of the badge ('urgent', 'alert', 'ok', 'info'). */
   badgeSeverity: {
     type: String,
     default: 'info'
   },
+  /** Whether to show the badge even if label is present. */
   showBadge: {
     type: Boolean,
     default: true

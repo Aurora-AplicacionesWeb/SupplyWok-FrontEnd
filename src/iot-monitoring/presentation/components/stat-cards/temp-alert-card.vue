@@ -10,8 +10,12 @@
 </template>
 
 <script setup>
-import IotStatCard from './IotStatCard.vue';
-import { useIotStore } from '../../../application/stores/useIotStore.js';
+/**
+ * Specialized Stat Card for displaying active temperature alerts.
+ * Shows an alert badge if any temperature sensor is out of its optimal range.
+ */
+import IotStatCard from './iot-stat-card.vue';
+import { iotStore } from '../../../application/iot-store.js';
 
-const store = useIotStore();
+const store = iotStore();
 </script>

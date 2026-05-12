@@ -1,6 +1,13 @@
 import { Sensor } from './sensor.entity.js';
 
+/**
+ * Represents a business alert generated from a sensor reading.
+ */
 export class Alert {
+  /**
+   * Creates an instance of Alert.
+   * @param {Object} alert - The raw alert data or properties.
+   */
   constructor(alert) {
     this._id = alert.id;
     this._sensorId = alert.sensorId;
@@ -30,11 +37,17 @@ export class Alert {
   get timestamp() { return this._timestamp; }
   set timestamp(value) { this._timestamp = value; }
 
+  /**
+   * Factory method to generate an Alert if a Sensor reading is out of bounds.
+   * @param {Sensor} sensor - The sensor to evaluate.
+   * @returns {Alert|null} - An Alert instance or null if no alert is needed.
+   */
   static fromSensor(sensor) {
     if (!sensor.enabled) return null;
 
     const now = new Date();
 
+    // Temperature Alerts (Kitchen/Storage)
     if (sensor.type === 'kitchen-temperature' || sensor.type === 'storage-temperature') {
       if (sensor.lastValue > sensor.maxValue || sensor.lastValue < sensor.minValue) {
         const isColdStorage = sensor.type === 'storage-temperature';
@@ -58,6 +71,7 @@ export class Alert {
       }
     }
 
+    // Low Stock Alerts (Pressure)
     if (sensor.type === 'storage-pressure') {
       if (sensor.lastValue <= sensor.minValue) {
         return new Alert({
@@ -76,6 +90,7 @@ export class Alert {
       }
     }
 
+    // Occupancy Alerts (Table pressure)
     if (sensor.type === 'table-pressure') {
        if (sensor.lastValue >= sensor.maxValue * 0.9 && sensor.maxValue > 0) {
           return new Alert({
