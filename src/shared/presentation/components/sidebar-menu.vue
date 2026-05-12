@@ -27,7 +27,7 @@ const {t}=useI18n();
 /** @type {import('vue').Ref<string>} Reactive state for the current subscription plan. */
 const currentPlan = ref('Premium');
 
-const userRole = ref('restaurant')
+const userRole = ref('supplier')
 
 /** @type {MenuItem[]} Array containing the main navigation items. */
 const menuItems = {
@@ -48,6 +48,7 @@ const menuItems = {
     { id: 'dashboard', i18nKey: 'shared.sidebar.dashboard', iconOff: '/images/icons/dashboard-icon.svg', iconOn: '/images/icons/dashboard-on-icon.svg', path: '/supplier/dashboard' },
     { id: 'orders', i18nKey: 'shared.sidebar.orders', iconOff: '/images/icons/orders-icon.svg', iconOn: '/images/icons/orders-on-icon.svg', path: '/supplier/orders' },
     { id: 'clients', i18nKey: 'shared.sidebar.clients', iconOff: '/images/icons/clients-icon.svg', iconOn: '/images/icons/clients-icon.svg', path: '/supplier/clients' },
+    { id: 'delivery', i18nKey: 'shared.sidebar.delivery', iconOff: '/images/icons/delivery-icon.svg', iconOn: '/images/icons/delivery-icon.svg', path: '/supplier/delivery' },
     { id: 'forecast', i18nKey: 'shared.sidebar.forecast', iconOff: '/images/icons/forecast-icon.svg', iconOn: '/images/icons/forecast-icon.svg', path: '/supplier/forecast' },
     { id: 'catalog', i18nKey: 'shared.sidebar.catalog', iconOff: '/images/icons/catalog-icon.svg', iconOn: '/images/icons/catalog-icon.svg', path: '/supplier/catalog' },
     { id: 'alerts', i18nKey: 'shared.sidebar.alerts', iconOff: '/images/icons/alerts-icon.svg', iconOn: '/images/icons/alerts-on-icon.svg', path: '/supplier/alerts' },

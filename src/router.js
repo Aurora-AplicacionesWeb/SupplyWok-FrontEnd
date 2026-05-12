@@ -9,12 +9,13 @@ const supplierCatalog      = () => import('./supply-management/presentation/view
 const supplierAlerts       = () => import('./supply-management/presentation/views/alerts-supplier.vue');
 const supplierSettings     = () => import('./supply-management/presentation/views/settings-supplier.vue');
 const supplierSubscription = () => import('./supply-management/presentation/views/subscription-supplier.vue');
-
+const supplierDelivery     = () => import('./supply-management/presentation/views/delivery-supplier.vue');
 /** Child routes for the /supplier prefix (only active when userRole === 'supplier') */
 const supplierRoutes = [
     { path: 'dashboard',     name: 'supplier-dashboard',     component: supplierDashboard,    meta: { title: 'Dashboard',     role: 'supplier' } },
     { path: 'orders',        name: 'supplier-orders',        component: supplierOrders,       meta: { title: 'Orders',        role: 'supplier' } },
     { path: 'clients',       name: 'supplier-clients',       component: supplierClients,      meta: { title: 'Clients',       role: 'supplier' } },
+    { path: 'delivery',      name: 'supplier-delivery',      component: supplierDelivery,     meta: { title: 'Delivery',      role: 'supplier' } },
     { path: 'forecast',      name: 'supplier-forecast',      component: supplierForecast,     meta: { title: 'Forecast',      role: 'supplier' } },
     { path: 'catalog',       name: 'supplier-catalog',       component: supplierCatalog,      meta: { title: 'Catalog',       role: 'supplier' } },
     { path: 'alerts',        name: 'supplier-alerts',        component: supplierAlerts,       meta: { title: 'Alerts',        role: 'supplier' } },

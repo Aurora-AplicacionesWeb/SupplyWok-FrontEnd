@@ -1,14 +1,472 @@
 {
-    "supply-management": {
-        "clients": [
-
-        ],
-        "orders": [
-
-        ],
-        "catalog": [
-
-        ]
-
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin Profile",
+      "email": "admin@grandragon.pe",
+      "password": "password123",
+      "role": "supplier",
+      "supplierId": 1,
+      "plan": "Premium",
+      "language": "en"
     }
+  ],
+
+  "supplier": {
+    "id": 1,
+    "name": "Gran Dragón Chifa",
+    "tagline": "GRAN DRAGÓN CHIFA",
+    "plan": "Premium",
+    "ordersReceived": 23,
+    "scheduledDeliveries": 9,
+    "demandOutlookPercent": 11,
+    "urgentRequests": 5
+  },
+
+  "deliveryRoutes": [
+    {
+      "id": 1,
+      "name": "Lima Centro AM",
+      "stops": 6,
+      "startTime": "09:00",
+      "endTime": "13:20",
+      "priority": "high",
+      "lastUpdatedMinutesAgo": 12
+    },
+    {
+      "id": 2,
+      "name": "Miraflores / San Isidro",
+      "stops": 5,
+      "startTime": "10:30",
+      "endTime": "14:10",
+      "priority": "medium",
+      "lastUpdatedMinutesAgo": 5
+    },
+    {
+      "id": 3,
+      "name": "Table 18",
+      "stops": 4,
+      "startTime": "13:30",
+      "endTime": "17:10",
+      "priority": "high",
+      "lastUpdatedMinutesAgo": 30
+    }
+  ],
+
+  "aggregateChart": [
+    { "id": 1, "month": "May", "value": 240 },
+    { "id": 2, "month": "Jun", "value": 260 },
+    { "id": 3, "month": "Jul", "value": 270 },
+    { "id": 4, "month": "Aug", "value": 285 },
+    { "id": 5, "month": "Sep", "value": 305 },
+    { "id": 6, "month": "Oct", "value": 319 }
+  ],
+  "purchase-orders": [
+    {
+      "id": 1,
+      "code": "PO-69629",
+      "supplierId": 202,
+      "supplierName": "Andes Cold Chain",
+      "restaurantName": "GRAN DRAGÓN CHIFA",
+      "orderDate": "2026-05-10",
+      "estimatedDate": "2026-05-12T10:30:00",
+      "priority": "Medium",
+      "status": "Pending",
+      "items": [
+        {
+          "id": 1,
+          "inventoryItemId": 103,
+          "productName": "Chicken Breast",
+          "quantity": 18,
+          "unitPrice": 14.8,
+          "unitType": "kg"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "code": "PO-24021",
+      "supplierId": 201,
+      "supplierName": "Golden Wok Produce",
+      "restaurantName": "GRAN DRAGÓN CHIFA",
+      "orderDate": "2026-05-09",
+      "estimatedDate": "2026-05-11T09:00:00",
+      "priority": "High",
+      "status": "In Transit",
+      "items": [
+        {
+          "id": 2,
+          "inventoryItemId": 101,
+          "productName": "Rice",
+          "quantity": 25,
+          "unitPrice": 4.5,
+          "unitType": "kg"
+        },
+        {
+          "id": 3,
+          "inventoryItemId": 102,
+          "productName": "Soy Sauce",
+          "quantity": 12,
+          "unitPrice": 8.2,
+          "unitType": "ltr"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "code": "PO-24018",
+      "supplierId": 202,
+      "supplierName": "Andes Cold Chain",
+      "restaurantName": "JADE EXPRESS",
+      "orderDate": "2026-05-08",
+      "estimatedDate": "2026-05-10T11:00:00",
+      "priority": "Low",
+      "status": "Pending",
+      "items": [
+        {
+          "id": 4,
+          "inventoryItemId": 104,
+          "productName": "Sesame Oil",
+          "quantity": 6,
+          "unitPrice": 18.4,
+          "unitType": "ltr"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "code": "PO-24013",
+      "supplierId": 203,
+      "supplierName": "Orient Pantry Co.",
+      "restaurantName": "PEKÍN LOUNGE",
+      "orderDate": "2026-05-07",
+      "estimatedDate": "2026-05-09T08:00:00",
+      "priority": "High",
+      "status": "Delayed",
+      "items": [
+        {
+          "id": 5,
+          "inventoryItemId": 105,
+          "productName": "Oyster Sauce",
+          "quantity": 10,
+          "unitPrice": 9,
+          "unitType": "ltr"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "code": "PO-24009",
+      "supplierId": 201,
+      "supplierName": "Golden Wok Produce",
+      "restaurantName": "MING GARDEN",
+      "orderDate": "2026-05-06",
+      "estimatedDate": "2026-05-08T14:00:00",
+      "priority": "Medium",
+      "status": "Delivered",
+      "items": [
+        {
+          "id": 6,
+          "inventoryItemId": 101,
+          "productName": "Rice",
+          "quantity": 50,
+          "unitPrice": 4.5,
+          "unitType": "kg"
+        }
+      ]
+    }
+  ],
+  "clients": [
+    {
+      "id": 1,
+      "name": "Gran Dragon Chifa",
+      "district": "San Isidro",
+      "frequency": "4X/WEEK",
+      "averageTicket": 620,
+      "demandProjectionPercent": 14,
+      "status": "active",
+      "lastOrderDate": "2026-04-21"
+    },
+    {
+      "id": 2,
+      "name": "Jade Express",
+      "district": "Miraflores",
+      "frequency": "3X/WEEK",
+      "averageTicket": 480,
+      "demandProjectionPercent": 7,
+      "status": "active",
+      "lastOrderDate": "2026-04-21"
+    },
+    {
+      "id": 3,
+      "name": "Pekin Lounge",
+      "district": "Surco",
+      "frequency": "2X/WEEK",
+      "averageTicket": 710,
+      "demandProjectionPercent": 11,
+      "status": "active",
+      "lastOrderDate": "2026-04-20"
+    },
+    {
+      "id": 4,
+      "name": "Ming Garden",
+      "district": "La Molina",
+      "frequency": "5X/WEEK",
+      "averageTicket": 535,
+      "demandProjectionPercent": 9,
+      "status": "active",
+      "lastOrderDate": "2026-04-19"
+    }
+  ],
+
+  "demandForecast": [
+    {
+      "id": 1,
+      "clientId": 1,
+      "clientName": "Gran Dragon Chifa",
+      "product": "Arroz Largo Grano",
+      "category": "GRAINS",
+      "currentWeekUnits": 120,
+      "nextWeekUnits": 137,
+      "trend": "up",
+      "projectionPercent": 14
+    },
+    {
+      "id": 2,
+      "clientId": 2,
+      "clientName": "Jade Express",
+      "product": "Fideos de Arroz",
+      "category": "GRAINS",
+      "currentWeekUnits": 80,
+      "nextWeekUnits": 86,
+      "trend": "up",
+      "projectionPercent": 7
+    },
+    {
+      "id": 3,
+      "clientId": 3,
+      "clientName": "Pekin Lounge",
+      "product": "Pollo Entero",
+      "category": "PROTEIN",
+      "currentWeekUnits": 60,
+      "nextWeekUnits": 67,
+      "trend": "up",
+      "projectionPercent": 11
+    },
+    {
+      "id": 4,
+      "clientId": 4,
+      "clientName": "Ming Garden",
+      "product": "Arroz Largo Grano",
+      "category": "GRAINS",
+      "currentWeekUnits": 100,
+      "nextWeekUnits": 109,
+      "trend": "up",
+      "projectionPercent": 9
+    },
+    {
+      "id": 5,
+      "clientId": 1,
+      "clientName": "Gran Dragon Chifa",
+      "product": "Cerdo Troceado",
+      "category": "PROTEIN",
+      "currentWeekUnits": 40,
+      "nextWeekUnits": 38,
+      "trend": "down",
+      "projectionPercent": -5
+    }
+  ],
+
+  "products": [
+    {
+      "id": 1,
+      "name": "Arroz Largo Grano",
+      "category": "GRAINS",
+      "unit": "kg",
+      "price": 3.5,
+      "stock": 500,
+      "available": true,
+      "description": "Arroz de grano largo importado"
+    },
+    {
+      "id": 2,
+      "name": "Fideos de Arroz",
+      "category": "GRAINS",
+      "unit": "kg",
+      "price": 4.2,
+      "stock": 200,
+      "available": true,
+      "description": "Fideos de arroz para tallarín saltado"
+    },
+    {
+      "id": 3,
+      "name": "Pollo Entero",
+      "category": "PROTEIN",
+      "unit": "kg",
+      "price": 8.5,
+      "stock": 150,
+      "available": true,
+      "description": "Pollo fresco de granja"
+    },
+    {
+      "id": 4,
+      "name": "Carne de Res",
+      "category": "PROTEIN",
+      "unit": "kg",
+      "price": 22.0,
+      "stock": 80,
+      "available": true,
+      "description": "Carne de res para lomo y wok"
+    },
+    {
+      "id": 5,
+      "name": "Cerdo Troceado",
+      "category": "PROTEIN",
+      "unit": "kg",
+      "price": 15.0,
+      "stock": 60,
+      "available": true,
+      "description": "Cerdo para chicharrón y preparaciones chifa"
+    },
+    {
+      "id": 6,
+      "name": "Salsa Soya Oscura",
+      "category": "SAUCES",
+      "unit": "lt",
+      "price": 6.5,
+      "stock": 100,
+      "available": true,
+      "description": "Salsa de soya oscura importada"
+    },
+    {
+      "id": 7,
+      "name": "Salsa Oyster",
+      "category": "SAUCES",
+      "unit": "lt",
+      "price": 9.0,
+      "stock": 80,
+      "available": true,
+      "description": "Salsa de ostión para wok"
+    },
+    {
+      "id": 8,
+      "name": "Brócoli Fresco",
+      "category": "VEGETABLES",
+      "unit": "kg",
+      "price": 3.0,
+      "stock": 120,
+      "available": true,
+      "description": "Brócoli fresco de primera calidad"
+    },
+    {
+      "id": 9,
+      "name": "Zanahoria",
+      "category": "VEGETABLES",
+      "unit": "kg",
+      "price": 1.8,
+      "stock": 200,
+      "available": true,
+      "description": "Zanahoria fresca"
+    },
+    {
+      "id": 10,
+      "name": "Col China",
+      "category": "VEGETABLES",
+      "unit": "kg",
+      "price": 2.5,
+      "stock": 0,
+      "available": false,
+      "description": "Col china o repollo chino"
+    }
+  ],
+
+  "alerts": [
+    {
+      "id": 1,
+      "severity": "high",
+      "detail": "Rush reorder request",
+      "date": "2026-04-21T09:35:00Z",
+      "status": "pending"
+    },
+    {
+      "id": 2,
+      "severity": "medium",
+      "detail": "Route congestion detected",
+      "date": "2026-04-21T09:18:00Z",
+      "status": "pending"
+    },
+    {
+      "id": 3,
+      "severity": "low",
+      "detail": "Client stock alert received",
+      "date": "2026-04-21T08:42:00Z",
+      "status": "pending"
+    },
+    {
+      "id": 4,
+      "severity": "high",
+      "detail": "Delayed delivery on route Lima Centro AM",
+      "date": "2026-04-21T07:10:00Z",
+      "status": "acknowledged"
+    },
+    {
+      "id": 5,
+      "severity": "medium",
+      "detail": "New urgent order from Ming Garden",
+      "date": "2026-04-20T18:00:00Z",
+      "status": "acknowledged"
+    }
+  ],
+
+  "configuration": {
+    "id": 1,
+    "supplierId": 1,
+    "companyName": "Gran Dragón Chifa",
+    "contactName": "Admin Profile",
+    "email": "admin@grandragon.pe",
+    "phone": "+51 987 100 120",
+    "district": "San Isidro",
+    "address": "Av. Conquistadores 456, San Isidro",
+    "language": "en",
+    "notificationsEnabled": true,
+    "emailAlertsEnabled": true,
+    "categories": ["GRAINS", "PROTEIN", "SAUCES", "VEGETABLES"]
+  },
+
+  "subscriptionPlans": [
+    {
+      "id": 1,
+      "name": "Premium",
+      "priceMonthly": 119.99,
+      "currency": "PEN",
+      "current": true,
+      "features": [
+        "Dashboard with analytics",
+        "Order management",
+        "My clients panel",
+        "Demand forecast",
+        "Product catalog",
+        "Alerts",
+        "Configuration",
+        "Mobile access",
+        "Email alerts"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Enterprise",
+      "priceMonthly": null,
+      "currency": "PEN",
+      "current": false,
+      "features": [
+        "All Premium features",
+        "Unlimited clients",
+        "Custom integrations",
+        "Dedicated support",
+        "Advanced analytics",
+        "Custom reports",
+        "API access"
+      ]
+    }
+  ]
 }
