@@ -1,0 +1,117 @@
+{
+  "welcome": "欢迎来到 SupplyWok",
+  "access": {
+    "log-in": {
+      "welcome": "欢迎",
+      "new-supply": "新来到 SupplyWok？",
+      "sign-up-now": "立即注册",
+      "email": "电子邮箱地址",
+      "email-example": "name@restaurant.com",
+      "password": "密码",
+      "password-example": "请输入您的密码",
+      "forgot-password": "忘记密码？",
+      "login": "登录"
+    }
+  },
+  "shared": {
+    "sidebar": {
+      "dashboard": "仪表板",
+      "inventory": "库存",
+      "orders": "订单",
+      "kitchen-tickets": "厨房单",
+      "suppliers": "供应商",
+      "tables-and-occupancy": "桌位与占用",
+      "alerts": "警报",
+      "reports": "报告",
+      "configuration": "配置",
+      "subscription": "订阅"
+    }
+  },
+  "supply-and-purchasing": {
+    "shared": {
+      "priority": {
+        "high": "高",
+        "medium": "中",
+        "low": "低"
+      },
+      "status": {
+        "pending": "待处理",
+        "in-preparation": "准备中",
+        "delivered": "已交付",
+        "delayed": "延迟"
+      }
+    },
+    "orders-page": {
+      "kicker": "餐厅",
+      "title": "订单",
+      "description": "管理库存、最低库存水平以及与供应商的关系。"
+    },
+    "purchase-order-form-page": {
+      "kicker": "Supply and Purchasing",
+      "title": "创建订单",
+      "description": "当你只想专注于创建订单时，请使用这个独立页面。"
+    },
+    "suppliers-page": {
+      "kicker": "Supply and Purchasing",
+      "title": "供应商",
+      "description": "此页面已准备好在前端第一版中接入供应商目录视图。"
+    },
+    "form": {
+      "title": "创建订单",
+      "fields": {
+        "supplier": "供应商",
+        "estimated-date": "预计日期",
+        "priority": "优先级",
+        "product": "产品",
+        "product-placeholder": "例如：茉莉香米",
+        "quantity": "数量",
+        "unit": "单位",
+        "price": "价格"
+      },
+      "actions": {
+        "add-line": "添加行",
+        "create-order": "创建订单"
+      }
+    },
+    "table": {
+      "title": "订单跟踪",
+      "search-placeholder": "按供应商、状态或编码搜索",
+      "columns": {
+        "code": "编码",
+        "status": "状态",
+        "actions": "操作"
+      },
+      "actions": {
+        "detail": "详情"
+      },
+      "footer": {
+        "showing": "显示 {filtered} / {total}"
+      }
+    },
+    "detail": {
+      "kicker": "订单详情",
+      "meta": {
+        "status": "状态",
+        "priority": "优先级",
+        "date": "日期",
+        "total": "总计"
+      },
+      "items": {
+        "product": "产品",
+        "quantity": "数量",
+        "unit": "单位",
+        "subtotal": "小计"
+      }
+    },
+    "validation": {
+      "supplier-required": "供应商为必填项。",
+      "order-date-required": "预计日期为必填项。",
+      "priority-required": "优先级为必填项。",
+      "items-required": "请至少添加一行产品。",
+      "product-name-required": "产品名称为必填项。",
+      "quantity-invalid": "数量必须是大于零的有效数字。",
+      "unit-required": "单位为必填项。",
+      "unit-price-invalid": "价格必须是大于零的有效数字。"
+    }
+  }
+}
