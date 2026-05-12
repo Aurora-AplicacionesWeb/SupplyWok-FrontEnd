@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import {useI18n} from "vue-i18n";
 
 /**
  * @component SidebarMenu
@@ -23,6 +24,8 @@ const restaurantName = ref('GRAN DRAGÓN CHIFA');
 
 /** @type {import('vue').Ref<string>} Reactive state for the current subscription plan. */
 const currentPlan = ref('Premium');
+
+const {t}=useI18n();
 
 /** @type {MenuItem[]} Array containing the main navigation items. */
 const menuItems = [
