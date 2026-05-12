@@ -1,8 +1,4 @@
 import {createRouter, createWebHistory} from "vue-router";
-// To import when IAM is implemented,
-// import iamRoutes from "./iam/presentation/iam-routes.js";
-
-// Define lazy-loaded components for routes
 
 // ── Supply Management (Supplier role) – lazy-loaded views ──────────────────
 const supplierDashboard    = () => import('./supply-management/presentation/views/dashboard-supplier.vue');
@@ -63,7 +59,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     console.log(`Navigating from ${from.name} to ${to.name}`);
     // Set the page title
-    let baseTitle = 'ACME Learning Center';
+    let baseTitle = 'SupplyWok';
     document.title = `${baseTitle} - ${to.meta['title']}`;
     // When IAM is implemented, use:
     // return authenticationGuard(to, from, next);

@@ -27,7 +27,7 @@ const {t}=useI18n();
 /** @type {import('vue').Ref<string>} Reactive state for the current subscription plan. */
 const currentPlan = ref('Premium');
 
-const userRole = ref('supplier')
+const userRole = ref('restaurant')
 
 /** @type {MenuItem[]} Array containing the main navigation items. */
 const menuItems = {
