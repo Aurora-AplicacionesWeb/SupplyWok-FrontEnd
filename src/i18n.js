@@ -6,7 +6,7 @@ import zh from './locales/zh.json'
 const i18n = createI18n({
     legacy: false,
     globalInjection: true,
-    locale: 'es',
+    locale: 'en',
     fallbackLocale: 'en',
     messages: { en, es, zh }
 })
