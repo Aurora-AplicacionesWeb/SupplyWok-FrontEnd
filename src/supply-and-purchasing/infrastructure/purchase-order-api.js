@@ -54,7 +54,7 @@ export class PurchaseOrderApi extends BaseApi {
     /** Creates the endpoint client for purchase orders when an endpoint path is available. */
     constructor() {
         super();
-        this.#purchaseOrdersEndpoint = !useMockApi && purchaseOrdersEndpointPath
+        this.#purchaseOrdersEndpoint = purchaseOrdersEndpointPath && !useMockApi
             ? new BaseEndpoint(this, purchaseOrdersEndpointPath)
             : null;
     }
