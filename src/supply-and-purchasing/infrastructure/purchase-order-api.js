@@ -54,7 +54,7 @@ export class PurchaseOrderApi extends BaseApi {
     /** Creates the endpoint client for purchase orders when an endpoint path is available. */
     constructor() {
         super();
-        this.#purchaseOrdersEndpoint = !useMockApi && purchaseOrdersEndpointPath
+        this.#purchaseOrdersEndpoint = purchaseOrdersEndpointPath && !useMockApi
             ? new BaseEndpoint(this, purchaseOrdersEndpointPath)
             : null;
     }
@@ -66,7 +66,14 @@ export class PurchaseOrderApi extends BaseApi {
      */
     getPurchaseOrders() {
         if (this.#purchaseOrdersEndpoint) {
-            return this.#purchaseOrdersEndpoint.getAll();
+            return this.#purchaseOrdersEndpoint.getAll().catch((error) => {
+                console.warn('Remote purchase orders API unavailable, using local fallback.', error);
+                return {
+                    status: 200,
+                    statusText: 'OK',
+                    data: { purchaseOrders: mockPurchaseOrders }
+                };
+            });
         }
 
         return Promise.resolve({
@@ -84,7 +91,22 @@ export class PurchaseOrderApi extends BaseApi {
      */
     createPurchaseOrder(resource) {
         if (this.#purchaseOrdersEndpoint) {
-            return this.#purchaseOrdersEndpoint.create(resource);
+            return this.#purchaseOrdersEndpoint.create(resource).catch((error) => {
+                console.warn('Remote purchase orders API unavailable during creation, using local fallback.', error);
+
+                const newPurchaseOrder = {
+                    ...resource,
+                    id: mockPurchaseOrders.length + 1
+                };
+
+                mockPurchaseOrders = [newPurchaseOrder, ...mockPurchaseOrders];
+
+                return {
+                    status: 201,
+                    statusText: 'Created',
+                    data: newPurchaseOrder
+                };
+            });
         }
 
         const newPurchaseOrder = {

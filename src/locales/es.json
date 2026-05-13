@@ -15,6 +15,8 @@
   },
   "shared": {
     "sidebar": {
+      "restaurant": "Restaurante",
+      "current-plan": "Plan actual:",
       "dashboard": "Dashboard",
       "inventory": "Inventario",
       "orders": "Pedidos",
@@ -86,6 +88,22 @@
       },
       "footer": {
         "showing": "Mostrando {filtered} de {total}"
+      }
+    },
+    "summary-card": {
+      "title": "Pedidos",
+      "caption": "{count} pedidos cargados en el contexto",
+      "loading": "Cargando pedidos...",
+      "error": "No se pudo cargar el resumen de pedidos.",
+      "empty": "Todavia no hay pedidos registrados.",
+      "columns": {
+        "id": "ID",
+        "supplier": "Proveedor",
+        "status": "Estado",
+        "date": "Fecha"
+      },
+      "actions": {
+        "view-history": "Ver historial de pedidos"
       }
     },
     "detail": {
