@@ -203,7 +203,10 @@ export class InventoryItem {
       return this.currentStock > 0 ? 100 : 0;
     }
 
-    return Math.min(100, Math.round((this.currentStock / this.minimumStockLevel) * 100));
+    // Calculate percentage relative to a reasonable max (minimum * 6)
+    // This shows stock level on a 0-100% scale where minimum level is ~17%
+    const targetMaxStock = this.minimumStockLevel * 6;
+    return Math.min(100, Math.max(0, Math.round((this.currentStock / targetMaxStock) * 100)));
   }
 
   getStockGap() {
