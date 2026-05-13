@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import restaurantManagementRoutes from './restaurant-management/presentation/restaurant-management-routes.js';
 import supplyAndPurchasingRoutes from './supply-and-purchasing/presentation/supply-and-purchasing-routes.js';
+import { inventoryManagementRoutes } from './inventory-management/presentation/inventory-management-routes.js';
 
 const placeholderPage = () => import('./shared/presentation/views/placeholder-page.vue');
 const pageNotFound = () => import('./shared/presentation/views/page-not-found.vue');
 
 const placeholderRoutes = [
     { path: '/dashboard', name: 'dashboard', component: placeholderPage, meta: { title: 'Dashboard' } },
-    { path: '/inventory', name: 'inventory', component: placeholderPage, meta: { title: 'Inventory' } },
     { path: '/alerts', name: 'alerts', component: placeholderPage, meta: { title: 'Alerts' } },
     { path: '/reports', name: 'reports', component: placeholderPage, meta: { title: 'Reports' } },
     { path: '/configuration', name: 'configuration', component: placeholderPage, meta: { title: 'Configuration' } },
@@ -18,6 +18,7 @@ const placeholderRoutes = [
 const routes = [
     { path: '/', redirect: '/orders' },
     ...placeholderRoutes,
+    ...inventoryManagementRoutes,
     ...supplyAndPurchasingRoutes,
     ...restaurantManagementRoutes,
     { path: '/:pathMatch(.*)*', name: 'not-found', component: pageNotFound, meta: { title: 'Page Not Found' } }

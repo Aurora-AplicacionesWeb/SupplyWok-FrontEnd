@@ -29,6 +29,35 @@
       "subscription": "订阅"
     }
   },
+  "inventoryManagement": {
+    "page": {
+      "kicker": "餐厅",
+      "title": "库存",
+      "description": "管理库存水平、最小值和库存变动。",
+      "actions": { "add": "新增物资" }
+    },
+    "metrics": {
+      "items": "物品",
+      "totalStock": "总库存",
+      "critical": "缺货项目",
+      "movements": "库存变动"
+    },
+    "table": {
+      "title": "库存",
+      "searchPlaceholder": "搜索产品...",
+      "filterUnit": "按单位筛选",
+      "columns": {
+        "product": "产品",
+        "stock": "库存",
+        "unit": "单位",
+        "restaurant": "餐厅",
+        "actions": "操作"
+      },
+      "actions": { "add": "添加" }
+    },
+    "stockStatus": { "critical": "紧急", "warning": "低库存", "healthy": "充足" },
+    "units": { "kilograms": "千克", "liters": "升", "units": "单位", "grams": "克" }
+  },
   "supply-and-purchasing": {
     "shared": {
       "priority": {

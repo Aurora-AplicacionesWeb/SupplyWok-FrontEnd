@@ -29,6 +29,35 @@
       "subscription": "Suscripción"
     }
   },
+  "inventoryManagement": {
+    "page": {
+      "kicker": "Restaurante",
+      "title": "Inventario",
+      "description": "Gestiona niveles de stock, mínimos y movimientos.",
+      "actions": { "add": "Agregar insumo" }
+    },
+    "metrics": {
+      "items": "Productos",
+      "totalStock": "Stock total",
+      "critical": "Críticos",
+      "movements": "Movimientos"
+    },
+    "table": {
+      "title": "Inventario",
+      "searchPlaceholder": "Buscar producto...",
+      "filterUnit": "Filtrar por unidad",
+      "columns": {
+        "product": "Producto",
+        "stock": "Stock",
+        "unit": "Unidad",
+        "restaurant": "Restaurante",
+        "actions": "Acciones"
+      },
+      "actions": { "add": "Agregar" }
+    },
+    "stockStatus": { "critical": "Crítico", "warning": "Bajo", "healthy": "Saludable" },
+    "units": { "kilograms": "Kilogramos", "liters": "Litros", "units": "Unidades", "grams": "Gramos" }
+  },
   "supply-and-purchasing": {
     "shared": {
       "priority": {
