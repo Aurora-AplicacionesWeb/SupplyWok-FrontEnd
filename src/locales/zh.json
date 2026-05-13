@@ -207,8 +207,9 @@
       "notifications": "通知",
       "no-active-alerts": "没有活动警报。",
       "severity-critical": "严重",
-      "severity-warning": "警告",
-      "severity-normal": "正常",
+      "severity-high": "高",
+      "severity-medium": "中",
+      "severity-low": "低",
       "cold-storage-breach-title": "冷库阈值突破",
       "kitchen-temp-breach-title": "厨房温度超出范围",
       "temp-exceeded-msg": "{sensorName} 超出允许的最大范围 ({lastValue} °C)。 最佳为 {minValue} 到 {maxValue} °C。",
@@ -217,6 +218,47 @@
       "low-stock-msg": "{sensorName} 已降至 {lastValue} 单位（最低：{minValue}）。需要补货。",
       "high-occupancy-title": "{sensorName} 达到高入住率",
       "high-occupancy-msg": "负载集中在 {sensorName} ({lastValue}% 入住率)。"
+    },
+    "alerts-page": {
+      "kicker": "餐厅",
+      "title": "警报",
+      "description": "整合库存、温度和交付偏差，并采取后续行动。",
+      "search-label": "搜索",
+      "search-placeholder": "搜索警报...",
+      "severity-label": "严重程度",
+      "severity-placeholder": "按严重程度筛选",
+      "table": {
+        "columns": {
+          "severity": "严重程度",
+          "detail": "警报详情",
+          "source": "来源",
+          "date": "日期",
+          "status": "状态",
+          "actions": "操作"
+        },
+        "actions": {
+          "view-details": "查看详情",
+          "acknowledge": "确认"
+        },
+        "status": {
+          "open": "开启",
+          "resolved": "已解决",
+          "acknowledged": "已确认"
+        },
+        "footer": "显示第 {first} 至 {last} 条，共 {total} 条活动警报"
+      },
+      "dialog": {
+        "header": "警报详情",
+        "meta": {
+          "source": "来源",
+          "date": "日期",
+          "sensor-id": "传感器 ID"
+        },
+        "actions": {
+          "close": "关闭",
+          "acknowledge": "确认"
+        }
+      }
     }
   },
   "tables": {

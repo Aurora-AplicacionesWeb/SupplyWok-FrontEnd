@@ -16,6 +16,8 @@ export class Alert {
     this._messageParams = alert.messageParams || {};
     this._severity = alert.severity;
     this._timestamp = alert.timestamp;
+    this._status = alert.status || 'Open';
+    this._source = alert.source || 'Unknown';
   }
 
   get id() { return this._id; }
@@ -36,6 +38,26 @@ export class Alert {
 
   get timestamp() { return this._timestamp; }
   set timestamp(value) { this._timestamp = value; }
+
+  get status() { return this._status; }
+  set status(value) { this._status = value; }
+
+  get source() { return this._source; }
+  set source(value) { this._source = value; }
+
+  /**
+   * Marks the alert as resolved.
+   */
+  resolve() {
+    this._status = 'Resolved';
+  }
+
+  /**
+   * Marks the alert as acknowledged.
+   */
+  acknowledge() {
+    this._status = 'Acknowledged';
+  }
 
   /**
    * Factory method to generate an Alert if a Sensor reading is out of bounds.
@@ -65,8 +87,10 @@ export class Alert {
             minValue: sensor.minValue,
             maxValue: sensor.maxValue
           },
-          severity: 'Critical',
-          timestamp: now
+          severity: isColdStorage ? 'Critical' : 'Low',
+          source: isColdStorage ? 'Storage sensor' : 'Kitchen sensor',
+          timestamp: now,
+          status: 'Open'
         });
       }
     }
@@ -84,8 +108,10 @@ export class Alert {
             lastValue: sensor.lastValue,
             minValue: sensor.minValue
           },
-          severity: 'Warning',
-          timestamp: now
+          severity: 'High',
+          source: 'Inventory sensor',
+          timestamp: now,
+          status: 'Open'
         });
       }
     }
@@ -102,8 +128,10 @@ export class Alert {
               sensorName: sensor.name,
               lastValue: sensor.lastValue
             },
-            severity: 'Warning',
-            timestamp: now
+            severity: 'Medium',
+            source: 'Dining Room sensor',
+            timestamp: now,
+            status: 'Open'
           });
        }
     }

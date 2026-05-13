@@ -5,10 +5,11 @@ import { inventoryManagementRoutes } from './inventory-management/presentation/i
 
 const placeholderPage = () => import('./shared/presentation/views/placeholder-page.vue');
 const pageNotFound = () => import('./shared/presentation/views/page-not-found.vue');
+const alertsPage = () => import('./iot-monitoring/presentation/views/alerts-view.vue');
 
 const placeholderRoutes = [
     { path: '/dashboard', name: 'dashboard', component: placeholderPage, meta: { title: 'Dashboard' } },
-    { path: '/alerts', name: 'alerts', component: placeholderPage, meta: { title: 'Alerts' } },
+    { path: '/alerts', name: 'alerts', component: alertsPage, meta: { title: 'Alerts' } },
     { path: '/reports', name: 'reports', component: placeholderPage, meta: { title: 'Reports' } },
     { path: '/configuration', name: 'configuration', component: placeholderPage, meta: { title: 'Configuration' } },
     { path: '/subscription', name: 'subscription', component: placeholderPage, meta: { title: 'Subscription' } },

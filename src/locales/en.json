@@ -207,8 +207,9 @@
       "notifications": "Notifications",
       "no-active-alerts": "No active alerts.",
       "severity-critical": "Critical",
-      "severity-warning": "Warning",
-      "severity-normal": "Normal",
+      "severity-high": "High",
+      "severity-medium": "Medium",
+      "severity-low": "Low",
       "cold-storage-breach-title": "Cold storage threshold breach",
       "kitchen-temp-breach-title": "Kitchen temperature out of bounds",
       "temp-exceeded-msg": "{sensorName} exceeded maximum allowed range ({lastValue} °C). Optimal is {minValue} to {maxValue} °C.",
@@ -217,6 +218,47 @@
       "low-stock-msg": "{sensorName} has fallen to {lastValue} units (Minimum: {minValue}). Restock required.",
       "high-occupancy-title": "{sensorName} peaked at high occupancy",
       "high-occupancy-msg": "Load concentrated on {sensorName} ({lastValue}% occupied)."
+    },
+    "alerts-page": {
+      "kicker": "Restaurant",
+      "title": "Alerts",
+      "description": "Consolidate stock, temperature, and delivery deviations with follow-up actions.",
+      "search-label": "Search",
+      "search-placeholder": "Search alerts...",
+      "severity-label": "Severity",
+      "severity-placeholder": "Filter by Severity",
+      "table": {
+        "columns": {
+          "severity": "SEVERITY",
+          "detail": "ALERT DETAIL",
+          "source": "SOURCE",
+          "date": "DATE",
+          "status": "STATUS",
+          "actions": "ACTIONS"
+        },
+        "actions": {
+          "view-details": "VIEW DETAILS",
+          "acknowledge": "ACKNOWLEDGE"
+        },
+        "status": {
+          "open": "Open",
+          "resolved": "Resolved",
+          "acknowledged": "Acknowledged"
+        },
+        "footer": "Showing {first} to {last} of {total} active alerts"
+      },
+      "dialog": {
+        "header": "Alert Details",
+        "meta": {
+          "source": "Source",
+          "date": "Date",
+          "sensor-id": "Sensor ID"
+        },
+        "actions": {
+          "close": "Close",
+          "acknowledge": "Acknowledge"
+        }
+      }
     }
   },
   "tables": {

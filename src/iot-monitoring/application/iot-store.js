@@ -12,6 +12,7 @@ export const iotStore = defineStore('iot', () => {
 
   // --- State ---
   const sensors = ref([]);
+  const alertHistory = ref([]);
   const loading = ref(false);
   const error = ref(null);
 
@@ -20,29 +21,27 @@ export const iotStore = defineStore('iot', () => {
   /** Total number of sensors registered. */
   const sensorsCount = computed(() => sensors.value.length);
 
+  /** List of all alerts in the history. */
+  const allAlerts = computed(() => alertHistory.value);
+
   /** 
-   * List of all active alerts generated from current sensor readings. 
+   * List of all active (Open) alerts. 
    * Sorted by severity (Critical first) and then by timestamp (newest first).
    */
   const activeAlerts = computed(() => {
-    const alerts = [];
-    for (const sensor of sensors.value) {
-      const alert = Alert.fromSensor(sensor);
-      if (alert) {
-        alerts.push(alert);
-      }
-    }
-    return alerts.sort((a, b) => {
-      if (a.severity === 'Critical' && b.severity !== 'Critical') return -1;
-      if (a.severity !== 'Critical' && b.severity === 'Critical') return 1;
-      return b.timestamp.getTime() - a.timestamp.getTime();
-    });
+    return alertHistory.value
+      .filter(a => a.status === 'Open')
+      .sort((a, b) => {
+        const severityMap = { 'Critical': 0, 'High': 1, 'Medium': 2, 'Low': 3 };
+        const diff = severityMap[a.severity] - severityMap[b.severity];
+        if (diff !== 0) return diff;
+        return b.timestamp.getTime() - a.timestamp.getTime();
+      });
   });
 
   /** The 3 most recent alerts for quick display. */
   const recentAlerts = computed(() => {
-    const alerts = [...activeAlerts.value];
-    return alerts
+    return [...alertHistory.value]
       .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime())
       .slice(0, 3);
   });
@@ -52,14 +51,13 @@ export const iotStore = defineStore('iot', () => {
     return activeAlerts.value.slice(0, 5);
   });
 
-  /** Count of storage items with low stock levels. */
+  // ... (lowStockStorageCount, etc. remain the same as they check sensors directly)
   const lowStockStorageCount = computed(() => {
     const storage = sensors.value.filter(s => s.type === 'storage-pressure');
     if (storage.length === 0) return 0;
     return storage.filter(s => s.lastValue <= s.minValue).length;
   });
 
-  /** Count of sensors with readings outside of defined thresholds. */
   const outOfRangeTemperatureCount = computed(() => {
     const tempSensors = sensors.value.filter(
       s => s.type === 'kitchen-temperature' || s.type === 'storage-temperature'
@@ -70,7 +68,6 @@ export const iotStore = defineStore('iot', () => {
     ).length;
   });
 
-  /** Average temperature in the kitchen area. */
   const averageKitchenTemperature = computed(() => {
     const active = sensors.value.filter(
       s => s.type === 'kitchen-temperature' && s.enabled
@@ -80,7 +77,6 @@ export const iotStore = defineStore('iot', () => {
     return Math.round((sum / active.length) * 10) / 10;
   });
 
-  /** Average temperature in cold storage areas. */
   const averageStorageTemperature = computed(() => {
     const active = sensors.value.filter(
       s => s.type === 'storage-temperature' && s.enabled
@@ -90,7 +86,6 @@ export const iotStore = defineStore('iot', () => {
     return Math.round((sum / active.length) * 10) / 10;
   });
 
-  /** Percentage of tables currently occupied. */
   const occupiedTablePercentage = computed(() => {
     const tables = sensors.value.filter(s => s.type === 'table-pressure');
     if (tables.length === 0) return null;
@@ -100,6 +95,22 @@ export const iotStore = defineStore('iot', () => {
 
   // --- Actions ---
 
+  /**
+   * Synchronizes alerts based on current sensor values.
+   */
+  const syncAlerts = () => {
+    for (const sensor of sensors.value) {
+      const newAlert = Alert.fromSensor(sensor);
+      const existingAlert = alertHistory.value.find(a => a.sensorId === sensor.id && a.status === 'Open');
+
+      if (newAlert && !existingAlert) {
+        alertHistory.value.unshift(newAlert);
+      } else if (!newAlert && existingAlert) {
+        existingAlert.resolve();
+      }
+    }
+  };
+
   /** 
    * Fetches the latest sensor data from the API.
    */
@@ -108,10 +119,21 @@ export const iotStore = defineStore('iot', () => {
     error.value = null;
     try {
       sensors.value = await api.getSensors();
+      syncAlerts();
     } catch (err) {
       error.value = formatError(err, 'Failed to load sensors');
     } finally {
       loading.value = false;
+    }
+  };
+
+  /**
+   * Marks an alert as acknowledged.
+   */
+  const acknowledgeAlert = (alertId) => {
+    const alert = alertHistory.value.find(a => a.id === alertId);
+    if (alert) {
+      alert.acknowledge();
     }
   };
 
@@ -132,6 +154,7 @@ export const iotStore = defineStore('iot', () => {
     error.value = null;
     try {
       sensors.value.push(sensor);
+      syncAlerts();
     } catch (err) {
       error.value = formatError(err, 'Failed to create sensor');
     } finally {
@@ -150,6 +173,7 @@ export const iotStore = defineStore('iot', () => {
       const index = sensors.value.findIndex(s => s.id === updatedSensor.id);
       if (index !== -1) {
         sensors.value.splice(index, 1, updatedSensor);
+        syncAlerts();
       }
     } catch (err) {
       error.value = formatError(err, 'Failed to update sensor');
@@ -167,6 +191,7 @@ export const iotStore = defineStore('iot', () => {
     error.value = null;
     try {
       sensors.value = sensors.value.filter(s => s.id !== id);
+      syncAlerts();
     } catch (err) {
       error.value = formatError(err, 'Failed to delete sensor');
     } finally {
@@ -190,9 +215,11 @@ export const iotStore = defineStore('iot', () => {
 
   return {
     sensors,
+    alertHistory,
     loading,
     error,
     sensorsCount,
+    allAlerts,
     activeAlerts,
     recentAlerts,
     topCriticalAlerts,
@@ -205,6 +232,7 @@ export const iotStore = defineStore('iot', () => {
     getSensorById,
     addSensor,
     updateSensor,
-    deleteSensor
+    deleteSensor,
+    acknowledgeAlert
   };
 });

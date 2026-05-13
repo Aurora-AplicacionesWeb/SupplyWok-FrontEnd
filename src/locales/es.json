@@ -207,8 +207,9 @@
       "notifications": "Notificaciones",
       "no-active-alerts": "No hay alertas activas.",
       "severity-critical": "Crítico",
-      "severity-warning": "Advertencia",
-      "severity-normal": "Normal",
+      "severity-high": "Alta",
+      "severity-medium": "Media",
+      "severity-low": "Baja",
       "cold-storage-breach-title": "Incumplimiento del umbral en almacén frío",
       "kitchen-temp-breach-title": "Temperatura de cocina fuera de límites",
       "temp-exceeded-msg": "{sensorName} excedió el rango máximo permitido ({lastValue} °C). El óptimo es de {minValue} a {maxValue} °C.",
@@ -217,6 +218,47 @@
       "low-stock-msg": "{sensorName} ha caído a {lastValue} unidades (Mínimo: {minValue}). Requiere reposición.",
       "high-occupancy-title": "{sensorName} alcanzó una alta ocupación",
       "high-occupancy-msg": "Carga concentrada en {sensorName} ({lastValue}% ocupado)."
+    },
+    "alerts-page": {
+      "kicker": "Restaurante",
+      "title": "Alertas",
+      "description": "Consolida las desviaciones de stock, temperatura y entrega con acciones de seguimiento.",
+      "search-label": "Buscar",
+      "search-placeholder": "Buscar alertas...",
+      "severity-label": "Severidad",
+      "severity-placeholder": "Filtrar por Severidad",
+      "table": {
+        "columns": {
+          "severity": "SEVERIDAD",
+          "detail": "DETALLE DE ALERTA",
+          "source": "ORIGEN",
+          "date": "FECHA",
+          "status": "ESTADO",
+          "actions": "ACCIONES"
+        },
+        "actions": {
+          "view-details": "VER DETALLES",
+          "acknowledge": "RECONOCER"
+        },
+        "status": {
+          "open": "Abierta",
+          "resolved": "Resuelta",
+          "acknowledged": "Reconocida"
+        },
+        "footer": "Mostrando {first} a {last} de {total} alertas activas"
+      },
+      "dialog": {
+        "header": "Detalles de la Alerta",
+        "meta": {
+          "source": "Origen",
+          "date": "Fecha",
+          "sensor-id": "ID del Sensor"
+        },
+        "actions": {
+          "close": "Cerrar",
+          "acknowledge": "Reconocer"
+        }
+      }
     }
   },
   "tables": {
