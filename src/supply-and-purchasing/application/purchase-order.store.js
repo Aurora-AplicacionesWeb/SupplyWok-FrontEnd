@@ -66,6 +66,17 @@ const usePurchaseOrderStore = defineStore('supply-and-purchasing', () => {
     }
 
     /**
+     * Ensures purchase orders are loaded before a page or dashboard card tries to render them.
+     *
+     * @returns {Promise<void>}
+     */
+    async function ensurePurchaseOrdersLoaded() {
+        if (!purchaseOrdersLoaded.value && !loading.value) {
+            await fetchPurchaseOrders();
+        }
+    }
+
+    /**
      * Clears validation errors from the current application state.
      *
      * @returns {void}
@@ -214,6 +225,7 @@ const usePurchaseOrderStore = defineStore('supply-and-purchasing', () => {
         purchaseOrdersCount,
         pendingPurchaseOrdersCount,
         highPriorityPurchaseOrdersCount,
+        ensurePurchaseOrdersLoaded,
         fetchPurchaseOrders,
         clearValidationErrors,
         clearValidationScope,

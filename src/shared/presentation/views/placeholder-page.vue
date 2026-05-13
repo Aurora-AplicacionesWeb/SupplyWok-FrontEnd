@@ -6,6 +6,7 @@ import TempAlertCard from '../../../iot-monitoring/presentation/components/stat-
 import ActiveTablesCard from '../../../iot-monitoring/presentation/components/stat-cards/active-tables-card.vue';
 import IotPanelCard from '../../../iot-monitoring/presentation/components/panel-cards/iot-panel-card.vue';
 import HeaderAlertsPopup from '../../../iot-monitoring/presentation/components/alerts/header-alerts-popup.vue';
+import OrdersSummaryCard from '../../../supply-and-purchasing/presentation/components/orders-summary-card.vue';
 
 const route = useRoute();
 const pageTitle = computed(() => route.meta?.title ?? 'Module');
@@ -26,6 +27,10 @@ const pageTitle = computed(() => route.meta?.title ?? 'Module');
 
         <div class="panel-row">
             <IotPanelCard />
+        </div>
+
+        <div class="dashboard-secondary-row">
+            <OrdersSummaryCard class="dashboard-orders-card" />
         </div>
     </div>
 
@@ -91,5 +96,22 @@ const pageTitle = computed(() => route.meta?.title ?? 'Module');
 .panel-row {
     display: flex;
     justify-content: flex-start;
+}
+
+.dashboard-secondary-row {
+    display: grid;
+    grid-template-columns: minmax(320px, 520px);
+    justify-content: end;
+}
+
+.dashboard-orders-card {
+    width: 100%;
+}
+
+@media (max-width: 960px) {
+    .dashboard-secondary-row {
+        grid-template-columns: 1fr;
+        justify-content: stretch;
+    }
 }
 </style>
