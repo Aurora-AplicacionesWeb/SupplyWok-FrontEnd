@@ -185,7 +185,8 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
      */
     function deleteCatalogItem(id){
         supplierManagementApi.deleteCatalogItem(id).then(()=>{
-            const index = catalogItems.value.findIndex(i => i['id'] === id);
+            const idNum = parseInt(id);
+            const index = catalogItems.value.findIndex(i => i['id'] === idNum);
             if(index !== -1){
                 catalogItems.value.splice(index, 1);
             }

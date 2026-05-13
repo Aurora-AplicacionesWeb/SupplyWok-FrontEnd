@@ -10,6 +10,7 @@ const supplierAlerts       = () => import('./supply-management/presentation/view
 const supplierSettings     = () => import('./supply-management/presentation/views/settings-supplier.vue');
 const supplierSubscription = () => import('./supply-management/presentation/views/subscription-supplier.vue');
 const supplierDelivery     = () => import('./supply-management/presentation/views/delivery-supplier.vue');
+
 /** Child routes for the /supplier prefix (only active when userRole === 'supplier') */
 const supplierRoutes = [
     { path: 'dashboard',     name: 'supplier-dashboard',     component: supplierDashboard,    meta: { title: 'Dashboard',     role: 'supplier' } },
@@ -31,6 +32,7 @@ const routes = [
     { path: '/publishing',      name: 'publishing', children: publishingRoutes },
     { path: '/iam',             name: 'iam',        children: iamRoutes },
     { path: '/supplier',        name: 'supplier',   redirect: '/supplier/dashboard', children: supplierRoutes },
+    { path: '/restaurant',      name: 'restaurant', redirect: '/restaurant/dashboard' },
     { path: '/',                redirect: '/home' },
     { path: '/:pathMatch(.*)*', name: 'not-found', component: pageNotFound, meta: { title: 'Page Not Found' } }
 ];
@@ -38,9 +40,11 @@ const routes = [
 
 // Routes version when IAM is not implemented
 const routes = [
-    // ── Supplier routes (supply-management module) ──
+    // Supplier routes (supply-management bc)
     { path: '/supplier',        name: 'supplier',   redirect: '/supplier/dashboard', children: supplierRoutes },
-    { path: '/',                redirect: '/home' },
+
+    { path: '/restaurant',      name: 'restaurant', redirect: '/restaurant/dashboard' },
+    { path: '/',                redirect: '/restaurant/dashboard' },
 ];
 
 const router = createRouter({

@@ -11,7 +11,6 @@
       "language": "en"
     }
   ],
-
   "supplier": {
     "id": 1,
     "name": "Gran Dragón Chifa",
@@ -22,7 +21,6 @@
     "demandOutlookPercent": 11,
     "urgentRequests": 5
   },
-
   "deliveryRoutes": [
     {
       "id": 1,
@@ -52,14 +50,37 @@
       "lastUpdatedMinutesAgo": 30
     }
   ],
-
   "aggregateChart": [
-    { "id": 1, "month": "May", "value": 240 },
-    { "id": 2, "month": "Jun", "value": 260 },
-    { "id": 3, "month": "Jul", "value": 270 },
-    { "id": 4, "month": "Aug", "value": 285 },
-    { "id": 5, "month": "Sep", "value": 305 },
-    { "id": 6, "month": "Oct", "value": 319 }
+    {
+      "id": 1,
+      "month": "May",
+      "value": 240
+    },
+    {
+      "id": 2,
+      "month": "Jun",
+      "value": 260
+    },
+    {
+      "id": 3,
+      "month": "Jul",
+      "value": 270
+    },
+    {
+      "id": 4,
+      "month": "Aug",
+      "value": 285
+    },
+    {
+      "id": 5,
+      "month": "Sep",
+      "value": 305
+    },
+    {
+      "id": 6,
+      "month": "Oct",
+      "value": 319
+    }
   ],
   "catalog-items": [
     {
@@ -252,7 +273,6 @@
       "lastOrderDate": "2026-04-19"
     }
   ],
-
   "demandForecast": [
     {
       "id": 1,
@@ -310,7 +330,6 @@
       "projectionPercent": -5
     }
   ],
-
   "products": [
     {
       "id": 1,
@@ -347,7 +366,7 @@
       "name": "Carne de Res",
       "category": "PROTEIN",
       "unit": "kg",
-      "price": 22.0,
+      "price": 22,
       "stock": 80,
       "available": true,
       "description": "Carne de res para lomo y wok"
@@ -357,7 +376,7 @@
       "name": "Cerdo Troceado",
       "category": "PROTEIN",
       "unit": "kg",
-      "price": 15.0,
+      "price": 15,
       "stock": 60,
       "available": true,
       "description": "Cerdo para chicharrón y preparaciones chifa"
@@ -377,7 +396,7 @@
       "name": "Salsa Oyster",
       "category": "SAUCES",
       "unit": "lt",
-      "price": 9.0,
+      "price": 9,
       "stock": 80,
       "available": true,
       "description": "Salsa de ostión para wok"
@@ -387,7 +406,7 @@
       "name": "Brócoli Fresco",
       "category": "VEGETABLES",
       "unit": "kg",
-      "price": 3.0,
+      "price": 3,
       "stock": 120,
       "available": true,
       "description": "Brócoli fresco de primera calidad"
@@ -413,7 +432,6 @@
       "description": "Col china o repollo chino"
     }
   ],
-
   "alerts": [
     {
       "id": 1,
@@ -451,7 +469,6 @@
       "status": "acknowledged"
     }
   ],
-
   "configuration": {
     "id": 1,
     "supplierId": 1,
@@ -464,9 +481,13 @@
     "language": "en",
     "notificationsEnabled": true,
     "emailAlertsEnabled": true,
-    "categories": ["GRAINS", "PROTEIN", "SAUCES", "VEGETABLES"]
+    "categories": [
+      "GRAINS",
+      "PROTEIN",
+      "SAUCES",
+      "VEGETABLES"
+    ]
   },
-
   "subscriptionPlans": [
     {
       "id": 1,

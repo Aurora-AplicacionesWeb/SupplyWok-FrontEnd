@@ -1,6 +1,9 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import {useI18n} from "vue-i18n";
+import { useRoute, useRouter } from 'vue-router';
+import { storeToRefs } from 'pinia';
+import useSessionStore from '../../application/session.store.js';
 
 /**
  * @component SidebarMenu
@@ -16,18 +19,17 @@ import {useI18n} from "vue-i18n";
  * @property {string} iconOn - Path to the active icon image.
  */
 
-/** @type {import('vue').Ref<string>} Reactive state for the currently active menu item ID. */
-const activeItem = ref('dashboard');
-
 /** @type {import('vue').Ref<string>} Reactive state for the restaurant name. */
 const restaurantName = ref('GRAN DRAGÓN CHIFA');
 
 const {t}=useI18n();
+const route = useRoute();
+const router = useRouter();
+const sessionStore = useSessionStore();
+const { userRole } = storeToRefs(sessionStore);
 
 /** @type {import('vue').Ref<string>} Reactive state for the current subscription plan. */
 const currentPlan = ref('Premium');
-
-const userRole = ref('supplier')
 
 /** @type {MenuItem[]} Array containing the main navigation items. */
 const menuItems = {
@@ -57,13 +59,21 @@ const menuItems = {
   ]
 };
 
+const visibleMenuItems = computed(() => menuItems[userRole.value] ?? []);
+
+const activeItem = computed(() => {
+  const currentItem = visibleMenuItems.value.find((item) => route.path.startsWith(item.path));
+  return currentItem?.id ?? 'dashboard';
+});
+
 /**
- * Sets the given item ID as the active selection in the menu.
- * @param {string} itemId - The ID of the menu item to activate.
+ * Navigates to role-scoped menu items.
+ * @param {MenuItem} item - Menu item selected by the user.
  * @returns {void}
  */
-const selectItem = (itemId) => {
-  activeItem.value = itemId;
+const selectItem = (item) => {
+  if (!item.path.startsWith(`/${userRole.value}`)) return;
+  router.push(item.path);
 };
 </script>
 
@@ -88,12 +98,12 @@ const selectItem = (itemId) => {
     <nav class="sidebar__nav" aria-label="Main Navigation">
       <ul class="sidebar__menu">
         <li
-          v-for="item in menuItems[userRole]"
+          v-for="item in visibleMenuItems"
           :key="item.id"
           class="sidebar__item"
           :class="{ 'sidebar__item--active': activeItem === item.id }"
         >
-          <button class="sidebar__button" @click="selectItem(item.id)">
+          <button class="sidebar__button" @click="selectItem(item)">
             <img
               :src="activeItem === item.id ? item.iconOn : item.iconOff"
               :alt="`${ t(item.i18nKey)} icon`"

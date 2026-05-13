@@ -1,6 +1,23 @@
 <script setup>
+import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import SidebarMenu from './sidebar-menu.vue';
 import LanguageSwitcher from './language-switcher.vue';
+import useSessionStore from '../../application/session.store.js';
+
+const router = useRouter();
+const { t } = useI18n();
+const sessionStore = useSessionStore();
+const { userRole } = storeToRefs(sessionStore);
+
+const nextRole = computed(() => userRole.value === 'supplier' ? 'restaurant' : 'supplier');
+
+function switchRole() {
+  sessionStore.toggleUserRole();
+  router.push(`/${userRole.value}/dashboard`);
+}
 </script>
 
 <template>
@@ -9,7 +26,10 @@ import LanguageSwitcher from './language-switcher.vue';
     <div class="layout__main">
       <header class="layout__header">
         <strong class="layout__brand">SupplyWok</strong>
-        <LanguageSwitcher />
+        <div class="layout__actions">
+          <pv-button class="layout__role-toggle" label="Switch Role" outlined type="button" @click="switchRole"/>
+          <LanguageSwitcher />
+        </div>
       </header>
       <main class="layout__content">
         <router-view />
@@ -45,6 +65,18 @@ import LanguageSwitcher from './language-switcher.vue';
   color: #2d241e;
   font-family: 'Poppins', system-ui, sans-serif;
   font-size: 18px;
+  font-weight: 700;
+}
+
+.layout__actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.layout__role-toggle {
+  color: #2d241e;
+  border-color: #cfc6ba;
   font-weight: 700;
 }
 
