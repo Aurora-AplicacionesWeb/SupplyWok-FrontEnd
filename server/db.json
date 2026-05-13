@@ -61,6 +61,40 @@
     { "id": 5, "month": "Sep", "value": 305 },
     { "id": 6, "month": "Oct", "value": 319 }
   ],
+  "catalog-items": [
+    {
+      "id": 1,
+      "name": "Cebolla china",
+      "category": "Vegetables",
+      "price": 2.9,
+      "unit": "kg",
+      "deliveryConditions": "Next-day before 11:00"
+    },
+    {
+      "id": 2,
+      "name": "Pollo trozado",
+      "category": "Protein",
+      "price": 12.4,
+      "unit": "kg",
+      "deliveryConditions": "Cold chain guaranteed 0-4 °C"
+    },
+    {
+      "id": 3,
+      "name": "Aceite de sésamo",
+      "category": "Sauces",
+      "price": 18.2,
+      "unit": "ltr",
+      "deliveryConditions": "48h dispatch window"
+    },
+    {
+      "id": 4,
+      "name": "Wantán congelado",
+      "category": "Frozen",
+      "price": 34,
+      "unit": "box",
+      "deliveryConditions": "Frozen route Tuesdays and Fridays"
+    }
+  ],
   "purchase-orders": [
     {
       "id": 1,
