@@ -7,7 +7,10 @@ import InputText from 'primevue/inputtext';
 import Dropdown from 'primevue/dropdown';
 import ProgressBar from 'primevue/progressbar';
 import Tag from 'primevue/tag';
-import Button from 'primevue/button';
+import { useConfirm } from 'primevue/useconfirm';
+
+const confirm = useConfirm();
+const emit = defineEmits(['delete']);
 
 const props = defineProps({
   items: { type: Array, default: () => [] },
@@ -50,6 +53,20 @@ function formatUnit(unit) {
 	GRAMS: t('inventoryManagement.units.grams')
   };
   return map[unit] ?? unit;
+}
+
+function confirmDelete(item) {
+  confirm.require({
+	message: `¿Estás seguro de que deseas eliminar "${item.name}"?`,
+	header: 'Confirmar eliminación',
+	icon: 'pi pi-exclamation-triangle',
+	accept() {
+	  emit('delete', item.id);
+	},
+	reject() {
+	  // No hacer nada
+	}
+  });
 }
 </script>
 
@@ -100,9 +117,14 @@ function formatUnit(unit) {
 
 	  <Column field="restaurantId" :header="t('inventoryManagement.table.columns.restaurant')" />
 
-	  <Column :header="t('inventoryManagement.table.columns.actions')">
+	  <Column :header="t('inventoryManagement.table.columns.actions')" style="width: 120px;">
 		<template #body="{ data }">
-		  <Button icon="pi pi-plus" class="p-button-text" :label="t('inventoryManagement.table.actions.add')" />
+		  <button class="inventory-data-table__action-btn inventory-data-table__action-btn--edit" title="Editar" @click="() => {}">
+			<i class="pi pi-pencil"></i>
+		  </button>
+		  <button class="inventory-data-table__action-btn inventory-data-table__action-btn--delete" title="Eliminar" @click="confirmDelete(data)">
+			<i class="pi pi-trash"></i>
+		  </button>
 		</template>
 	  </Column>
 	</DataTable>
@@ -118,6 +140,26 @@ function formatUnit(unit) {
 .inventory-data-table__stock-cell { display:flex; align-items:center; gap:12px; }
 .inventory-data-table__stock-value { font-weight:700; }
 .inventory-data-table__stock-progress { width:120px; }
+
+.inventory-data-table__action-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px 8px;
+  margin-right: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inventory-data-table__action-btn--edit { color: #7b6d61; }
+.inventory-data-table__action-btn--edit:hover { background: rgba(123, 109, 97, 0.1); color: #5a4a3a; }
+
+.inventory-data-table__action-btn--delete { color: #c21204; }
+.inventory-data-table__action-btn--delete:hover { background: rgba(194, 18, 4, 0.1); color: #900; }
 </style>
 
 
