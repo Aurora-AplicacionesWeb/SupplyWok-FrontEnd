@@ -33,5 +33,41 @@
       "catalog": "产品目录",
       "delivery": "配送计划"
     }
+  },
+  "supplier-management": {
+    "catalog": {
+      "breadcrumb": "供应商",
+      "title": "产品目录",
+      "subtitle": "管理报价、价格、单位和配送条件。",
+      "add": "添加",
+      "search": "搜索",
+      "columns": {
+        "product": "产品",
+        "category": "类别",
+        "price": "价格",
+        "unit": "单位",
+        "delivery-conditions": "配送条件",
+        "actions": "操作"
+      },
+      "actions": {
+        "edit": "编辑",
+        "delete": "删除"
+      },
+      "form": {
+        "product": "产品",
+        "category": "类别",
+        "price": "价格",
+        "unit": "单位",
+        "delivery-conditions": "配送条件",
+        "cancel": "取消",
+        "save": "保存"
+      },
+      "delete-dialog": {
+        "title": "删除产品",
+        "message": "确定要从目录中删除 {product} 吗？",
+        "confirm": "删除"
+      },
+      "empty": "目录中还没有产品。"
+    }
   }
 }

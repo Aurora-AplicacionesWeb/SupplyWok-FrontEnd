@@ -33,5 +33,41 @@
       "catalog": "Catálogo de Productos",
       "delivery": "Planificación de Entregas"
     }
+  },
+  "supplier-management": {
+    "catalog": {
+      "breadcrumb": "PROVEEDOR",
+      "title": "Catálogo de productos",
+      "subtitle": "Gestiona oferta, precio, unidad y condiciones de entrega.",
+      "add": "Agregar",
+      "search": "Buscar",
+      "columns": {
+        "product": "Producto",
+        "category": "Categoría",
+        "price": "Precio",
+        "unit": "Unidad",
+        "delivery-conditions": "Condiciones de entrega",
+        "actions": "Acciones"
+      },
+      "actions": {
+        "edit": "Editar",
+        "delete": "Eliminar"
+      },
+      "form": {
+        "product": "Producto",
+        "category": "Categoría",
+        "price": "Precio",
+        "unit": "Unidad",
+        "delivery-conditions": "Condiciones de entrega",
+        "cancel": "Cancelar",
+        "save": "Guardar"
+      },
+      "delete-dialog": {
+        "title": "Eliminar producto",
+        "message": "¿Seguro que quieres eliminar {product} del catálogo?",
+        "confirm": "Eliminar"
+      },
+      "empty": "Aún no hay productos en el catálogo."
+    }
   }
 }

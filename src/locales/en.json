@@ -35,6 +35,39 @@
     }
   },
   "supplier-management": {
-
+    "catalog": {
+      "breadcrumb": "SUPPLIER",
+      "title": "Product catalog",
+      "subtitle": "Manage offer, price, unit, and delivery conditions.",
+      "add": "Add",
+      "search": "Search",
+      "columns": {
+        "product": "Product",
+        "category": "Category",
+        "price": "Price",
+        "unit": "Unit",
+        "delivery-conditions": "Delivery conditions",
+        "actions": "Actions"
+      },
+      "actions": {
+        "edit": "Edit",
+        "delete": "Delete"
+      },
+      "form": {
+        "product": "Product",
+        "category": "Category",
+        "price": "Price",
+        "unit": "Unit",
+        "delivery-conditions": "Delivery conditions",
+        "cancel": "Cancel",
+        "save": "Save"
+      },
+      "delete-dialog": {
+        "title": "Delete product",
+        "message": "Are you sure you want to delete {product} from the catalog?",
+        "confirm": "Delete"
+      },
+      "empty": "No products in the catalog yet."
+    }
   }
 }

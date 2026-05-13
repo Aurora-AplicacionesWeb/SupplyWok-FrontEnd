@@ -7,7 +7,7 @@ import Aura from '@primeuix/themes/aura'
 import 'primeflex/primeflex.css'
 import 'primeicons/primeicons.css'
 
-import { Button, InputText, Card } from 'primevue'
+import { Button, InputText, Card, Dialog, DataTable, Column, InputNumber } from 'primevue'
 
 import i18n from './i18n.js'
 import router from "./router.js";
@@ -21,4 +21,8 @@ createApp(App)
     .component('pv-button', Button)
     .component('pv-input-text', InputText)
     .component('pv-card', Card)
+    .component('pv-dialog', Dialog)
+    .component('pv-data-table', DataTable)
+    .component('pv-column', Column)
+    .component('pv-input-number', InputNumber)
     .mount('#app')
