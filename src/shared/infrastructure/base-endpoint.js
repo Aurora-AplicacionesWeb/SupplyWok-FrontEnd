@@ -12,7 +12,6 @@ export class BaseEndpoint {
         this.http = baseApi.http;
         this.endpointPath = endpointPath;
     }
-
     /**
      * Retrieves a collection resource from the endpoint.
      *
@@ -20,6 +19,10 @@ export class BaseEndpoint {
      */
     getAll() {
         return this.http.get(this.endpointPath);
+    }
+
+    getById(id) {
+        return this.http.get(`${this.endpointPath}/${id}`);
     }
 
     /**
@@ -30,5 +33,13 @@ export class BaseEndpoint {
      */
     create(resource) {
         return this.http.post(this.endpointPath, resource);
+    }
+
+    update(id, resource) {
+        return this.http.put(`${this.endpointPath}/${id}`, resource);
+    }
+
+    delete(id) {
+        return this.http.delete(`${this.endpointPath}/${id}`);
     }
 }
