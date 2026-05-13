@@ -45,6 +45,14 @@ function normalizeMovements(movements) {
 }
 
 export class InventoryItem {
+  id;
+  restaurantId;
+  name;
+  unitOfMeasure;
+  currentStock;
+  minimumStockLevel;
+  movements;
+
   constructor(idOrParams, restaurantId, name, unitOfMeasure, initialStock = 0, minimumStockLevel = 0, movements = []) {
     const params = typeof idOrParams === 'object' && idOrParams !== null
       ? idOrParams
