@@ -2,6 +2,7 @@ import {defineStore} from "pinia";
 import {computed, ref} from "vue";
 import { SupplyManagementApi } from "../infrastructure/supply-management-api.js";
 import {OrdersAssembler} from "../infrastructure/orders.assembler.js";
+import {CatalogItemAssembler} from "../infrastructure/catalog-item.assembler.js";
 const supplierManagementApi = new SupplyManagementApi();
 
 /**
@@ -102,6 +103,98 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
         })
     }
 
+    // ── Catalog Supplier section ──────────────────────────────────────────────
+    // State and use cases for the supplier's product catalog (CatalogItem aggregate).
+
+    const catalogItems = ref([]);
+    const catalogItemsLoaded = ref(false);
+
+    /**
+     * Number of loaded catalog items.
+     *
+     * @type {import('vue').ComputedRef<number>}
+     */
+    const catalogItemsCount =
+        computed(()=> catalogItemsLoaded.value ? catalogItems.value.length : 0);
+
+    /**
+     * Loads the supplier's catalog items from infrastructure and updates local state.
+     *
+     * @returns {void}
+     */
+    function fetchCatalogItems(){
+        supplierManagementApi.getCatalogItems().then(response=>{
+            catalogItems.value = CatalogItemAssembler.toEntitiesFromResponse(response);
+            catalogItemsLoaded.value = true;
+        }).catch(error=>{
+            errors.value.push(error);
+        });
+    }
+
+    /**
+     * Finds a catalog item by its identifier from the local state.
+     *
+     * @param {string|number} id - Catalog item identifier.
+     * @returns {import('../domain/model/catalog-item.entity.js').CatalogItem|undefined}
+     */
+    function getCatalogItemById(id){
+        let idNum = parseInt(id);
+        return catalogItems.value.find(item => item['id'] === idNum);
+    }
+
+    /**
+     * Creates a catalog item through infrastructure and appends it to local state.
+     *
+     * @param {import('../domain/model/catalog-item.entity.js').CatalogItem} item - Catalog item entity to persist.
+     * @returns {void}
+     */
+    function addCatalogItem(item){
+        supplierManagementApi.createCatalogItem(item).then(response=>{
+            const resource = response.data;
+            const newItem = CatalogItemAssembler.toEntityFromResource(resource);
+            catalogItems.value.push(newItem);
+        }).catch(error=>{
+            errors.value.push(error);
+        });
+    }
+
+    /**
+     * Updates a catalog item through infrastructure and replaces it in local state.
+     *
+     * @param {import('../domain/model/catalog-item.entity.js').CatalogItem} item - Catalog item entity to update.
+     * @returns {void}
+     */
+    function updateCatalogItem(item){
+        supplierManagementApi.updateCatalogItem(item.id, item).then(response=>{
+            const resource = response.data;
+            const updatedItem = CatalogItemAssembler.toEntityFromResource(resource);
+            const index = catalogItems.value.findIndex(i => i['id'] === updatedItem.id);
+            if(index !== -1){
+                catalogItems.value[index] = updatedItem;
+            }
+        }).catch(error=>{
+            errors.value.push(error);
+        });
+    }
+
+    /**
+     * Deletes a catalog item through infrastructure and removes it from local state.
+     *
+     * @param {string|number} id - Catalog item identifier.
+     * @returns {void}
+     */
+    function deleteCatalogItem(id){
+        supplierManagementApi.deleteCatalogItem(id).then(()=>{
+            const index = catalogItems.value.findIndex(i => i['id'] === id);
+            if(index !== -1){
+                catalogItems.value.splice(index, 1);
+            }
+        }).catch(error=>{
+            errors.value.push(error);
+        });
+    }
+    // ── End Catalog Supplier section ──────────────────────────────────────────
+
     return{
         purchaseOrders,
         errors,
@@ -112,6 +205,15 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
         addPurchaseOrders,
         updatePurchaseOrders,
         deletePurchaseOrders,
+        // ── Catalog Supplier exports ──
+        catalogItems,
+        catalogItemsLoaded,
+        catalogItemsCount,
+        fetchCatalogItems,
+        getCatalogItemById,
+        addCatalogItem,
+        updateCatalogItem,
+        deleteCatalogItem,
     }
 });
 
