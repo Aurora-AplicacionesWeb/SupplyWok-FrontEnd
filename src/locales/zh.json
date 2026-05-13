@@ -2,15 +2,40 @@
   "welcome": "欢迎来到 SupplyWok",
   "access": {
     "log-in": {
-      "welcome": "欢迎",
-      "new-supply": "新来到 SupplyWok？",
+      "welcome": "欢迎！",
+      "new-supply": "SupplyWok 新用户？",
       "sign-up-now": "立即注册",
-      "email": "电子邮箱地址",
-      "email-example": "name@restaurant.com",
+      "email": "电子邮件",
+      "email-example": "example@email.com",
       "password": "密码",
-      "password-example": "请输入您的密码",
+      "password-example": "Password123",
       "forgot-password": "忘记密码？",
       "login": "登录"
+    },
+    "register": {
+      "get-started": "开始使用",
+      "phone": "电话号码",
+      "phone-example": "999 666 333",
+      "role": "角色",
+      "subscription": "订阅",
+      "select-one": "请选择",
+      "no-plans": "不了解我们的计划？",
+      "click-here": "点击这里",
+      "terms-accept": "我接受 {terms} 和 {policy}",
+      "terms": "条款",
+      "policy": "隐私政策",
+      "go-to-pay": "去支付"
+    },
+    "languages": {
+      "english": "英语 (US)",
+      "spanish": "西班牙语 (ES)",
+      "chinese": "中文 (ZH)"
+    },
+    "validation": {
+      "email-invalid": "电子邮件地址无效。",
+      "password-min": "密码必须至少为 8 个字符。",
+      "phone-invalid": "电话号码无效。",
+      "terms-required": "您必须接受条款才能继续。"
     }
   },
   "shared": {
@@ -377,5 +402,9 @@
     "newState": "新狀態",
     "dateChange": "變更日期",
     "observation": "備註"
+  },
+  "header": {
+    "settings": "设置",
+    "logout": "登出"
   }
 }

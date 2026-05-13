@@ -2,7 +2,7 @@
   <div class="header-alerts-wrapper">
     <!-- Icono de notificaciones -->
     <div class="notification-icon" @click="togglePanel">
-      <img src="/images/icons/alerts-icon.svg" alt="Alerts" />
+      <img src="/images/icons/notify-icon.svg" alt="Alerts" />
       <span v-if="store.topCriticalAlerts.length > 0" class="badge">
         {{ store.topCriticalAlerts.length }}
       </span>

@@ -15,8 +15,13 @@ const placeholderRoutes = [
 
 ];
 
+const loginPage = () => import('./iam/presentation/views/login-view.vue');
+const registerPage = () => import('./iam/presentation/views/register-view.vue');
+
 const routes = [
-    { path: '/', redirect: '/orders' },
+    { path: '/', redirect: '/login' },
+    { path: '/login', name: 'login', component: loginPage, meta: { title: 'Log in' } },
+    { path: '/register', name: 'register', component: registerPage, meta: { title: 'Register' } },
     ...placeholderRoutes,
     ...inventoryManagementRoutes,
     ...supplyAndPurchasingRoutes,

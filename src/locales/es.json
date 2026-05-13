@@ -2,15 +2,40 @@
   "welcome": "Bienvenido a SupplyWok",
   "access": {
     "log-in": {
-      "welcome": "Bienvenido",
+      "welcome": "¡Bienvenido!",
       "new-supply": "¿Nuevo en SupplyWok?",
       "sign-up-now": "Regístrate ahora",
       "email": "Correo electrónico",
-      "email-example": "nombre@restaurante.com",
+      "email-example": "ejemplo@email.com",
       "password": "Contraseña",
-      "password-example": "Ingresa tu contraseña",
+      "password-example": "Contraseña123",
       "forgot-password": "¿Olvidaste tu contraseña?",
       "login": "Iniciar sesión"
+    },
+    "register": {
+      "get-started": "Comenzar",
+      "phone": "Número de teléfono",
+      "phone-example": "999 666 333",
+      "role": "Rol",
+      "subscription": "Suscripción",
+      "select-one": "Selecciona uno",
+      "no-plans": "¿No conoces nuestros planes?",
+      "click-here": "Haz clic aquí",
+      "terms-accept": "Acepto los {terms} y la {policy}",
+      "terms": "términos",
+      "policy": "política de privacidad",
+      "go-to-pay": "Ir a pagar"
+    },
+    "languages": {
+      "english": "Inglés (US)",
+      "spanish": "Español (ES)",
+      "chinese": "Chino (ZH)"
+    },
+    "validation": {
+      "email-invalid": "El correo electrónico no es válido.",
+      "password-min": "La contraseña debe tener al menos 8 caracteres.",
+      "phone-invalid": "El número de teléfono no es válido.",
+      "terms-required": "Debes aceptar los términos para continuar."
     }
   },
   "shared": {
@@ -377,5 +402,9 @@
     "newState": "Estado Nuevo",
     "dateChange": "Fecha Cambio",
     "observation": "Observación"
+  },
+  "header": {
+    "settings": "Configuración",
+    "logout": "Cerrar sesión"
   }
 }

@@ -25,12 +25,11 @@ const pageTitle = computed(() => route.meta?.title ?? 'Module');
             <ActiveTablesCard />
         </div>
 
-        <div class="panel-row">
-            <IotPanelCard />
-        </div>
-
-        <div class="dashboard-secondary-row">
-            <OrdersSummaryCard class="dashboard-orders-card" />
+        <div class="dashboard-grid">
+            <IotPanelCard class="grid-item-tl" />
+            <div class="placeholder-box grid-item-tr"></div>
+            <div class="placeholder-box grid-item-bl"></div>
+            <OrdersSummaryCard class="dashboard-orders-card grid-item-br" />
         </div>
     </div>
 
@@ -71,7 +70,7 @@ const pageTitle = computed(() => route.meta?.title ?? 'Module');
 .iot-dashboard-layout {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
 }
 
 .dashboard-header h2 {
@@ -91,27 +90,40 @@ const pageTitle = computed(() => route.meta?.title ?? 'Module');
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
-.panel-row {
-    display: flex;
-    justify-content: flex-start;
-}
-
-.dashboard-secondary-row {
+.dashboard-grid {
     display: grid;
-    grid-template-columns: minmax(320px, 520px);
-    justify-content: end;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: start;
 }
+
+.placeholder-box {
+    background-color: #1a1a1a;
+    border-radius: 20px;
+    height: 300px;
+    width: 100%;
+    opacity: 0.1;
+}
+
+.grid-item-tl { grid-column: 1; grid-row: 1; }
+.grid-item-tr { grid-column: 2; grid-row: 1; }
+.grid-item-bl { grid-column: 1; grid-row: 2; }
+.grid-item-br { grid-column: 2; grid-row: 2; }
 
 .dashboard-orders-card {
     width: 100%;
 }
 
-@media (max-width: 960px) {
-    .dashboard-secondary-row {
+@media (max-width: 1024px) {
+    .dashboard-grid {
         grid-template-columns: 1fr;
-        justify-content: stretch;
+    }
+    .grid-item-tl, .grid-item-tr, .grid-item-bl, .grid-item-br {
+        grid-column: auto;
+        grid-row: auto;
     }
 }
 </style>

@@ -2,15 +2,40 @@
   "welcome": "Welcome to SupplyWok",
   "access": {
     "log-in": {
-      "welcome": "Welcome",
-      "new-supply": "New to SupplyWok?",
+      "welcome": "Welcome!",
+      "new-supply": "New in SupplyWok?",
       "sign-up-now": "Sign up now",
-      "email": "Email Address",
-      "email-example": "name@restaurant.com",
+      "email": "Email",
+      "email-example": "example@email.com",
       "password": "Password",
-      "password-example": "Enter your password",
-      "forgot-password": "Forgot your password?",
-      "login": "Log In"
+      "password-example": "Password123",
+      "forgot-password": "Forgot password?",
+      "login": "Log in"
+    },
+    "register": {
+      "get-started": "Get Started",
+      "phone": "Phone number",
+      "phone-example": "999 666 333",
+      "role": "Role",
+      "subscription": "Subscription",
+      "select-one": "Select one",
+      "no-plans": "Doesn't know our plans?",
+      "click-here": "Click here",
+      "terms-accept": "I accept {terms} and {policy}",
+      "terms": "terms",
+      "policy": "private policy",
+      "go-to-pay": "Go to pay"
+    },
+    "languages": {
+      "english": "English (US)",
+      "spanish": "Spanish (ES)",
+      "chinese": "Chinese (ZH)"
+    },
+    "validation": {
+      "email-invalid": "Invalid email address.",
+      "password-min": "Password must be at least 8 characters.",
+      "phone-invalid": "Invalid phone number.",
+      "terms-required": "You must accept the terms to continue."
     }
   },
   "shared": {
@@ -377,5 +402,9 @@
     "newState": "New State",
     "dateChange": "Date Change",
     "observation": "Observation"
+  },
+  "header": {
+    "settings": "Settings",
+    "logout": "Log Out"
   }
 }
