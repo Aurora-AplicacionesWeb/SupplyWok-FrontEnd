@@ -88,6 +88,22 @@
         "showing": "显示 {filtered} / {total}"
       }
     },
+    "summary-card": {
+      "title": "订单",
+      "caption": "该上下文已加载 {count} 个订单",
+      "loading": "正在加载订单...",
+      "error": "无法加载订单摘要。",
+      "empty": "当前还没有订单。",
+      "columns": {
+        "id": "编号",
+        "supplier": "供应商",
+        "status": "状态",
+        "date": "日期"
+      },
+      "actions": {
+        "view-history": "查看订单历史"
+      }
+    },
     "detail": {
       "kicker": "订单详情",
       "meta": {

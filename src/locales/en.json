@@ -88,6 +88,22 @@
         "showing": "Showing {filtered} of {total}"
       }
     },
+    "summary-card": {
+      "title": "Orders",
+      "caption": "{count} orders loaded in this context",
+      "loading": "Loading orders...",
+      "error": "Unable to load the orders summary.",
+      "empty": "There are no orders yet.",
+      "columns": {
+        "id": "ID",
+        "supplier": "Supplier",
+        "status": "Status",
+        "date": "Date"
+      },
+      "actions": {
+        "view-history": "View order history"
+      }
+    },
     "detail": {
       "kicker": "Order detail",
       "meta": {
