@@ -35,6 +35,60 @@
     }
   },
   "supplier-management": {
+    "orders": {
+      "breadcrumb": "PROVEEDOR",
+      "title": "Órdenes de compra",
+      "subtitle": "Monitorea pedidos de restaurantes y compromisos de entrega.",
+      "search": "Buscar",
+      "stats": {
+        "total": "Órdenes totales",
+        "pending": "Pendientes",
+        "in-transit": "En tránsito",
+        "delivered": "Entregadas"
+      },
+      "filters": {
+        "status": "Estado",
+        "all": "Todos los estados",
+        "confirmed": "Confirmada",
+        "pending": "Pendiente",
+        "in-transit": "En tránsito",
+        "delivered": "Entregada",
+        "delayed": "Retrasada"
+      },
+      "columns": {
+        "code": "Orden",
+        "restaurant": "Restaurante",
+        "order-date": "Fecha de orden",
+        "delivery-date": "Entrega estimada",
+        "priority": "Prioridad",
+        "status": "Estado",
+        "items": "Items",
+        "actions": "Acciones"
+      },
+      "actions": {
+        "confirm": "Confirmar",
+        "mark-in-transit": "Marcar en tránsito",
+        "mark-delivered": "Marcar entregada",
+        "view": "Ver detalle"
+      },
+      "details": {
+        "title": "Detalle de la orden",
+        "order-date": "Fecha de orden",
+        "delivery-date": "Entrega estimada",
+        "priority": "Prioridad",
+        "supplier": "Proveedor",
+        "close": "Cerrar",
+        "columns": {
+          "product": "Producto",
+          "quantity": "Cantidad",
+          "unit": "Unidad",
+          "unit-price": "Precio unitario",
+          "subtotal": "Subtotal"
+        }
+      },
+      "empty": "No hay órdenes que coincidan con tu búsqueda.",
+      "visible-count": "Mostrando {visible} de {total} órdenes totales"
+    },
     "catalog": {
       "breadcrumb": "PROVEEDOR",
       "title": "Catálogo de productos",

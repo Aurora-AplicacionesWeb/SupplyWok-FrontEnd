@@ -35,6 +35,60 @@
     }
   },
   "supplier-management": {
+    "orders": {
+      "breadcrumb": "供应商",
+      "title": "采购订单",
+      "subtitle": "跟踪餐厅订单与交付承诺。",
+      "search": "搜索",
+      "stats": {
+        "total": "订单总数",
+        "pending": "待处理",
+        "in-transit": "运输中",
+        "delivered": "已交付"
+      },
+      "filters": {
+        "status": "状态",
+        "all": "全部状态",
+        "confirmed": "已确认",
+        "pending": "待处理",
+        "in-transit": "运输中",
+        "delivered": "已交付",
+        "delayed": "延迟"
+      },
+      "columns": {
+        "code": "订单号",
+        "restaurant": "餐厅",
+        "order-date": "下单日期",
+        "delivery-date": "预计交付",
+        "priority": "优先级",
+        "status": "状态",
+        "items": "项目数",
+        "actions": "操作"
+      },
+      "actions": {
+        "confirm": "确认",
+        "mark-in-transit": "标记运输中",
+        "mark-delivered": "标记已交付",
+        "view": "查看详情"
+      },
+      "details": {
+        "title": "订单详情",
+        "order-date": "下单日期",
+        "delivery-date": "预计交付",
+        "priority": "优先级",
+        "supplier": "供应商",
+        "close": "关闭",
+        "columns": {
+          "product": "产品",
+          "quantity": "数量",
+          "unit": "单位",
+          "unit-price": "单价",
+          "subtotal": "小计"
+        }
+      },
+      "empty": "没有符合搜索条件的订单。",
+      "visible-count": "显示 {visible}/{total} 条订单"
+    },
     "catalog": {
       "breadcrumb": "供应商",
       "title": "产品目录",
