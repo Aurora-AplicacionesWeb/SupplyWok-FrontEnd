@@ -11,14 +11,6 @@ const emit = defineEmits(['saved']);
 
 const { t } = useI18n();
 const store = usePurchaseOrderStore();
-const { validationErrors } = storeToRefs(store);
-const { addPurchaseOrder, clearValidationScope, validateOrderItem } = store;
-
-const supplierOptions = [
-    { id: 201, name: 'Golden Wok Produce' },
-    { id: 202, name: 'Andes Cold Chain' },
-    { id: 203, name: 'Orient Pantry Co.' }
-];
 const { validationErrors, supplierDirectory } = storeToRefs(store);
 const { addPurchaseOrder, clearValidationScope, validateOrderItem, ensureSuppliersLoaded } = store;
 
@@ -31,15 +23,6 @@ const priorityOptions = computed(() => ([
 const form = reactive({
     supplierId: '',
     supplierName: '',
-    orderDate: new Date().toLocaleString('en-US', {
-        month: '2-digit',
-        day: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-    }),
-    supplierId: supplierOptions[0].id,
-    supplierName: supplierOptions[0].name,
     orderDate: formatLocalDate(new Date()),
     estimatedDate: formatLocalDate(addDays(new Date(), 2)),
     priority: 'Medium'
@@ -188,7 +171,7 @@ onMounted(() => {
                     :class="{ 'purchase-order-form-panel__select--invalid': getFieldError('supplierId') }"
                     @change="syncSupplierData"
                 >
-                    <option v-for="supplier in supplierOptions" :key="supplier.id" :value="supplier.id">{{ supplier.name }}</option>
+                    <option v-for="supplier in supplierDirectory" :key="supplier.id" :value="supplier.id">{{ supplier.name }}</option>
                 </select>
                 <small v-if="getFieldError('supplierId')" class="purchase-order-form-panel__error">{{ getFieldError('supplierId') }}</small>
             </label>
