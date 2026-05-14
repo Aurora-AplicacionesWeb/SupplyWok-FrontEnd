@@ -1,3 +1,10 @@
+/**
+ * Application service store for the `RestaurantManagement` bounded context.
+ * It coordinates table, dish, dish-category, kitchen-order, kitchen-order-item and kitchen-lock use cases
+ * and keeps a UI-facing state.
+ *
+ * @module useRestaurantManagementStore
+ */
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import { RestaurantManagementApi } from '../infrastructure/restaurant-management-api.js';
@@ -7,37 +14,143 @@ import { DishCategoryAssembler } from '../infrastructure/dish-category.assembler
 import { KitchenOrderAssembler } from '../infrastructure/kitchen-order.assembler.js';
 import { KitchenOrderItemAssembler } from '../infrastructure/kitchen-order-item.assembler.js';
 import { KitchenLockAssembler } from '../infrastructure/kitchen-lock.assembler.js';
+import { Table } from '../domain/model/table.entity.js';
+import { Dish } from '../domain/model/dish.entity.js';
+import { DishCategory } from '../domain/model/dish-category.entity.js';
+import { KitchenOrder } from '../domain/model/kitchen-order.entity.js';
+import { KitchenOrderItem } from '../domain/model/kitchen-order-item.entity.js';
+import { KitchenLock } from '../domain/model/kitchen-lock.entity.js';
 
 const restaurantManagementApi = new RestaurantManagementApi();
 
+/**
+ * Reactive store that exposes RestaurantManagement commands and queries.
+ *
+ * @returns {Object} Reactive RestaurantManagement state and use-case actions.
+ */
 const useRestaurantManagementStore = defineStore('restaurant-management', () => {
+    /**
+     * List of table entities.
+     * @type {import('vue').Ref<Table[]>}
+     */
     const tables = ref([]);
+    /**
+     * List of dish entities.
+     * @type {import('vue').Ref<Dish[]>}
+     */
     const dishes = ref([]);
+    /**
+     * List of dish-category entities.
+     * @type {import('vue').Ref<DishCategory[]>}
+     */
     const dishCategories = ref([]);
+    /**
+     * List of kitchen-order entities.
+     * @type {import('vue').Ref<KitchenOrder[]>}
+     */
     const kitchenOrders = ref([]);
+    /**
+     * List of kitchen-order-item entities.
+     * @type {import('vue').Ref<KitchenOrderItem[]>}
+     */
     const kitchenOrderItems = ref([]);
+    /**
+     * Current kitchen-lock entity.
+     * @type {import('vue').Ref<KitchenLock|null>}
+     */
     const kitchenLock = ref(null);
-    const kitchenOrderHistory = ref([]);
+    /**
+     * Currently selected kitchen-order entity.
+     * @type {import('vue').Ref<KitchenOrder|null>}
+     */
     const currentKitchenOrder = ref(null);
+    /**
+     * List of errors encountered during API operations.
+     * @type {import('vue').Ref<Error[]>}
+     */
     const errors = ref([]);
+    /**
+     * Whether any API operation is in progress.
+     * @type {import('vue').Ref<boolean>}
+     */
     const loading = ref(false);
 
+    // --- New order form state ---
+
+    /**
+     * Table id for a new kitchen order.
+     * @type {import('vue').Ref<number|null>}
+     */
     const newOrderTableId = ref(null);
+    /**
+     * Table number for a new kitchen order.
+     * @type {import('vue').Ref<string|null>}
+     */
     const newOrderTableNumber = ref(null);
+    /**
+     * Service type for a new kitchen order.
+     * @type {import('vue').Ref<string>}
+     */
     const newOrderTypeService = ref('to_take_home');
+    /**
+     * Items for a new kitchen order.
+     * @type {import('vue').Ref<Object[]>}
+     */
     const newOrderItems = ref([]);
+    /**
+     * Observations for a new kitchen order.
+     * @type {import('vue').Ref<string>}
+     */
     const newOrderObservations = ref('');
 
+    // --- Computed state ---
+
+    /**
+     * Kitchen orders with pending state.
+     * @type {import('vue').ComputedRef<KitchenOrder[]>}
+     */
     const pendingKitchenOrders = computed(() => kitchenOrders.value.filter(o => o.state === 'pending'));
+    /**
+     * Kitchen orders with in_preparation state.
+     * @type {import('vue').ComputedRef<KitchenOrder[]>}
+     */
     const inPreparationKitchenOrders = computed(() => kitchenOrders.value.filter(o => o.state === 'in_preparation'));
+    /**
+     * Kitchen orders with ready state.
+     * @type {import('vue').ComputedRef<KitchenOrder[]>}
+     */
     const readyKitchenOrders = computed(() => kitchenOrders.value.filter(o => o.state === 'ready'));
+    /**
+     * Kitchen orders with delivered state.
+     * @type {import('vue').ComputedRef<KitchenOrder[]>}
+     */
     const deliveredKitchenOrders = computed(() => kitchenOrders.value.filter(o => o.state === 'delivered'));
+    /**
+     * Kitchen orders with canceled state.
+     * @type {import('vue').ComputedRef<KitchenOrder[]>}
+     */
     const cancelledKitchenOrders = computed(() => kitchenOrders.value.filter(o => o.state === 'cancelled'));
 
-    const activeKitchenOrders = computed(() => kitchenOrders.value.filter(o => o.state !== 'delivered' && o.state !== 'cancelled'));
+    /**
+     * Kitchen orders that are neither delivered nor canceled.
+     * @type {import('vue').ComputedRef<KitchenOrder[]>}
+     */
+    const activeKitchenOrders = computed(() => kitchenOrders.value.filter(o => o.state !== 'delivered' && o.state !== 'cancelled' && o.state !== 'deleted'));
+    /**
+     * Dishes that are currently active.
+     * @type {import('vue').ComputedRef<Dish[]>}
+     */
     const activeDishes = computed(() => dishes.value.filter(d => d.active));
+    /**
+     * Dishes that are both outstanding and active.
+     * @type {import('vue').ComputedRef<Dish[]>}
+     */
     const featuredDishes = computed(() => dishes.value.filter(d => d.outstanding && d.active));
 
+    /**
+     * Dishes grouped by dish category.
+     * @type {import('vue').ComputedRef<Object>}
+     */
     const dishesByCategory = computed(() => {
         const grouped = {};
         dishCategories.value.forEach(cat => {
@@ -49,8 +162,20 @@ const useRestaurantManagementStore = defineStore('restaurant-management', () => 
         return grouped;
     });
 
+    /**
+     * Tables that are available and active.
+     * @type {import('vue').ComputedRef<Table[]>}
+     */
     const freeTables = computed(() => tables.value.filter(t => t.state === 'available' && t.active));
+    /**
+     * Tables that are busy and active.
+     * @type {import('vue').ComputedRef<Table[]>}
+     */
     const occupiedTables = computed(() => tables.value.filter(t => t.state === 'busy' && t.active));
+    /**
+     * Tables grouped by location.
+     * @type {import('vue').ComputedRef<Object>}
+     */
     const tablesByLocation = computed(() => {
         const grouped = {};
         tables.value.forEach(t => {
@@ -60,12 +185,37 @@ const useRestaurantManagementStore = defineStore('restaurant-management', () => 
         return grouped;
     });
 
+    /**
+     * Total item count in the new order.
+     * @type {import('vue').ComputedRef<number>}
+     */
     const totalItemsNewOrder = computed(() => newOrderItems.value.reduce((sum, item) => sum + (item.quantity || 0), 0));
+    /**
+     * Total price of the new order.
+     * @type {import('vue').ComputedRef<number>}
+     */
     const totalNewOrder = computed(() => newOrderItems.value.reduce((sum, item) => sum + (item.quantity || 0) * (item.unitPrice || 0), 0));
 
+    /**
+     * Whether the kitchen is currently locked.
+     * @type {import('vue').ComputedRef<boolean>}
+     */
     const isKitchenLocked = computed(() => kitchenLock.value?.stateLocked ?? false);
+    /**
+     * Number of failed unlock attempts.
+     * @type {import('vue').ComputedRef<number>}
+     */
     const failedAttempts = computed(() => kitchenLock.value?.failAttempt ?? 0);
 
+    // --- Order form actions ---
+
+    /**
+     * Initializes the new kitchen order form.
+     * @param {number|null} tableId - Table identifier.
+     * @param {string|null} tableNumber - Table number.
+     * @param {string} typeService - Service type.
+     * @returns {void}
+     */
     function initNewKitchenOrder(tableId = null, tableNumber = null, typeService = 'to_take_home') {
         newOrderTableId.value = tableId;
         newOrderTableNumber.value = tableNumber;
@@ -74,12 +224,44 @@ const useRestaurantManagementStore = defineStore('restaurant-management', () => 
         newOrderObservations.value = '';
     }
 
+    /**
+     * Selects a service type for the new order.
+     * @param {string} typeService - Service type.
+     * @param {number|null} tableId - Table identifier.
+     * @param {string|null} tableNumber - Table number.
+     * @returns {void}
+     */
     function selectServiceType(typeService, tableId = null, tableNumber = null) {
         newOrderTypeService.value = typeService;
         newOrderTableId.value = tableId;
         newOrderTableNumber.value = tableNumber;
     }
 
+    /**
+     * Sets observations for the new order.
+     * @param {string} value - Observations text.
+     * @returns {void}
+     */
+    function setNewOrderObservations(value) {
+        newOrderObservations.value = value;
+    }
+
+    /**
+     * Sets items for the new order.
+     * @param {Object[]} items - Order items.
+     * @returns {void}
+     */
+    function setNewOrderItems(items) {
+        newOrderItems.value = items;
+    }
+
+    /**
+     * Adds a dish to the new order, incrementing quantity if already present.
+     * @param {Dish} dish - Dish entity to add.
+     * @param {number} quantity - Quantity to add.
+     * @param {string} observations - Item observations.
+     * @returns {void}
+     */
     function addItemToOrder(dish, quantity = 1, observations = '') {
         const existing = newOrderItems.value.find(item => item.dishId === dish.id);
         if (existing) {
@@ -98,11 +280,22 @@ const useRestaurantManagementStore = defineStore('restaurant-management', () => 
         }
     }
 
+    /**
+     * Removes a dish from the new order by dish id.
+     * @param {number|string} dishId - Dish identifier.
+     * @returns {void}
+     */
     function removeItemFromOrder(dishId) {
         const index = newOrderItems.value.findIndex(item => item.dishId === dishId);
         if (index !== -1) newOrderItems.value.splice(index, 1);
     }
 
+    /**
+     * Updates the quantity of an item in the new order. Removes the item if quantity is zero or less.
+     * @param {number|string} dishId - Dish identifier.
+     * @param {number} quantity - New quantity.
+     * @returns {void}
+     */
     function updateItemQuantity(dishId, quantity) {
         const item = newOrderItems.value.find(i => i.dishId === dishId);
         if (item) {
@@ -115,64 +308,85 @@ const useRestaurantManagementStore = defineStore('restaurant-management', () => 
         }
     }
 
+    /**
+     * Clears the current order form and selected order.
+     * @returns {void}
+     */
     function clearCurrentOrder() {
         initNewKitchenOrder(null, null, 'to_take_home');
         currentKitchenOrder.value = null;
     }
 
-    async function fetchTables() {
+    // --- Fetch actions ---
+
+    /**
+     * Loads tables from infrastructure and updates the application state.
+     * @returns {Promise<void>}
+     */
+    function fetchTables() {
         loading.value = true;
-        try {
-            const response = await restaurantManagementApi.getTables();
+        return restaurantManagementApi.getTables().then(response => {
             tables.value = TableAssembler.toEntitiesFromResponse(response);
-        } catch (error) {
-            errors.value.push(error);
-        } finally {
             loading.value = false;
-        }
+        }).catch(error => {
+            errors.value.push(error);
+            loading.value = false;
+        });
     }
 
-    async function fetchDishes() {
+    /**
+     * Loads dishes from infrastructure and updates the application state.
+     * @returns {Promise<void>}
+     */
+    function fetchDishes() {
         loading.value = true;
-        try {
-            const response = await restaurantManagementApi.getDishes();
+        return restaurantManagementApi.getDishes().then(response => {
             dishes.value = DishAssembler.toEntitiesFromResponse(response);
-        } catch (error) {
-            errors.value.push(error);
-        } finally {
             loading.value = false;
-        }
+        }).catch(error => {
+            errors.value.push(error);
+            loading.value = false;
+        });
     }
 
-    async function fetchDishCategories() {
+    /**
+     * Loads dish categories from infrastructure and updates the application state.
+     * @returns {Promise<void>}
+     */
+    function fetchDishCategories() {
         loading.value = true;
-        try {
-            const response = await restaurantManagementApi.getDishCategories();
+        return restaurantManagementApi.getDishCategories().then(response => {
             dishCategories.value = DishCategoryAssembler.toEntitiesFromResponse(response);
-        } catch (error) {
-            errors.value.push(error);
-        } finally {
             loading.value = false;
-        }
+        }).catch(error => {
+            errors.value.push(error);
+            loading.value = false;
+        });
     }
 
-    async function fetchKitchenOrders() {
+    /**
+     * Loads kitchen orders and their items from infrastructure and updates the application state.
+     * @returns {Promise<void>}
+     */
+    function fetchKitchenOrders() {
         loading.value = true;
-        try {
-            const [ordersResponse, itemsResponse] = await Promise.all([
-                restaurantManagementApi.getKitchenOrders(),
-                restaurantManagementApi.getKitchenOrderItems()
-            ]);
+        return restaurantManagementApi.getKitchenOrders().then(ordersResponse => {
             kitchenOrders.value = KitchenOrderAssembler.toEntitiesFromResponse(ordersResponse);
+            return restaurantManagementApi.getKitchenOrderItems();
+        }).then(itemsResponse => {
             kitchenOrderItems.value = KitchenOrderItemAssembler.toEntitiesFromResponse(itemsResponse);
             mergeItemsIntoOrders();
-        } catch (error) {
-            errors.value.push(error);
-        } finally {
             loading.value = false;
-        }
+        }).catch(error => {
+            errors.value.push(error);
+            loading.value = false;
+        });
     }
 
+    /**
+     * Merges kitchen-order items into their parent orders.
+     * @returns {void}
+     */
     function mergeItemsIntoOrders() {
         const itemsByOrderId = {};
         kitchenOrderItems.value.forEach(item => {
@@ -181,61 +395,88 @@ const useRestaurantManagementStore = defineStore('restaurant-management', () => 
         });
         kitchenOrders.value.forEach(order => {
             if (!order.item || order.item.length === 0) {
-                const matched = itemsByOrderId[order.id] || [];
-                order.item = matched;
+                order.item = itemsByOrderId[order.id] || [];
             }
         });
     }
 
-    async function fetchKitchenOrderItemsOnly() {
-        try {
-            const response = await restaurantManagementApi.getKitchenOrderItems();
-            kitchenOrderItems.value = KitchenOrderItemAssembler.toEntitiesFromResponse(response);
-        } catch (error) {
-            errors.value.push(error);
-        }
-    }
-
-    async function fetchKitchenOrderById(id) {
+    /**
+     * Loads a single kitchen order by identifier.
+     * @param {number|string} id - Kitchen order identifier.
+     * @returns {Promise<void>}
+     */
+    function fetchKitchenOrderById(id) {
         loading.value = true;
-        try {
-            const response = await restaurantManagementApi.getKitchenOrderById(id);
-            currentKitchenOrder.value = KitchenOrderAssembler.toEntityFromResource(response.data);
-        } catch (error) {
-            errors.value.push(error);
-        } finally {
+        return restaurantManagementApi.getKitchenOrderById(id).then(response => {
+            const order = KitchenOrderAssembler.toEntityFromResource(response.data);
+            if (!order.item || order.item.length === 0) {
+                return restaurantManagementApi.getKitchenOrderItems().then(itemsResponse => {
+                    const allItems = KitchenOrderItemAssembler.toEntitiesFromResponse(itemsResponse);
+                    order.item = allItems.filter(i => i.kitchenOrderId === id);
+                    currentKitchenOrder.value = order;
+                    loading.value = false;
+                });
+            }
+            currentKitchenOrder.value = order;
             loading.value = false;
-        }
+        }).catch(error => {
+            errors.value.push(error);
+            loading.value = false;
+        });
     }
 
-    async function fetchKitchenLock() {
-        try {
-            const response = await restaurantManagementApi.getKitchenLock();
+    /**
+     * Loads the kitchen lock from infrastructure.
+     * @returns {Promise<void>}
+     */
+    function fetchKitchenLock() {
+        return restaurantManagementApi.getKitchenLock().then(response => {
             const locks = KitchenLockAssembler.toEntitiesFromResponse(response);
             kitchenLock.value = locks.length > 0 ? locks[0] : null;
-        } catch (error) {
+        }).catch(error => {
             console.error('Error fetching kitchen lock:', error);
-        }
+        });
     }
 
-    async function fetchAll() {
+    /**
+     * Loads all restaurant-management data (tables, dishes, categories, orders, lock).
+     * @returns {void}
+     */
+    function fetchAll() {
         loading.value = true;
-        try {
-            await Promise.all([
-                fetchTables(),
-                fetchDishes(),
-                fetchDishCategories(),
-                fetchKitchenOrders(),
-                fetchKitchenLock()
-            ]);
-        } catch (error) {
-            errors.value.push(error);
-        } finally {
+        restaurantManagementApi.getTables().then(response => {
+            tables.value = TableAssembler.toEntitiesFromResponse(response);
+            return restaurantManagementApi.getDishes();
+        }).then(response => {
+            dishes.value = DishAssembler.toEntitiesFromResponse(response);
+            return restaurantManagementApi.getDishCategories();
+        }).then(response => {
+            dishCategories.value = DishCategoryAssembler.toEntitiesFromResponse(response);
+            return restaurantManagementApi.getKitchenOrders();
+        }).then(ordersResponse => {
+            kitchenOrders.value = KitchenOrderAssembler.toEntitiesFromResponse(ordersResponse);
+            return restaurantManagementApi.getKitchenOrderItems();
+        }).then(itemsResponse => {
+            kitchenOrderItems.value = KitchenOrderItemAssembler.toEntitiesFromResponse(itemsResponse);
+            mergeItemsIntoOrders();
+            return restaurantManagementApi.getKitchenLock();
+        }).then(response => {
+            const locks = KitchenLockAssembler.toEntitiesFromResponse(response);
+            kitchenLock.value = locks.length > 0 ? locks[0] : null;
             loading.value = false;
-        }
+        }).catch(error => {
+            errors.value.push(error);
+            loading.value = false;
+        });
     }
 
-    async function createKitchenOrder() {
+    // --- Mutation actions ---
+
+    /**
+     * Creates a kitchen order through infrastructure and prepends it to the local state.
+     * @returns {KitchenOrder|null} Created kitchen order, or null on failure.
+     */
+    function createKitchenOrder() {
         if (newOrderItems.value.length === 0) {
             errors.value.push('Debe agregar al menos un item');
             return null;
@@ -245,80 +486,125 @@ const useRestaurantManagementStore = defineStore('restaurant-management', () => 
             return null;
         }
 
-        loading.value = true;
-        try {
-            const orderData = {
-                tableId: newOrderTableId.value,
-                tableNumber: newOrderTableNumber.value,
-                typeService: newOrderTypeService.value,
-                state: 'pending',
-                items: [...newOrderItems.value],
-                observations: newOrderObservations.value,
-                dateCreated: new Date().toISOString()
-            };
+        const orderData = {
+            number: `C${String(kitchenOrders.value.length + 1).padStart(3, '0')}`,
+            tableId: newOrderTableId.value,
+            tableNumber: newOrderTableNumber.value,
+            typeService: newOrderTypeService.value,
+            state: 'pending',
+            items: [...newOrderItems.value],
+            observations: newOrderObservations.value,
+            dateCreated: new Date().toISOString()
+        };
 
-            const response = await restaurantManagementApi.createKitchenOrder(orderData);
+        loading.value = true;
+        return restaurantManagementApi.createKitchenOrder(orderData).then(response => {
             const newOrder = KitchenOrderAssembler.toEntityFromResource(response.data);
-            kitchenOrders.value.unshift(newOrder);
+            kitchenOrders.value.push(newOrder);
             initNewKitchenOrder(null, null, 'to_take_home');
             return newOrder;
-        } catch (error) {
+        }).catch(error => {
             errors.value.push(error);
             return null;
-        } finally {
-            loading.value = false;
-        }
+        });
     }
 
-    async function addTable(tableData) {
+    /**
+     * Creates a table through infrastructure and appends it to the local state.
+     * @param {Object} tableData - Table data.
+     * @returns {Promise<Table|null>} Created table, or null on failure.
+     */
+    function addTable(tableData) {
         loading.value = true;
-        try {
-            const response = await restaurantManagementApi.createTable(tableData);
+        return restaurantManagementApi.createTable(tableData).then(response => {
             const newTable = TableAssembler.toEntityFromResource(response.data);
             tables.value.push(newTable);
             return newTable;
-        } catch (error) {
+        }).catch(error => {
             errors.value.push(error);
             return null;
-        } finally {
-            loading.value = false;
-        }
+        });
     }
 
-    async function updateKitchenOrderFull(orderId, orderData) {
+    /**
+     * Fully updates a kitchen order and synchronizes local state.
+     * @param {number|string} orderId - Kitchen order identifier.
+     * @param {Object} orderData - Updated order data.
+     * @returns {Promise<KitchenOrder|null>} Updated kitchen order, or null on failure.
+     */
+    function serializeOrderItems(items) {
+        return (items || []).map(function (i) {
+            return {
+                dishId: i.dishId,
+                dishName: i.dishName,
+                quantity: i.quantity,
+                unitPrice: i.unitPrice,
+                totalPrice: i.totalPrice,
+                state: i.state || 'pending',
+                observations: i.observations || ''
+            };
+        });
+    }
+
+    function updateKitchenOrderFull(orderId, orderData) {
         loading.value = true;
-        try {
-            const response = await restaurantManagementApi.updateKitchenOrderFull(orderId, orderData);
+        const existing = kitchenOrders.value.find(o => o.id === orderId);
+        const dateCreated = existing?.dateCreated
+            ? (existing.dateCreated instanceof Date ? existing.dateCreated.toISOString() : existing.dateCreated)
+            : new Date().toISOString();
+        const fullData = {
+            id: orderId,
+            number: existing?.number || '',
+            dateCreated,
+            state: existing?.state || 'pending',
+            ...orderData,
+            items: serializeOrderItems(orderData.items || existing?.item)
+        };
+        return restaurantManagementApi.updateKitchenOrderFull(orderId, fullData).then(response => {
             const updated = KitchenOrderAssembler.toEntityFromResource(response.data);
             const index = kitchenOrders.value.findIndex(o => o.id === orderId);
             if (index !== -1) kitchenOrders.value[index] = updated;
             clearCurrentOrder();
             return updated;
-        } catch (error) {
+        }).catch(error => {
             errors.value.push(error);
             return null;
-        } finally {
+        }).finally(function () {
             loading.value = false;
-        }
+        });
     }
 
-    async function deleteKitchenOrder(orderId) {
-        loading.value = true;
-        try {
-            await restaurantManagementApi.deleteKitchenOrder(orderId);
-            const index = kitchenOrders.value.findIndex(o => o.id === orderId);
-            if (index !== -1) kitchenOrders.value.splice(index, 1);
-            if (currentKitchenOrder.value?.id === orderId) currentKitchenOrder.value = null;
+    /**
+     * Deletes a kitchen order and removes it from the local state.
+     * @param {number|string} orderId - Kitchen order identifier.
+     * @returns {Promise<boolean>} Whether deletion succeeded.
+     */
+    function deleteKitchenOrder(orderId) {
+        const order = kitchenOrders.value.find(o => o.id === orderId);
+        const index = kitchenOrders.value.findIndex(o => o.id === orderId);
+        if (index !== -1) kitchenOrders.value.splice(index, 1);
+        if (currentKitchenOrder.value?.id === orderId) currentKitchenOrder.value = null;
+        if (!order) return Promise.resolve(true);
+        const deletedData = {
+            ...order,
+            state: 'deleted',
+            items: serializeOrderItems(order.item)
+        };
+        return updateKitchenOrderFull(orderId, deletedData).then(() => {
             return true;
-        } catch (error) {
+        }).catch(error => {
             errors.value.push(error);
             return false;
-        } finally {
-            loading.value = false;
-        }
+        });
     }
 
-    async function updateKitchenOrderStatus(orderId, newState) {
+    /**
+     * Updates a kitchen order status with state-transition validation.
+     * @param {number|string} orderId - Kitchen order identifier.
+     * @param {string} newState - Target state.
+     * @returns {KitchenOrder|null|Promise<KitchenOrder|null>} Updated kitchen order, or null on failure or invalid transition.
+     */
+    function updateKitchenOrderStatus(orderId, newState) {
         const order = kitchenOrders.value.find(o => o.id === orderId);
         if (!order) return null;
 
@@ -333,67 +619,91 @@ const useRestaurantManagementStore = defineStore('restaurant-management', () => 
         if (!allowed.includes(newState)) return null;
 
         loading.value = true;
-        try {
-            const response = await restaurantManagementApi.updateKitchenOrderStatus(orderId, newState, '');
+        const dateCreated = order.dateCreated
+            ? (order.dateCreated instanceof Date ? order.dateCreated.toISOString() : order.dateCreated)
+            : new Date().toISOString();
+        const fullData = {
+            id: orderId,
+            number: order.number || '',
+            tableId: order.tableId,
+            tableNumber: order.tableNumber,
+            typeService: order.typeService,
+            items: serializeOrderItems(order.item),
+            observations: order.observations || '',
+            dateCreated,
+            state: newState
+        };
+        if (newState === 'ready') fullData.hourReady = new Date().toISOString();
+        if (newState === 'delivered') fullData.hourDelivered = new Date().toISOString();
+        return restaurantManagementApi.updateKitchenOrderFull(orderId, fullData).then(response => {
             const updated = KitchenOrderAssembler.toEntityFromResource(response.data);
             const index = kitchenOrders.value.findIndex(o => o.id === orderId);
             if (index !== -1) kitchenOrders.value[index] = updated;
             if (currentKitchenOrder.value?.id === orderId) currentKitchenOrder.value = updated;
             return updated;
-        } catch (error) {
+        }).catch(error => {
             errors.value.push(error);
             return null;
-        } finally {
+        }).finally(function () {
             loading.value = false;
-        }
+        });
     }
 
-    async function activateKitchenMode(password) {
+    /**
+     * Activates kitchen mode (locks the kitchen).
+     * @param {string} password - Kitchen lock password.
+     * @returns {boolean|Promise<boolean>} Whether activation succeeded.
+     */
+    function activateKitchenMode(password) {
         if (!password || !password.trim()) {
             errors.value.push('La contraseña es requerida');
             return false;
         }
-        try {
-            if (password === kitchenLock.value?.password) {
-                kitchenLock.value.stateLocked = true;
-                await restaurantManagementApi.updateKitchenLock(kitchenLock.value);
-                return true;
-            }
-            errors.value.push('Contraseña incorrecta');
-            return false;
-        } catch (error) {
-            errors.value.push(error);
-            return false;
+        if (password === kitchenLock.value?.password) {
+            kitchenLock.value.stateLocked = true;
+            return restaurantManagementApi.updateKitchenLock(kitchenLock.value).then(() => true).catch(error => {
+                errors.value.push(error);
+                return false;
+            });
         }
+        errors.value.push('Contraseña incorrecta');
+        return false;
     }
 
-    async function deactivateKitchenMode(password) {
+    /**
+     * Deactivates kitchen mode (unlocks the kitchen).
+     * @param {string} password - Kitchen lock password.
+     * @returns {boolean|Promise<boolean>} Whether deactivation succeeded.
+     */
+    function deactivateKitchenMode(password) {
         if (!password || !password.trim()) {
             errors.value.push('La contraseña es requerida');
             return false;
         }
-        try {
-            if (password === kitchenLock.value?.password) {
-                kitchenLock.value.stateLocked = false;
-                await restaurantManagementApi.updateKitchenLock(kitchenLock.value);
-                return true;
-            }
-            kitchenLock.value.failAttempt = (kitchenLock.value?.failAttempt ?? 0) + 1;
-            errors.value.push('Contraseña incorrecta');
-            return false;
-        } catch (error) {
-            errors.value.push(error);
-            return false;
+        if (password === kitchenLock.value?.password) {
+            kitchenLock.value.stateLocked = false;
+            return restaurantManagementApi.updateKitchenLock(kitchenLock.value).then(() => true).catch(error => {
+                errors.value.push(error);
+                return false;
+            });
         }
+        if (kitchenLock.value) {
+            kitchenLock.value.failAttempt = (kitchenLock.value.failAttempt ?? 0) + 1;
+        }
+        errors.value.push('Contraseña incorrecta');
+        return false;
     }
 
+    /**
+     * Resets the entire store state to its initial values.
+     * @returns {void}
+     */
     function resetStore() {
         tables.value = [];
         dishes.value = [];
         dishCategories.value = [];
         kitchenOrders.value = [];
         kitchenLock.value = null;
-        kitchenOrderHistory.value = [];
         currentKitchenOrder.value = null;
         errors.value = [];
         loading.value = false;
@@ -402,7 +712,7 @@ const useRestaurantManagementStore = defineStore('restaurant-management', () => 
 
     return {
         tables, dishes, dishCategories, kitchenOrders, kitchenOrderItems, kitchenLock,
-        kitchenOrderHistory, currentKitchenOrder, errors, loading,
+        currentKitchenOrder, errors, loading,
         newOrderTableId, newOrderTableNumber, newOrderTypeService,
         newOrderItems, newOrderObservations,
         pendingKitchenOrders, inPreparationKitchenOrders, readyKitchenOrders,
@@ -410,10 +720,10 @@ const useRestaurantManagementStore = defineStore('restaurant-management', () => 
         activeDishes, featuredDishes, dishesByCategory,
         freeTables, occupiedTables, tablesByLocation,
         totalItemsNewOrder, totalNewOrder, isKitchenLocked, failedAttempts,
-        initNewKitchenOrder, selectServiceType, addItemToOrder,
-        removeItemFromOrder, updateItemQuantity, clearCurrentOrder,
+        initNewKitchenOrder, selectServiceType, setNewOrderObservations, setNewOrderItems,
+        addItemToOrder, removeItemFromOrder, updateItemQuantity, clearCurrentOrder,
         fetchTables, fetchDishes, fetchDishCategories, fetchKitchenOrders,
-        fetchKitchenOrderById, fetchKitchenOrderItemsOnly, fetchKitchenLock, fetchAll,
+        fetchKitchenOrderById, fetchKitchenLock, fetchAll,
         createKitchenOrder, updateKitchenOrderStatus, updateKitchenOrderFull, deleteKitchenOrder,
         addTable, activateKitchenMode, deactivateKitchenMode, resetStore
     };

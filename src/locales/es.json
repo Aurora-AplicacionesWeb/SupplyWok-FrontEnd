@@ -80,6 +80,19 @@
       },
       "actions": { "add": "Agregar" }
     },
+    "belowMinimum": {
+      "title": "Por debajo del mínimo",
+      "caption": "{count} producto(s) por debajo del nivel mínimo de stock",
+      "empty": "No hay productos por debajo del nivel mínimo de stock.",
+      "columns": {
+        "product": "PRODUCTO",
+        "currentStock": "STOCK ACTUAL",
+        "status": "ESTADO"
+      },
+      "actions": {
+        "sortAll": "ORDENAR TODO"
+      }
+    },
     "stockStatus": { "critical": "Crítico", "warning": "Bajo", "healthy": "Saludable" },
     "units": { "kilograms": "Kilogramos", "liters": "Litros", "units": "Unidades", "grams": "Gramos" }
   },
@@ -327,6 +340,13 @@
     "failedAttempts": "Intentos Fallidos",
     "lockedUntil": "Bloqueado Hasta"
   },
+  "supplyAndPurchasing": {
+    "dashboard": {
+      "pendingOrders": {
+        "label": "Órdenes Pendientes"
+      }
+    }
+  },
   "restaurantManagement": {
     "dishMenuPage": {
       "kicker": "Menú",
@@ -433,6 +453,15 @@
       "serviceType": {
         "table_service": "Servicio en Mesa",
         "to_take_home": "Para Llevar"
+      }
+    },
+    "dashboard": {
+      "kitchenTickets": {
+        "title": "Tickets de Cocina",
+        "seeAll": "Ver Todos los Tickets"
+      },
+      "activeCommands": {
+        "label": "Comandos de Cocina"
       }
     }
   },

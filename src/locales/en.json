@@ -80,6 +80,19 @@
       },
       "actions": { "add": "Add" }
     },
+    "belowMinimum": {
+      "title": "Below minimum",
+      "caption": "{count} product(s) below minimum stock level",
+      "empty": "No products below minimum stock level.",
+      "columns": {
+        "product": "PRODUCT",
+        "currentStock": "CURRENT STOCK",
+        "status": "STATUS"
+      },
+      "actions": {
+        "sortAll": "SORT ALL"
+      }
+    },
     "stockStatus": { "critical": "Critical", "warning": "Low", "healthy": "Healthy" },
     "units": { "kilograms": "Kilograms", "liters": "Liters", "units": "Units", "grams": "Grams" }
   },
@@ -327,6 +340,13 @@
     "failedAttempts": "Failed Attempts",
     "lockedUntil": "Locked Until"
   },
+  "supplyAndPurchasing": {
+    "dashboard": {
+      "pendingOrders": {
+        "label": "Pending Orders"
+      }
+    }
+  },
   "restaurantManagement": {
     "dishMenuPage": {
       "kicker": "Menu",
@@ -433,6 +453,15 @@
       "serviceType": {
         "table_service": "Table Service",
         "to_take_home": "To Take Home"
+      }
+    },
+    "dashboard": {
+      "kitchenTickets": {
+        "title": "Kitchen Tickets",
+        "seeAll": "See All Kitchen Tickets"
+      },
+      "activeCommands": {
+        "label": "Kitchen Commands"
       }
     }
   },

@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
-    table: { type: Object, required: true }
+  table: { type: Object, required: true }
 });
 
 const { t } = useI18n();
@@ -12,136 +12,50 @@ const isFree = computed(() => props.table.state === 'available');
 const isOccupied = computed(() => props.table.state === 'busy');
 
 const stateLabel = computed(() => {
-    if (isFree.value) return t('restaurantManagement.tablesAndOccupancyPage.free');
-    if (isOccupied.value) return t('restaurantManagement.tablesAndOccupancyPage.occupied');
-    return props.table.state;
+  if (isFree.value) return t('restaurantManagement.tablesAndOccupancyPage.free');
+  if (isOccupied.value) return t('restaurantManagement.tablesAndOccupancyPage.occupied');
+  return props.table.state;
 });
+
+const cardStyle = computed(() => ({
+  borderColor: isFree.value ? '#bbf7d0' : isOccupied.value ? '#fecaca' : '#f0e8dd',
+  backgroundColor: isOccupied.value ? '#fef2f2' : '#fff'
+}));
+
+const dotColor = computed(() => isFree.value ? '#16a34a' : isOccupied.value ? '#dc2626' : '#d1d5db');
+
+const stateStyle = computed(() => ({
+  color: isFree.value ? '#16a34a' : isOccupied.value ? '#dc2626' : '#6b7280',
+  backgroundColor: isFree.value ? 'rgba(22,163,74,0.25)' : isOccupied.value ? 'rgba(220,38,38,0.25)' : 'rgba(107,114,128,0.15)'
+}));
 </script>
 
 <template>
-    <article
-        class="table-card"
-        :class="{
-            'table-card--free': isFree,
-            'table-card--occupied': isOccupied
-        }"
-    >
-        <div class="table-card__indicator" />
-        <div class="table-card__body">
-            <strong class="table-card__number">
-                <i class="pi pi-table" />
-                {{ table.code || `T-${String(table.number).padStart(2, '0')}` }}
-            </strong>
-            <span class="table-card__capacity">
+  <article
+      class="flex align-items-center gap-1 bg-white border-round shadow-1 border-2 p-3 relative overflow-hidden"
+      :style="{ width: '200px', minHeight: '80px', borderRadius: '18px', ...cardStyle }"
+  >
+    <div class="border-circle" :style="{ width: '8px', height: '8px', backgroundColor: dotColor, flexShrink: 0 }" />
+    <div class="flex flex-column flex-1" :style="{ gap: '2px' }">
+      <strong class="flex align-items-center gap-1 font-heading" :style="{ color: '#40342d', fontSize: '18px' }">
+        <i class="pi pi-table" :style="{ fontSize: '14px', color: '#7d7065' }" />
+        {{ table.code ||String(table.number).padStart(2, '0') }}
+      </strong>
+      <span class="flex align-items-center gap-1" :style="{ fontSize: '12px', color: '#8e8177' }">
                 <i class="pi pi-users" /> {{ table.capacity }}
             </span>
-            <span class="table-card__state">{{ stateLabel }}</span>
-        </div>
-    </article>
+      <span
+          class="inline-block font-bold uppercase border-round px-2 py-1"
+          :style="{ fontSize: '11px', letterSpacing: '0.05em', ...stateStyle }"
+      >
+                {{ stateLabel }}
+            </span>
+    </div>
+  </article>
 </template>
 
 <style scoped>
-.table-card {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 14px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 14px rgba(45, 36, 30, 0.06);
-    border: 2px solid #f0e8dd;
-    transition: all 0.2s;
-    position: relative;
-    overflow: hidden;
-    width: 200px;
-    min-height: 80px;
-    box-sizing: border-box;
-}
-
-.table-card--free {
-    border-color: #bbf7d0;
-}
-
-.table-card--free:hover {
-    border-color: #16a34a;
-    box-shadow: 0 8px 24px rgba(22, 163, 74, 0.12);
-}
-
-.table-card--occupied {
-    border-color: #fecaca;
-    background: #fef2f2;
-}
-
-.table-card--occupied:hover {
-    border-color: #dc2626;
-}
-
-.table-card__indicator {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-}
-
-.table-card--free .table-card__indicator {
-    background: #16a34a;
-}
-
-.table-card--occupied .table-card__indicator {
-    background: #dc2626;
-}
-
-.table-card__body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.table-card__number {
-    color: #40342d;
-    font-size: 18px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-family: 'Poppins', system-ui, sans-serif;
-}
-
-.table-card__number i {
-    font-size: 14px;
-    color: #7d7065;
-}
-
-.table-card__capacity {
-    font-size: 12px;
-    color: #8e8177;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.table-card__state {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 2px 8px;
-    border-radius: 6px;
-    display: inline-block;
-}
-
-.table-card--free .table-card__state {
-    color: #16a34a;
-    background: rgba(22, 163, 74, 0.25);
-}
-
-.table-card--occupied .table-card__state {
-    color: #dc2626;
-    background: rgba(220, 38, 38, 0.25);
-}
-
-.table-card__action {
-    flex-shrink: 0;
+.font-heading {
+  font-family: 'Poppins', system-ui, sans-serif;
 }
 </style>
