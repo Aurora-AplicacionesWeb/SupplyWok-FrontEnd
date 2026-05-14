@@ -51,6 +51,9 @@ export class InventoryItem {
   unitOfMeasure;
   currentStock;
   minimumStockLevel;
+  category;
+  supplierId;
+  supplierName;
   movements;
 
   constructor(idOrParams, restaurantId, name, unitOfMeasure, initialStock = 0, minimumStockLevel = 0, movements = []) {
@@ -92,6 +95,9 @@ export class InventoryItem {
     this.unitOfMeasure = resolvedUnitOfMeasure;
     this.currentStock = toNonNegativeNumber(resolvedCurrentStock, 'currentStock');
     this.minimumStockLevel = toNonNegativeNumber(resolvedMinimumStockLevel, 'minimumStockLevel');
+    this.category = String(params.category ?? 'UNCATEGORIZED').trim();
+    this.supplierId = params.supplierId ?? null;
+    this.supplierName = String(params.supplierName ?? '').trim();
     this.movements = normalizeMovements(params.movements);
   }
 

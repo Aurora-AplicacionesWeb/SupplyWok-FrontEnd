@@ -246,16 +246,37 @@
     },
     "table": {
       "title": "库存",
-      "searchPlaceholder": "搜索产品...",
+      "search": "搜索",
+      "searchPlaceholder": "按产品、类别或供应商搜索...",
+      "category": "类别",
+      "allCategories": "全部类别",
       "filterUnit": "按单位筛选",
+      "minimum": "最低",
+      "empty": "没有符合搜索条件的库存项目。",
+      "error": "无法加载库存项目。",
+      "unassignedSupplier": "未分配供应商",
       "columns": {
         "product": "产品",
         "stock": "库存",
+        "stockLevels": "库存水平",
         "unit": "单位",
         "restaurant": "餐厅",
+        "category": "类别",
+        "supplier": "供应商",
         "actions": "操作"
       },
-      "actions": { "add": "添加" }
+      "actions": {
+        "add": "添加",
+        "edit": "编辑项目",
+        "delete": "删除项目"
+      },
+      "pagination": {
+        "previous": "上一页",
+        "next": "下一页"
+      },
+      "footer": {
+        "showing": "显示 {visible}/{total} 个项目"
+      }
     },
     "belowMinimum": {
       "title": "低于最低库存",

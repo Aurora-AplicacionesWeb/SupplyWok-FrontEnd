@@ -1,21 +1,24 @@
 <script setup>
 import InventoryDataTable from '../components/inventory-data-table.component.vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 </script>
 
 <template>
   <section class="inventory-management-page">
     <header class="inventory-management-page__hero">
       <div>
-        <span class="inventory-management-page__kicker">Restaurant</span>
-        <h1 class="inventory-management-page__title">Inventory</h1>
+        <span class="inventory-management-page__kicker">{{ t('inventoryManagement.page.kicker') }}</span>
+        <h1 class="inventory-management-page__title">{{ t('inventoryManagement.page.title') }}</h1>
         <p class="inventory-management-page__description">
-          Control stock, minimums and relationships with suppliers.
+          {{ t('inventoryManagement.page.description') }}
         </p>
       </div>
 
       <button type="button" class="inventory-management-page__action">
         <i class="pi pi-plus"></i>
-        <span>add supply</span>
+        <span>{{ t('inventoryManagement.page.actions.add') }}</span>
       </button>
     </header>
 

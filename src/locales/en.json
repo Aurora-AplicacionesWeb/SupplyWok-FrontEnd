@@ -246,16 +246,37 @@
     },
     "table": {
       "title": "Inventory",
-      "searchPlaceholder": "Search product...",
+      "search": "Search",
+      "searchPlaceholder": "Search product name, category or supplier...",
+      "category": "Category",
+      "allCategories": "All categories",
       "filterUnit": "Filter by unit",
+      "minimum": "MIN",
+      "empty": "No inventory items match your search.",
+      "error": "Unable to load inventory items.",
+      "unassignedSupplier": "Unassigned supplier",
       "columns": {
         "product": "Product",
         "stock": "Stock",
+        "stockLevels": "Stock levels",
         "unit": "Unit",
         "restaurant": "Restaurant",
+        "category": "Category",
+        "supplier": "Supplier",
         "actions": "Actions"
       },
-      "actions": { "add": "Add" }
+      "actions": {
+        "add": "Add",
+        "edit": "Edit item",
+        "delete": "Delete item"
+      },
+      "pagination": {
+        "previous": "Previous",
+        "next": "Next"
+      },
+      "footer": {
+        "showing": "Showing {visible} of {total} total items"
+      }
     },
     "belowMinimum": {
       "title": "Below minimum",

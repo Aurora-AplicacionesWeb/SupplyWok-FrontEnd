@@ -1,37 +1,31 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import useInventoryManagementStore from '../../application/inventory-management.store.js';
+
+const { t } = useI18n();
+const store = useInventoryManagementStore();
 
 const searchTerm = ref('');
 const selectedCategory = ref('');
 const currentPage = ref(1);
 const rowsPerPage = 6;
 
-// Mockup-aligned presentation rows are used here because the current inventory API
-// does not expose the supplier/category metadata shown in the design chapter.
-const inventoryRows = [
-  { id: 'SK-99210', product: 'Arroz pre preparado', stock: 505, unit: 'kg', minimum: 20, category: 'GRAINS', supplier: 'Andes Cold Chain', alert: '' },
-  { id: 'SK-11840', product: 'Arroz jazmin', stock: 42, unit: 'kg', minimum: 60, category: 'GRAINS', supplier: 'Golden Wok Produce', alert: 'Stock Alert' },
-  { id: 'SK-88341', product: 'Pollo trozado', stock: 78, unit: 'kg', minimum: 55, category: 'PROTEIN', supplier: 'Andes Cold Chain', alert: '' },
-  { id: 'SK-54012', product: 'Aceite de sesamo', stock: 12, unit: 'ltr', minimum: 20, category: 'SAUCES', supplier: 'Orient Pantry Co.', alert: 'Low Inventory' },
-  { id: 'SK-66712', product: 'Langostino mediano', stock: 16, unit: 'kg', minimum: 18, category: 'SEAFOOD', supplier: 'Andes Cold Chain', alert: 'Refill Needed' },
-  { id: 'SK-11202', product: 'Cebolla china', stock: 28, unit: 'kg', minimum: 14, category: 'VEGETABLES', supplier: 'Golden Wok Produce', alert: '' }
-];
-
 const categories = computed(() => {
-  return [...new Set(inventoryRows.map((row) => row.category))];
+  return [...new Set(store.inventoryItems.map((item) => item.category).filter(Boolean))].sort();
 });
 
 const filteredRows = computed(() => {
   const normalizedQuery = searchTerm.value.trim().toLowerCase();
 
-  return inventoryRows.filter((row) => {
-    const matchesCategory = !selectedCategory.value || row.category === selectedCategory.value;
+  return store.inventoryItems.filter((item) => {
+    const matchesCategory = !selectedCategory.value || item.category === selectedCategory.value;
     const matchesQuery = !normalizedQuery || [
-      row.product,
-      row.category,
-      row.supplier,
-      row.id
-    ].some((value) => value.toLowerCase().includes(normalizedQuery));
+      item.name,
+      item.category,
+      item.supplierName,
+      String(item.id)
+    ].some((value) => String(value ?? '').toLowerCase().includes(normalizedQuery));
 
     return matchesCategory && matchesQuery;
   });
@@ -46,6 +40,11 @@ const totalPages = computed(() => {
   return Math.max(1, Math.ceil(filteredRows.value.length / rowsPerPage));
 });
 
+const visibleCountText = computed(() => t('inventoryManagement.table.footer.showing', {
+  visible: paginatedRows.value.length,
+  total: filteredRows.value.length
+}));
+
 function goToPreviousPage() {
   currentPage.value = Math.max(1, currentPage.value - 1);
 }
@@ -54,15 +53,19 @@ function goToNextPage() {
   currentPage.value = Math.min(totalPages.value, currentPage.value + 1);
 }
 
-function getStatusTone(row) {
-  const ratio = row.stock / row.minimum;
-  if (ratio <= 1) return 'critical';
-  if (ratio <= 1.5) return 'warning';
-  return 'healthy';
+function getStatusTone(item) {
+  return item.getStockStatus?.() ?? 'healthy';
 }
 
-function getProgressWidth(row) {
-  return `${Math.min((row.stock / (row.minimum * 3)) * 100, 100)}%`;
+function getProgressWidth(item) {
+  return `${item.getStockLevelPercentage?.() ?? 0}%`;
+}
+
+function getStockAlert(item) {
+  const status = item.getStockStatus?.();
+  if (status === 'critical') return t('inventoryManagement.stockStatus.critical');
+  if (status === 'warning') return t('inventoryManagement.stockStatus.warning');
+  return '';
 }
 
 function handleSearchInput() {
@@ -72,30 +75,36 @@ function handleSearchInput() {
 function handleCategoryChange() {
   currentPage.value = 1;
 }
+
+onMounted(async () => {
+  if (!store.loaded) {
+    await store.fetchAll();
+  }
+});
 </script>
 
 <template>
   <section class="inventory-table-card">
     <div class="inventory-table-card__filters">
       <label class="inventory-table-card__filter">
-        <span>Search</span>
+        <span>{{ t('inventoryManagement.table.search') }}</span>
         <div class="inventory-table-card__input-shell">
           <i class="pi pi-search"></i>
           <input
             v-model="searchTerm"
             type="text"
-            placeholder="Search product name, category or supplier..."
+            :placeholder="t('inventoryManagement.table.searchPlaceholder')"
             @input="handleSearchInput"
           >
         </div>
       </label>
 
       <label class="inventory-table-card__filter">
-        <span>Category</span>
+        <span>{{ t('inventoryManagement.table.category') }}</span>
         <div class="inventory-table-card__input-shell">
           <i class="pi pi-search"></i>
           <select v-model="selectedCategory" @change="handleCategoryChange">
-            <option value="">Search product name, category or supplier...</option>
+            <option value="">{{ t('inventoryManagement.table.allCategories') }}</option>
             <option v-for="category in categories" :key="category" :value="category">{{ category }}</option>
           </select>
           <i class="pi pi-chevron-down inventory-table-card__select-icon"></i>
@@ -103,15 +112,27 @@ function handleCategoryChange() {
       </label>
     </div>
 
-    <div class="inventory-table-card__table-wrap">
+    <div v-if="store.loading && !store.loaded" class="inventory-table-card__state">
+      {{ t('supply-and-purchasing.summary-card.loading') }}
+    </div>
+
+    <div v-else-if="store.errors.length && !store.inventoryItems.length" class="inventory-table-card__state inventory-table-card__state--error">
+      {{ t('inventoryManagement.table.error') }}
+    </div>
+
+    <div v-else-if="!filteredRows.length" class="inventory-table-card__state">
+      {{ t('inventoryManagement.table.empty') }}
+    </div>
+
+    <div v-else class="inventory-table-card__table-wrap">
       <table class="inventory-table">
         <thead>
           <tr>
-            <th>PRODUCT</th>
-            <th>STOCK LEVELS</th>
-            <th>CATEGORY</th>
-            <th>SUPPLIER</th>
-            <th>ACTIONS</th>
+            <th>{{ t('inventoryManagement.table.columns.product') }}</th>
+            <th>{{ t('inventoryManagement.table.columns.stockLevels') }}</th>
+            <th>{{ t('inventoryManagement.table.columns.category') }}</th>
+            <th>{{ t('inventoryManagement.table.columns.supplier') }}</th>
+            <th>{{ t('inventoryManagement.table.columns.actions') }}</th>
           </tr>
         </thead>
 
@@ -119,20 +140,25 @@ function handleCategoryChange() {
           <tr v-for="row in paginatedRows" :key="row.id">
             <td>
               <div class="inventory-table__product">
-                <strong>{{ row.product }}</strong>
+                <strong>{{ row.name }}</strong>
                 <small>ID: {{ row.id }}</small>
-                <em v-if="row.alert">{{ row.alert }}</em>
+                <em v-if="getStockAlert(row)">{{ getStockAlert(row) }}</em>
               </div>
             </td>
 
             <td>
               <div class="inventory-table__stock">
                 <div class="inventory-table__stock-top">
-                  <strong :class="`inventory-table__stock-value--${getStatusTone(row)}`">{{ row.stock }} {{ row.unit }}</strong>
-                  <small>MIN: {{ row.minimum }}</small>
+                  <strong :class="`inventory-table__stock-value--${getStatusTone(row)}`">
+                    {{ row.currentStock }} {{ row.unitOfMeasure }}
+                  </strong>
+                  <small>{{ t('inventoryManagement.table.minimum') }}: {{ row.minimumStockLevel }}</small>
                 </div>
                 <div class="inventory-table__bar">
-                  <span :class="`inventory-table__bar-fill inventory-table__bar-fill--${getStatusTone(row)}`" :style="{ width: getProgressWidth(row) }"></span>
+                  <span
+                    :class="`inventory-table__bar-fill inventory-table__bar-fill--${getStatusTone(row)}`"
+                    :style="{ width: getProgressWidth(row) }"
+                  ></span>
                 </div>
               </div>
             </td>
@@ -144,16 +170,16 @@ function handleCategoryChange() {
             <td>
               <span class="inventory-table__supplier">
                 <i class="pi pi-building"></i>
-                {{ row.supplier }}
+                {{ row.supplierName || t('inventoryManagement.table.unassignedSupplier') }}
               </span>
             </td>
 
             <td>
               <div class="inventory-table__actions">
-                <button type="button" aria-label="Edit item">
+                <button type="button" :aria-label="t('inventoryManagement.table.actions.edit')">
                   <i class="pi pi-pencil"></i>
                 </button>
-                <button type="button" aria-label="Delete item">
+                <button type="button" :aria-label="t('inventoryManagement.table.actions.delete')">
                   <i class="pi pi-trash"></i>
                 </button>
               </div>
@@ -164,11 +190,20 @@ function handleCategoryChange() {
     </div>
 
     <footer class="inventory-table-card__footer">
-      <p>Showing {{ paginatedRows.length }} of {{ filteredRows.length }} total items</p>
+      <p>{{ visibleCountText }}</p>
 
       <div class="inventory-table-card__pagination">
-        <button type="button" :disabled="currentPage === 1" @click="goToPreviousPage">Previous</button>
-        <button type="button" class="inventory-table-card__pagination-next" :disabled="currentPage === totalPages" @click="goToNextPage">Next</button>
+        <button type="button" :disabled="currentPage === 1" @click="goToPreviousPage">
+          {{ t('inventoryManagement.table.pagination.previous') }}
+        </button>
+        <button
+          type="button"
+          class="inventory-table-card__pagination-next"
+          :disabled="currentPage === totalPages"
+          @click="goToNextPage"
+        >
+          {{ t('inventoryManagement.table.pagination.next') }}
+        </button>
       </div>
     </footer>
   </section>
@@ -235,6 +270,16 @@ function handleCategoryChange() {
   font-size: 0.95rem;
 }
 
+.inventory-table-card__state {
+  padding: 28px 22px;
+  border-top: 1px solid #eadbca;
+  color: #7d7065;
+}
+
+.inventory-table-card__state--error {
+  color: #b91c1c;
+}
+
 .inventory-table {
   width: 100%;
   border-collapse: collapse;
@@ -280,7 +325,7 @@ function handleCategoryChange() {
 .inventory-table__stock {
   display: grid;
   gap: 7px;
-  max-width: 160px;
+  max-width: 180px;
 }
 
 .inventory-table__stock-top {

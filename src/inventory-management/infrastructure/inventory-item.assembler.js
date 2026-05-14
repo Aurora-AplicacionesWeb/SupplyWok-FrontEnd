@@ -17,6 +17,9 @@ export class InventoryItemAssembler {
       unitOfMeasure: resource.unitOfMeasure,
       currentStock: resource.currentStock ?? resource.initialStock ?? 0,
       minimumStockLevel: resource.minimumStockLevel ?? 0,
+      category: resource.category,
+      supplierId: resource.supplierId,
+      supplierName: resource.supplierName,
       movements: resource.movements ?? []
     });
   }
@@ -45,7 +48,10 @@ export class InventoryItemAssembler {
       name: inventoryItem.name,
       unitOfMeasure: inventoryItem.unitOfMeasure,
       currentStock: inventoryItem.currentStock,
-      minimumStockLevel: inventoryItem.minimumStockLevel
+      minimumStockLevel: inventoryItem.minimumStockLevel,
+      category: inventoryItem.category,
+      supplierId: inventoryItem.supplierId,
+      supplierName: inventoryItem.supplierName
     };
   }
 }

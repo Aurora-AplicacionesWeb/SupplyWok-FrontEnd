@@ -246,16 +246,37 @@
     },
     "table": {
       "title": "Inventario",
-      "searchPlaceholder": "Buscar producto...",
+      "search": "Buscar",
+      "searchPlaceholder": "Buscar producto, categoría o proveedor...",
+      "category": "Categoría",
+      "allCategories": "Todas las categorías",
       "filterUnit": "Filtrar por unidad",
+      "minimum": "MIN",
+      "empty": "No hay productos de inventario que coincidan con tu búsqueda.",
+      "error": "No se pudo cargar el inventario.",
+      "unassignedSupplier": "Proveedor sin asignar",
       "columns": {
         "product": "Producto",
         "stock": "Stock",
+        "stockLevels": "Niveles de stock",
         "unit": "Unidad",
         "restaurant": "Restaurante",
+        "category": "Categoría",
+        "supplier": "Proveedor",
         "actions": "Acciones"
       },
-      "actions": { "add": "Agregar" }
+      "actions": {
+        "add": "Agregar",
+        "edit": "Editar producto",
+        "delete": "Eliminar producto"
+      },
+      "pagination": {
+        "previous": "Anterior",
+        "next": "Siguiente"
+      },
+      "footer": {
+        "showing": "Mostrando {visible} de {total} productos"
+      }
     },
     "belowMinimum": {
       "title": "Por debajo del mínimo",

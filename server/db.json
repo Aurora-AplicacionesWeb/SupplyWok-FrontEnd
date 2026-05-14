@@ -453,6 +453,9 @@
       "id": 1001,
       "restaurantId": 1,
       "name": "Tomatoes",
+      "category": "VEGETABLES",
+      "supplierId": 201,
+      "supplierName": "Golden Wok Produce",
       "unitOfMeasure": "KILOGRAMS",
       "currentStock": 50,
       "minimumStockLevel": 20
@@ -461,6 +464,9 @@
       "id": 1002,
       "restaurantId": 1,
       "name": "Olive Oil",
+      "category": "SAUCES",
+      "supplierId": 203,
+      "supplierName": "Orient Pantry Co.",
       "unitOfMeasure": "LITERS",
       "currentStock": 15,
       "minimumStockLevel": 10
@@ -469,6 +475,9 @@
       "id": 1003,
       "restaurantId": 1,
       "name": "Salt",
+      "category": "PANTRY",
+      "supplierId": 203,
+      "supplierName": "Orient Pantry Co.",
       "unitOfMeasure": "GRAMS",
       "currentStock": 500,
       "minimumStockLevel": 300
@@ -477,6 +486,9 @@
       "id": 1004,
       "restaurantId": 1,
       "name": "Jasmine rice",
+      "category": "GRAINS",
+      "supplierId": 201,
+      "supplierName": "Golden Wok Produce",
       "unitOfMeasure": "KILOGRAMS",
       "currentStock": 2,
       "minimumStockLevel": 5
@@ -485,6 +497,9 @@
       "id": 1005,
       "restaurantId": 1,
       "name": "Sesame oil",
+      "category": "SAUCES",
+      "supplierId": 203,
+      "supplierName": "Orient Pantry Co.",
       "unitOfMeasure": "LITERS",
       "currentStock": 1,
       "minimumStockLevel": 2
@@ -493,6 +508,9 @@
       "id": 1006,
       "restaurantId": 1,
       "name": "Oyster sauce",
+      "category": "SAUCES",
+      "supplierId": 203,
+      "supplierName": "Orient Pantry Co.",
       "unitOfMeasure": "LITERS",
       "currentStock": 3,
       "minimumStockLevel": 3
