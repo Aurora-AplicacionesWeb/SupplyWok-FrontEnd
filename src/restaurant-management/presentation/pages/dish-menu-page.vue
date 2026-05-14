@@ -43,7 +43,7 @@ function categoryLabel(cat) {
 
 function handleAddToOrder(dish) {
   addItemToOrder(dish, 1, '');
-  router.push('/create-kitchen-order');
+  router.push({ name: 'create-kitchen-order-page' });
 }
 
 onMounted(() => {
