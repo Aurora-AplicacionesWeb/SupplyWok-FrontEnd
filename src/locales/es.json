@@ -136,6 +136,21 @@
       "empty": "No hay clientes que coincidan con tu búsqueda.",
       "visible-count": "Mostrando {visible} de {total} elementos totales"
     },
+    "forecast": {
+      "breadcrumb": "PROVEEDOR",
+      "title": "Pronóstico de demanda",
+      "subtitle": "Combina demanda agregada y pronósticos por cliente para planificar el suministro.",
+      "aggregate-title": "Vista agregada",
+      "clients-title": "Por cliente",
+      "chart-summary": "Resumen del gráfico: {from} -> {to}",
+      "top-client-summary": "Resumen del gráfico: {value}",
+      "empty": "No hay datos de pronóstico disponibles.",
+      "trend": {
+        "upward": "Al alza",
+        "stable": "Estable",
+        "watch": "En observación"
+      }
+    },
     "alerts": {
       "breadcrumb": "PROVEEDOR",
       "title": "Alertas del proveedor",

@@ -136,6 +136,21 @@
       "empty": "没有符合搜索条件的客户。",
       "visible-count": "显示 {visible}/{total} 条记录"
     },
+    "forecast": {
+      "breadcrumb": "供应商",
+      "title": "需求预测",
+      "subtitle": "结合整体需求和客户级预测来规划供应。",
+      "aggregate-title": "汇总视图",
+      "clients-title": "按客户",
+      "chart-summary": "图表摘要: {from} -> {to}",
+      "top-client-summary": "图表摘要: {value}",
+      "empty": "暂无预测数据。",
+      "trend": {
+        "upward": "上升",
+        "stable": "稳定",
+        "watch": "关注"
+      }
+    },
     "alerts": {
       "breadcrumb": "供应商",
       "title": "供应商警报",

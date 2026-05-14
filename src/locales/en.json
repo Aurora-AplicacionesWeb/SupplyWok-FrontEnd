@@ -136,6 +136,21 @@
       "empty": "No clients match your search.",
       "visible-count": "Showing {visible} of {total} total items"
     },
+    "forecast": {
+      "breadcrumb": "SUPPLIER",
+      "title": "Demand forecast",
+      "subtitle": "Combine aggregate demand and client-level forecasts for supply planning.",
+      "aggregate-title": "Aggregate view",
+      "clients-title": "By client",
+      "chart-summary": "Text summary for the chart: {from} -> {to}",
+      "top-client-summary": "Text summary for the chart: {value}",
+      "empty": "No forecast data available.",
+      "trend": {
+        "upward": "Upward",
+        "stable": "Stable",
+        "watch": "Watch"
+      }
+    },
     "alerts": {
       "breadcrumb": "SUPPLIER",
       "title": "Supplier alerts",
