@@ -151,6 +151,29 @@
         "watch": "关注"
       }
     },
+    "delivery": {
+      "breadcrumb": "供应商",
+      "title": "配送计划",
+      "subtitle": "按日期和路线顺序规划附近餐厅的合并配送。",
+      "filters": {
+        "date": "日期",
+        "all-dates": "全部日期",
+        "status": "状态",
+        "all-statuses": "全部状态"
+      },
+      "stats": {
+        "routes": "路线",
+        "stops": "停靠点",
+        "orders": "订单"
+      },
+      "status": {
+        "planned": "已计划",
+        "in-progress": "进行中",
+        "completed": "已完成"
+      },
+      "stop-orders": "{count} 单",
+      "empty": "没有符合筛选条件的配送路线。"
+    },
     "alerts": {
       "breadcrumb": "供应商",
       "title": "供应商警报",

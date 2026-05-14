@@ -151,6 +151,29 @@
         "watch": "Watch"
       }
     },
+    "delivery": {
+      "breadcrumb": "SUPPLIER",
+      "title": "Delivery planning",
+      "subtitle": "Plan grouped deliveries by date and route sequence for nearby restaurants.",
+      "filters": {
+        "date": "Date",
+        "all-dates": "All dates",
+        "status": "Status",
+        "all-statuses": "All statuses"
+      },
+      "stats": {
+        "routes": "Routes",
+        "stops": "Stops",
+        "orders": "Orders"
+      },
+      "status": {
+        "planned": "Planned",
+        "in-progress": "In progress",
+        "completed": "Completed"
+      },
+      "stop-orders": "{count} order(s)",
+      "empty": "No delivery routes match your filters."
+    },
     "alerts": {
       "breadcrumb": "SUPPLIER",
       "title": "Supplier alerts",

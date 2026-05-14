@@ -151,6 +151,29 @@
         "watch": "En observación"
       }
     },
+    "delivery": {
+      "breadcrumb": "PROVEEDOR",
+      "title": "Planificación de entregas",
+      "subtitle": "Planifica entregas agrupadas por fecha y secuencia de ruta para restaurantes cercanos.",
+      "filters": {
+        "date": "Fecha",
+        "all-dates": "Todas las fechas",
+        "status": "Estado",
+        "all-statuses": "Todos los estados"
+      },
+      "stats": {
+        "routes": "Rutas",
+        "stops": "Paradas",
+        "orders": "Órdenes"
+      },
+      "status": {
+        "planned": "Planificada",
+        "in-progress": "En curso",
+        "completed": "Completada"
+      },
+      "stop-orders": "{count} orden(es)",
+      "empty": "No hay rutas de entrega que coincidan con tus filtros."
+    },
     "alerts": {
       "breadcrumb": "PROVEEDOR",
       "title": "Alertas del proveedor",
