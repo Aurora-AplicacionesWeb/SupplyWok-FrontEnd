@@ -1,7 +1,15 @@
 <script setup>
+import { computed, onMounted, ref, watch } from 'vue';
+import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
+import usePurchaseOrderStore from '../../application/purchase-order.store.js';
 
 const { t } = useI18n();
+const store = usePurchaseOrderStore();
+const { supplierDirectory, suppliersLoaded, loading, errors } = storeToRefs(store);
+const { ensureSuppliersLoaded } = store;
+const itemsPerPage = 5;
+const currentPage = ref(1);
 
 const getCategoryLabel = (category) => {
   const categories = {
@@ -13,13 +21,71 @@ const getCategoryLabel = (category) => {
   return categories[category] ?? category;
 };
 
-const supplierRows = [
-  { supplier: 'Golden Wok Produce', contact: 'Martin Lau', email: 'mlau@goldenwok.pe', phone: '+51 987 100 120', category: 'GRAINS', linkedDate: '2026-04-21', sla: '98% SLA', responseTime: '1.6 H' },
-  { supplier: 'Andes Cold Chain', contact: 'Valeria Lin', email: 'vlin@andescold.pe', phone: '+51 988 210 310', category: 'GRAINS', linkedDate: '2026-04-20', sla: '95% SLA', responseTime: '2.1 H' },
-  { supplier: 'Orient Pantry Co.', contact: 'Jose Chen', email: 'jchen@orientpantry.pe', phone: '+51 977 543 210', category: 'PROTEIN', linkedDate: '2026-04-19', sla: '91% SLA', responseTime: '2.9 H' },
-  { supplier: 'Pacific Dumpling Hub', contact: 'Julia Wong', email: 'jwong@pacificdumpling.pe', phone: '+51 964 404 700', category: 'SAUCES', linkedDate: '2026-04-18', sla: '94% SLA', responseTime: '3.4 H' },
-  { supplier: 'Urban Service Goods', contact: 'Sofia Tello', email: 'stello@urbanservice.pe', phone: '+51 955 443 220', category: 'SEAFOOD', linkedDate: '2026-04-17', sla: '89% SLA', responseTime: '2.4 H' }
-];
+const supplierRows = computed(() => {
+  return supplierDirectory.value.map((supplier) => ({
+    id: supplier.id,
+    supplier: supplier.name,
+    contact: supplier.contactName || 'No contact',
+    email: supplier.email || 'No email',
+    phone: supplier.phone || 'No phone',
+    category: normalizeCategory(supplier.category),
+    linkedDate: supplier.linkedDate || supplier.createdAt?.slice(0, 10) || '--',
+    sla: supplier.sla || '--',
+    responseTime: supplier.responseTime || '--'
+  }));
+});
+
+const totalPages = computed(() => Math.max(1, Math.ceil(supplierRows.value.length / itemsPerPage)));
+
+const visibleSupplierRows = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage;
+  return supplierRows.value.slice(start, start + itemsPerPage);
+});
+
+const paginationSummary = computed(() => {
+  if (!supplierRows.value.length) {
+    return { from: 0, to: 0, total: 0 };
+  }
+
+  const from = (currentPage.value - 1) * itemsPerPage + 1;
+  const to = Math.min(currentPage.value * itemsPerPage, supplierRows.value.length);
+  return { from, to, total: supplierRows.value.length };
+});
+
+const canGoPrevious = computed(() => currentPage.value > 1);
+const canGoNext = computed(() => currentPage.value < totalPages.value);
+
+function goToPreviousPage() {
+  if (canGoPrevious.value) {
+    currentPage.value -= 1;
+  }
+}
+
+function goToNextPage() {
+  if (canGoNext.value) {
+    currentPage.value += 1;
+  }
+}
+
+function normalizeCategory(category) {
+  const normalized = String(category ?? '').trim().toUpperCase();
+  if (!normalized) return 'SAUCES';
+  if (normalized.includes('GRAIN') || normalized.includes('PANTRY')) return 'GRAINS';
+  if (normalized.includes('PROTEIN') || normalized.includes('COLD')) return 'PROTEIN';
+  if (normalized.includes('SAUCE') || normalized.includes('OIL') || normalized.includes('ASIAN')) return 'SAUCES';
+  if (normalized.includes('SEAFOOD')) return 'SEAFOOD';
+  return normalized;
+}
+
+onMounted(() => {
+  ensureSuppliersLoaded();
+});
+
+watch(totalPages, (nextTotalPages) => {
+  if (currentPage.value > nextTotalPages) {
+    currentPage.value = nextTotalPages;
+  }
+});
 </script>
 
 <template>
@@ -34,7 +100,15 @@ const supplierRows = [
 
     <section class="suppliers-table-card">
       <div class="suppliers-table-card__table-wrap">
-        <table class="suppliers-table">
+        <div v-if="loading && !suppliersLoaded" class="suppliers-table-card__state">
+          {{ t('shared.placeholder.description') }}
+        </div>
+
+        <div v-else-if="errors.length && !supplierRows.length" class="suppliers-table-card__state suppliers-table-card__state--error">
+          Failed to load suppliers.
+        </div>
+
+        <table v-else class="suppliers-table">
           <thead>
             <tr>
               <th>{{ t('supply-and-purchasing.suppliers-page.table.headers.supplier') }}</th>
@@ -46,7 +120,7 @@ const supplierRows = [
           </thead>
 
           <tbody>
-            <tr v-for="row in supplierRows" :key="row.supplier">
+            <tr v-for="row in visibleSupplierRows" :key="row.id">
               <td class="suppliers-table__supplier-cell">{{ row.supplier }}</td>
               <td>
                 <div class="suppliers-table__contact">
@@ -71,10 +145,10 @@ const supplierRows = [
       </div>
 
       <footer class="suppliers-table-card__footer">
-        <p>{{ t('supply-and-purchasing.suppliers-page.footer.showing', { count: supplierRows.length, total: 142 }) }}</p>
+        <p>{{ paginationSummary.from }}-{{ paginationSummary.to }} of {{ paginationSummary.total }} suppliers</p>
         <div class="suppliers-table-card__pagination">
-          <button type="button" disabled>{{ t('supply-and-purchasing.suppliers-page.footer.previous') }}</button>
-          <button type="button" class="suppliers-table-card__pagination-next">{{ t('supply-and-purchasing.suppliers-page.footer.next') }}</button>
+          <button type="button" :disabled="!canGoPrevious" @click="goToPreviousPage">{{ t('supply-and-purchasing.suppliers-page.footer.previous') }}</button>
+          <button type="button" class="suppliers-table-card__pagination-next" :disabled="!canGoNext" @click="goToNextPage">{{ t('supply-and-purchasing.suppliers-page.footer.next') }}</button>
         </div>
       </footer>
     </section>
@@ -120,6 +194,15 @@ const supplierRows = [
   border-radius: 22px;
   box-shadow: 0 18px 36px rgba(47, 36, 29, 0.1);
   overflow: hidden;
+}
+
+.suppliers-table-card__state {
+  padding: 24px 20px;
+  color: #7e756b;
+}
+
+.suppliers-table-card__state--error {
+  color: #b42318;
 }
 
 .suppliers-table {
