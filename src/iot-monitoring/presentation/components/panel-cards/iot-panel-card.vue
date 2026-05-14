@@ -41,7 +41,6 @@ import IotPanelAlerts from '../alerts/iot-panel-alerts.vue';
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 720px;
 }
 
 .panel-header-section {

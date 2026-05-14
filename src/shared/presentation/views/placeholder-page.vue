@@ -104,13 +104,19 @@ onMounted(() => {
     gap: 16px;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: stretch;
+}
+
+.stat-cards-row:deep(.stat-card) {
+    flex: 1 1 180px;
+    min-width: 130px;
 }
 
 .dashboard-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
-    align-items: start;
+    align-items: stretch;
 }
 
 .placeholder-box {
