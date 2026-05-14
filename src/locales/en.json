@@ -664,7 +664,12 @@
         "main_hall": "Main Hall",
         "terrace": "Terrace",
         "bar": "Bar"
-      }
+      },
+      "viewDetails": "View details",
+      "tableDetails": "Table Details",
+      "deleteTable": "Delete Table",
+      "close": "Close",
+      "people": "people"
     },
     "shared": {
       "status": {

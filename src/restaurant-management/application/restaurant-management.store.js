@@ -527,6 +527,22 @@ const useRestaurantManagementStore = defineStore('restaurant-management', () => 
     }
 
     /**
+     * Deletes a table by identifier and removes it from local state.
+     * @param {number|string} id - Table identifier.
+     * @returns {Promise<boolean>} Whether deletion succeeded.
+     */
+    function deleteTable(id) {
+        loading.value = true;
+        return restaurantManagementApi.deleteTable(id).then(() => {
+            return fetchTables();
+        }).catch(error => {
+            errors.value.push(error);
+            loading.value = false;
+            return false;
+        });
+    }
+
+    /**
      * Fully updates a kitchen order and synchronizes local state.
      * @param {number|string} orderId - Kitchen order identifier.
      * @param {Object} orderData - Updated order data.
@@ -725,7 +741,7 @@ const useRestaurantManagementStore = defineStore('restaurant-management', () => 
         fetchTables, fetchDishes, fetchDishCategories, fetchKitchenOrders,
         fetchKitchenOrderById, fetchKitchenLock, fetchAll,
         createKitchenOrder, updateKitchenOrderStatus, updateKitchenOrderFull, deleteKitchenOrder,
-        addTable, activateKitchenMode, deactivateKitchenMode, resetStore
+        addTable, deleteTable, activateKitchenMode, deactivateKitchenMode, resetStore
     };
 });
 

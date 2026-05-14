@@ -19,7 +19,7 @@ function handleStatusChange({ orderId, newState }) {
 }
 
 function goToKitchenTickets() {
-  router.push({ name: 'kitchen-tickets-page' });
+  router.push({ name: 'kitchen-tickets-view' });
 }
 </script>
 

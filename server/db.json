@@ -867,36 +867,6 @@
           "trend": "stable",
           "summary": "Projected demand is steady with no urgent restock signal."
         }
-      ],
-      "clients": [
-        {
-          "clientId": 1,
-          "clientName": "Gran Dragon Chifa",
-          "value": 72,
-          "trend": "upward",
-          "summary": "Seafood and greens demand trending higher before weekends."
-        },
-        {
-          "clientId": 2,
-          "clientName": "Jade Express",
-          "value": 68,
-          "trend": "stable",
-          "summary": "Keep standard restock cadence; lunch traffic is stable."
-        },
-        {
-          "clientId": 3,
-          "clientName": "Pekin Lounge",
-          "value": 55,
-          "trend": "watch",
-          "summary": "Demand remains moderate with steady weekly orders."
-        },
-        {
-          "clientId": 4,
-          "clientName": "Ming Garden",
-          "value": 49,
-          "trend": "stable",
-          "summary": "Projected demand is steady with no urgent restock signal."
-        }
       ]
     }
   ],

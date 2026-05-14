@@ -36,6 +36,10 @@ export class RestaurantManagementApi extends BaseApi {
         return this.#tablesEndpoint.create(resource);
     }
 
+    deleteTable(id) {
+        return this.#tablesEndpoint.delete(id);
+    }
+
     getKitchenOrders() {
         return this.#kitchenOrdersEndpoint.getAll();
     }

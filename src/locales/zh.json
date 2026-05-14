@@ -664,7 +664,12 @@
         "main_hall": "主廳",
         "terrace": "露台",
         "bar": "酒吧"
-      }
+      },
+      "viewDetails": "查看詳情",
+      "tableDetails": "餐桌詳情",
+      "deleteTable": "刪除餐桌",
+      "close": "關閉",
+      "people": "人"
     },
     "shared": {
       "status": {

@@ -664,7 +664,12 @@
         "main_hall": "Salón Principal",
         "terrace": "Terraza",
         "bar": "Bar"
-      }
+      },
+      "viewDetails": "Ver detalles",
+      "tableDetails": "Detalles de Mesa",
+      "deleteTable": "Eliminar Mesa",
+      "close": "Cerrar",
+      "people": "personas"
     },
     "shared": {
       "status": {
