@@ -75,11 +75,11 @@ function handleDelete(orderId) {
 }
 
 function handleEdit(order) {
-  router.push({ name: 'create-kitchen-order-page', query: { edit: order.id } });
+  router.push({ name: 'create-kitchen-order-view', query: { edit: order.id } });
 }
 
 function goToNewTicket() {
-  router.push({ name: 'create-kitchen-order-page' });
+  router.push({ name: 'create-kitchen-order-view' });
 }
 
 onMounted(() => {

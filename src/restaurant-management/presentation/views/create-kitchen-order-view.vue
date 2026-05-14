@@ -42,7 +42,7 @@ function categoryLabel(cat) {
 function handleCreateOrder() {
   function onResult(result) {
     if (result) {
-      router.push({ name: 'kitchen-tickets-page' });
+      router.push({ name: 'kitchen-tickets-view' });
     }
   }
   if (editId.value) {
@@ -67,7 +67,7 @@ function handleAddDish(dish) {
 }
 
 function goBack() {
-  router.push({ name: 'kitchen-tickets-page' });
+  router.push({ name: 'kitchen-tickets-view' });
 }
 
 function loadEditOrder(editIdVal) {

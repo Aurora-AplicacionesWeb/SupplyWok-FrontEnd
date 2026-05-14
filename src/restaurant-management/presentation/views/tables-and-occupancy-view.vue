@@ -85,15 +85,19 @@ onMounted(() => {
  *   5. Revert the i18n keys `addTable`, `confirmAddTable`, `cancel`
  *      from the locale JSON files (optional).
  * ============================================================ */
+const locationOptions = ['Main Hall', 'Bar', 'Terrace'];
+const statusOptions = ['available', 'busy'];
+
 const addTableDialogVisible = ref(false);
 const newTable = ref({
   number: '',
   capacity: 4,
-  location: ''
+  location: '',
+  state: 'available'
 });
 
 function openAddTableDialog() {
-  newTable.value = { number: '', capacity: 4, location: '' };
+  newTable.value = { number: '', capacity: 4, location: '', state: 'available' };
   addTableDialogVisible.value = true;
 }
 
@@ -103,7 +107,7 @@ function handleAddTable() {
     number: newTable.value.number,
     capacity: newTable.value.capacity,
     location: newTable.value.location || 'Main Hall',
-    state: 'available',
+    state: newTable.value.state,
     active: true
   }).then(() => {
     addTableDialogVisible.value = false;
@@ -211,7 +215,7 @@ function handleAddTable() {
       :style="{ width: 'min(420px, calc(100vw - 32px))' }"
       :draggable="false"
     >
-      <div class="flex flex-column gap-3 p-3">
+      <div class="flex flex-column gap-4 p-4">
         <div class="flex flex-column gap-1">
           <label class="dialog-label">{{ t('restaurantManagement.tablesAndOccupancyPage.tableNumber') }}</label>
           <InputText v-model="newTable.number" :placeholder="t('restaurantManagement.tablesAndOccupancyPage.tableNumber')" />
@@ -222,7 +226,11 @@ function handleAddTable() {
         </div>
         <div class="flex flex-column gap-1">
           <label class="dialog-label">{{ t('restaurantManagement.tablesAndOccupancyPage.location') }}</label>
-          <InputText v-model="newTable.location" :placeholder="t('restaurantManagement.tablesAndOccupancyPage.location')" />
+          <Select v-model="newTable.location" :options="locationOptions" :placeholder="t('restaurantManagement.tablesAndOccupancyPage.location')" :showClear="true" class="w-full" />
+        </div>
+        <div class="flex flex-column gap-1">
+          <label class="dialog-label">{{ t('restaurantManagement.tablesAndOccupancyPage.state') }}</label>
+          <Select v-model="newTable.state" :options="statusOptions" class="w-full" />
         </div>
       </div>
       <template #footer>
@@ -304,7 +312,7 @@ function handleAddTable() {
 .filter-btn--active.filter-btn--free { background: #16a34a; color: #fff; border-color: #16a34a; }
 .filter-btn--active.filter-btn--occupied { background: #dc2626; color: #fff; border-color: #dc2626; }
 .empty-state { color: #7d7065; }
-.location-title { color: #40342d; font-size: 18px; border-bottom: 2px solid #aa9387; font-family: 'Poppins', system-ui, sans-serif; }
+.location-title { color: #40342d; font-size: 18px; border-bottom: 2px solid #efe6da; font-family: 'Poppins', system-ui, sans-serif; }
 
 /* Dialog form label */
 .dialog-label { font-size: 13px; font-weight: 600; color: #40342d; }
