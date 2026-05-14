@@ -316,6 +316,34 @@
           ]
         }
       }
+    },
+    "dashboard": {
+      "title": "Dashboard del proveedor",
+      "subtitle": "Pedidos entrantes, carga logística, clientes y perspectiva de demanda.",
+      "loading": "Cargando datos del dashboard...",
+      "stats": {
+        "orders-received": "Órdenes recibidas",
+        "scheduled-deliveries": "Entregas programadas",
+        "demand-outlook": "Perspectiva de demanda",
+        "urgent-requests": "Solicitudes urgentes",
+        "alert-badge": "Alerta"
+      },
+      "routes": {
+        "title": "Rutas activas de hoy",
+        "schedule": "{stops} Paradas · {departure} - {arrival}",
+        "date": "{date}",
+        "empty": "No hay rutas activas disponibles."
+      },
+      "aggregate": {
+        "title": "Vista agregada",
+        "summary": "Resumen del gráfico: {from} -> {to}",
+        "empty": "No hay datos de pronóstico disponibles."
+      },
+      "priority": {
+        "high": "Alta",
+        "medium": "Media",
+        "low": "Baja"
+      }
     }
   },
   "inventoryManagement": {

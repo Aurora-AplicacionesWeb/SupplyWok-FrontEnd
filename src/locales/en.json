@@ -316,6 +316,34 @@
           ]
         }
       }
+    },
+    "dashboard": {
+      "title": "Supplier dashboard",
+      "subtitle": "Incoming orders, logistics load, clients, and demand outlook.",
+      "loading": "Loading dashboard data...",
+      "stats": {
+        "orders-received": "Orders received",
+        "scheduled-deliveries": "Scheduled deliveries",
+        "demand-outlook": "Demand outlook",
+        "urgent-requests": "Urgent requests",
+        "alert-badge": "Alert"
+      },
+      "routes": {
+        "title": "Today's active routes",
+        "schedule": "{stops} Stops · {departure} - {arrival}",
+        "date": "{date}",
+        "empty": "No active routes available."
+      },
+      "aggregate": {
+        "title": "Aggregate view",
+        "summary": "Text summary for the chart: {from} -> {to}",
+        "empty": "No forecast data available."
+      },
+      "priority": {
+        "high": "High",
+        "medium": "Medium",
+        "low": "Low"
+      }
     }
   },
   "inventoryManagement": {

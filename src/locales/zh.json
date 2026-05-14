@@ -316,6 +316,34 @@
           ]
         }
       }
+    },
+    "dashboard": {
+      "title": "供应商仪表板",
+      "subtitle": "传入订单、物流负载、客户与需求走势。",
+      "loading": "正在加载仪表板数据...",
+      "stats": {
+        "orders-received": "已接收订单",
+        "scheduled-deliveries": "已安排配送",
+        "demand-outlook": "需求走势",
+        "urgent-requests": "紧急请求",
+        "alert-badge": "警报"
+      },
+      "routes": {
+        "title": "今日活跃路线",
+        "schedule": "{stops} 站 · {departure} - {arrival}",
+        "date": "{date}",
+        "empty": "暂无活跃路线。"
+      },
+      "aggregate": {
+        "title": "汇总视图",
+        "summary": "图表摘要: {from} -> {to}",
+        "empty": "暂无预测数据。"
+      },
+      "priority": {
+        "high": "高",
+        "medium": "中",
+        "low": "低"
+      }
     }
   },
   "inventoryManagement": {
