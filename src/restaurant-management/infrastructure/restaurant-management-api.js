@@ -1,9 +1,21 @@
 import { BaseApi } from '../../shared/infrastructure/base-api.js';
 import { BaseEndpoint } from '../../shared/infrastructure/base-endpoint.js';
 
+const baseUno = import.meta.env.VITE_SUPPLY_WOK_REST_MANAGE_UNO_URL;   // "https://my-json-server.typicode.com/Nounz27/db.server/"
+const baseDos = import.meta.env.VITE_SUPPLY_WOK_REST_MANAGE_DOS_URL;   // "https://my-json-server.typicode.com/Nounz27/db.server-2/"
+
+const dishesEndpointPath           = baseUno + 'dishes';
+const dishesCategoriesEndpointPath = baseUno + 'dishes-categories';
+const kitchenOrdersEndpointPath    = baseUno + 'kitchen-orders';
+const kitchenOrderItemsEndpointPath = baseUno + 'kitchen-order-items';
+const kitchenLocksEndpointPath     = baseDos + 'kitchen-locks';
+const tablesEndpointPath           = baseDos + 'tables';
+const historyStateKitchenOrdersEndpointPath = baseUno + 'history-state-kitchen-orders';
+
 export class RestaurantManagementApi extends BaseApi {
     #dishesEndpoint;
     #dishesCategoriesEndpoint;
+    #historyStateKitchenOrdersEndpoint;
     #kitchenLocksEndpoint;
     #kitchenOrdersEndpoint;
     #kitchenOrderItemsEndpoint;
@@ -12,12 +24,13 @@ export class RestaurantManagementApi extends BaseApi {
     constructor() {
         super();
 
-        this.#dishesEndpoint = new BaseEndpoint(this, import.meta.env.VITE_DISHES_ENDPOINT_PATH);
-        this.#dishesCategoriesEndpoint = new BaseEndpoint(this, import.meta.env.VITE_DISHES_CATEGORIES_ENDPOINT_PATH);
-        this.#kitchenLocksEndpoint = new BaseEndpoint(this, import.meta.env.VITE_KITCHEN_LOCKS_ENDPOINT_PATH);
-        this.#kitchenOrdersEndpoint = new BaseEndpoint(this, import.meta.env.VITE_KITCHEN_ORDERS_ENDPOINT_PATH);
-        this.#kitchenOrderItemsEndpoint = new BaseEndpoint(this, import.meta.env.VITE_KITCHEN_ORDER_ITEMS_ENDPOINT_PATH);
-        this.#tablesEndpoint = new BaseEndpoint(this, import.meta.env.VITE_TABLES_ENDPOINT_PATH);
+        this.#dishesEndpoint = new BaseEndpoint(this, dishesEndpointPath);
+        this.#dishesCategoriesEndpoint = new BaseEndpoint(this, dishesCategoriesEndpointPath);
+        this.#kitchenLocksEndpoint = new BaseEndpoint(this, kitchenLocksEndpointPath);
+        this.#kitchenOrdersEndpoint = new BaseEndpoint(this, kitchenOrdersEndpointPath);
+        this.#kitchenOrderItemsEndpoint = new BaseEndpoint(this, kitchenOrderItemsEndpointPath);
+        this.#historyStateKitchenOrdersEndpoint = new BaseEndpoint(this, historyStateKitchenOrdersEndpointPath);
+        this.#tablesEndpoint = new BaseEndpoint(this, tablesEndpointPath);
     }
 
     getDishes() {
@@ -52,19 +65,15 @@ export class RestaurantManagementApi extends BaseApi {
         return this.#kitchenOrdersEndpoint.create(resource);
     }
 
-    updateKitchenOrder(id, resource) {
-        return this.updateKitchenOrderFull(id, resource);
-    }
-
     updateKitchenOrderFull(id, resource) {
         return this.#kitchenOrdersEndpoint.update(id, resource);
     }
 
     updateKitchenOrderStatus(id, newState, observation) {
-        const resource = { state: newState, observations: observation };
+        var resource = { state: newState, observations: observation };
         if (newState === 'ready') resource.hourReady = new Date().toISOString();
         if (newState === 'delivered') resource.hourDelivered = new Date().toISOString();
-        return this.updateKitchenOrder(id, resource);
+        return this.#kitchenOrdersEndpoint.update(id, resource);
     }
 
     getKitchenOrderItems() {
@@ -81,5 +90,17 @@ export class RestaurantManagementApi extends BaseApi {
 
     deleteKitchenOrder(id) {
         return this.#kitchenOrdersEndpoint.delete(id);
+    }
+
+    createStateHistory(resource) {
+        return this.#historyStateKitchenOrdersEndpoint.create(resource);
+    }
+
+    getHistoryByKitchenOrderId(kitchenOrderId) {
+        return this.#historyStateKitchenOrdersEndpoint.getAll();
+    }
+
+    updateTableStatus(tableId, newState) {
+        return this.#tablesEndpoint.update(tableId, { state: newState });
     }
 }

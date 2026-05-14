@@ -581,12 +581,12 @@ const useRestaurantManagementStore = defineStore('restaurant-management', () => 
             const index = kitchenOrders.value.findIndex(o => o.id === orderId);
             if (index !== -1) kitchenOrders.value[index] = updated;
             clearCurrentOrder();
+            loading.value = false;
             return updated;
         }).catch(error => {
             errors.value.push(error);
-            return null;
-        }).finally(function () {
             loading.value = false;
+            return null;
         });
     }
 
@@ -600,7 +600,7 @@ const useRestaurantManagementStore = defineStore('restaurant-management', () => 
         const index = kitchenOrders.value.findIndex(o => o.id === orderId);
         if (index !== -1) kitchenOrders.value.splice(index, 1);
         if (currentKitchenOrder.value?.id === orderId) currentKitchenOrder.value = null;
-        if (!order) return Promise.resolve(true);
+        if (!order) return true;
         const deletedData = {
             ...order,
             state: 'deleted',
@@ -656,12 +656,12 @@ const useRestaurantManagementStore = defineStore('restaurant-management', () => 
             const index = kitchenOrders.value.findIndex(o => o.id === orderId);
             if (index !== -1) kitchenOrders.value[index] = updated;
             if (currentKitchenOrder.value?.id === orderId) currentKitchenOrder.value = updated;
+            loading.value = false;
             return updated;
         }).catch(error => {
             errors.value.push(error);
-            return null;
-        }).finally(function () {
             loading.value = false;
+            return null;
         });
     }
 
