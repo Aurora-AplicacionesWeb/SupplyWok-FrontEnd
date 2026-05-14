@@ -1,5 +1,5 @@
 <script setup>
-import { computed, reactive, ref } from 'vue';
+import { computed, onMounted, reactive, ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import Button from 'primevue/button';
@@ -11,14 +11,8 @@ const emit = defineEmits(['saved']);
 
 const { t } = useI18n();
 const store = usePurchaseOrderStore();
-const { validationErrors } = storeToRefs(store);
-const { addPurchaseOrder, clearValidationScope, validateOrderItem } = store;
-
-const supplierOptions = [
-    { id: 201, name: 'Golden Wok Produce' },
-    { id: 202, name: 'Andes Cold Chain' },
-    { id: 203, name: 'Orient Pantry Co.' }
-];
+const { validationErrors, supplierDirectory } = storeToRefs(store);
+const { addPurchaseOrder, clearValidationScope, validateOrderItem, ensureSuppliersLoaded } = store;
 
 const priorityOptions = computed(() => ([
     { value: 'High', label: t('supply-and-purchasing.shared.priority.high') },
@@ -27,8 +21,8 @@ const priorityOptions = computed(() => ([
 ]));
 
 const form = reactive({
-    supplierId: supplierOptions[0].id,
-    supplierName: supplierOptions[0].name,
+    supplierId: '',
+    supplierName: '',
     orderDate: formatLocalDate(new Date()),
     estimatedDate: formatLocalDate(addDays(new Date(), 2)),
     priority: 'Medium'
@@ -51,7 +45,7 @@ function resetDraftLine() {
 }
 
 function syncSupplierData() {
-    const selectedSupplier = supplierOptions.find((supplier) => supplier.id === Number(form.supplierId));
+    const selectedSupplier = supplierDirectory.value.find((supplier) => supplier.id === form.supplierId);
     form.supplierName = selectedSupplier?.name ?? '';
 }
 
@@ -146,6 +140,17 @@ function formatLocalDate(date) {
 function buildPurchaseOrderCode() {
     return `PO-${String(Date.now()).slice(-5)}`;
 }
+
+watch(supplierDirectory, (options) => {
+    if (!form.supplierId && options.length > 0) {
+        form.supplierId = options[0].id;
+        form.supplierName = options[0].name;
+    }
+}, { immediate: true });
+
+onMounted(() => {
+    ensureSuppliersLoaded();
+});
 </script>
 
 <template>
@@ -166,14 +171,14 @@ function buildPurchaseOrderCode() {
                     :class="{ 'purchase-order-form-panel__select--invalid': getFieldError('supplierId') }"
                     @change="syncSupplierData"
                 >
-                    <option v-for="supplier in supplierOptions" :key="supplier.id" :value="supplier.id">{{ supplier.name }}</option>
+                    <option v-for="supplier in supplierDirectory" :key="supplier.id" :value="supplier.id">{{ supplier.name }}</option>
                 </select>
                 <small v-if="getFieldError('supplierId')" class="purchase-order-form-panel__error">{{ getFieldError('supplierId') }}</small>
             </label>
 
             <label class="purchase-order-form-panel__field">
                 <span>{{ t('supply-and-purchasing.form.fields.estimated-date') }}</span>
-                <InputText v-model="form.estimatedDate" :class="{ 'purchase-order-form-panel__input--invalid': getFieldError('orderDate') }" />
+                <InputText v-model="form.orderDate" :class="{ 'purchase-order-form-panel__input--invalid': getFieldError('orderDate') }" />
                 <small v-if="getFieldError('orderDate')" class="purchase-order-form-panel__error">{{ getFieldError('orderDate') }}</small>
             </label>
 

@@ -1,15 +1,18 @@
 <script setup>
-import Layout from './shared/presentation/components/layout.vue';
-import { useRoute } from 'vue-router';
 import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+import Layout from './shared/presentation/components/layout.vue';
 
 const route = useRoute();
-const isAuthRoute = computed(() => ['login', 'register'].includes(route.name));
+
+/**
+ * Authentication screens must bypass the shell layout.
+ * Otherwise the auth cards render inside the application chrome and break navigation.
+ */
+const isAuthRoute = computed(() => ['login', 'register'].includes(String(route.name ?? '')));
 </script>
 
 <template>
-  <Layout v-if="!isAuthRoute">
-    <router-view />
-  </Layout>
-  <router-view v-else />
+  <router-view v-if="isAuthRoute" />
+  <Layout v-else />
 </template>

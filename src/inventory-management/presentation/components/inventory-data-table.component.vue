@@ -1,169 +1,428 @@
 <script setup>
-import { ref, computed } from 'vue';
-import { useI18n } from 'vue-i18n';
-import ConfirmDialog from 'primevue/confirmdialog';
-import DataTable from 'primevue/datatable';
-import Column from 'primevue/column';
-import InputText from 'primevue/inputtext';
-import Dropdown from 'primevue/dropdown';
-import ProgressBar from 'primevue/progressbar';
-import Tag from 'primevue/tag';
-import { useConfirm } from 'primevue/useconfirm';
+import { computed, ref } from 'vue';
 
-const confirm = useConfirm();
-const emit = defineEmits(['delete']);
+const searchTerm = ref('');
+const selectedCategory = ref('');
+const currentPage = ref(1);
+const rowsPerPage = 6;
 
-const props = defineProps({
-  items: { type: Array, default: () => [] },
-  loading: { type: Boolean, default: false },
-  units: { type: Array, default: () => [] }
+// Mockup-aligned presentation rows are used here because the current inventory API
+// does not expose the supplier/category metadata shown in the design chapter.
+const inventoryRows = [
+  { id: 'SK-99210', product: 'Arroz pre preparado', stock: 505, unit: 'kg', minimum: 20, category: 'GRAINS', supplier: 'Andes Cold Chain', alert: '' },
+  { id: 'SK-11840', product: 'Arroz jazmin', stock: 42, unit: 'kg', minimum: 60, category: 'GRAINS', supplier: 'Golden Wok Produce', alert: 'Stock Alert' },
+  { id: 'SK-88341', product: 'Pollo trozado', stock: 78, unit: 'kg', minimum: 55, category: 'PROTEIN', supplier: 'Andes Cold Chain', alert: '' },
+  { id: 'SK-54012', product: 'Aceite de sesamo', stock: 12, unit: 'ltr', minimum: 20, category: 'SAUCES', supplier: 'Orient Pantry Co.', alert: 'Low Inventory' },
+  { id: 'SK-66712', product: 'Langostino mediano', stock: 16, unit: 'kg', minimum: 18, category: 'SEAFOOD', supplier: 'Andes Cold Chain', alert: 'Refill Needed' },
+  { id: 'SK-11202', product: 'Cebolla china', stock: 28, unit: 'kg', minimum: 14, category: 'VEGETABLES', supplier: 'Golden Wok Produce', alert: '' }
+];
+
+const categories = computed(() => {
+  return [...new Set(inventoryRows.map((row) => row.category))];
 });
 
-const { t } = useI18n();
-const search = ref('');
-const selectedUnit = ref(null);
+const filteredRows = computed(() => {
+  const normalizedQuery = searchTerm.value.trim().toLowerCase();
 
-const filtered = computed(() => {
-  const q = String(search.value ?? '').trim().toLowerCase();
-  return props.items.filter((item) => {
-	if (selectedUnit.value && item.unitOfMeasure !== selectedUnit.value) return false;
-	if (!q) return true;
-	return (
-	  String(item.name ?? '').toLowerCase().includes(q) ||
-	  String(item.id ?? '').toLowerCase().includes(q) ||
-	  String(item.restaurantId ?? '').toLowerCase().includes(q)
-	);
+  return inventoryRows.filter((row) => {
+    const matchesCategory = !selectedCategory.value || row.category === selectedCategory.value;
+    const matchesQuery = !normalizedQuery || [
+      row.product,
+      row.category,
+      row.supplier,
+      row.id
+    ].some((value) => value.toLowerCase().includes(normalizedQuery));
+
+    return matchesCategory && matchesQuery;
   });
 });
 
-function getStatus(item) {
-  return item.getStockStatus ? item.getStockStatus() : 'healthy';
+const paginatedRows = computed(() => {
+  const startIndex = (currentPage.value - 1) * rowsPerPage;
+  return filteredRows.value.slice(startIndex, startIndex + rowsPerPage);
+});
+
+const totalPages = computed(() => {
+  return Math.max(1, Math.ceil(filteredRows.value.length / rowsPerPage));
+});
+
+function goToPreviousPage() {
+  currentPage.value = Math.max(1, currentPage.value - 1);
 }
 
-function statusSeverity(status) {
-  if (status === 'critical') return 'danger';
-  if (status === 'warning') return 'warning';
-  return 'success';
+function goToNextPage() {
+  currentPage.value = Math.min(totalPages.value, currentPage.value + 1);
 }
 
-function formatUnit(unit) {
-  const map = {
-	KILOGRAMS: t('inventoryManagement.units.kilograms'),
-	LITERS: t('inventoryManagement.units.liters'),
-	UNITS: t('inventoryManagement.units.units'),
-	GRAMS: t('inventoryManagement.units.grams')
-  };
-  return map[unit] ?? unit;
+function getStatusTone(row) {
+  const ratio = row.stock / row.minimum;
+  if (ratio <= 1) return 'critical';
+  if (ratio <= 1.5) return 'warning';
+  return 'healthy';
 }
 
-function confirmDelete(item) {
-  confirm.require({
-	message: `¿Estás seguro de que deseas eliminar "${item.name}"?`,
-	header: 'Confirmar eliminación',
-	icon: 'pi pi-exclamation-triangle',
-	accept() {
-	  emit('delete', item.id);
-	},
-	reject() {
-	  // No hacer nada
-	}
-  });
+function getProgressWidth(row) {
+  return `${Math.min((row.stock / (row.minimum * 3)) * 100, 100)}%`;
+}
+
+function handleSearchInput() {
+  currentPage.value = 1;
+}
+
+function handleCategoryChange() {
+  currentPage.value = 1;
 }
 </script>
 
 <template>
-  <section class="inventory-data-table">
-	<div class="inventory-data-table__toolbar">
-	  <div class="inventory-data-table__heading">
-		<h3>{{ t('inventoryManagement.table.title') }}</h3>
-	  </div>
+  <section class="inventory-table-card">
+    <div class="inventory-table-card__filters">
+      <label class="inventory-table-card__filter">
+        <span>Search</span>
+        <div class="inventory-table-card__input-shell">
+          <i class="pi pi-search"></i>
+          <input
+            v-model="searchTerm"
+            type="text"
+            placeholder="Search product name, category or supplier..."
+            @input="handleSearchInput"
+          >
+        </div>
+      </label>
 
-	  <div class="inventory-data-table__controls">
-		<span class="inventory-data-table__search">
-		  <i class="pi pi-search" />
-		  <InputText v-model="search" :placeholder="t('inventoryManagement.table.searchPlaceholder')" />
-		</span>
+      <label class="inventory-table-card__filter">
+        <span>Category</span>
+        <div class="inventory-table-card__input-shell">
+          <i class="pi pi-search"></i>
+          <select v-model="selectedCategory" @change="handleCategoryChange">
+            <option value="">Search product name, category or supplier...</option>
+            <option v-for="category in categories" :key="category" :value="category">{{ category }}</option>
+          </select>
+          <i class="pi pi-chevron-down inventory-table-card__select-icon"></i>
+        </div>
+      </label>
+    </div>
 
-		<Dropdown v-model="selectedUnit" :options="units" optionLabel="label" optionValue="value" :placeholder="t('inventoryManagement.table.filterUnit')" class="inventory-data-table__dropdown" />
-	  </div>
-	</div>
+    <div class="inventory-table-card__table-wrap">
+      <table class="inventory-table">
+        <thead>
+          <tr>
+            <th>PRODUCT</th>
+            <th>STOCK LEVELS</th>
+            <th>CATEGORY</th>
+            <th>SUPPLIER</th>
+            <th>ACTIONS</th>
+          </tr>
+        </thead>
 
-	<DataTable :value="filtered" :loading="loading" paginator :rows="6" dataKey="id" rowHover class="inventory-data-table__grid">
-	  <Column field="name" :header="t('inventoryManagement.table.columns.product')" sortable>
-		<template #body="{ data }">
-		  <div class="inventory-data-table__product-cell">
-			<strong>{{ data.name }}</strong>
-			<small>ID: {{ data.id }}</small>
-		  </div>
-		</template>
-	  </Column>
+        <tbody>
+          <tr v-for="row in paginatedRows" :key="row.id">
+            <td>
+              <div class="inventory-table__product">
+                <strong>{{ row.product }}</strong>
+                <small>ID: {{ row.id }}</small>
+                <em v-if="row.alert">{{ row.alert }}</em>
+              </div>
+            </td>
 
-	  <Column field="currentStock" :header="t('inventoryManagement.table.columns.stock')" sortable>
-		<template #body="{ data }">
-		  <div class="inventory-data-table__stock-cell">
-			<div class="inventory-data-table__stock-value">{{ data.currentStock }}</div>
-			<div class="inventory-data-table__stock-progress">
-			  <ProgressBar :value="data.getStockLevelPercentage ? data.getStockLevelPercentage() : 0" />
-			</div>
-			<Tag :value="t(`inventoryManagement.stockStatus.${getStatus(data)}`)" :severity="statusSeverity(getStatus(data))" />
-		  </div>
-		</template>
-	  </Column>
+            <td>
+              <div class="inventory-table__stock">
+                <div class="inventory-table__stock-top">
+                  <strong :class="`inventory-table__stock-value--${getStatusTone(row)}`">{{ row.stock }} {{ row.unit }}</strong>
+                  <small>MIN: {{ row.minimum }}</small>
+                </div>
+                <div class="inventory-table__bar">
+                  <span :class="`inventory-table__bar-fill inventory-table__bar-fill--${getStatusTone(row)}`" :style="{ width: getProgressWidth(row) }"></span>
+                </div>
+              </div>
+            </td>
 
-	  <Column field="unitOfMeasure" :header="t('inventoryManagement.table.columns.unit')">
-		<template #body="{ data }">
-		  <span>{{ formatUnit(data.unitOfMeasure) }}</span>
-		</template>
-	  </Column>
+            <td>
+              <span class="inventory-table__tag">{{ row.category }}</span>
+            </td>
 
-	  <Column field="restaurantId" :header="t('inventoryManagement.table.columns.restaurant')" />
+            <td>
+              <span class="inventory-table__supplier">
+                <i class="pi pi-building"></i>
+                {{ row.supplier }}
+              </span>
+            </td>
 
-	  <Column :header="t('inventoryManagement.table.columns.actions')" style="width: 120px;">
-		<template #body="{ data }">
-		  <button class="inventory-data-table__action-btn inventory-data-table__action-btn--edit" title="Editar" @click="() => {}">
-			<i class="pi pi-pencil"></i>
-		  </button>
-		  <button class="inventory-data-table__action-btn inventory-data-table__action-btn--delete" title="Eliminar" @click="confirmDelete(data)">
-			<i class="pi pi-trash"></i>
-		  </button>
-		</template>
-	  </Column>
-	</DataTable>
+            <td>
+              <div class="inventory-table__actions">
+                <button type="button" aria-label="Edit item">
+                  <i class="pi pi-pencil"></i>
+                </button>
+                <button type="button" aria-label="Delete item">
+                  <i class="pi pi-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-	<ConfirmDialog />
+    <footer class="inventory-table-card__footer">
+      <p>Showing {{ paginatedRows.length }} of {{ filteredRows.length }} total items</p>
+
+      <div class="inventory-table-card__pagination">
+        <button type="button" :disabled="currentPage === 1" @click="goToPreviousPage">Previous</button>
+        <button type="button" class="inventory-table-card__pagination-next" :disabled="currentPage === totalPages" @click="goToNextPage">Next</button>
+      </div>
+    </footer>
   </section>
 </template>
 
 <style scoped>
-.inventory-data-table { background: #fff; border-radius: 12px; padding: 12px; box-shadow: 0 10px 24px rgba(0,0,0,0.06); }
-.inventory-data-table__toolbar { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:8px 4px; }
-.inventory-data-table__controls { display:flex; gap:8px; align-items:center; }
-.inventory-data-table__search { display:flex; align-items:center; gap:8px; padding:6px 10px; border-radius:8px; background:#fbf8f4; border:1px solid #eee; }
-.inventory-data-table__product-cell small { display:block; color:#8e8177; font-size:12px; }
-.inventory-data-table__stock-cell { display:flex; align-items:center; gap:12px; }
-.inventory-data-table__stock-value { font-weight:700; }
-.inventory-data-table__stock-progress { width:120px; }
+.inventory-table-card {
+  background: #ffffff;
+  border: 1px solid #eadbca;
+  border-radius: 26px;
+  box-shadow: 0 18px 36px rgba(47, 36, 29, 0.1);
+  overflow: hidden;
+}
 
-.inventory-data-table__action-btn {
-  background: transparent;
+.inventory-table-card__filters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  padding: 22px 22px 16px;
+}
+
+.inventory-table-card__filter {
+  display: grid;
+  gap: 8px;
+}
+
+.inventory-table-card__filter span {
+  color: #53493f;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.inventory-table-card__input-shell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+  border: 1px solid #e8dccd;
+  border-radius: 18px;
+  background: #ffffff;
+  padding: 0 16px;
+}
+
+.inventory-table-card__input-shell > .pi-search {
+  color: #8a8177;
+  font-size: 1rem;
+}
+
+.inventory-table-card__input-shell input,
+.inventory-table-card__input-shell select {
+  flex: 1;
+  min-width: 0;
   border: none;
-  cursor: pointer;
-  padding: 6px 8px;
-  margin-right: 8px;
-  font-size: 16px;
-  border-radius: 4px;
-  transition: all 0.2s;
+  outline: none;
+  background: transparent;
+  color: #6b6258;
+  font-size: 1rem;
+  padding-left: 12px;
+  appearance: none;
+}
+
+.inventory-table-card__select-icon {
+  color: #8a8177;
+  font-size: 0.95rem;
+}
+
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.inventory-table thead th {
+  padding: 16px 22px;
+  border-top: 1px solid #eadbca;
+  border-bottom: 1px solid #eadbca;
+  color: #85796d;
+  font-size: 0.96rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.inventory-table tbody td {
+  padding: 14px 22px;
+  border-bottom: 1px solid #f0e7dc;
+  vertical-align: middle;
+}
+
+.inventory-table__product {
+  display: grid;
+  gap: 3px;
+}
+
+.inventory-table__product strong {
+  color: #30262e;
+  font-size: 1.05rem;
+}
+
+.inventory-table__product small {
+  color: #aea39a;
+  font-size: 0.92rem;
+}
+
+.inventory-table__product em {
+  color: #ff3b30;
+  font-size: 0.92rem;
+  font-style: normal;
+}
+
+.inventory-table__stock {
+  display: grid;
+  gap: 7px;
+  max-width: 160px;
+}
+
+.inventory-table__stock-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.inventory-table__stock-top small {
+  color: #b2a69b;
+  font-size: 0.82rem;
+}
+
+.inventory-table__stock-value--healthy {
+  color: #19a64a;
+}
+
+.inventory-table__stock-value--warning {
+  color: #ff6a1a;
+}
+
+.inventory-table__stock-value--critical {
+  color: #ff3b30;
+}
+
+.inventory-table__bar {
+  height: 8px;
+  border-radius: 999px;
+  background: #ece7e2;
+  overflow: hidden;
+}
+
+.inventory-table__bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.inventory-table__bar-fill--healthy {
+  background: #2ec95b;
+}
+
+.inventory-table__bar-fill--warning {
+  background: #ff7c22;
+}
+
+.inventory-table__bar-fill--critical {
+  background: #ff4b45;
+}
+
+.inventory-table__tag {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 28px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: #f2efeb;
+  color: #676057;
+  font-size: 0.82rem;
+  font-weight: 700;
 }
 
-.inventory-data-table__action-btn--edit { color: #7b6d61; }
-.inventory-data-table__action-btn--edit:hover { background: rgba(123, 109, 97, 0.1); color: #5a4a3a; }
+.inventory-table__supplier {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #5e564d;
+}
 
-.inventory-data-table__action-btn--delete { color: #c21204; }
-.inventory-data-table__action-btn--delete:hover { background: rgba(194, 18, 4, 0.1); color: #900; }
+.inventory-table__actions {
+  display: flex;
+  gap: 16px;
+}
+
+.inventory-table__actions button {
+  border: none;
+  background: transparent;
+  color: #a59a91;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.inventory-table-card__footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 22px;
+}
+
+.inventory-table-card__footer p {
+  color: #8b8175;
+  font-size: 0.95rem;
+}
+
+.inventory-table-card__pagination {
+  display: flex;
+  gap: 8px;
+}
+
+.inventory-table-card__pagination button {
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid #e6dbcf;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #b8ada3;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.inventory-table-card__pagination-next {
+  background: #2d241e !important;
+  color: #ffffff !important;
+  border-color: #2d241e !important;
+}
+
+.inventory-table-card__pagination button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+@media (max-width: 1100px) {
+  .inventory-table-card__filters {
+    grid-template-columns: 1fr;
+  }
+
+  .inventory-table-card__table-wrap {
+    overflow-x: auto;
+  }
+
+  .inventory-table {
+    min-width: 860px;
+  }
+}
+
+@media (max-width: 700px) {
+  .inventory-table-card__footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
 </style>
-
-
-
