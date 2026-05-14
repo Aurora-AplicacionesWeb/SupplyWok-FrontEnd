@@ -33,7 +33,7 @@ const { userRole } = storeToRefs(sessionStore);
 const { currentUserRole, currentUser } = storeToRefs(iamStore);
 
 /** @type {import('vue').Ref<string>} Reactive state for the current subscription plan. */
-const currentPlan = computed(() => currentUser.value?.subscription ?? 'Premium');
+const currentPlan = computed(() => sessionStore.subscriptionPlan);
 
 /** @type {MenuItem[]} Array containing the main navigation items. */
 const menuItems = {

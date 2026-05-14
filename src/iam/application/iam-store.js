@@ -52,6 +52,10 @@ export const useIamStore = defineStore('iam', () => {
       
       if (user) {
         currentUser.value = user;
+        const sessionStore = useSessionStore();
+        if (user.subscription) {
+          sessionStore.setSubscriptionPlan(user.subscription);
+        }
         return true;
       } else {
         error.value = 'Invalid email or password';
