@@ -5,8 +5,6 @@ export const inventoryManagementRoutes = [
 	path: 'inventory',
 	name: 'restaurant-inventory',
 	component: inventoryManagementPage,
-	meta: { title: 'Inventory' }
+	meta: { i18nKey: 'shared.titles.inventory' }
   }
 ];
-
-

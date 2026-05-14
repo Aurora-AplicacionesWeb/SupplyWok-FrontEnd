@@ -44,7 +44,7 @@ const landingUrl = 'https://aurora-aplicacionesweb.github.io/SupplyWok-Landing-P
           </a>
           <button class="profile-button" @click="toggleProfileMenu">
             <i class="pi pi-user"></i>
-            <span class="profile-text">Admin profile</span>
+            <span class="profile-text">{{ t('header.adminProfile') }}</span>
           </button>
           <pv-menu ref="profileMenu" :model="profileMenuOptions" :popup="true" />
         </div>

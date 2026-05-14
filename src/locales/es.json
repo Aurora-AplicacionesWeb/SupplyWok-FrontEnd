@@ -57,6 +57,107 @@
       "forecast": "Pronóstico de Demanda",
       "catalog": "Catálogo de Productos",
       "delivery": "Planificación de Entregas"
+    },
+    "titles": {
+      "dashboard": "Dashboard",
+      "inventory": "Inventario",
+      "orders": "Pedidos",
+      "create-order": "Crear pedido",
+      "suppliers": "Proveedores",
+      "kitchen-tickets": "Comandas",
+      "tables": "Mesas",
+      "alerts": "Alertas",
+      "reports": "Reportes",
+      "configuration": "Configuración",
+      "subscription": "Suscripción",
+      "dish-menu": "Carta de platos",
+      "create-kitchen-order": "Crear pedido de cocina",
+      "tables-and-occupancy": "Mesas y ocupación",
+      "login": "Iniciar sesión",
+      "register": "Registrarse",
+      "not-found": "Página no encontrada"
+    },
+    "placeholder": {
+      "kicker": "Primera versión frontend",
+      "description": "Este módulo está reservado y podrá completarse en las tareas del próximo sprint.",
+      "dashboardTitle": "Dashboard de Cocina",
+      "dashboardDesc": "Monitoreo de la planta y cadena de suministro en tiempo real."
+    },
+    "errors": {
+      "pageNotFoundTitle": "Página no encontrada",
+      "pageNotFoundDesc": "La ruta solicitada no existe en la versión actual del frontend."
+    },
+    "configurationPage": {
+      "kicker": "Restaurante",
+      "title": "Configuración del restaurante",
+      "description": "Perfil operativo, horarios, notificaciones, umbrales y accesos.",
+      "profile": {
+        "title": "Perfil del restaurante",
+        "save": "Guardar",
+        "fields": {
+          "name": "Perfil del restaurante",
+          "hours": "Horario de atención",
+          "thresholds": "Umbrales mínimos de stock",
+          "days": "Días de operación",
+          "contact": "Contacto de soporte",
+          "email": "Correo",
+          "sms": "SMS"
+        }
+      },
+      "users": {
+        "title": "Lista de usuarios",
+        "status": {
+          "active": "Activo"
+        }
+      },
+      "demo": {
+        "state": "Estado de demo"
+      },
+      "lock": {
+        "title": "Modo bloqueo de empleado",
+        "restrictedMode": "Activar modo restringido",
+        "password": "Contraseña de desbloqueo",
+        "callout": "Solo el dueño puede cambiar la configuración del modo restringido."
+      }
+    },
+    "subscriptionPage": {
+      "kicker": "Suscripción",
+      "title": "Planes disponibles",
+      "description": "Compara capacidad, alcance operativo y beneficios antes de mover el restaurante a un plan superior.",
+      "summary": {
+        "currentPlan": "Plan actual",
+        "users": "Usuarios",
+        "locations": "Locales",
+        "sensors": "Sensores"
+      },
+      "plans": {
+        "eyebrowCurrent": "Plan actual",
+        "eyebrowAvailable": "Disponible",
+        "actionCurrent": "Plan actual",
+        "actionSelect": "Seleccionar plan",
+        "metaUsers": "{count} usuarios",
+        "metaLocations": "{count} locales",
+        "metaSensors": "{count} sensores",
+        "premium": {
+          "features": [
+            "Dashboard principal con monitoreo IoT",
+            "Inventario, pedidos y proveedores",
+            "Alertas operativas en tiempo real",
+            "Exportación de reportes en CSV y PDF"
+          ]
+        },
+        "enterprise": {
+          "features": [
+            "Multi local y trazabilidad extendida",
+            "Mayor capacidad de sensores y usuarios",
+            "Priorización para soporte y auditorías",
+            "Escalamiento avanzado para equipos operativos"
+          ]
+        }
+      },
+      "messages": {
+        "switchSuccess": "La vista ahora refleja el plan {plan}. Conéctalo al flujo de pago cuando el módulo comercial esté listo."
+      }
     }
   },
   "supplier-management": {
@@ -419,6 +520,8 @@
       "status": {
         "pending": "Pendiente",
         "in-preparation": "En preparación",
+        "confirmed": "Confirmado",
+        "in-transit": "En tránsito",
         "delivered": "Entregado",
         "delayed": "Retrasado"
       }
@@ -434,9 +537,29 @@
       "description": "Usa esta pantalla independiente cuando quieras enfocarte solo en la creación del pedido."
     },
     "suppliers-page": {
-      "kicker": "Supply and Purchasing",
+      "kicker": "Restaurante",
       "title": "Proveedores",
-      "description": "Esta página está lista para recibir la vista del directorio de proveedores en la primera versión del frontend."
+      "description": "Visibilidad de contactos, categorías suministradas y rendimiento reciente.",
+      "table": {
+        "headers": {
+          "supplier": "PROVEEDOR",
+          "contact": "CONTACTO",
+          "categories": "CATEGORÍAS SUMINISTRADAS",
+          "history": "HISTORIAL VINCULADO",
+          "responseTime": "TIEMPO DE RESPUESTA"
+        },
+        "categories": {
+          "grains": "Granos",
+          "protein": "Proteínas",
+          "sauces": "Salsas",
+          "seafood": "Pescados y Mariscos"
+        }
+      },
+      "footer": {
+        "showing": "Mostrando {count} de {total} ítems totales",
+        "previous": "Anterior",
+        "next": "Siguiente"
+      }
     },
     "form": {
       "title": "Crear pedido",
@@ -784,6 +907,25 @@
       "activeCommands": {
         "label": "Comandos de Cocina"
       }
+    },
+    "reportsPage": {
+      "kicker": "Restaurante",
+      "title": "Reportes",
+      "description": "Evolución de inventario, consumo, pedidos a proveedores, demanda e incidentes térmicos.",
+      "actions": {
+        "exportCsv": "Exportar CSV",
+        "exportPdf": "Exportar PDF"
+      },
+      "charts": {
+        "inventoryTitle": "Evolución de inventario",
+        "consumptionTitle": "Consumo por período",
+        "ordersTitle": "Pedidos por proveedor",
+        "tempTitle": "Incidentes de temperatura",
+        "summary": "Resumen de texto:",
+        "summaryDesc": "Resumen de texto del gráfico: {from} -> {to}",
+        "summaryValue": "Resumen de texto del gráfico: {value}",
+        "month": "Mes"
+      }
     }
   },
   "historyStateKitchenOrders": {
@@ -798,6 +940,7 @@
   "header": {
     "settings": "Configuración",
     "logout": "Cerrar sesión",
-    "help": "Ayuda"
+    "help": "Ayuda",
+    "adminProfile": "Perfil de Administrador"
   }
 }

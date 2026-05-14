@@ -31,8 +31,8 @@ function getStatusLabel(status) {
     const translations = {
         'Pending': t('supply-and-purchasing.shared.status.pending'),
         'In Preparation': t('supply-and-purchasing.shared.status.in-preparation'),
-        'Confirmed': 'Confirmed',
-        'In Transit': 'In Transit',
+        'Confirmed': t('supply-and-purchasing.shared.status.confirmed'),
+        'In Transit': t('supply-and-purchasing.shared.status.in-transit'),
         'Delivered': t('supply-and-purchasing.shared.status.delivered'),
         'Delayed': t('supply-and-purchasing.shared.status.delayed')
     };

@@ -1,7 +1,12 @@
+<script setup>
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+</script>
+
 <template>
     <section class="page-not-found">
-        <h1>Page not found</h1>
-        <p>The requested route does not exist in the current frontend version.</p>
+        <h1>{{ t('shared.errors.pageNotFoundTitle') }}</h1>
+        <p>{{ t('shared.errors.pageNotFoundDesc') }}</p>
     </section>
 </template>
 

@@ -12,10 +12,13 @@ export class BaseApi {
     /** @type {import('axios').AxiosInstance} */
     #http;
 
-    /** Initializes the shared Axios client with environment-driven configuration. */
-    constructor() {
+    /**
+     * Initializes the shared Axios client with environment-driven configuration.
+     * @param {string} [customBaseUrl] - Optional custom base URL to override the default platform API.
+     */
+    constructor(customBaseUrl) {
         this.#http = axios.create({
-            baseURL: platformApi,
+            baseURL: customBaseUrl ?? platformApi,
             headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
         });
     }

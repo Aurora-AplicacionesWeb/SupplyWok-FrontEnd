@@ -1,7 +1,10 @@
 <script setup>
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
 function exportCsv() {
   const rows = [
-    ['Month', 'Inventory evolution'],
+    [t('restaurantManagement.reportsPage.charts.month'), t('restaurantManagement.reportsPage.charts.inventoryTitle')],
     ['Jan', 42],
     ['Feb', 46],
     ['Mar', 34],
@@ -29,28 +32,28 @@ function exportPdf() {
   <section class="reports-page">
     <header class="reports-page__hero">
       <div>
-        <span class="reports-page__kicker">Restaurant</span>
-        <h1 class="reports-page__title">Reports</h1>
+        <span class="reports-page__kicker">{{ t('restaurantManagement.reportsPage.kicker') }}</span>
+        <h1 class="reports-page__title">{{ t('restaurantManagement.reportsPage.title') }}</h1>
         <p class="reports-page__description">
-          Inventory evolution, consumption, supplier orders, demand, and thermal events.
+          {{ t('restaurantManagement.reportsPage.description') }}
         </p>
       </div>
 
       <div class="reports-page__actions">
         <button type="button" class="reports-page__secondary-action" @click="exportCsv">
           <i class="pi pi-download"></i>
-          <span>Export CSV</span>
+          <span>{{ t('restaurantManagement.reportsPage.actions.exportCsv') }}</span>
         </button>
         <button type="button" class="reports-page__primary-action" @click="exportPdf">
           <i class="pi pi-file-pdf"></i>
-          <span>Export PDF</span>
+          <span>{{ t('restaurantManagement.reportsPage.actions.exportPdf') }}</span>
         </button>
       </div>
     </header>
 
     <article class="reports-page__chart-card reports-page__chart-card--wide">
       <div class="reports-page__card-header">
-        <h2>Inventory evolution</h2>
+        <h2>{{ t('restaurantManagement.reportsPage.charts.inventoryTitle') }}</h2>
         <i class="pi pi-ellipsis-v"></i>
       </div>
 
@@ -80,7 +83,7 @@ function exportPdf() {
     <div class="reports-page__grid">
       <article class="reports-page__chart-card">
         <div class="reports-page__card-header">
-          <h2>Consumption by period</h2>
+          <h2>{{ t('restaurantManagement.reportsPage.charts.consumptionTitle') }}</h2>
           <i class="pi pi-ellipsis-v"></i>
         </div>
 
@@ -104,14 +107,14 @@ function exportPdf() {
         </div>
 
         <div class="reports-page__summary">
-          <strong>Text summary:</strong>
-          <p>Text summary for the chart: 40 -> 52</p>
+          <strong>{{ t('restaurantManagement.reportsPage.charts.summary') }}</strong>
+          <p>{{ t('restaurantManagement.reportsPage.charts.summaryDesc', { from: 40, to: 52 }) }}</p>
         </div>
       </article>
 
       <article class="reports-page__chart-card">
         <div class="reports-page__card-header">
-          <h2>Orders by supplier</h2>
+          <h2>{{ t('restaurantManagement.reportsPage.charts.ordersTitle') }}</h2>
           <i class="pi pi-ellipsis-v"></i>
         </div>
 
@@ -139,14 +142,14 @@ function exportPdf() {
         </div>
 
         <div class="reports-page__summary">
-          <strong>Text summary:</strong>
-          <p>Text summary for the chart: 8</p>
+          <strong>{{ t('restaurantManagement.reportsPage.charts.summary') }}</strong>
+          <p>{{ t('restaurantManagement.reportsPage.charts.summaryValue', { value: 8 }) }}</p>
         </div>
       </article>
 
       <article class="reports-page__chart-card">
         <div class="reports-page__card-header">
-          <h2>Temperature incidents</h2>
+          <h2>{{ t('restaurantManagement.reportsPage.charts.tempTitle') }}</h2>
           <i class="pi pi-ellipsis-v"></i>
         </div>
 
@@ -174,8 +177,8 @@ function exportPdf() {
         </div>
 
         <div class="reports-page__summary">
-          <strong>Text summary:</strong>
-          <p>Text summary for the chart: 9</p>
+          <strong>{{ t('restaurantManagement.reportsPage.charts.summary') }}</strong>
+          <p>{{ t('restaurantManagement.reportsPage.charts.summaryValue', { value: 9 }) }}</p>
         </div>
       </article>
     </div>

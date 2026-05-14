@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const restaurantProfile = ref('La Cucina Bella');
 const operatingHours = ref('11:00 AM - 10:00 PM');
 const minimumThreshold = ref('15%');
@@ -41,37 +43,37 @@ function toggleDay(dayId) {
 <template>
   <section class="configuration-page">
     <header class="configuration-page__hero">
-      <span class="configuration-page__kicker">Restaurant</span>
-      <h1 class="configuration-page__title">Restaurant settings</h1>
+      <span class="configuration-page__kicker">{{ t('shared.configurationPage.kicker') }}</span>
+      <h1 class="configuration-page__title">{{ t('shared.configurationPage.title') }}</h1>
       <p class="configuration-page__description">
-        Operational profile, hours, notifications, thresholds, and access.
+        {{ t('shared.configurationPage.description') }}
       </p>
     </header>
 
     <div class="configuration-page__grid">
       <article class="settings-card settings-card--profile">
         <div class="settings-card__header">
-          <h2>Restaurant profile</h2>
-          <button type="button">Save</button>
+          <h2>{{ t('shared.configurationPage.profile.title') }}</h2>
+          <button type="button">{{ t('shared.configurationPage.profile.save') }}</button>
         </div>
 
         <label class="settings-field">
-          <span>Restaurant profile</span>
+          <span>{{ t('shared.configurationPage.profile.fields.name') }}</span>
           <input v-model="restaurantProfile" type="text">
         </label>
 
         <label class="settings-field">
-          <span>Operating hours</span>
+          <span>{{ t('shared.configurationPage.profile.fields.hours') }}</span>
           <input v-model="operatingHours" type="text">
         </label>
 
         <label class="settings-field">
-          <span>Minimum stock thresholds</span>
+          <span>{{ t('shared.configurationPage.profile.fields.thresholds') }}</span>
           <input v-model="minimumThreshold" type="text">
         </label>
 
         <div class="settings-field">
-          <span>Operating days</span>
+          <span>{{ t('shared.configurationPage.profile.fields.days') }}</span>
           <div class="settings-day-list">
             <button
               v-for="day in dayChips"
@@ -86,7 +88,7 @@ function toggleDay(dayId) {
         </div>
 
         <label class="settings-field">
-          <span>Support contact</span>
+          <span>{{ t('shared.configurationPage.profile.fields.contact') }}</span>
           <input v-model="supportContact" type="text">
         </label>
 
@@ -94,13 +96,13 @@ function toggleDay(dayId) {
           <label class="settings-toggle">
             <input v-model="notificationEmail" type="checkbox">
             <span class="settings-toggle__slider"></span>
-            <span>Email</span>
+            <span>{{ t('shared.configurationPage.profile.fields.email') }}</span>
           </label>
 
           <label class="settings-toggle">
             <input v-model="notificationSms" type="checkbox">
             <span class="settings-toggle__slider"></span>
-            <span>SMS</span>
+            <span>{{ t('shared.configurationPage.profile.fields.sms') }}</span>
           </label>
         </div>
       </article>
@@ -108,7 +110,7 @@ function toggleDay(dayId) {
       <div class="configuration-page__side">
         <article class="settings-card">
           <div class="settings-card__header settings-card__header--simple">
-            <h2>User list</h2>
+            <h2>{{ t('shared.configurationPage.users.title') }}</h2>
           </div>
 
           <div class="user-list">
@@ -120,14 +122,14 @@ function toggleDay(dayId) {
                   <small>{{ user.role }}</small>
                 </div>
               </div>
-              <span class="user-list__badge">Active</span>
+              <span class="user-list__badge">{{ t('shared.configurationPage.users.status.active') }}</span>
             </article>
           </div>
         </article>
 
         <article class="settings-card">
           <label class="settings-field settings-field--select">
-            <span>Demo state</span>
+            <span>{{ t('shared.configurationPage.demo.state') }}</span>
             <div class="settings-field__select-shell">
               <select v-model="demoState">
                 <option>Inactive</option>
@@ -140,18 +142,18 @@ function toggleDay(dayId) {
           <div class="settings-card__divider"></div>
 
           <div class="settings-card__header">
-            <h2>Employee lock mode</h2>
-            <button type="button">Save</button>
+            <h2>{{ t('shared.configurationPage.lock.title') }}</h2>
+            <button type="button">{{ t('shared.configurationPage.profile.save') }}</button>
           </div>
 
           <label class="settings-toggle settings-toggle--full">
-            <span>Enable restricted mode</span>
+            <span>{{ t('shared.configurationPage.lock.restrictedMode') }}</span>
             <input v-model="restrictedMode" type="checkbox">
             <span class="settings-toggle__slider"></span>
           </label>
 
           <label class="settings-field">
-            <span>Unlock password</span>
+            <span>{{ t('shared.configurationPage.lock.password') }}</span>
             <div class="settings-field__password-shell">
               <input v-model="employeeLockPassword" type="text">
               <i class="pi pi-eye-slash"></i>
@@ -160,7 +162,7 @@ function toggleDay(dayId) {
 
           <div class="settings-callout">
             <i class="pi pi-info-circle"></i>
-            <p>Only the owner can change restricted mode settings.</p>
+            <p>{{ t('shared.configurationPage.lock.callout') }}</p>
           </div>
         </article>
       </div>

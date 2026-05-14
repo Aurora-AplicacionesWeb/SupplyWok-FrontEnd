@@ -10,17 +10,17 @@ const kitchenTicketsView = () => import('./views/kitchen-tickets-view.vue');
 const tablesAndOccupancyView = () => import('./views/tables-and-occupancy-view.vue');
 
 const restaurantManagementRoutes = [
-    { path: 'dashboard', name: 'restaurant-dashboard', component: placeholderPage, meta: { title: 'Dashboard', role: 'restaurant', isDashboard: true } },
-    { path: 'kitchen', name: 'restaurant-kitchen', component: kitchenTicketsView, meta: { title: 'Kitchen Tickets' } },
-    { path: 'tables', name: 'restaurant-tables', component: tablesAndOccupancyView, meta: { title: 'Tables' } },
-    { path: 'alerts', name: 'restaurant-alerts', component: alertsPage, meta: { title: 'Alerts' } },
-    { path: 'reports', name: 'restaurant-reports', component: reportsPage, meta: { title: 'Reports' } },
-    { path: 'configuration', name: 'restaurant-configuration', component: configurationPage, meta: { title: 'Configuration' } },
-    { path: 'subscription', name: 'restaurant-subscription', component: subscriptionPage, meta: { title: 'Subscription' } },
-    { path: 'dish-menu', name: 'dish-menu-view', component: dishMenuView, meta: { title: 'Dish Menu' } },
-    { path: 'create-kitchen-order', name: 'create-kitchen-order-view', component: createKitchenOrderView, meta: { title: 'Create Kitchen Order' } },
-    { path: 'kitchen-tickets', name: 'kitchen-tickets-view', component: kitchenTicketsView, meta: { title: 'Kitchen Tickets' } },
-    { path: 'tables-and-occupancy', name: 'tables-and-occupancy-view', component: tablesAndOccupancyView, meta: { title: 'Tables and Occupancy' } }
+    { path: 'dashboard', name: 'restaurant-dashboard', component: placeholderPage, meta: { i18nKey: 'shared.titles.dashboard', role: 'restaurant', isDashboard: true } },
+    { path: 'kitchen', name: 'restaurant-kitchen', component: kitchenTicketsView, meta: { i18nKey: 'shared.titles.kitchen-tickets' } },
+    { path: 'tables', name: 'restaurant-tables', component: tablesAndOccupancyView, meta: { i18nKey: 'shared.titles.tables' } },
+    { path: 'alerts', name: 'restaurant-alerts', component: alertsPage, meta: { i18nKey: 'shared.titles.alerts' } },
+    { path: 'reports', name: 'restaurant-reports', component: reportsPage, meta: { i18nKey: 'shared.titles.reports' } },
+    { path: 'configuration', name: 'restaurant-configuration', component: configurationPage, meta: { i18nKey: 'shared.titles.configuration' } },
+    { path: 'subscription', name: 'restaurant-subscription', component: subscriptionPage, meta: { i18nKey: 'shared.titles.subscription' } },
+    { path: 'dish-menu', name: 'dish-menu-view', component: dishMenuView, meta: { i18nKey: 'shared.titles.dish-menu' } },
+    { path: 'create-kitchen-order', name: 'create-kitchen-order-view', component: createKitchenOrderView, meta: { i18nKey: 'shared.titles.create-kitchen-order' } },
+    { path: 'kitchen-tickets', name: 'kitchen-tickets-view', component: kitchenTicketsView, meta: { i18nKey: 'shared.titles.kitchen-tickets' } },
+    { path: 'tables-and-occupancy', name: 'tables-and-occupancy-view', component: tablesAndOccupancyView, meta: { i18nKey: 'shared.titles.tables-and-occupancy' } }
 ];
 
 export default restaurantManagementRoutes;

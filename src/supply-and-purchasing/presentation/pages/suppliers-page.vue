@@ -1,4 +1,18 @@
 <script setup>
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+
+const getCategoryLabel = (category) => {
+  const categories = {
+    'GRAINS': t('supply-and-purchasing.suppliers-page.table.categories.grains'),
+    'PROTEIN': t('supply-and-purchasing.suppliers-page.table.categories.protein'),
+    'SAUCES': t('supply-and-purchasing.suppliers-page.table.categories.sauces'),
+    'SEAFOOD': t('supply-and-purchasing.suppliers-page.table.categories.seafood')
+  };
+  return categories[category] ?? category;
+};
+
 const supplierRows = [
   { supplier: 'Golden Wok Produce', contact: 'Martin Lau', email: 'mlau@goldenwok.pe', phone: '+51 987 100 120', category: 'GRAINS', linkedDate: '2026-04-21', sla: '98% SLA', responseTime: '1.6 H' },
   { supplier: 'Andes Cold Chain', contact: 'Valeria Lin', email: 'vlin@andescold.pe', phone: '+51 988 210 310', category: 'GRAINS', linkedDate: '2026-04-20', sla: '95% SLA', responseTime: '2.1 H' },
@@ -11,10 +25,10 @@ const supplierRows = [
 <template>
   <section class="suppliers-page">
     <header class="suppliers-page__hero">
-      <span class="suppliers-page__kicker">Restaurant</span>
-      <h1 class="suppliers-page__title">Suppliers</h1>
+      <span class="suppliers-page__kicker">{{ t('supply-and-purchasing.suppliers-page.kicker') }}</span>
+      <h1 class="suppliers-page__title">{{ t('supply-and-purchasing.suppliers-page.title') }}</h1>
       <p class="suppliers-page__description">
-        Visibility into contacts, supplied categories, and recent performance.
+        {{ t('supply-and-purchasing.suppliers-page.description') }}
       </p>
     </header>
 
@@ -23,11 +37,11 @@ const supplierRows = [
         <table class="suppliers-table">
           <thead>
             <tr>
-              <th>SUPPLIER</th>
-              <th>CONTACT</th>
-              <th>SUPPLIED CATEGORIES</th>
-              <th>LINKED HISTORY</th>
-              <th>RESPONSE TIME</th>
+              <th>{{ t('supply-and-purchasing.suppliers-page.table.headers.supplier') }}</th>
+              <th>{{ t('supply-and-purchasing.suppliers-page.table.headers.contact') }}</th>
+              <th>{{ t('supply-and-purchasing.suppliers-page.table.headers.categories') }}</th>
+              <th>{{ t('supply-and-purchasing.suppliers-page.table.headers.history') }}</th>
+              <th>{{ t('supply-and-purchasing.suppliers-page.table.headers.responseTime') }}</th>
             </tr>
           </thead>
 
@@ -42,7 +56,7 @@ const supplierRows = [
                 </div>
               </td>
               <td>
-                <span class="suppliers-table__tag">{{ row.category }}</span>
+                <span class="suppliers-table__tag">{{ getCategoryLabel(row.category) }}</span>
               </td>
               <td>
                 <div class="suppliers-table__history">
@@ -57,10 +71,10 @@ const supplierRows = [
       </div>
 
       <footer class="suppliers-table-card__footer">
-        <p>Showing {{ supplierRows.length }} of 142 total items</p>
+        <p>{{ t('supply-and-purchasing.suppliers-page.footer.showing', { count: supplierRows.length, total: 142 }) }}</p>
         <div class="suppliers-table-card__pagination">
-          <button type="button" disabled>Previous</button>
-          <button type="button" class="suppliers-table-card__pagination-next">Next</button>
+          <button type="button" disabled>{{ t('supply-and-purchasing.suppliers-page.footer.previous') }}</button>
+          <button type="button" class="suppliers-table-card__pagination-next">{{ t('supply-and-purchasing.suppliers-page.footer.next') }}</button>
         </div>
       </footer>
     </section>
@@ -132,8 +146,9 @@ const supplierRows = [
 .suppliers-table__supplier-cell {
   font-size: 1.02rem;
   font-weight: 700;
-}
+  }
 
+.suppliers-table__contact,
 .suppliers-table__contact,
 .suppliers-table__history {
   display: grid;

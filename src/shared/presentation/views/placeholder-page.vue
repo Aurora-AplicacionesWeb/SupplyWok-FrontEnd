@@ -1,6 +1,7 @@
 <script setup>
 import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import LowStockCard from '../../../iot-monitoring/presentation/components/stat-cards/low-stock-card.vue';
 import PendingOrdersCard from '../../../supply-and-purchasing/presentation/components/stat-cards/pending-orders-card.vue';
 import TempAlertCard from '../../../iot-monitoring/presentation/components/stat-cards/temp-alert-card.vue';
@@ -14,7 +15,11 @@ import BelowMinimumCard from '../../../inventory-management/presentation/compone
 import useRestaurantManagementStore from '../../../restaurant-management/application/restaurant-management.store.js';
 
 const route = useRoute();
-const pageTitle = computed(() => route.meta?.title ?? 'Module');
+const { t } = useI18n();
+const pageTitle = computed(() => {
+  if (route.meta?.i18nKey) return t(route.meta.i18nKey);
+  return route.meta?.title ?? 'Module';
+});
 const isDashboard = computed(() => route.meta?.isDashboard === true);
 const restaurantStore = useRestaurantManagementStore();
 
@@ -26,8 +31,8 @@ onMounted(() => {
 <template>
     <div v-if="isDashboard" class="iot-dashboard-layout">
         <div class="dashboard-header">
-            <h2>Kitchen Dashboard</h2>
-            <p>Real-time supply chain and floor monitoring.</p>
+            <h2>{{ t('shared.placeholder.dashboardTitle') }}</h2>
+            <p>{{ t('shared.placeholder.dashboardDesc') }}</p>
         </div>
         
         <div class="stat-cards-row">
@@ -47,9 +52,9 @@ onMounted(() => {
     </div>
 
     <section v-else class="placeholder-page">
-        <span class="placeholder-page__kicker">Frontend first version</span>
+        <span class="placeholder-page__kicker">{{ t('shared.placeholder.kicker') }}</span>
         <h1>{{ pageTitle }}</h1>
-        <p>This module is reserved and can be completed in the next sprint tasks.</p>
+        <p>{{ t('shared.placeholder.description') }}</p>
     </section>
 </template>
 

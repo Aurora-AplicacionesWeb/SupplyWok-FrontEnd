@@ -1,6 +1,7 @@
 import { BaseApi } from '../../shared/infrastructure/base-api.js';
 import { BaseEndpoint } from '../../shared/infrastructure/base-endpoint.js';
 
+const inventoryBaseUrl = import.meta.env.VITE_INVENTORY_BASE_URL;
 const inventoryEndpointPath = import.meta.env.VITE_INVENTORY_ENDPOINT_PATH;
 const stockMovementEndpointPath = import.meta.env.VITE_STOCK_MOVEMENT_ENDPOINT_PATH;
 
@@ -12,7 +13,7 @@ export class InventoryManagementApi extends BaseApi {
   #stockMovementEndpoint;
 
   constructor() {
-    super();
+    super(inventoryBaseUrl);
     this.#inventoryEndpoint = new BaseEndpoint(this, inventoryEndpointPath);
     this.#stockMovementEndpoint = new BaseEndpoint(this, stockMovementEndpointPath);
   }

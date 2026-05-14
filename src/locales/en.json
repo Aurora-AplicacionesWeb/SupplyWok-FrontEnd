@@ -57,6 +57,107 @@
       "forecast": "Demand Forecast",
       "catalog": "Product Catalog",
       "delivery": "Delivery Planning"
+    },
+    "titles": {
+      "dashboard": "Dashboard",
+      "inventory": "Inventory",
+      "orders": "Orders",
+      "create-order": "Create Order",
+      "suppliers": "Suppliers",
+      "kitchen-tickets": "Kitchen Tickets",
+      "tables": "Tables",
+      "alerts": "Alerts",
+      "reports": "Reports",
+      "configuration": "Configuration",
+      "subscription": "Subscription",
+      "dish-menu": "Dish Menu",
+      "create-kitchen-order": "Create Kitchen Order",
+      "tables-and-occupancy": "Tables and Occupancy",
+      "login": "Log in",
+      "register": "Register",
+      "not-found": "Page Not Found"
+    },
+    "placeholder": {
+      "kicker": "Frontend first version",
+      "description": "This module is reserved and can be completed in the next sprint tasks.",
+      "dashboardTitle": "Kitchen Dashboard",
+      "dashboardDesc": "Real-time supply chain and floor monitoring."
+    },
+    "errors": {
+      "pageNotFoundTitle": "Page not found",
+      "pageNotFoundDesc": "The requested route does not exist in the current frontend version."
+    },
+    "configurationPage": {
+      "kicker": "Restaurant",
+      "title": "Restaurant settings",
+      "description": "Operational profile, hours, notifications, thresholds, and access.",
+      "profile": {
+        "title": "Restaurant profile",
+        "save": "Save",
+        "fields": {
+          "name": "Restaurant profile",
+          "hours": "Operating hours",
+          "thresholds": "Minimum stock thresholds",
+          "days": "Operating days",
+          "contact": "Support contact",
+          "email": "Email",
+          "sms": "SMS"
+        }
+      },
+      "users": {
+        "title": "User list",
+        "status": {
+          "active": "Active"
+        }
+      },
+      "demo": {
+        "state": "Demo state"
+      },
+      "lock": {
+        "title": "Employee lock mode",
+        "restrictedMode": "Enable restricted mode",
+        "password": "Unlock password",
+        "callout": "Only the owner can change restricted mode settings."
+      }
+    },
+    "subscriptionPage": {
+      "kicker": "Subscription",
+      "title": "Available plans",
+      "description": "Compare capacity, operational scope, and benefits before moving the restaurant to a higher plan.",
+      "summary": {
+        "currentPlan": "Current plan",
+        "users": "Users",
+        "locations": "Locations",
+        "sensors": "Sensors"
+      },
+      "plans": {
+        "eyebrowCurrent": "Current plan",
+        "eyebrowAvailable": "Available",
+        "actionCurrent": "Current plan",
+        "actionSelect": "Select plan",
+        "metaUsers": "{count} users",
+        "metaLocations": "{count} locations",
+        "metaSensors": "{count} sensors",
+        "premium": {
+          "features": [
+            "Main dashboard with IoT monitoring",
+            "Inventory, orders, and suppliers",
+            "Real-time operational alerts",
+            "Report export in CSV and PDF"
+          ]
+        },
+        "enterprise": {
+          "features": [
+            "Multi-location and extended traceability",
+            "Greater sensor and user capacity",
+            "Priority for support and audits",
+            "Advanced scaling for operational teams"
+          ]
+        }
+      },
+      "messages": {
+        "switchSuccess": "The view now reflects the {plan} plan. Connect it to the payment flow when the commercial module is ready."
+      }
     }
   },
   "supplier-management": {
@@ -419,6 +520,8 @@
       "status": {
         "pending": "Pending",
         "in-preparation": "In preparation",
+        "confirmed": "Confirmed",
+        "in-transit": "In Transit",
         "delivered": "Delivered",
         "delayed": "Delayed"
       }
@@ -434,9 +537,29 @@
       "description": "Use this standalone screen when you want to focus only on order creation."
     },
     "suppliers-page": {
-      "kicker": "Supply and Purchasing",
+      "kicker": "Restaurant",
       "title": "Suppliers",
-      "description": "This page is ready to receive the supplier directory view for the first frontend version."
+      "description": "Visibility into contacts, supplied categories, and recent performance.",
+      "table": {
+        "headers": {
+          "supplier": "SUPPLIER",
+          "contact": "CONTACT",
+          "categories": "SUPPLIED CATEGORIES",
+          "history": "LINKED HISTORY",
+          "responseTime": "RESPONSE TIME"
+        },
+        "categories": {
+          "grains": "Grains",
+          "protein": "Protein",
+          "sauces": "Sauces",
+          "seafood": "Seafood"
+        }
+      },
+      "footer": {
+        "showing": "Showing {count} of {total} total items",
+        "previous": "Previous",
+        "next": "Next"
+      }
     },
     "form": {
       "title": "Create order",
@@ -784,6 +907,25 @@
       "activeCommands": {
         "label": "Kitchen Commands"
       }
+    },
+    "reportsPage": {
+      "kicker": "Restaurant",
+      "title": "Reports",
+      "description": "Inventory evolution, consumption, supplier orders, demand, and thermal events.",
+      "actions": {
+        "exportCsv": "Export CSV",
+        "exportPdf": "Export PDF"
+      },
+      "charts": {
+        "inventoryTitle": "Inventory evolution",
+        "consumptionTitle": "Consumption by period",
+        "ordersTitle": "Orders by supplier",
+        "tempTitle": "Temperature incidents",
+        "summary": "Text summary:",
+        "summaryDesc": "Text summary for the chart: {from} -> {to}",
+        "summaryValue": "Text summary for the chart: {value}",
+        "month": "Month"
+      }
     }
   },
   "historyStateKitchenOrders": {
@@ -798,6 +940,7 @@
   "header": {
     "settings": "Settings",
     "logout": "Log Out",
-    "help": "Help"
+    "help": "Help",
+    "adminProfile": "Admin Profile"
   }
 }

@@ -1,6 +1,8 @@
 <script setup>
 import { computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const activePlan = ref('Premium');
 const planUpdateMessage = ref('');
 
@@ -14,10 +16,10 @@ const planCatalog = [
         sensors: 12,
         tone: 'primary',
         features: [
-            'Dashboard principal con monitoreo IoT',
-            'Inventario, pedidos y proveedores',
-            'Alertas operativas en tiempo real',
-            'Exportacion de reportes en CSV y PDF'
+            t('shared.subscriptionPage.plans.premium.features.0'),
+            t('shared.subscriptionPage.plans.premium.features.1'),
+            t('shared.subscriptionPage.plans.premium.features.2'),
+            t('shared.subscriptionPage.plans.premium.features.3')
         ]
     },
     {
@@ -29,10 +31,10 @@ const planCatalog = [
         sensors: 40,
         tone: 'secondary',
         features: [
-            'Multi local y trazabilidad extendida',
-            'Mayor capacidad de sensores y usuarios',
-            'Priorizacion para soporte y auditorias',
-            'Escalamiento avanzado para equipos operativos'
+            t('shared.subscriptionPage.plans.enterprise.features.0'),
+            t('shared.subscriptionPage.plans.enterprise.features.1'),
+            t('shared.subscriptionPage.plans.enterprise.features.2'),
+            t('shared.subscriptionPage.plans.enterprise.features.3')
         ]
     }
 ];
@@ -42,10 +44,10 @@ const currentPlan = computed(() => {
 });
 
 const currentPlanSummary = computed(() => ([
-    { label: 'Plan actual', value: currentPlan.value.name },
-    { label: 'Usuarios', value: currentPlan.value.users },
-    { label: 'Locales', value: currentPlan.value.locations },
-    { label: 'Sensores', value: currentPlan.value.sensors }
+    { label: t('shared.subscriptionPage.summary.currentPlan'), value: currentPlan.value.name },
+    { label: t('shared.subscriptionPage.summary.users'), value: currentPlan.value.users },
+    { label: t('shared.subscriptionPage.summary.locations'), value: currentPlan.value.locations },
+    { label: t('shared.subscriptionPage.summary.sensors'), value: currentPlan.value.sensors }
 ]));
 
 function selectPlan(planId) {
@@ -54,17 +56,17 @@ function selectPlan(planId) {
     }
 
     activePlan.value = planId;
-    planUpdateMessage.value = `La vista ahora refleja el plan ${planId}. Conectalo al flujo de pago cuando el modulo comercial este listo.`;
+    planUpdateMessage.value = t('shared.subscriptionPage.messages.switchSuccess', { plan: planId });
 }
 </script>
 
 <template>
     <section class="subscription-page">
         <header class="subscription-page__hero">
-            <span class="subscription-page__kicker">Suscripcion</span>
-            <h1 class="subscription-page__title">Planes disponibles</h1>
+            <span class="subscription-page__kicker">{{ t('shared.subscriptionPage.kicker') }}</span>
+            <h1 class="subscription-page__title">{{ t('shared.subscriptionPage.title') }}</h1>
             <p class="subscription-page__description">
-                Compara capacidad, alcance operativo y beneficios antes de mover el restaurante a un plan superior.
+                {{ t('shared.subscriptionPage.description') }}
             </p>
         </header>
 
@@ -79,7 +81,7 @@ function selectPlan(planId) {
             <article v-for="plan in planCatalog" :key="plan.id" class="plan-card" :class="`plan-card--${plan.tone}`">
                 <div class="plan-card__header">
                     <div>
-                        <span class="plan-card__eyebrow">{{ plan.id === activePlan ? 'Plan actual' : 'Disponible' }}</span>
+                        <span class="plan-card__eyebrow">{{ plan.id === activePlan.value ? t('shared.subscriptionPage.plans.eyebrowCurrent') : t('shared.subscriptionPage.plans.eyebrowAvailable') }}</span>
                         <h2>{{ plan.name }}</h2>
                     </div>
                     <span class="plan-card__price">{{ plan.price }}</span>
@@ -90,18 +92,18 @@ function selectPlan(planId) {
                 </ul>
 
                 <div class="plan-card__meta">
-                    <span>{{ plan.users }} usuarios</span>
-                    <span>{{ plan.locations }} locales</span>
-                    <span>{{ plan.sensors }} sensores</span>
+                    <span>{{ t('shared.subscriptionPage.plans.metaUsers', { count: plan.users }) }}</span>
+                    <span>{{ t('shared.subscriptionPage.plans.metaLocations', { count: plan.locations }) }}</span>
+                    <span>{{ t('shared.subscriptionPage.plans.metaSensors', { count: plan.sensors }) }}</span>
                 </div>
 
                 <button
                     type="button"
                     class="plan-card__action"
-                    :disabled="plan.id === activePlan"
+                    :disabled="plan.id === activePlan.value"
                     @click="selectPlan(plan.id)"
                 >
-                    {{ plan.id === activePlan ? 'Plan actual' : 'Seleccionar plan' }}
+                    {{ plan.id === activePlan.value ? t('shared.subscriptionPage.plans.actionCurrent') : t('shared.subscriptionPage.plans.actionSelect') }}
                 </button>
             </article>
         </div>
@@ -111,6 +113,7 @@ function selectPlan(planId) {
 </template>
 
 <style scoped>
+/* styles remain the same */
 .subscription-page {
     display: flex;
     flex-direction: column;

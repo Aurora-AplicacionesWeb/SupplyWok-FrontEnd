@@ -6,6 +6,7 @@ import { inventoryManagementRoutes } from './inventory-management/presentation/i
 import { useIamStore } from './iam/application/iam-store.js';
 import useSessionStore from './shared/application/session.store.js';
 import { getHomeByRole, getRoleFromPath, getScopedPathByRole, normalizeRole } from './shared/application/role-routing.js';
+import i18n from './i18n.js';
 
 const pageNotFound = () => import('./shared/presentation/views/page-not-found.vue');
 
@@ -49,10 +50,10 @@ const routes = [
     { path: '/restaurant',      name: 'restaurant', component: restaurantView, redirect: '/restaurant/dashboard', meta: { role: 'restaurant' }, children: restaurantRoutes },
     { path: '/supplier',        name: 'supplier',   component: supplierView,   redirect: '/supplier/dashboard', meta: { role: 'supplier' }, children: supplyManagementRoutes },
     { path: '/', redirect: '/login' },
-    { path: '/login', name: 'login', component: loginPage, meta: { title: 'Log in' } },
-    { path: '/register', name: 'register', component: registerPage, meta: { title: 'Register' } },
+    { path: '/login', name: 'login', component: loginPage, meta: { i18nKey: 'shared.titles.login' } },
+    { path: '/register', name: 'register', component: registerPage, meta: { i18nKey: 'shared.titles.register' } },
     ...legacyRedirectRoutes,
-    { path: '/:pathMatch(.*)*', name: 'not-found', component: pageNotFound, meta: { title: 'Page Not Found' } }
+    { path: '/:pathMatch(.*)*', name: 'not-found', component: pageNotFound, meta: { i18nKey: 'shared.titles.not-found' } }
 ];
 
 const router = createRouter({
@@ -72,7 +73,8 @@ router.beforeEach((to, from, next) => {
     console.log(`Navigating from ${from.name} to ${to.name}`);
 
     const baseTitle = 'SupplyWok';
-    document.title = to.meta?.title ? `${baseTitle} - ${to.meta.title}` : baseTitle;
+    const pageTitle = to.meta?.i18nKey ? i18n.global.t(to.meta.i18nKey) : (to.meta?.title || '');
+    document.title = pageTitle ? `${baseTitle} - ${pageTitle}` : baseTitle;
 
     const currentRole = getActiveRole();
     const requiredRole = getRoleFromPath(to.path);
