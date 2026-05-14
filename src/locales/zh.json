@@ -657,6 +657,9 @@
       "occupiedTables": "忙碌",
       "searchPlaceholder": "按餐桌號碼或位置搜索...",
       "allLocations": "所有位置",
+      "addTable": "新增餐桌",
+      "confirmAddTable": "新增",
+      "cancel": "取消",
       "locations": {
         "main_hall": "主廳",
         "terrace": "露台",

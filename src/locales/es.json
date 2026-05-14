@@ -657,6 +657,9 @@
       "occupiedTables": "Ocupadas",
       "searchPlaceholder": "Buscar mesas por número o ubicación...",
       "allLocations": "Todas las Ubicaciones",
+      "addTable": "Agregar Mesa",
+      "confirmAddTable": "Agregar",
+      "cancel": "Cancelar",
       "locations": {
         "main_hall": "Salón Principal",
         "terrace": "Terraza",
