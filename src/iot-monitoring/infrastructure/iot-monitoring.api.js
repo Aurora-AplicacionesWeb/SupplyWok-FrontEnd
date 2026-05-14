@@ -7,7 +7,7 @@ import { SensorAssembler } from './sensor.assembler.js';
 export class IotMonitoringApi {
   constructor() {
     this.baseUrl = import.meta.env.VITE_SUPPLYWOK_API_URL || 'http://localhost:3000/api/v1';
-    this.endpoint = import.meta.env.VITE_IOT_SENSORS_ENDPOINT_PATH || '/sensors';
+    this.endpoint = import.meta.env.VITE_SUPPLYWOK_API_SENSORS_ENDPOINT_PATH;
   }
 
   /**

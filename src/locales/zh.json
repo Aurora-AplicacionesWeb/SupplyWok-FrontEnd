@@ -114,6 +114,88 @@
       "empty": "没有符合搜索条件的订单。",
       "visible-count": "显示 {visible}/{total} 条订单"
     },
+    "clients": {
+      "breadcrumb": "供应商",
+      "title": "我的客户",
+      "subtitle": "按餐厅查看采购频率、平均客单价和需求走势。",
+      "search": "搜索",
+      "filters": {
+        "status": "状态",
+        "all": "全部状态",
+        "active": "活跃"
+      },
+      "columns": {
+        "client": "我的客户",
+        "district": "区域",
+        "frequency": "频率",
+        "ticket": "客单价",
+        "demand": "需求预测",
+        "status": "状态",
+        "last-order-date": "最近下单日期"
+      },
+      "empty": "没有符合搜索条件的客户。",
+      "visible-count": "显示 {visible}/{total} 条记录"
+    },
+    "forecast": {
+      "breadcrumb": "供应商",
+      "title": "需求预测",
+      "subtitle": "结合整体需求和客户级预测来规划供应。",
+      "aggregate-title": "汇总视图",
+      "clients-title": "按客户",
+      "chart-summary": "图表摘要: {from} -> {to}",
+      "top-client-summary": "图表摘要: {value}",
+      "empty": "暂无预测数据。",
+      "trend": {
+        "upward": "上升",
+        "stable": "稳定",
+        "watch": "关注"
+      }
+    },
+    "alerts": {
+      "breadcrumb": "供应商",
+      "title": "供应商警报",
+      "description": "监控客户共享的紧急变更、延误和信号。",
+      "search-label": "搜索",
+      "search-placeholder": "搜索警报...",
+      "severity-label": "严重程度",
+      "severity-placeholder": "按严重程度筛选",
+      "severity": {
+        "high": "高",
+        "medium": "中",
+        "low": "低"
+      },
+      "status": {
+        "open": "开启",
+        "acknowledged": "已确认"
+      },
+      "table": {
+        "columns": {
+          "severity": "严重程度",
+          "detail": "警报详情",
+          "source": "来源",
+          "date": "日期",
+          "status": "状态",
+          "actions": "操作"
+        },
+        "actions": {
+          "view-details": "查看详情",
+          "acknowledge": "确认"
+        },
+        "footer": "显示第 {first} 至 {last} 条，共 {total} 条供应商警报"
+      },
+      "dialog": {
+        "header": "警报详情",
+        "meta": {
+          "date": "日期",
+          "status": "状态"
+        },
+        "actions": {
+          "close": "关闭",
+          "acknowledge": "确认"
+        }
+      },
+      "empty": "没有符合搜索条件的警报。"
+    },
     "catalog": {
       "breadcrumb": "供应商",
       "title": "产品目录",

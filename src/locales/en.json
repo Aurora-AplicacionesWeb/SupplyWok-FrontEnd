@@ -114,6 +114,88 @@
       "empty": "No orders match your search.",
       "visible-count": "Showing {visible} of {total} total orders"
     },
+    "clients": {
+      "breadcrumb": "SUPPLIER",
+      "title": "My clients",
+      "subtitle": "Purchase frequency, average ticket, and demand momentum by restaurant.",
+      "search": "Search",
+      "filters": {
+        "status": "Status",
+        "all": "All statuses",
+        "active": "Active"
+      },
+      "columns": {
+        "client": "My clients",
+        "district": "District",
+        "frequency": "Frequency",
+        "ticket": "Ticket",
+        "demand": "Demand projection",
+        "status": "Status",
+        "last-order-date": "Last order date"
+      },
+      "empty": "No clients match your search.",
+      "visible-count": "Showing {visible} of {total} total items"
+    },
+    "forecast": {
+      "breadcrumb": "SUPPLIER",
+      "title": "Demand forecast",
+      "subtitle": "Combine aggregate demand and client-level forecasts for supply planning.",
+      "aggregate-title": "Aggregate view",
+      "clients-title": "By client",
+      "chart-summary": "Text summary for the chart: {from} -> {to}",
+      "top-client-summary": "Text summary for the chart: {value}",
+      "empty": "No forecast data available.",
+      "trend": {
+        "upward": "Upward",
+        "stable": "Stable",
+        "watch": "Watch"
+      }
+    },
+    "alerts": {
+      "breadcrumb": "SUPPLIER",
+      "title": "Supplier alerts",
+      "description": "Monitor urgent changes, delays, and signals shared by clients.",
+      "search-label": "Search",
+      "search-placeholder": "Search alerts...",
+      "severity-label": "Severity",
+      "severity-placeholder": "Filter by Severity",
+      "severity": {
+        "high": "High",
+        "medium": "Medium",
+        "low": "Low"
+      },
+      "status": {
+        "open": "Open",
+        "acknowledged": "Acknowledged"
+      },
+      "table": {
+        "columns": {
+          "severity": "SEVERITY",
+          "detail": "ALERT DETAIL",
+          "source": "SOURCE",
+          "date": "DATE",
+          "status": "STATUS",
+          "actions": "ACTIONS"
+        },
+        "actions": {
+          "view-details": "VIEW DETAILS",
+          "acknowledge": "ACKNOWLEDGE"
+        },
+        "footer": "Showing {first} to {last} of {total} supplier alerts"
+      },
+      "dialog": {
+        "header": "Alert details",
+        "meta": {
+          "date": "Date",
+          "status": "Status"
+        },
+        "actions": {
+          "close": "Close",
+          "acknowledge": "Acknowledge"
+        }
+      },
+      "empty": "No alerts match your search."
+    },
     "catalog": {
       "breadcrumb": "SUPPLIER",
       "title": "Product catalog",

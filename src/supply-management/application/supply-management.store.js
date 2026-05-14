@@ -3,6 +3,9 @@ import {computed, ref} from "vue";
 import { SupplyManagementApi } from "../infrastructure/supply-management-api.js";
 import {OrdersAssembler} from "../infrastructure/orders.assembler.js";
 import {CatalogItemAssembler} from "../infrastructure/catalog-item.assembler.js";
+import {ClientAssembler} from "../infrastructure/client.assembler.js";
+import {SupplierAlertAssembler} from "../infrastructure/supplier-alert.assembler.js";
+import {DemandForecastAssembler} from "../infrastructure/demand-forecast.assembler.js";
 const supplierManagementApi = new SupplyManagementApi();
 
 /**
@@ -108,6 +111,12 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
 
     const catalogItems = ref([]);
     const catalogItemsLoaded = ref(false);
+    const clients = ref([]);
+    const clientsLoaded = ref(false);
+    const alerts = ref([]);
+    const alertsLoaded = ref(false);
+    const demandForecast = ref(null);
+    const demandForecastLoaded = ref(false);
 
     /**
      * Number of loaded catalog items.
@@ -116,6 +125,25 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
      */
     const catalogItemsCount =
         computed(()=> catalogItemsLoaded.value ? catalogItems.value.length : 0);
+
+    /**
+     * Number of loaded clients.
+     *
+     * @type {import('vue').ComputedRef<number>}
+     */
+    const clientsCount =
+        computed(() => clientsLoaded.value ? clients.value.length : 0);
+
+    /**
+     * Number of loaded supplier alerts.
+     *
+     * @type {import('vue').ComputedRef<number>}
+     */
+    const alertsCount =
+        computed(() => alertsLoaded.value ? alerts.value.length : 0);
+
+    const demandForecastClientCount =
+        computed(() => demandForecastLoaded.value ? demandForecast.value?.clients?.length ?? 0 : 0);
 
     /**
      * Loads the supplier's catalog items from infrastructure and updates local state.
@@ -129,6 +157,80 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
         }).catch(error=>{
             errors.value.push(error);
         });
+    }
+
+    /**
+     * Loads supplier clients from infrastructure and updates local state.
+     *
+     * @returns {void}
+     */
+    function fetchClients(){
+        supplierManagementApi.getClients().then(response=>{
+            clients.value = ClientAssembler.toEntitiesFromResponse(response);
+            clientsLoaded.value = true;
+        }).catch(error=>{
+            errors.value.push(error);
+        });
+    }
+
+    /**
+     * Loads supplier alerts from infrastructure and updates local state.
+     *
+     * @returns {void}
+     */
+    function fetchAlerts(){
+        supplierManagementApi.getAlerts().then(response=>{
+            alerts.value = SupplierAlertAssembler.toEntitiesFromResponse(response);
+            alertsLoaded.value = true;
+        }).catch(error=>{
+            errors.value.push(error);
+        });
+    }
+
+    /**
+     * Loads supplier demand forecast from infrastructure and updates local state.
+     *
+     * @returns {void}
+     */
+    function fetchDemandForecast(){
+        supplierManagementApi.getDemandForecast().then(response=>{
+            demandForecast.value = DemandForecastAssembler.toEntityFromResponse(response);
+            demandForecastLoaded.value = true;
+        }).catch(error=>{
+            errors.value.push(error);
+        });
+    }
+
+    /**
+     * Acknowledges one supplier alert and updates local state.
+     *
+     * @param {string|number} id - Alert identifier.
+     * @returns {Promise<void>}
+     */
+    async function acknowledgeAlert(id){
+        const idNum = parseInt(id);
+        const existingAlert = alerts.value.find(alert => alert.id === idNum);
+
+        if (!existingAlert || existingAlert.status === 'acknowledged') {
+            return;
+        }
+
+        const updatedAlert = {
+            ...existingAlert,
+            status: 'acknowledged'
+        };
+
+        try {
+            const response = await supplierManagementApi.updateAlert(idNum, updatedAlert);
+            const persistedAlert = SupplierAlertAssembler.toEntityFromResource(response.data);
+            const index = alerts.value.findIndex(alert => alert.id === persistedAlert.id);
+
+            if (index !== -1) {
+                alerts.value[index] = persistedAlert;
+            }
+        } catch (error) {
+            errors.value.push(error);
+        }
     }
 
     /**
@@ -210,7 +312,20 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
         catalogItems,
         catalogItemsLoaded,
         catalogItemsCount,
+        clients,
+        clientsLoaded,
+        clientsCount,
+        alerts,
+        alertsLoaded,
+        alertsCount,
+        demandForecast,
+        demandForecastLoaded,
+        demandForecastClientCount,
         fetchCatalogItems,
+        fetchClients,
+        fetchAlerts,
+        fetchDemandForecast,
+        acknowledgeAlert,
         getCatalogItemById,
         addCatalogItem,
         updateCatalogItem,

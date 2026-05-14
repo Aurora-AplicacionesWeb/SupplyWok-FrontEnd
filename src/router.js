@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import restaurantManagementRoutes from './restaurant-management/presentation/restaurant-management-routes.js';
 import supplyAndPurchasingRoutes from './supply-and-purchasing/presentation/supply-and-purchasing-routes.js';
+import supplyManagementRoutes from './supply-management/presentation/supply-management-routes.js';
 import { inventoryManagementRoutes } from './inventory-management/presentation/inventory-management-routes.js';
 import { useIamStore } from './iam/application/iam-store.js';
 import useSessionStore from './shared/application/session.store.js';
@@ -39,130 +40,43 @@ function scopeRoutes(routes, prefix) {
     }));
 }
 
-const restaurantScopedRoutes = [
-    {
-        path: '/restaurant/dashboard',
-        name: 'restaurant-dashboard',
-        component: placeholderPage,
-        meta: { title: 'Dashboard', role: 'restaurant', isDashboard: true }
-    },
-    {
-        path: '/restaurant/alerts',
-        name: 'restaurant-alerts',
-        component: alertsPage,
-        meta: { title: 'Alerts', role: 'restaurant' }
-    },
-    {
-        path: '/restaurant/reports',
-        name: 'restaurant-reports',
-        component: reportsPage,
-        meta: { title: 'Reports', role: 'restaurant' }
-    },
-    {
-        path: '/restaurant/configuration',
-        name: 'restaurant-configuration',
-        component: configurationPage,
-        meta: { title: 'Configuration', role: 'restaurant' }
-    },
-    {
-        path: '/restaurant/subscription',
-        name: 'restaurant-subscription',
-        component: subscriptionPage,
-        meta: { title: 'Subscription', role: 'restaurant' }
-    },
-    ...scopeRoutes(
-        restaurantManagementRoutes.filter((route) => !['dashboard', 'alerts', 'reports', 'configuration', 'subscription'].includes(route.path)),
-        '/restaurant'
-    ),
-    ...scopeRoutes(inventoryManagementRoutes, '/restaurant'),
-    ...scopeRoutes(supplyAndPurchasingRoutes, '/restaurant')
-];
-
-const supplierScopedRoutes = [
-    {
-        path: '/supplier/dashboard',
-        name: 'supplier-dashboard',
-        component: placeholderPage,
-        meta: { title: 'Dashboard', role: 'supplier', isDashboard: true }
-    },
-    {
-        path: '/supplier/orders',
-        name: 'supplier-orders',
-        component: placeholderPage,
-        meta: { title: 'Orders', role: 'supplier' }
-    },
-    {
-        path: '/supplier/clients',
-        name: 'supplier-clients',
-        component: placeholderPage,
-        meta: { title: 'Clients', role: 'supplier' }
-    },
-    {
-        path: '/supplier/delivery',
-        name: 'supplier-delivery',
-        component: placeholderPage,
-        meta: { title: 'Delivery', role: 'supplier' }
-    },
-    {
-        path: '/supplier/forecast',
-        name: 'supplier-forecast',
-        component: placeholderPage,
-        meta: { title: 'Forecast', role: 'supplier' }
-    },
-    {
-        path: '/supplier/catalog',
-        name: 'supplier-catalog',
-        component: placeholderPage,
-        meta: { title: 'Catalog', role: 'supplier' }
-    },
-    {
-        path: '/supplier/alerts',
-        name: 'supplier-alerts',
-        component: placeholderPage,
-        meta: { title: 'Alerts', role: 'supplier' }
-    },
-    {
-        path: '/supplier/configuration',
-        name: 'supplier-configuration',
-        component: placeholderPage,
-        meta: { title: 'Configuration', role: 'supplier' }
-    },
-    {
-        path: '/supplier/subscription',
-        name: 'supplier-subscription',
-        component: placeholderPage,
-        meta: { title: 'Subscription', role: 'supplier' }
-    }
+const restaurantRoutes = [
+    ...restaurantManagementRoutes,
+    ...inventoryManagementRoutes,
+    ...supplyAndPurchasingRoutes
 ];
 
 const legacyRedirectRoutes = [
     { path: '/dashboard', name: 'dashboard', redirect: () => getHomeByRole(getActiveRole()) },
     { path: '/alerts', name: 'alerts', redirect: () => getScopedPathByRole(getActiveRole(), 'alerts') },
-    { path: '/reports', name: 'reports', redirect: () => getScopedPathByRole(getActiveRole(), 'reports') },
+    { path: '/reports', name: 'reports', redirect: '/restaurant/reports' },
     { path: '/configuration', name: 'configuration', redirect: () => getScopedPathByRole(getActiveRole(), 'configuration') },
     { path: '/subscription', name: 'subscription', redirect: () => getScopedPathByRole(getActiveRole(), 'subscription') },
-    { path: '/inventory', name: 'inventory', redirect: () => getScopedPathByRole(getActiveRole(), 'inventory') },
-    { path: '/orders', name: 'orders', redirect: () => getScopedPathByRole(getActiveRole(), 'orders') },
-    { path: '/orders/new', name: 'orders-new', redirect: () => `${getScopedPathByRole(getActiveRole(), 'orders')}/new` },
-    { path: '/suppliers', name: 'suppliers', redirect: () => getScopedPathByRole(getActiveRole(), 'suppliers') }
+    { path: '/inventory', name: 'inventory', redirect: '/restaurant/inventory' },
+    { path: '/orders', name: 'orders', redirect: '/restaurant/orders' },
+    { path: '/orders/new', name: 'orders-new', redirect: '/restaurant/orders/new' },
+    { path: '/suppliers', name: 'suppliers', redirect: '/restaurant/suppliers' },
 ];
+
+const supplierView = () => import('./shared/presentation/views/supplier-view.vue');
+const restaurantView = () => import('./shared/presentation/views/restaurant-view.vue');
 
 const loginPage = () => import('./iam/presentation/views/login-view.vue');
 const registerPage = () => import('./iam/presentation/views/register-view.vue');
 
 const routes = [
+    { path: '/restaurant',      name: 'restaurant', component: restaurantView, redirect: '/restaurant/dashboard', meta: { role: 'restaurant' }, children: restaurantRoutes },
+    { path: '/supplier',        name: 'supplier',   component: supplierView,   redirect: '/supplier/dashboard', meta: { role: 'supplier' }, children: supplyManagementRoutes },
     { path: '/', redirect: '/login' },
     { path: '/login', name: 'login', component: loginPage, meta: { title: 'Log in' } },
     { path: '/register', name: 'register', component: registerPage, meta: { title: 'Register' } },
     ...legacyRedirectRoutes,
-    ...restaurantScopedRoutes,
-    ...supplierScopedRoutes,
     { path: '/:pathMatch(.*)*', name: 'not-found', component: pageNotFound, meta: { title: 'Page Not Found' } }
 ];
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
-    routes
+    routes: routes
 });
 
 /**
