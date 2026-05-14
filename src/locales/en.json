@@ -114,6 +114,28 @@
       "empty": "No orders match your search.",
       "visible-count": "Showing {visible} of {total} total orders"
     },
+    "clients": {
+      "breadcrumb": "SUPPLIER",
+      "title": "My clients",
+      "subtitle": "Purchase frequency, average ticket, and demand momentum by restaurant.",
+      "search": "Search",
+      "filters": {
+        "status": "Status",
+        "all": "All statuses",
+        "active": "Active"
+      },
+      "columns": {
+        "client": "My clients",
+        "district": "District",
+        "frequency": "Frequency",
+        "ticket": "Ticket",
+        "demand": "Demand projection",
+        "status": "Status",
+        "last-order-date": "Last order date"
+      },
+      "empty": "No clients match your search.",
+      "visible-count": "Showing {visible} of {total} total items"
+    },
     "catalog": {
       "breadcrumb": "SUPPLIER",
       "title": "Product catalog",

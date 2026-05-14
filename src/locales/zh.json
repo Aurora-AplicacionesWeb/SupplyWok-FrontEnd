@@ -114,6 +114,28 @@
       "empty": "没有符合搜索条件的订单。",
       "visible-count": "显示 {visible}/{total} 条订单"
     },
+    "clients": {
+      "breadcrumb": "供应商",
+      "title": "我的客户",
+      "subtitle": "按餐厅查看采购频率、平均客单价和需求走势。",
+      "search": "搜索",
+      "filters": {
+        "status": "状态",
+        "all": "全部状态",
+        "active": "活跃"
+      },
+      "columns": {
+        "client": "我的客户",
+        "district": "区域",
+        "frequency": "频率",
+        "ticket": "客单价",
+        "demand": "需求预测",
+        "status": "状态",
+        "last-order-date": "最近下单日期"
+      },
+      "empty": "没有符合搜索条件的客户。",
+      "visible-count": "显示 {visible}/{total} 条记录"
+    },
     "catalog": {
       "breadcrumb": "供应商",
       "title": "产品目录",

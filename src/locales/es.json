@@ -114,6 +114,28 @@
       "empty": "No hay órdenes que coincidan con tu búsqueda.",
       "visible-count": "Mostrando {visible} de {total} órdenes totales"
     },
+    "clients": {
+      "breadcrumb": "PROVEEDOR",
+      "title": "Mis clientes",
+      "subtitle": "Frecuencia de compra, ticket promedio y momentum de demanda por restaurante.",
+      "search": "Buscar",
+      "filters": {
+        "status": "Estado",
+        "all": "Todos los estados",
+        "active": "Activo"
+      },
+      "columns": {
+        "client": "Mis clientes",
+        "district": "Distrito",
+        "frequency": "Frecuencia",
+        "ticket": "Ticket",
+        "demand": "Proyección de demanda",
+        "status": "Estado",
+        "last-order-date": "Última orden"
+      },
+      "empty": "No hay clientes que coincidan con tu búsqueda.",
+      "visible-count": "Mostrando {visible} de {total} elementos totales"
+    },
     "catalog": {
       "breadcrumb": "PROVEEDOR",
       "title": "Catálogo de productos",
