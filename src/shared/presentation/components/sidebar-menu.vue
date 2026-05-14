@@ -34,16 +34,16 @@ const currentPlan = ref('Premium');
 /** @type {MenuItem[]} Array containing the main navigation items. */
 const menuItems = {
   restaurant: [
-  { id: 'dashboard', i18nKey: 'shared.sidebar.dashboard', iconOff: '/images/icons/dashboard-icon.svg', iconOn: '/images/icons/dashboard-on-icon.svg', path: '/restaurant/dashboard' },
-  { id: 'inventory', i18nKey: 'shared.sidebar.inventory', iconOff: '/images/icons/inventory-icon.svg', iconOn: '/images/icons/inventory-on-icon.svg', path: '/restaurant/inventory' },
-  { id: 'orders', i18nKey: 'shared.sidebar.orders', iconOff: '/images/icons/orders-icon.svg', iconOn: '/images/icons/orders-on-icon.svg', path: '/restaurant/orders' },
-  { id: 'kitchen-tickets', i18nKey: 'shared.sidebar.kitchen-tickets', iconOff: '/images/icons/kitchen-ticket-icon.svg', iconOn: '/images/icons/kitchen-tickets-on-icon.svg', path: '/restaurant/kitchen' },
-  { id: 'suppliers', i18nKey: 'shared.sidebar.suppliers', iconOff: '/images/icons/suppliers-icon.svg', iconOn: '/images/icons/suppliers-on-icon.svg', path: '/restaurant/suppliers' },
-  { id: 'tables-and-occupancy', i18nKey: 'shared.sidebar.tables-and-occupancy', iconOff: '/images/icons/tables-and-occupancy-icon.svg', iconOn: '/images/icons/tables-and-occupancy-on-icon.svg', path: '/restaurant/tables' },
-  { id: 'alerts', i18nKey: 'shared.sidebar.alerts', iconOff: '/images/icons/alerts-icon.svg', iconOn: '/images/icons/alerts-on-icon.svg', path: '/restaurant/alerts' },
-  { id: 'reports', i18nKey: 'shared.sidebar.reports', iconOff: '/images/icons/reports-icon.svg', iconOn: '/images/icons/reports-on-icon.svg', path: '/restaurant/reports' },
-  { id: 'configuration', i18nKey: 'shared.sidebar.configuration', iconOff: '/images/icons/configuration-icon.svg', iconOn: '/images/icons/configuration-on-icon.svg', path: '/restaurant/configuration' },
-  { id: 'subscription', i18nKey: 'shared.sidebar.subscription', iconOff: '/images/icons/subscripcion-icon.svg', iconOn: '/images/icons/subscription-on-icon.svg', path: '/restaurant/subscription' },
+    { id: 'dashboard', i18nKey: 'shared.sidebar.dashboard', iconOff: '/images/icons/dashboard-icon.svg', iconOn: '/images/icons/dashboard-on-icon.svg', path: '/restaurant/dashboard' },
+    { id: 'inventory', i18nKey: 'shared.sidebar.inventory', iconOff: '/images/icons/inventory-icon.svg', iconOn: '/images/icons/inventory-on-icon.svg', path: '/restaurant/inventory' },
+    { id: 'orders', i18nKey: 'shared.sidebar.orders', iconOff: '/images/icons/orders-icon.svg', iconOn: '/images/icons/orders-on-icon.svg', path: '/restaurant/orders' },
+    { id: 'kitchen-tickets', i18nKey: 'shared.sidebar.kitchen-tickets', iconOff: '/images/icons/kitchen-ticket-icon.svg', iconOn: '/images/icons/kitchen-tickets-on-icon.svg', path: '/restaurant/kitchen' },
+    { id: 'suppliers', i18nKey: 'shared.sidebar.suppliers', iconOff: '/images/icons/suppliers-icon.svg', iconOn: '/images/icons/suppliers-on-icon.svg', path: '/restaurant/suppliers' },
+    { id: 'tables-and-occupancy', i18nKey: 'shared.sidebar.tables-and-occupancy', iconOff: '/images/icons/tables-and-occupancy-icon.svg', iconOn: '/images/icons/tables-and-occupancy-on-icon.svg', path: '/restaurant/tables' },
+    { id: 'alerts', i18nKey: 'shared.sidebar.alerts', iconOff: '/images/icons/alerts-icon.svg', iconOn: '/images/icons/alerts-on-icon.svg', path: '/restaurant/alerts' },
+    { id: 'reports', i18nKey: 'shared.sidebar.reports', iconOff: '/images/icons/reports-icon.svg', iconOn: '/images/icons/reports-on-icon.svg', path: '/restaurant/reports' },
+    { id: 'configuration', i18nKey: 'shared.sidebar.configuration', iconOff: '/images/icons/configuration-icon.svg', iconOn: '/images/icons/configuration-on-icon.svg', path: '/restaurant/configuration' },
+    { id: 'subscription', i18nKey: 'shared.sidebar.subscription', iconOff: '/images/icons/subscripcion-icon.svg', iconOn: '/images/icons/subscription-on-icon.svg', path: '/restaurant/subscription' },
 
   ],
   supplier:[
@@ -98,16 +98,16 @@ const selectItem = (item) => {
     <nav class="sidebar__nav" aria-label="Main Navigation">
       <ul class="sidebar__menu">
         <li
-          v-for="item in visibleMenuItems"
-          :key="item.id"
-          class="sidebar__item"
-          :class="{ 'sidebar__item--active': activeItem === item.id }"
+            v-for="item in visibleMenuItems"
+            :key="item.id"
+            class="sidebar__item"
+            :class="{ 'sidebar__item--active': activeItem === item.id }"
         >
           <button class="sidebar__button" @click="selectItem(item)">
             <img
-              :src="activeItem === item.id ? item.iconOn : item.iconOff"
-              :alt="`${ t(item.i18nKey)} icon`"
-              class="sidebar__icon"
+                :src="activeItem === item.id ? item.iconOn : item.iconOff"
+                :alt="`${ t(item.i18nKey)} icon`"
+                class="sidebar__icon"
             />
             <span class="sidebar__label">{{ $t(item.i18nKey) }}</span>
           </button>

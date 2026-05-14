@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
 
-const platformApi = import.meta.env.VITE_SUPPLY_WOK_API_URL;
+const platformApi = import.meta.env.VITE_SUPPLY_WOK_API_URL ?? '';
 
 /**
  * Shared infrastructure base class that owns the configured Axios client.
@@ -16,12 +16,13 @@ export class BaseApi {
     constructor() {
         this.#http = axios.create({
             baseURL: platformApi,
-            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
         });
     }
 
     /**
      * Axios client used by infrastructure endpoint adapters.
+     *
      * @returns {import('axios').AxiosInstance}
      */
     get http() {

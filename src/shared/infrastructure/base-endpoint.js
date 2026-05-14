@@ -15,6 +15,7 @@ export class BaseEndpoint {
 
     /**
      * Retrieves a collection resource from the endpoint.
+     *
      * @returns {Promise<import('axios').AxiosResponse<Array<Object>|Object>>}
      */
     getAll() {
@@ -32,6 +33,7 @@ export class BaseEndpoint {
 
     /**
      * Creates a new resource.
+     *
      * @param {Object} resource - Resource payload.
      * @returns {Promise<import('axios').AxiosResponse<Object>>}
      */
