@@ -252,6 +252,70 @@
         "confirm": "Delete"
       },
       "empty": "No products in the catalog yet."
+    },
+    "settings": {
+      "breadcrumb": "SUPPLIER",
+      "title": "Supplier settings",
+      "subtitle": "Commercial profile, zones, contacts, and operating preferences.",
+      "profile": {
+        "title": "Supplier profile",
+        "supplier-name": "Supplier profile",
+        "support-contact": "Support contact",
+        "email": "Email",
+        "sms": "SMS",
+        "save": "Save",
+        "saving": "Saving...",
+        "saved": "Settings saved."
+      },
+      "zones": {
+        "title": "Service zones",
+        "active": "Active",
+        "add-placeholder": "Add service zone",
+        "remove": "Remove zone"
+      }
+    },
+    "subscription": {
+      "breadcrumb": "SUPPLIER",
+      "title": "Supplier subscription",
+      "subtitle": "Commercial capacity, limits, and enterprise features.",
+      "active": "Active plan",
+      "summary": {
+        "current-plan": {
+          "label": "Current plan",
+          "value": "Enterprise"
+        },
+        "users": {
+          "label": "Users",
+          "value": "Unlimited users"
+        },
+        "locations": {
+          "label": "Locations",
+          "value": "Multi-location"
+        },
+        "sensors": {
+          "label": "Sensors",
+          "value": "Unlimited sensors"
+        }
+      },
+      "plans": {
+        "premium": {
+          "name": "Premium",
+          "features": [
+            "Core dashboards",
+            "IoT monitoring",
+            "Email support"
+          ]
+        },
+        "enterprise": {
+          "name": "Enterprise",
+          "features": [
+            "Advanced analytics",
+            "Multi-location",
+            "Route optimization",
+            "Priority support"
+          ]
+        }
+      }
     }
   },
   "inventoryManagement": {
