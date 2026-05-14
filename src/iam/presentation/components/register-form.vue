@@ -3,10 +3,13 @@ import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useIamStore } from '../../application/iam-store.js';
 import { useI18n } from 'vue-i18n';
+import useSessionStore from '../../../shared/application/session.store.js';
+import { getHomeByRole, normalizeRole } from '../../../shared/application/role-routing.js';
 
 const { t } = useI18n();
 const router = useRouter();
 const iamStore = useIamStore();
+const sessionStore = useSessionStore();
 
 const email = ref('');
 const password = ref('');
@@ -69,7 +72,9 @@ const handleRegister = async () => {
   const success = await iamStore.registerUser(userData);
   
   if (success) {
-    router.push('/dashboard');
+    const normalizedRole = normalizeRole(role.value);
+    sessionStore.setUserRole(normalizedRole);
+    router.push(getHomeByRole(normalizedRole));
   } else {
     errorMessage.value = iamStore.error || 'Registration failed';
   }

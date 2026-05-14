@@ -10,10 +10,11 @@ import OrdersSummaryCard from '../../../supply-and-purchasing/presentation/compo
 
 const route = useRoute();
 const pageTitle = computed(() => route.meta?.title ?? 'Module');
+const isDashboard = computed(() => route.meta?.isDashboard === true);
 </script>
 
 <template>
-    <div v-if="route.name === 'dashboard'" class="iot-dashboard-layout">
+    <div v-if="isDashboard" class="iot-dashboard-layout">
         <div class="dashboard-header">
             <h2>Kitchen Dashboard</h2>
             <p>Real-time supply chain and floor monitoring.</p>

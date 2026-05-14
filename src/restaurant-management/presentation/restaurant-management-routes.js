@@ -1,4 +1,5 @@
 const placeholderPage = () => import('../../shared/presentation/views/placeholder-page.vue');
+const alertsPage = () => import('../../iot-monitoring/presentation/views/alerts-view.vue');
 
 const dishMenuPage = () => import('./pages/dish-menu-page.vue');
 const createKitchenOrderPage = () => import('./pages/create-kitchen-order-page.vue');
@@ -6,13 +7,10 @@ const kitchenTicketsPage = () => import('./pages/kitchen-tickets-page.vue');
 const tablesAndOccupancyPage = () => import('./pages/tables-and-occupancy-page.vue');
 
 const restaurantManagementRoutes = [
-    { path: 'dashboard', name: 'restaurant-dashboard', component: placeholderPage, meta: { title: 'Dashboard' } },
-    { path: 'inventory', name: 'restaurant-inventory', component: placeholderPage, meta: { title: 'Inventory' } },
-    { path: 'orders', name: 'restaurant-orders', component: placeholderPage, meta: { title: 'Orders' } },
-    { path: 'kitchen', name: 'restaurant-kitchen', component: placeholderPage, meta: { title: 'Kitchen Tickets' } },
-    { path: 'suppliers', name: 'restaurant-suppliers', component: placeholderPage, meta: { title: 'Suppliers' } },
-    { path: 'tables', name: 'restaurant-tables', component: placeholderPage, meta: { title: 'Tables' } },
-    { path: 'alerts', name: 'restaurant-alerts', component: placeholderPage, meta: { title: 'Alerts' } },
+    { path: 'dashboard', name: 'restaurant-dashboard', component: placeholderPage, meta: { title: 'Dashboard', role: 'restaurant', isDashboard: true } },
+    { path: 'kitchen', name: 'restaurant-kitchen', component: kitchenTicketsPage, meta: { title: 'Kitchen Tickets' } },
+    { path: 'tables', name: 'restaurant-tables', component: tablesAndOccupancyPage, meta: { title: 'Tables' } },
+    { path: 'alerts', name: 'restaurant-alerts', component: alertsPage, meta: { title: 'Alerts' } },
     { path: 'reports', name: 'restaurant-reports', component: placeholderPage, meta: { title: 'Reports' } },
     { path: 'configuration', name: 'restaurant-configuration', component: placeholderPage, meta: { title: 'Configuration' } },
     { path: 'subscription', name: 'restaurant-subscription', component: placeholderPage, meta: { title: 'Subscription' } },

@@ -3,7 +3,9 @@ import { computed, ref } from 'vue';
 import {useI18n} from "vue-i18n";
 import { useRoute, useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
-import useSessionStore from '../application/session.store.js';
+import useSessionStore from '../../application/session.store.js';
+import { useIamStore } from '../../../iam/application/iam-store.js';
+import { getRoleFromPath, normalizeRole } from '../../application/role-routing.js';
 
 /**
  * @component SidebarMenu
@@ -26,10 +28,12 @@ const {t}=useI18n();
 const route = useRoute();
 const router = useRouter();
 const sessionStore = useSessionStore();
+const iamStore = useIamStore();
 const { userRole } = storeToRefs(sessionStore);
+const { currentUserRole, currentUser } = storeToRefs(iamStore);
 
 /** @type {import('vue').Ref<string>} Reactive state for the current subscription plan. */
-const currentPlan = ref('Premium');
+const currentPlan = computed(() => currentUser.value?.subscription ?? 'Premium');
 
 /** @type {MenuItem[]} Array containing the main navigation items. */
 const menuItems = {
@@ -59,7 +63,18 @@ const menuItems = {
   ]
 };
 
-const visibleMenuItems = computed(() => menuItems[userRole.value] ?? []);
+const routeRole = computed(() => {
+  return getRoleFromPath(route.path);
+});
+
+const activeRole = computed(() => {
+  return routeRole.value
+      ?? normalizeRole(currentUserRole.value)
+      ?? normalizeRole(userRole.value)
+      ?? 'restaurant';
+});
+
+const visibleMenuItems = computed(() => menuItems[activeRole.value] ?? []);
 
 const activeItem = computed(() => {
   const currentItem = visibleMenuItems.value.find((item) => route.path.startsWith(item.path));
@@ -72,13 +87,13 @@ const activeItem = computed(() => {
  * @returns {void}
  */
 const selectItem = (item) => {
-  if (!item.path.startsWith(`/${userRole.value}`)) return;
+  if (!item.path.startsWith(`/${activeRole.value}`)) return;
   router.push(item.path);
 };
 </script>
 
 <template>
-  <aside class="sidebar" :class="{ 'sidebar--supplier': userRole === 'supplier' }">
+  <aside class="sidebar" :class="{ 'sidebar--supplier': activeRole === 'supplier' }">
     <!-- Branding Section -->
     <div class="sidebar__brand">
       <img src="/images/supplywok-logo.png" alt="SupplyWok Logo" class="sidebar__logo" />
@@ -90,7 +105,7 @@ const selectItem = (item) => {
 
     <!-- Status Tags Section -->
     <div class="sidebar__status">
-      <span class="sidebar__tag sidebar__tag--role">{{ userRole === 'supplier' ? t('shared.sidebar.supplier') : t('shared.sidebar.restaurant')}}</span>
+      <span class="sidebar__tag sidebar__tag--role">{{ activeRole === 'supplier' ? t('shared.sidebar.supplier') : t('shared.sidebar.restaurant')}}</span>
       <span class="sidebar__tag sidebar__tag--plan">{{t('shared.sidebar.current-plan')}} {{ currentPlan }}</span>
     </div>
 
@@ -118,31 +133,30 @@ const selectItem = (item) => {
 </template>
 
 <style scoped>
-/* ─── Variables and Base ─── */
 .sidebar {
-  width: 280px;
+  width: 260px;
   min-height: 100vh;
-  background-color: #2D241E; /* Dark brown background from mockup */
-  color: #B5B0A1; /* Muted text color for inactive elements */
+  background-color: #2d241e;
+  color: #b5b0a1;
   font-family: 'Montserrat', system-ui, sans-serif;
   display: flex;
   flex-direction: column;
-  padding: 24px 0;
+  padding: 22px 0;
   box-sizing: border-box;
+  flex-shrink: 0;
 }
 
-/* ─── Brand Section ─── */
 .sidebar__brand {
   display: flex;
   align-items: center;
-  padding: 0 24px;
-  margin-bottom: 16px;
-  gap: 12px;
+  padding: 0 26px;
+  margin-bottom: 14px;
+  gap: 10px;
 }
 
 .sidebar__logo {
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -155,47 +169,50 @@ const selectItem = (item) => {
 .sidebar__title {
   margin: 0;
   font-family: 'Poppins', system-ui, sans-serif;
-  font-size: 20px;
+  font-size: 19px;
+  line-height: 1;
   font-weight: 700;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .sidebar__subtitle {
-  font-size: 11px;
+  margin-top: 4px;
+  font-size: 9px;
   font-weight: 600;
-  color: #8C857B;
+  color: #8c857b;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 
-/* ─── Status Tags ─── */
 .sidebar__status {
   display: flex;
   align-items: center;
-  padding: 0 24px;
-  margin-bottom: 32px;
+  padding: 0 26px 18px;
+  margin-bottom: 14px;
   gap: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .sidebar__tag {
-  font-size: 12px;
+  font-size: 11px;
   border-radius: 6px;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .sidebar__tag--role {
-  background-color: #C21204;
-  color: #FFFFFF;
-  padding: 4px 10px;
-  font-weight: 600;
+  background-color: #c21204;
+  color: #ffffff;
+  padding: 7px 10px;
+  font-weight: 700;
   font-family: 'Poppins', system-ui, sans-serif;
 }
 
 .sidebar__tag--plan {
-  color: #8C857B;
+  color: #8c857b;
   font-weight: 500;
 }
 
-/* ─── Navigation Menu ─── */
 .sidebar__nav {
   flex-grow: 1;
 }
@@ -206,7 +223,7 @@ const selectItem = (item) => {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px; /* Spacing between items */
+  gap: 2px;
 }
 
 .sidebar__item {
@@ -215,58 +232,64 @@ const selectItem = (item) => {
 
 .sidebar__button {
   width: 100%;
+  min-height: 52px;
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 12px 24px 12px 32px; /* Extra padding on left for the active bar */
+  gap: 14px;
+  padding: 0 26px;
   background: transparent;
   border: none;
   cursor: pointer;
   text-align: left;
+  font-family: inherit;
   transition: all 0.2s ease;
 }
 
-/* Inactive Icon and Text */
 .sidebar__icon {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   object-fit: contain;
-  opacity: 0.7;
+  opacity: 0.75;
   transition: opacity 0.2s ease;
 }
 
 .sidebar__label {
-  font-size: 15px;
-  font-weight: 500; /* Medium for inactive */
-  color: #A39B8F;
+  font-size: 13px;
+  font-weight: 500;
+  color: #a39b8f;
+  line-height: 1.25;
   transition: all 0.2s ease;
 }
 
-/* Hover Effects */
+.sidebar__button:hover {
+  background-color: rgba(255, 255, 255, 0.035);
+}
+
 .sidebar__button:hover .sidebar__label {
-  color: #E2DFD8;
+  color: #e2dfd8;
 }
 
 .sidebar__button:hover .sidebar__icon {
   opacity: 1;
 }
 
-/* ─── Active State ─── */
+.sidebar__item--active {
+  background-color: rgba(0, 0, 0, 0.18);
+}
+
 .sidebar__item--active::before {
   content: '';
   position: absolute;
   left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 32px;
-  width: 4px;
-  background-color: #C21204; /* Red bar indicator */
-  border-radius: 0 4px 4px 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background-color: #c21204;
 }
 
 .sidebar__item--active .sidebar__label {
-  font-weight: 700; /* Bold */
-  color: #FFFFFF; /* Lighter color */
+  font-weight: 700;
+  color: #ffffff;
 }
 
 .sidebar__item--active .sidebar__icon {
@@ -275,6 +298,14 @@ const selectItem = (item) => {
 
 .sidebar--supplier .sidebar__tag--role,
 .sidebar--supplier .sidebar__item--active::before {
-  background-color: #B76A13;
+  background-color: #b76a13;
+}
+
+.sidebar--supplier {
+  background-color: #2b1d05;
+}
+
+.sidebar--supplier .sidebar__item--active {
+  background-color: rgba(80, 50, 0, 0.38);
 }
 </style>
