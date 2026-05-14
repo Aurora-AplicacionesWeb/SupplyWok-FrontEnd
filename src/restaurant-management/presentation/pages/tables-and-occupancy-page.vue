@@ -304,7 +304,7 @@ function handleAddTable() {
 .filter-btn--active.filter-btn--free { background: #16a34a; color: #fff; border-color: #16a34a; }
 .filter-btn--active.filter-btn--occupied { background: #dc2626; color: #fff; border-color: #dc2626; }
 .empty-state { color: #7d7065; }
-.location-title { color: #40342d; font-size: 18px; border-bottom: 2px solid #efe6da; font-family: 'Poppins', system-ui, sans-serif; }
+.location-title { color: #40342d; font-size: 18px; border-bottom: 2px solid #aa9387; font-family: 'Poppins', system-ui, sans-serif; }
 
 /* Dialog form label */
 .dialog-label { font-size: 13px; font-weight: 600; color: #40342d; }

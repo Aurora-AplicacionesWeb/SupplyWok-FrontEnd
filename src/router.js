@@ -7,12 +7,7 @@ import { useIamStore } from './iam/application/iam-store.js';
 import useSessionStore from './shared/application/session.store.js';
 import { getHomeByRole, getRoleFromPath, getScopedPathByRole, normalizeRole } from './shared/application/role-routing.js';
 
-const placeholderPage = () => import('./shared/presentation/views/placeholder-page.vue');
-const reportsPage = () => import('./shared/presentation/views/reports-page.vue');
-const configurationPage = () => import('./shared/presentation/views/configuration-page.vue');
-const subscriptionPage = () => import('./shared/presentation/views/subscription-page.vue');
 const pageNotFound = () => import('./shared/presentation/views/page-not-found.vue');
-const alertsPage = () => import('./iot-monitoring/presentation/views/alerts-view.vue');
 
 /**
  * Resolves the best available active role from IAM or the lightweight session store.
@@ -24,20 +19,6 @@ function getActiveRole() {
     const sessionStore = useSessionStore();
 
     return normalizeRole(iamStore.currentUserRole) ?? normalizeRole(sessionStore.userRole);
-}
-
-/**
- * Prefixes child-like route definitions with an absolute role scope.
- *
- * @param {import('vue-router').RouteRecordRaw[]} routes
- * @param {string} prefix
- * @returns {import('vue-router').RouteRecordRaw[]}
- */
-function scopeRoutes(routes, prefix) {
-    return routes.map((route) => ({
-        ...route,
-        path: `${prefix}/${route.path}`
-    }));
 }
 
 const restaurantRoutes = [
