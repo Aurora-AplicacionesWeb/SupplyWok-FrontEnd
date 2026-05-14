@@ -2,8 +2,8 @@ import { BaseApi } from '../../shared/infrastructure/base-api.js';
 import { BaseEndpoint } from '../../shared/infrastructure/base-endpoint.js';
 
 const inventoryApiBaseUrl = (import.meta.env.VITE_INVENTORY_API_URL ?? '').replace(/\/$/, '');
-const inventoryEndpointPath = import.meta.env.VITE_INVENTORY_ENDPOINT_PATH ?? '/Inventory';
-const stockMovementEndpointPath = import.meta.env.VITE_STOCK_MOVEMENT_ENDPOINT_PATH ?? '/StockMovement';
+const inventoryEndpointPath = import.meta.env.VITE_INVENTORY_ENDPOINT_PATH;
+const stockMovementEndpointPath = import.meta.env.VITE_STOCK_MOVEMENT_ENDPOINT_PATH;
 
 function joinUrl(base, path) {
   const p = String(path ?? '');
