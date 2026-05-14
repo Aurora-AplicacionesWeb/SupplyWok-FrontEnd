@@ -451,11 +451,12 @@
   "purchase-orders": [
     {
       "id": 1,
-      "code": "PO-69629",
+      "code": "PO-24021",
       "supplierId": 201,
       "supplierName": "Golden Wok Produce",
-      "restaurantName": "GRAN DRAGÓN CHIFA",
+      "restaurantName": "Gran Dragon Chifa",
       "orderDate": "2026-05-10",
+      "estimatedDate": "2026-05-11",
       "priority": "High",
       "status": "Pending",
       "items": [
@@ -479,13 +480,14 @@
     },
     {
       "id": 2,
-      "code": "PO-24013",
+      "code": "PO-24022",
       "supplierId": 202,
       "supplierName": "Andes Cold Chain",
-      "restaurantName": "PEKÍN LOUNGE",
+      "restaurantName": "Gran Dragon Chifa",
       "orderDate": "2026-05-09",
+      "estimatedDate": "2026-05-12",
       "priority": "Medium",
-      "status": "In Preparation",
+      "status": "Confirmed",
       "items": [
         {
           "id": 3,
@@ -499,11 +501,14 @@
     },
     {
       "id": 3,
+      "code": "PO-24023",
       "supplierId": 203,
       "supplierName": "Orient Pantry Co.",
+      "restaurantName": "Gran Dragon Chifa",
       "orderDate": "2026-05-08",
+      "estimatedDate": "2026-05-13",
       "priority": "Low",
-      "status": "Delivered",
+      "status": "In Transit",
       "items": [
         {
           "id": 4,
@@ -517,17 +522,25 @@
     },
     {
       "id": 4,
-      "code": "PO-24009",
-      "supplierId": "201",
+      "code": "PO-24024",
+      "supplierId": 201,
       "supplierName": "Golden Wok Produce",
-      "restaurantName": "PEKÍN LOUNGE",
-      "orderDate": "04/22/2026, 10:30 AM",
+      "restaurantName": "Pekin Lounge",
+      "orderDate": "2026-05-07",
+      "estimatedDate": "2026-05-10",
       "priority": "Medium",
-      "status": "Pending",
+      "status": "Delivered",
       "items": [
-        { "id": 1778626991997, "inventoryItemId": null, "productName": "intento3", "quantity": 500, "unitPrice": 2.5, "unitType": "Kg" },
         {
           "id": 5,
+          "inventoryItemId": 101,
+          "productName": "Rice",
+          "quantity": 30,
+          "unitPrice": 4.5,
+          "unitType": "kg"
+        },
+        {
+          "id": 6,
           "inventoryItemId": 105,
           "productName": "Oyster Sauce",
           "quantity": 10,
@@ -538,22 +551,127 @@
     },
     {
       "id": 5,
-      "code": "PO-24009",
-      "supplierId": "201",
+      "code": "PO-24025",
+      "supplierId": 202,
+      "supplierName": "Andes Cold Chain",
+      "restaurantName": "Jade Express",
+      "orderDate": "2026-05-06",
+      "estimatedDate": "2026-05-11",
+      "priority": "High",
+      "status": "Delayed",
+      "items": [
+        {
+          "id": 7,
+          "inventoryItemId": 103,
+          "productName": "Chicken Breast",
+          "quantity": 24,
+          "unitPrice": 14.8,
+          "unitType": "kg"
+        },
+        {
+          "id": 8,
+          "inventoryItemId": 106,
+          "productName": "Frozen Wontons",
+          "quantity": 8,
+          "unitPrice": 34,
+          "unitType": "box"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "code": "PO-24026",
+      "supplierId": 203,
+      "supplierName": "Orient Pantry Co.",
+      "restaurantName": "Ming Garden",
+      "orderDate": "2026-05-05",
+      "estimatedDate": "2026-05-09",
+      "priority": "Medium",
+      "status": "Confirmed",
+      "items": [
+        {
+          "id": 9,
+          "inventoryItemId": 104,
+          "productName": "Sesame Oil",
+          "quantity": 10,
+          "unitPrice": 18.4,
+          "unitType": "ltr"
+        },
+        {
+          "id": 10,
+          "inventoryItemId": 105,
+          "productName": "Oyster Sauce",
+          "quantity": 14,
+          "unitPrice": 9,
+          "unitType": "ltr"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "code": "PO-24521",
+      "supplierId": 201,
       "supplierName": "Golden Wok Produce",
-      "orderDate": "04/22/2026, 10:30 AM",
+      "restaurantName": "Gran Dragon Chifa",
+      "orderDate": "2026-05-14",
+      "estimatedDate": "2026-05-16",
       "priority": "Medium",
       "status": "Pending",
       "items": [
-        { "id": 1778627026163, "inventoryItemId": null, "productName": "intento5", "quantity": 50, "unitPrice": 2.5, "unitType": "Kg" },
-        { "id": 1778627039625, "inventoryItemId": null, "productName": "inteto6", "quantity": 50, "unitPrice": 2.5, "unitType": "Kg" }
+        {
+          "id": 1778739424797,
+          "inventoryItemId": null,
+          "productName": "asd",
+          "quantity": 50,
+          "unitPrice": 2.5,
+          "unitType": "Kg"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "code": "PO-30343",
+      "supplierId": 201,
+      "supplierName": "Golden Wok Produce",
+      "restaurantName": "Gran Dragon Chifa",
+      "orderDate": "2026-05-14",
+      "estimatedDate": "2026-05-16",
+      "priority": "Medium",
+      "status": "Pending",
+      "items": [
+        {
+          "id": 1778739428442,
+          "inventoryItemId": null,
+          "productName": "asdasdsad",
+          "quantity": 50,
+          "unitPrice": 2.5,
+          "unitType": "Kg"
+        }
       ]
     }
   ],
   "suppliers": [
-    { "id": 201, "name": "Golden Wok Produce", "contactName": "Mariela Soto", "phone": "+51 999 111 222", "category": "Grains and pantry" },
-    { "id": 202, "name": "Andes Cold Chain", "contactName": "Luis Cardenas", "phone": "+51 999 333 444", "category": "Cold products" },
-    { "id": 203, "name": "Orient Pantry Co.", "contactName": "Zhen Liu", "phone": "+51 999 555 666", "category": "Asian sauces and oils" }
+    {
+      "id": 201,
+      "name": "Golden Wok Produce",
+      "contactName": "Mariela Soto",
+      "phone": "+51 999 111 222",
+      "category": "Grains and pantry"
+    },
+    {
+      "id": 202,
+      "name": "Andes Cold Chain",
+      "contactName": "Luis Cardenas",
+      "phone": "+51 999 333 444",
+      "category": "Cold products"
+    },
+    {
+      "id": 203,
+      "name": "Orient Pantry Co.",
+      "contactName": "Zhen Liu",
+      "phone": "+51 999 555 666",
+      "category": "Asian sauces and oils"
+    }
   ],
   "clients": [
     {

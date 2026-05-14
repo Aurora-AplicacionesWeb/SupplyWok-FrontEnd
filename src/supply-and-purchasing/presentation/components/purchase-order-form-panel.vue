@@ -15,9 +15,9 @@ const { validationErrors } = storeToRefs(store);
 const { addPurchaseOrder, clearValidationScope, validateOrderItem } = store;
 
 const supplierOptions = [
-    { id: '201', name: 'Golden Wok Produce' },
-    { id: '202', name: 'Andes Cold Chain' },
-    { id: '203', name: 'Orient Pantry Co.' }
+    { id: 201, name: 'Golden Wok Produce' },
+    { id: 202, name: 'Andes Cold Chain' },
+    { id: 203, name: 'Orient Pantry Co.' }
 ];
 
 const priorityOptions = computed(() => ([
@@ -29,7 +29,8 @@ const priorityOptions = computed(() => ([
 const form = reactive({
     supplierId: supplierOptions[0].id,
     supplierName: supplierOptions[0].name,
-    orderDate: '04/22/2026, 10:30 AM',
+    orderDate: formatLocalDate(new Date()),
+    estimatedDate: formatLocalDate(addDays(new Date(), 2)),
     priority: 'Medium'
 });
 
@@ -50,7 +51,7 @@ function resetDraftLine() {
 }
 
 function syncSupplierData() {
-    const selectedSupplier = supplierOptions.find((supplier) => supplier.id === form.supplierId);
+    const selectedSupplier = supplierOptions.find((supplier) => supplier.id === Number(form.supplierId));
     form.supplierName = selectedSupplier?.name ?? '';
 }
 
@@ -95,9 +96,12 @@ async function handleSubmit() {
     }
 
     const purchaseOrder = new PurchaseOrder({
-        supplierId: form.supplierId,
+        code: buildPurchaseOrderCode(),
+        supplierId: Number(form.supplierId),
         supplierName: form.supplierName,
+        restaurantName: 'Gran Dragon Chifa',
         orderDate: form.orderDate,
+        estimatedDate: form.estimatedDate,
         priority: form.priority,
         status: 'Pending',
         items: items
@@ -124,6 +128,23 @@ function getDraftFieldError(field) {
 function formatPrice(value) {
     const parsedValue = Number(value);
     return Number.isFinite(parsedValue) ? parsedValue.toFixed(2) : '0.00';
+}
+
+function addDays(date, days) {
+    const nextDate = new Date(date);
+    nextDate.setDate(nextDate.getDate() + days);
+    return nextDate;
+}
+
+function formatLocalDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
+function buildPurchaseOrderCode() {
+    return `PO-${String(Date.now()).slice(-5)}`;
 }
 </script>
 
@@ -152,7 +173,7 @@ function formatPrice(value) {
 
             <label class="purchase-order-form-panel__field">
                 <span>{{ t('supply-and-purchasing.form.fields.estimated-date') }}</span>
-                <InputText v-model="form.orderDate" :class="{ 'purchase-order-form-panel__input--invalid': getFieldError('orderDate') }" />
+                <InputText v-model="form.estimatedDate" :class="{ 'purchase-order-form-panel__input--invalid': getFieldError('orderDate') }" />
                 <small v-if="getFieldError('orderDate')" class="purchase-order-form-panel__error">{{ getFieldError('orderDate') }}</small>
             </label>
 

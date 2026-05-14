@@ -9,7 +9,9 @@ export class OrdersAssembler {
             console.error(`${response.status}, ${response.statusText}`);
             return [];
         }
-        let resources = response.data instanceof Array ? response.data : response.data['purchase-orders'];
+        const resources = response.data instanceof Array
+            ? response.data
+            : response.data.purchaseOrders ?? response.data['purchase-orders'] ?? [];
 
         return resources.map(resource => this.toEntityFromResource(resource));
     }
