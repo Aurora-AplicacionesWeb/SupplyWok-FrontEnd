@@ -715,6 +715,67 @@
       "lastOrderDate": "2026-04-19"
     }
   ],
+  "demand-forecasts": [
+    {
+      "id": 1,
+      "aggregate": [
+        {
+          "period": "May",
+          "value": 240
+        },
+        {
+          "period": "Jun",
+          "value": 260
+        },
+        {
+          "period": "Jul",
+          "value": 272
+        },
+        {
+          "period": "Aug",
+          "value": 288
+        },
+        {
+          "period": "Sep",
+          "value": 304
+        },
+        {
+          "period": "Oct",
+          "value": 319
+        }
+      ],
+      "clients": [
+        {
+          "clientId": 1,
+          "clientName": "Gran Dragon Chifa",
+          "value": 72,
+          "trend": "upward",
+          "summary": "Seafood and greens demand trending higher before weekends."
+        },
+        {
+          "clientId": 2,
+          "clientName": "Jade Express",
+          "value": 68,
+          "trend": "stable",
+          "summary": "Keep standard restock cadence; lunch traffic is stable."
+        },
+        {
+          "clientId": 3,
+          "clientName": "Pekin Lounge",
+          "value": 55,
+          "trend": "watch",
+          "summary": "Demand remains moderate with steady weekly orders."
+        },
+        {
+          "clientId": 4,
+          "clientName": "Ming Garden",
+          "value": 49,
+          "trend": "stable",
+          "summary": "Projected demand is steady with no urgent restock signal."
+        }
+      ]
+    }
+  ],
   "deliveryRoutes": [
     {
       "id": 1,
