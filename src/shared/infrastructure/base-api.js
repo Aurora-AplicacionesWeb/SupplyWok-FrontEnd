@@ -4,6 +4,7 @@ const platformApi = import.meta.env.VITE_SUPPLY_WOK_API_URL ?? '';
 
 /**
  * Shared infrastructure base class that owns the configured Axios client.
+ * Bounded-context adapters extend this class to access a consistent HTTP gateway.
  *
  * @class BaseApi
  */

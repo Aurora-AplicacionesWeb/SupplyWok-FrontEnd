@@ -8,9 +8,9 @@ const suppliersPage = () => import('./pages/suppliers-page.vue');
  * @type {import('vue-router').RouteRecordRaw[]}
  */
 const supplyAndPurchasingRoutes = [
-    { path: '/orders', name: 'orders-page', component: ordersPage, meta: { title: 'Orders' } },
-    { path: '/orders/new', name: 'purchase-order-form-page', component: purchaseOrderFormPage, meta: { title: 'Create Order' } },
-    { path: '/suppliers', name: 'suppliers-page', component: suppliersPage, meta: { title: 'Suppliers' } }
+    { path: 'orders', name: 'restaurant-orders', component: ordersPage, meta: { title: 'Orders' } },
+    { path: 'orders/new', name: 'restaurant-orders-new', component: purchaseOrderFormPage, meta: { title: 'Create Order' } },
+    { path: 'suppliers', name: 'restaurant-suppliers', component: suppliersPage, meta: { title: 'Suppliers' } }
 ];
 
 export default supplyAndPurchasingRoutes;

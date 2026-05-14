@@ -414,11 +414,47 @@
       "observation": "Listo para entrega"
     }
   ],
+  "catalog-items": [
+    {
+      "id": 1,
+      "name": "Cebolla china",
+      "category": "Vegetables",
+      "price": 2.9,
+      "unit": "kg",
+      "deliveryConditions": "Next-day before 11:00"
+    },
+    {
+      "id": 2,
+      "name": "Pollo trozado",
+      "category": "Protein",
+      "price": 12.4,
+      "unit": "kg",
+      "deliveryConditions": "Cold chain guaranteed 0-4 °C"
+    },
+    {
+      "id": 3,
+      "name": "Aceite de sésamo",
+      "category": "Sauces",
+      "price": 18.2,
+      "unit": "ltr",
+      "deliveryConditions": "48h dispatch window"
+    },
+    {
+      "id": 4,
+      "name": "Wantán congelado",
+      "category": "Frozen",
+      "price": 34,
+      "unit": "box",
+      "deliveryConditions": "Frozen route Tuesdays and Fridays"
+    }
+  ],
   "purchase-orders": [
     {
       "id": 1,
+      "code": "PO-69629",
       "supplierId": 201,
       "supplierName": "Golden Wok Produce",
+      "restaurantName": "GRAN DRAGÓN CHIFA",
       "orderDate": "2026-05-10",
       "priority": "High",
       "status": "Pending",
@@ -443,8 +479,10 @@
     },
     {
       "id": 2,
+      "code": "PO-24013",
       "supplierId": 202,
       "supplierName": "Andes Cold Chain",
+      "restaurantName": "PEKÍN LOUNGE",
       "orderDate": "2026-05-09",
       "priority": "Medium",
       "status": "In Preparation",
@@ -479,70 +517,252 @@
     },
     {
       "id": 4,
+      "code": "PO-24009",
       "supplierId": "201",
       "supplierName": "Golden Wok Produce",
+      "restaurantName": "PEKÍN LOUNGE",
       "orderDate": "04/22/2026, 10:30 AM",
       "priority": "Medium",
       "status": "Pending",
       "items": [
+        { "id": 1778626991997, "inventoryItemId": null, "productName": "intento3", "quantity": 500, "unitPrice": 2.5, "unitType": "Kg" },
         {
-          "id": 1778626991997,
-          "inventoryItemId": null,
-          "productName": "intento3",
-          "quantity": 500,
-          "unitPrice": 2.5,
-          "unitType": "Kg"
+          "id": 5,
+          "inventoryItemId": 105,
+          "productName": "Oyster Sauce",
+          "quantity": 10,
+          "unitPrice": 9,
+          "unitType": "ltr"
         }
       ]
     },
     {
       "id": 5,
+      "code": "PO-24009",
       "supplierId": "201",
       "supplierName": "Golden Wok Produce",
       "orderDate": "04/22/2026, 10:30 AM",
       "priority": "Medium",
       "status": "Pending",
       "items": [
-        {
-          "id": 1778627026163,
-          "inventoryItemId": null,
-          "productName": "intento5",
-          "quantity": 50,
-          "unitPrice": 2.5,
-          "unitType": "Kg"
-        },
-        {
-          "id": 1778627039625,
-          "inventoryItemId": null,
-          "productName": "inteto6",
-          "quantity": 50,
-          "unitPrice": 2.5,
-          "unitType": "Kg"
-        }
+        { "id": 1778627026163, "inventoryItemId": null, "productName": "intento5", "quantity": 50, "unitPrice": 2.5, "unitType": "Kg" },
+        { "id": 1778627039625, "inventoryItemId": null, "productName": "inteto6", "quantity": 50, "unitPrice": 2.5, "unitType": "Kg" }
       ]
     }
   ],
   "suppliers": [
+    { "id": 201, "name": "Golden Wok Produce", "contactName": "Mariela Soto", "phone": "+51 999 111 222", "category": "Grains and pantry" },
+    { "id": 202, "name": "Andes Cold Chain", "contactName": "Luis Cardenas", "phone": "+51 999 333 444", "category": "Cold products" },
+    { "id": 203, "name": "Orient Pantry Co.", "contactName": "Zhen Liu", "phone": "+51 999 555 666", "category": "Asian sauces and oils" }
+  ],
+  "clients": [
     {
-      "id": 201,
-      "name": "Golden Wok Produce",
-      "contactName": "Mariela Soto",
-      "phone": "+51 999 111 222",
-      "category": "Grains and pantry"
+      "id": 1,
+      "name": "Gran Dragon Chifa",
+      "district": "San Isidro",
+      "frequency": "4X/WEEK",
+      "averageTicket": 620,
+      "demandProjectionPercent": 14,
+      "status": "active",
+      "lastOrderDate": "2026-04-21"
     },
     {
-      "id": 202,
-      "name": "Andes Cold Chain",
-      "contactName": "Luis Cardenas",
-      "phone": "+51 999 333 444",
-      "category": "Cold products"
+      "id": 2,
+      "name": "Jade Express",
+      "district": "Miraflores",
+      "frequency": "3X/WEEK",
+      "averageTicket": 480,
+      "demandProjectionPercent": 7,
+      "status": "active",
+      "lastOrderDate": "2026-04-21"
     },
     {
-      "id": 203,
-      "name": "Orient Pantry Co.",
-      "contactName": "Zhen Liu",
-      "phone": "+51 999 555 666",
-      "category": "Asian sauces and oils"
+      "id": 3,
+      "name": "Pekin Lounge",
+      "district": "Surco",
+      "frequency": "2X/WEEK",
+      "averageTicket": 710,
+      "demandProjectionPercent": 11,
+      "status": "active",
+      "lastOrderDate": "2026-04-20"
+    },
+    {
+      "id": 4,
+      "name": "Ming Garden",
+      "district": "La Molina",
+      "frequency": "5X/WEEK",
+      "averageTicket": 535,
+      "demandProjectionPercent": 9,
+      "status": "active",
+      "lastOrderDate": "2026-04-19"
+    }
+  ],
+  "deliveryRoutes": [
+    {
+      "id": 1,
+      "name": "Lima Centro AM",
+      "stops": 6,
+      "startTime": "09:00",
+      "endTime": "13:20",
+      "priority": "high",
+      "lastUpdatedMinutesAgo": 12
+    },
+    {
+      "id": 2,
+      "name": "Miraflores / San Isidro",
+      "stops": 5,
+      "startTime": "10:30",
+      "endTime": "14:10",
+      "priority": "medium",
+      "lastUpdatedMinutesAgo": 5
+    },
+    {
+      "id": 3,
+      "name": "Table 18",
+      "stops": 4,
+      "startTime": "13:30",
+      "endTime": "17:10",
+      "priority": "high",
+      "lastUpdatedMinutesAgo": 30
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Arroz Largo Grano",
+      "category": "GRAINS",
+      "unit": "kg",
+      "price": 3.5,
+      "stock": 500,
+      "available": true,
+      "description": "Arroz de grano largo importado"
+    },
+    {
+      "id": 2,
+      "name": "Fideos de Arroz",
+      "category": "GRAINS",
+      "unit": "kg",
+      "price": 4.2,
+      "stock": 200,
+      "available": true,
+      "description": "Fideos de arroz para tallarín saltado"
+    },
+    {
+      "id": 3,
+      "name": "Pollo Entero",
+      "category": "PROTEIN",
+      "unit": "kg",
+      "price": 8.5,
+      "stock": 150,
+      "available": true,
+      "description": "Pollo fresco de granja"
+    },
+    {
+      "id": 4,
+      "name": "Carne de Res",
+      "category": "PROTEIN",
+      "unit": "kg",
+      "price": 22,
+      "stock": 80,
+      "available": true,
+      "description": "Carne de res para lomo y wok"
+    },
+    {
+      "id": 5,
+      "name": "Cerdo Troceado",
+      "category": "PROTEIN",
+      "unit": "kg",
+      "price": 15,
+      "stock": 60,
+      "available": true,
+      "description": "Cerdo para chicharrón y preparaciones chifa"
+    },
+    {
+      "id": 6,
+      "name": "Salsa Soya Oscura",
+      "category": "SAUCES",
+      "unit": "lt",
+      "price": 6.5,
+      "stock": 100,
+      "available": true,
+      "description": "Salsa de soya oscura importada"
+    },
+    {
+      "id": 7,
+      "name": "Salsa Oyster",
+      "category": "SAUCES",
+      "unit": "lt",
+      "price": 9,
+      "stock": 80,
+      "available": true,
+      "description": "Salsa de ostión para wok"
+    },
+    {
+      "id": 8,
+      "name": "Brócoli Fresco",
+      "category": "VEGETABLES",
+      "unit": "kg",
+      "price": 3,
+      "stock": 120,
+      "available": true,
+      "description": "Brócoli fresco de primera calidad"
+    },
+    {
+      "id": 9,
+      "name": "Zanahoria",
+      "category": "VEGETABLES",
+      "unit": "kg",
+      "price": 1.8,
+      "stock": 200,
+      "available": true,
+      "description": "Zanahoria fresca"
+    },
+    {
+      "id": 10,
+      "name": "Col China",
+      "category": "VEGETABLES",
+      "unit": "kg",
+      "price": 2.5,
+      "stock": 0,
+      "available": false,
+      "description": "Col china o repollo chino"
+    }
+  ],
+  "alerts": [
+    {
+      "id": 1,
+      "severity": "high",
+      "detail": "Rush reorder request",
+      "date": "2026-04-21T09:35:00Z",
+      "status": "pending"
+    },
+    {
+      "id": 2,
+      "severity": "medium",
+      "detail": "Route congestion detected",
+      "date": "2026-04-21T09:18:00Z",
+      "status": "pending"
+    },
+    {
+      "id": 3,
+      "severity": "low",
+      "detail": "Client stock alert received",
+      "date": "2026-04-21T08:42:00Z",
+      "status": "pending"
+    },
+    {
+      "id": 4,
+      "severity": "high",
+      "detail": "Delayed delivery on route Lima Centro AM",
+      "date": "2026-04-21T07:10:00Z",
+      "status": "acknowledged"
+    },
+    {
+      "id": 5,
+      "severity": "medium",
+      "detail": "New urgent order from Ming Garden",
+      "date": "2026-04-20T18:00:00Z",
+      "status": "acknowledged"
     }
   ]
 }

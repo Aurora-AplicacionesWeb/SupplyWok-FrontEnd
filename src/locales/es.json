@@ -6,7 +6,7 @@
       "new-supply": "¿Nuevo en SupplyWok?",
       "sign-up-now": "Regístrate ahora",
       "email": "Correo electrónico",
-      "email-example": "ejemplo@email.com",
+      "email-example": "ejemplo{'@'}email.com",
       "password": "Contraseña",
       "password-example": "Contraseña123",
       "forgot-password": "¿Olvidaste tu contraseña?",
@@ -41,6 +41,7 @@
   "shared": {
     "sidebar": {
       "restaurant": "Restaurante",
+      "supplier": "Proveedor",
       "current-plan": "Plan actual:",
       "dashboard": "Dashboard",
       "inventory": "Inventario",
@@ -51,7 +52,101 @@
       "alerts": "Alertas",
       "reports": "Reportes",
       "configuration": "Configuración",
-      "subscription": "Suscripción"
+      "subscription": "Suscripción",
+      "clients": "Mis Clientes",
+      "forecast": "Pronóstico de Demanda",
+      "catalog": "Catálogo de Productos",
+      "delivery": "Planificación de Entregas"
+    }
+  },
+  "supplier-management": {
+    "orders": {
+      "breadcrumb": "PROVEEDOR",
+      "title": "Órdenes de compra",
+      "subtitle": "Monitorea pedidos de restaurantes y compromisos de entrega.",
+      "search": "Buscar",
+      "stats": {
+        "total": "Órdenes totales",
+        "pending": "Pendientes",
+        "in-transit": "En tránsito",
+        "delivered": "Entregadas"
+      },
+      "filters": {
+        "status": "Estado",
+        "all": "Todos los estados",
+        "confirmed": "Confirmada",
+        "pending": "Pendiente",
+        "in-transit": "En tránsito",
+        "delivered": "Entregada",
+        "delayed": "Retrasada"
+      },
+      "columns": {
+        "code": "Orden",
+        "restaurant": "Restaurante",
+        "order-date": "Fecha de orden",
+        "delivery-date": "Entrega estimada",
+        "priority": "Prioridad",
+        "status": "Estado",
+        "items": "Items",
+        "actions": "Acciones"
+      },
+      "actions": {
+        "confirm": "Confirmar",
+        "mark-in-transit": "Marcar en tránsito",
+        "mark-delivered": "Marcar entregada",
+        "view": "Ver detalle"
+      },
+      "details": {
+        "title": "Detalle de la orden",
+        "order-date": "Fecha de orden",
+        "delivery-date": "Entrega estimada",
+        "priority": "Prioridad",
+        "supplier": "Proveedor",
+        "close": "Cerrar",
+        "columns": {
+          "product": "Producto",
+          "quantity": "Cantidad",
+          "unit": "Unidad",
+          "unit-price": "Precio unitario",
+          "subtotal": "Subtotal"
+        }
+      },
+      "empty": "No hay órdenes que coincidan con tu búsqueda.",
+      "visible-count": "Mostrando {visible} de {total} órdenes totales"
+    },
+    "catalog": {
+      "breadcrumb": "PROVEEDOR",
+      "title": "Catálogo de productos",
+      "subtitle": "Gestiona oferta, precio, unidad y condiciones de entrega.",
+      "add": "Agregar",
+      "search": "Buscar",
+      "columns": {
+        "product": "Producto",
+        "category": "Categoría",
+        "price": "Precio",
+        "unit": "Unidad",
+        "delivery-conditions": "Condiciones de entrega",
+        "actions": "Acciones"
+      },
+      "actions": {
+        "edit": "Editar",
+        "delete": "Eliminar"
+      },
+      "form": {
+        "product": "Producto",
+        "category": "Categoría",
+        "price": "Precio",
+        "unit": "Unidad",
+        "delivery-conditions": "Condiciones de entrega",
+        "cancel": "Cancelar",
+        "save": "Guardar"
+      },
+      "delete-dialog": {
+        "title": "Eliminar producto",
+        "message": "¿Seguro que quieres eliminar {product} del catálogo?",
+        "confirm": "Eliminar"
+      },
+      "empty": "Aún no hay productos en el catálogo."
     }
   },
   "inventoryManagement": {
@@ -476,6 +571,7 @@
   },
   "header": {
     "settings": "Configuración",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "help": "Ayuda"
   }
 }
