@@ -318,7 +318,12 @@
           "acknowledge": "Reconocer"
         }
       },
-      "empty": "No hay alertas que coincidan con tu busqueda."
+      "empty": "No hay alertas que coincidan con tu busqueda.",
+      "notification-title": "Notificación de Proveedor",
+      "messages": {
+        "rush-reorder": "Pedido de reabastecimiento urgente",
+        "route-congestion": "Congestión en la ruta detectada"
+      }
     },
     "catalog": {
       "breadcrumb": "PROVEEDOR",
@@ -452,7 +457,9 @@
       "kicker": "Restaurante",
       "title": "Inventario",
       "description": "Gestiona niveles de stock, mínimos y movimientos.",
-      "actions": { "add": "Agregar insumo" }
+      "actions": {
+        "add": "Agregar insumo"
+      }
     },
     "metrics": {
       "items": "Productos",
@@ -507,8 +514,17 @@
         "sortAll": "ORDENAR TODO"
       }
     },
-    "stockStatus": { "critical": "Crítico", "warning": "Bajo", "healthy": "Saludable" },
-    "units": { "kilograms": "Kilogramos", "liters": "Litros", "units": "Unidades", "grams": "Gramos" }
+    "stockStatus": {
+      "critical": "Crítico",
+      "warning": "Bajo",
+      "healthy": "Saludable"
+    },
+    "units": {
+      "kilograms": "Kilogramos",
+      "liters": "Litros",
+      "units": "Unidades",
+      "grams": "Gramos"
+    }
   },
   "supply-and-purchasing": {
     "shared": {
@@ -666,7 +682,9 @@
       "low-stock-title": "Advertencia de bajo stock",
       "low-stock-msg": "{sensorName} ha caído a {lastValue} unidades (Mínimo: {minValue}). Requiere reposición.",
       "high-occupancy-title": "{sensorName} alcanzó una alta ocupación",
-      "high-occupancy-msg": "Carga concentrada en {sensorName} ({lastValue}% ocupado)."
+      "high-occupancy-msg": "Carga concentrada en {sensorName} ({lastValue}% ocupado).",
+      "severity-warning": "Advertencia",
+      "severity-normal": "Normal"
     },
     "alerts-page": {
       "kicker": "Restaurante",

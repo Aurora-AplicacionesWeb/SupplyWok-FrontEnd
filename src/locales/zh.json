@@ -318,7 +318,12 @@
           "acknowledge": "确认"
         }
       },
-      "empty": "没有符合搜索条件的警报。"
+      "empty": "没有符合搜索条件的警报。",
+      "notification-title": "供应商通知",
+      "messages": {
+        "rush-reorder": "紧急补货请求",
+        "route-congestion": "检测到路线拥堵"
+      }
     },
     "catalog": {
       "breadcrumb": "供应商",
@@ -452,7 +457,9 @@
       "kicker": "餐厅",
       "title": "库存",
       "description": "管理库存水平、最小值和库存变动。",
-      "actions": { "add": "新增物资" }
+      "actions": {
+        "add": "新增物资"
+      }
     },
     "metrics": {
       "items": "物品",
@@ -507,8 +514,17 @@
         "sortAll": "全部排序"
       }
     },
-    "stockStatus": { "critical": "紧急", "warning": "低库存", "healthy": "充足" },
-    "units": { "kilograms": "千克", "liters": "升", "units": "单位", "grams": "克" }
+    "stockStatus": {
+      "critical": "紧急",
+      "warning": "低库存",
+      "healthy": "充足"
+    },
+    "units": {
+      "kilograms": "千克",
+      "liters": "升",
+      "units": "单位",
+      "grams": "克"
+    }
   },
   "supply-and-purchasing": {
     "shared": {
@@ -666,7 +682,9 @@
       "low-stock-title": "低库存警告",
       "low-stock-msg": "{sensorName} 已降至 {lastValue} 单位（最低：{minValue}）。需要补货。",
       "high-occupancy-title": "{sensorName} 达到高入住率",
-      "high-occupancy-msg": "负载集中在 {sensorName} ({lastValue}% 入住率)。"
+      "high-occupancy-msg": "负载集中在 {sensorName} ({lastValue}% 入住率)。",
+      "severity-warning": "警告",
+      "severity-normal": "正常"
     },
     "alerts-page": {
       "kicker": "餐厅",

@@ -318,7 +318,12 @@
           "acknowledge": "Acknowledge"
         }
       },
-      "empty": "No alerts match your search."
+      "empty": "No alerts match your search.",
+      "notification-title": "Supplier Notification",
+      "messages": {
+        "rush-reorder": "Rush reorder request",
+        "route-congestion": "Route congestion detected"
+      }
     },
     "catalog": {
       "breadcrumb": "SUPPLIER",
@@ -452,7 +457,9 @@
       "kicker": "Restaurant",
       "title": "Inventory",
       "description": "Manage stock levels, minimums and movements.",
-      "actions": { "add": "Add supply" }
+      "actions": {
+        "add": "Add supply"
+      }
     },
     "metrics": {
       "items": "Items",
@@ -507,8 +514,17 @@
         "sortAll": "SORT ALL"
       }
     },
-    "stockStatus": { "critical": "Critical", "warning": "Low", "healthy": "Healthy" },
-    "units": { "kilograms": "Kilograms", "liters": "Liters", "units": "Units", "grams": "Grams" }
+    "stockStatus": {
+      "critical": "Critical",
+      "warning": "Low",
+      "healthy": "Healthy"
+    },
+    "units": {
+      "kilograms": "Kilograms",
+      "liters": "Liters",
+      "units": "Units",
+      "grams": "Grams"
+    }
   },
   "supply-and-purchasing": {
     "shared": {
@@ -666,7 +682,9 @@
       "low-stock-title": "Low stock warning",
       "low-stock-msg": "{sensorName} has fallen to {lastValue} units (Minimum: {minValue}). Restock required.",
       "high-occupancy-title": "{sensorName} peaked at high occupancy",
-      "high-occupancy-msg": "Load concentrated on {sensorName} ({lastValue}% occupied)."
+      "high-occupancy-msg": "Load concentrated on {sensorName} ({lastValue}% occupied).",
+      "severity-warning": "Warning",
+      "severity-normal": "Normal"
     },
     "alerts-page": {
       "kicker": "Restaurant",
