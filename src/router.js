@@ -13,9 +13,11 @@ const placeholderRoutes = [
     { path: '/reports', name: 'reports', component: placeholderPage, meta: { title: 'Reports' } },
     { path: '/configuration', name: 'configuration', component: placeholderPage, meta: { title: 'Configuration' } },
     { path: '/subscription', name: 'subscription', component: placeholderPage, meta: { title: 'Subscription' } },
+];
 
+const supplierView = () => import('./shared/presentation/views/supplier-view.vue');
+const restaurantView = () => import('./shared/presentation/views/restaurant-view.vue');
 
-// ── Supply Management (Supplier role) – lazy-loaded views ──────────────────
 const supplierDashboard    = () => import('./supply-management/presentation/views/dashboard-supplier.vue');
 const supplierOrders       = () => import('./supply-management/presentation/views/orders-supplier.vue');
 const supplierClients      = () => import('./supply-management/presentation/views/clients-supplier.vue');
@@ -26,7 +28,6 @@ const supplierSettings     = () => import('./supply-management/presentation/view
 const supplierSubscription = () => import('./supply-management/presentation/views/subscription-supplier.vue');
 const supplierDelivery     = () => import('./supply-management/presentation/views/delivery-supplier.vue');
 
-/** Child routes for the /supplier prefix (only active when userRole === 'supplier') */
 const supplierRoutes = [
     { path: 'dashboard',     name: 'supplier-dashboard',     component: supplierDashboard,    meta: { title: 'Dashboard',     role: 'supplier' } },
     { path: 'orders',        name: 'supplier-orders',        component: supplierOrders,       meta: { title: 'Orders',        role: 'supplier' } },
@@ -43,8 +44,8 @@ const loginPage = () => import('./iam/presentation/views/login-view.vue');
 const registerPage = () => import('./iam/presentation/views/register-view.vue');
 
 const routes = [
-    { path: '/restaurant',      name: 'restaurant', redirect: '/restaurant/dashboard' },
-    { path: '/supplier',        name: 'supplier',   redirect: '/supplier/dashboard', children: supplierRoutes },
+    { path: '/restaurant',      name: 'restaurant', component: restaurantView, redirect: '/restaurant/dashboard', children: restaurantManagementRoutes },
+    { path: '/supplier',        name: 'supplier',   component: supplierView,   redirect: '/supplier/dashboard', children: supplierRoutes },
     { path: '/', redirect: '/login' },
     { path: '/login', name: 'login', component: loginPage, meta: { title: 'Log in' } },
     { path: '/register', name: 'register', component: registerPage, meta: { title: 'Register' } },

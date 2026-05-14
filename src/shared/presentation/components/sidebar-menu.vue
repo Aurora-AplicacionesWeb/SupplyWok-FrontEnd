@@ -3,7 +3,7 @@ import { computed, ref } from 'vue';
 import {useI18n} from "vue-i18n";
 import { useRoute, useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
-import useSessionStore from '../../application/session.store.js';
+import useSessionStore from '../application/session.store.js';
 
 /**
  * @component SidebarMenu
