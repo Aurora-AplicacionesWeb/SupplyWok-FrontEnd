@@ -867,36 +867,153 @@
           "trend": "stable",
           "summary": "Projected demand is steady with no urgent restock signal."
         }
+      ],
+      "clients": [
+        {
+          "clientId": 1,
+          "clientName": "Gran Dragon Chifa",
+          "value": 72,
+          "trend": "upward",
+          "summary": "Seafood and greens demand trending higher before weekends."
+        },
+        {
+          "clientId": 2,
+          "clientName": "Jade Express",
+          "value": 68,
+          "trend": "stable",
+          "summary": "Keep standard restock cadence; lunch traffic is stable."
+        },
+        {
+          "clientId": 3,
+          "clientName": "Pekin Lounge",
+          "value": 55,
+          "trend": "watch",
+          "summary": "Demand remains moderate with steady weekly orders."
+        },
+        {
+          "clientId": 4,
+          "clientName": "Ming Garden",
+          "value": 49,
+          "trend": "stable",
+          "summary": "Projected demand is steady with no urgent restock signal."
+        }
       ]
     }
   ],
-  "deliveryRoutes": [
+  "delivery-routes": [
     {
       "id": 1,
-      "name": "Lima Centro AM",
-      "stops": 6,
-      "startTime": "09:00",
-      "endTime": "13:20",
-      "priority": "high",
-      "lastUpdatedMinutesAgo": 12
+      "date": "2026-05-16",
+      "routeName": "Miraflores - San Isidro AM",
+      "supplierName": "Golden Wok Produce",
+      "vehicle": "TRK-204",
+      "status": "planned",
+      "totalStops": 3,
+      "totalOrders": 3,
+      "estimatedDeparture": "08:20",
+      "estimatedArrival": "11:10",
+      "estimatedDurationMinutes": 170,
+      "stops": [
+        {
+          "sequence": 1,
+          "restaurantName": "Jade Express",
+          "district": "Miraflores",
+          "estimatedArrival": "09:00",
+          "ordersCount": 1,
+          "orderCodes": [
+            "PO-24025"
+          ]
+        },
+        {
+          "sequence": 2,
+          "restaurantName": "Gran Dragon Chifa",
+          "district": "San Isidro",
+          "estimatedArrival": "09:50",
+          "ordersCount": 2,
+          "orderCodes": [
+            "PO-24521",
+            "PO-30343"
+          ]
+        },
+        {
+          "sequence": 3,
+          "restaurantName": "Pekin Lounge",
+          "district": "Surco",
+          "estimatedArrival": "10:45",
+          "ordersCount": 0,
+          "orderCodes": []
+        }
+      ]
     },
     {
       "id": 2,
-      "name": "Miraflores / San Isidro",
-      "stops": 5,
-      "startTime": "10:30",
-      "endTime": "14:10",
-      "priority": "medium",
-      "lastUpdatedMinutesAgo": 5
+      "date": "2026-05-16",
+      "routeName": "Surco - La Molina PM",
+      "supplierName": "Golden Wok Produce",
+      "vehicle": "TRK-118",
+      "status": "in_progress",
+      "totalStops": 2,
+      "totalOrders": 2,
+      "estimatedDeparture": "13:30",
+      "estimatedArrival": "16:15",
+      "estimatedDurationMinutes": 165,
+      "stops": [
+        {
+          "sequence": 1,
+          "restaurantName": "Pekin Lounge",
+          "district": "Surco",
+          "estimatedArrival": "14:15",
+          "ordersCount": 1,
+          "orderCodes": [
+            "PO-24024"
+          ]
+        },
+        {
+          "sequence": 2,
+          "restaurantName": "Ming Garden",
+          "district": "La Molina",
+          "estimatedArrival": "15:40",
+          "ordersCount": 1,
+          "orderCodes": [
+            "PO-24026"
+          ]
+        }
+      ]
     },
     {
       "id": 3,
-      "name": "Table 18",
-      "stops": 4,
-      "startTime": "13:30",
-      "endTime": "17:10",
-      "priority": "high",
-      "lastUpdatedMinutesAgo": 30
+      "date": "2026-05-15",
+      "routeName": "Lima Centro Consolidated",
+      "supplierName": "Golden Wok Produce",
+      "vehicle": "TRK-077",
+      "status": "completed",
+      "totalStops": 2,
+      "totalOrders": 2,
+      "estimatedDeparture": "07:50",
+      "estimatedArrival": "10:20",
+      "estimatedDurationMinutes": 150,
+      "stops": [
+        {
+          "sequence": 1,
+          "restaurantName": "Gran Dragon Chifa",
+          "district": "San Isidro",
+          "estimatedArrival": "08:40",
+          "ordersCount": 1,
+          "orderCodes": [
+            "PO-24023"
+          ]
+        },
+        {
+          "sequence": 2,
+          "restaurantName": "Jade Express",
+          "district": "Miraflores",
+          "estimatedArrival": "09:35",
+          "ordersCount": 1,
+          "orderCodes": [
+            "PO-24022"
+          ]
+        }
+      ]
     }
   ],
   "products": [

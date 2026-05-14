@@ -6,6 +6,7 @@ import {CatalogItemAssembler} from "../infrastructure/catalog-item.assembler.js"
 import {ClientAssembler} from "../infrastructure/client.assembler.js";
 import {SupplierAlertAssembler} from "../infrastructure/supplier-alert.assembler.js";
 import {DemandForecastAssembler} from "../infrastructure/demand-forecast.assembler.js";
+import {DeliveryRouteAssembler} from "../infrastructure/delivery-route.assembler.js";
 const supplierManagementApi = new SupplyManagementApi();
 
 /**
@@ -36,8 +37,6 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
         supplierManagementApi.getOrders().then(response=>{
             purchaseOrders.value=OrdersAssembler.toEntitiesFromResponse(response);
             purchaseOrdersLoaded.value=true;
-            console.log(purchaseOrders.value);
-            console.log(purchaseOrdersLoaded.value);
         }).catch(error=>{
             errors.value.push(error);
         });
@@ -117,6 +116,8 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
     const alertsLoaded = ref(false);
     const demandForecast = ref(null);
     const demandForecastLoaded = ref(false);
+    const deliveryRoutes = ref([]);
+    const deliveryRoutesLoaded = ref(false);
 
     /**
      * Number of loaded catalog items.
@@ -144,6 +145,8 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
 
     const demandForecastClientCount =
         computed(() => demandForecastLoaded.value ? demandForecast.value?.clients?.length ?? 0 : 0);
+    const deliveryRoutesCount =
+        computed(() => deliveryRoutesLoaded.value ? deliveryRoutes.value.length : 0);
 
     /**
      * Loads the supplier's catalog items from infrastructure and updates local state.
@@ -196,6 +199,20 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
         supplierManagementApi.getDemandForecast().then(response=>{
             demandForecast.value = DemandForecastAssembler.toEntityFromResponse(response);
             demandForecastLoaded.value = true;
+        }).catch(error=>{
+            errors.value.push(error);
+        });
+    }
+
+    /**
+     * Loads delivery routes from infrastructure and updates local state.
+     *
+     * @returns {void}
+     */
+    function fetchDeliveryRoutes(){
+        supplierManagementApi.getDeliveryRoutes().then(response=>{
+            deliveryRoutes.value = DeliveryRouteAssembler.toEntitiesFromResponse(response);
+            deliveryRoutesLoaded.value = true;
         }).catch(error=>{
             errors.value.push(error);
         });
@@ -321,10 +338,14 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
         demandForecast,
         demandForecastLoaded,
         demandForecastClientCount,
+        deliveryRoutes,
+        deliveryRoutesLoaded,
+        deliveryRoutesCount,
         fetchCatalogItems,
         fetchClients,
         fetchAlerts,
         fetchDemandForecast,
+        fetchDeliveryRoutes,
         acknowledgeAlert,
         getCatalogItemById,
         addCatalogItem,
