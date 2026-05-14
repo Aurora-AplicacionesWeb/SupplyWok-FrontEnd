@@ -12,6 +12,7 @@ export class BaseEndpoint {
         this.http = baseApi.http;
         this.endpointPath = endpointPath;
     }
+
     /**
      * Retrieves a collection resource from the endpoint.
      *
@@ -21,6 +22,11 @@ export class BaseEndpoint {
         return this.http.get(this.endpointPath);
     }
 
+    /**
+     * Retrieves one resource by identifier.
+     * @param {number|string} id - Resource identifier.
+     * @returns {Promise<import('axios').AxiosResponse<Object>>}
+     */
     getById(id) {
         return this.http.get(`${this.endpointPath}/${id}`);
     }
@@ -35,10 +41,21 @@ export class BaseEndpoint {
         return this.http.post(this.endpointPath, resource);
     }
 
+    /**
+     * Updates an existing resource.
+     * @param {number|string} id - Resource identifier.
+     * @param {Object} resource - Resource payload.
+     * @returns {Promise<import('axios').AxiosResponse<Object>>}
+     */
     update(id, resource) {
         return this.http.put(`${this.endpointPath}/${id}`, resource);
     }
 
+    /**
+     * Deletes one resource by identifier.
+     * @param {number|string} id - Resource identifier.
+     * @returns {Promise<import('axios').AxiosResponse<Object>>}
+     */
     delete(id) {
         return this.http.delete(`${this.endpointPath}/${id}`);
     }

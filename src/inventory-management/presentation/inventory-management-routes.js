@@ -2,8 +2,8 @@ import inventoryManagementPage from './pages/inventory-management-page.vue';
 
 export const inventoryManagementRoutes = [
   {
-	path: '/inventory',
-	name: 'inventory-management-page',
+	path: 'inventory',
+	name: 'restaurant-inventory',
 	component: inventoryManagementPage,
 	meta: { title: 'Inventory' }
   }

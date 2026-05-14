@@ -33,18 +33,20 @@ const filteredPurchaseOrders = computed(() => {
         const supplierName = String(purchaseOrder.supplierName ?? '').toLowerCase();
         const priority = String(purchaseOrder.priority ?? '').toLowerCase();
         const status = String(purchaseOrder.status ?? '').toLowerCase();
+        const code = String(purchaseOrder.code ?? '').toLowerCase();
         const id = String(purchaseOrder.id ?? '').toLowerCase();
 
         return supplierName.includes(normalizedSearchValue)
             || priority.includes(normalizedSearchValue)
             || status.includes(normalizedSearchValue)
+            || code.includes(normalizedSearchValue)
             || id.includes(normalizedSearchValue);
     });
 });
 
 function getSeverityByStatus(status) {
     if (status === 'Pending') return 'warning';
-    if (status === 'In Preparation') return 'info';
+    if (status === 'In Preparation' || status === 'Confirmed' || status === 'In Transit') return 'info';
     if (status === 'Delivered') return 'success';
     if (status === 'Delayed') return 'danger';
     return 'secondary';
@@ -54,6 +56,8 @@ function getStatusLabel(status) {
     const translations = {
         'Pending': t('supply-and-purchasing.shared.status.pending'),
         'In Preparation': t('supply-and-purchasing.shared.status.in-preparation'),
+        'Confirmed': 'Confirmed',
+        'In Transit': 'In Transit',
         'Delivered': t('supply-and-purchasing.shared.status.delivered'),
         'Delayed': t('supply-and-purchasing.shared.status.delayed')
     };
@@ -94,6 +98,10 @@ function openPurchaseOrderDetail(purchaseOrder) {
 
 function closePurchaseOrderDetail() {
     selectedPurchaseOrder.value = null;
+}
+
+function formatCode(purchaseOrder) {
+    return purchaseOrder.code ?? `PO-${String(purchaseOrder.id).padStart(5, '0')}`;
 }
 </script>
 
@@ -136,7 +144,7 @@ function closePurchaseOrderDetail() {
             <Column field="id" :header="t('supply-and-purchasing.table.columns.code')" sortable>
                 <template #body="{ data }">
                     <div class="purchase-orders-table__code-cell">
-                        <strong>PO-{{ String(data.id).padStart(5, '0') }}</strong>
+                        <strong>{{ formatCode(data) }}</strong>
                         <span>{{ data.supplierName }}</span>
                     </div>
                 </template>
@@ -178,7 +186,7 @@ function closePurchaseOrderDetail() {
                 <div class="purchase-orders-table__detail-header">
                     <div>
                         <span class="purchase-orders-table__detail-kicker">{{ t('supply-and-purchasing.detail.kicker') }}</span>
-                        <h3>PO-{{ String(selectedPurchaseOrder.id).padStart(5, '0') }}</h3>
+                        <h3>{{ formatCode(selectedPurchaseOrder) }}</h3>
                         <p>{{ selectedPurchaseOrder.supplierName }}</p>
                     </div>
 

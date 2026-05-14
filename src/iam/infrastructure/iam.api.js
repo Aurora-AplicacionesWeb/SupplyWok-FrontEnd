@@ -5,7 +5,7 @@ import { UserAssembler } from './assemblers/user.assembler.js';
  */
 export class IamApi {
   constructor() {
-    this.baseUrl = import.meta.env.VITE_SUPPLYWOK_API_URL || 'http://localhost:3000/api/v1';
+    this.baseUrl = import.meta.env.VITE_SUPPLYWOK_API_URL || 'https://6a03931d2afe8349b4b55a06.mockapi.io';
     this.endpoint = import.meta.env.VITE_SUPPLYWOK_API_USERS_ENDPOINT_PATH || '/supplywok/users';
   }
 

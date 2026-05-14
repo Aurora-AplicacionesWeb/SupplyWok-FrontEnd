@@ -42,6 +42,7 @@
     "sidebar": {
       "restaurant": "Restaurant",
       "current-plan": "Current plan:",
+      "supplier": "Supplier",
       "dashboard": "Dashboard",
       "inventory": "Inventory",
       "orders": "Orders",
@@ -51,7 +52,101 @@
       "alerts": "Alerts",
       "reports": "Reports",
       "configuration": "Configuration",
-      "subscription": "Subscription"
+      "subscription": "Subscription",
+      "clients": "My Clients",
+      "forecast": "Demand Forecast",
+      "catalog": "Product Catalog",
+      "delivery": "Delivery Planning"
+    }
+  },
+  "supplier-management": {
+    "orders": {
+      "breadcrumb": "SUPPLIER",
+      "title": "Purchase orders",
+      "subtitle": "Track restaurant orders and delivery commitments.",
+      "search": "Search",
+      "stats": {
+        "total": "Total orders",
+        "pending": "Pending",
+        "in-transit": "In transit",
+        "delivered": "Delivered"
+      },
+      "filters": {
+        "status": "Status",
+        "all": "All statuses",
+        "confirmed": "Confirmed",
+        "pending": "Pending",
+        "in-transit": "In transit",
+        "delivered": "Delivered",
+        "delayed": "Delayed"
+      },
+      "columns": {
+        "code": "Order",
+        "restaurant": "Restaurant",
+        "order-date": "Order date",
+        "delivery-date": "Estimated delivery",
+        "priority": "Priority",
+        "status": "Status",
+        "items": "Items",
+        "actions": "Actions"
+      },
+      "actions": {
+        "confirm": "Confirm",
+        "mark-in-transit": "Mark in transit",
+        "mark-delivered": "Mark delivered",
+        "view": "View details"
+      },
+      "details": {
+        "title": "Order details",
+        "order-date": "Order date",
+        "delivery-date": "Estimated delivery",
+        "priority": "Priority",
+        "supplier": "Supplier",
+        "close": "Close",
+        "columns": {
+          "product": "Product",
+          "quantity": "Quantity",
+          "unit": "Unit",
+          "unit-price": "Unit price",
+          "subtotal": "Subtotal"
+        }
+      },
+      "empty": "No orders match your search.",
+      "visible-count": "Showing {visible} of {total} total orders"
+    },
+    "catalog": {
+      "breadcrumb": "SUPPLIER",
+      "title": "Product catalog",
+      "subtitle": "Manage offer, price, unit, and delivery conditions.",
+      "add": "Add",
+      "search": "Search",
+      "columns": {
+        "product": "Product",
+        "category": "Category",
+        "price": "Price",
+        "unit": "Unit",
+        "delivery-conditions": "Delivery conditions",
+        "actions": "Actions"
+      },
+      "actions": {
+        "edit": "Edit",
+        "delete": "Delete"
+      },
+      "form": {
+        "product": "Product",
+        "category": "Category",
+        "price": "Price",
+        "unit": "Unit",
+        "delivery-conditions": "Delivery conditions",
+        "cancel": "Cancel",
+        "save": "Save"
+      },
+      "delete-dialog": {
+        "title": "Delete product",
+        "message": "Are you sure you want to delete {product} from the catalog?",
+        "confirm": "Delete"
+      },
+      "empty": "No products in the catalog yet."
     }
   },
   "inventoryManagement": {
@@ -79,6 +174,19 @@
         "actions": "Actions"
       },
       "actions": { "add": "Add" }
+    },
+    "belowMinimum": {
+      "title": "Below minimum",
+      "caption": "{count} product(s) below minimum stock level",
+      "empty": "No products below minimum stock level.",
+      "columns": {
+        "product": "PRODUCT",
+        "currentStock": "CURRENT STOCK",
+        "status": "STATUS"
+      },
+      "actions": {
+        "sortAll": "SORT ALL"
+      }
     },
     "stockStatus": { "critical": "Critical", "warning": "Low", "healthy": "Healthy" },
     "units": { "kilograms": "Kilograms", "liters": "Liters", "units": "Units", "grams": "Grams" }
@@ -327,6 +435,13 @@
     "failedAttempts": "Failed Attempts",
     "lockedUntil": "Locked Until"
   },
+  "supplyAndPurchasing": {
+    "dashboard": {
+      "pendingOrders": {
+        "label": "Pending Orders"
+      }
+    }
+  },
   "restaurantManagement": {
     "dishMenuPage": {
       "kicker": "Menu",
@@ -434,6 +549,15 @@
         "table_service": "Table Service",
         "to_take_home": "To Take Home"
       }
+    },
+    "dashboard": {
+      "kitchenTickets": {
+        "title": "Kitchen Tickets",
+        "seeAll": "See All Kitchen Tickets"
+      },
+      "activeCommands": {
+        "label": "Kitchen Commands"
+      }
     }
   },
   "historyStateKitchenOrders": {
@@ -447,6 +571,7 @@
   },
   "header": {
     "settings": "Settings",
-    "logout": "Log Out"
+    "logout": "Log Out",
+    "help": "Help"
   }
 }

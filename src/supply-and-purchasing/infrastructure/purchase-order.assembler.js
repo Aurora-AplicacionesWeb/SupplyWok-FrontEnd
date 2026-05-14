@@ -9,7 +9,7 @@ import { OrderItem } from '../domain/model/order-item.entity.js';
 export class PurchaseOrderAssembler {
 
     /**
-     * @param {{id: number|string, supplierId: number|string, orderDate: string, priority: string, status: string, items?: Array<Object>}} resource - Purchase order resource payload.
+     * @param {{id: number|string, code?: string, supplierId: number|string, supplierName?: string, restaurantName?: string, orderDate: string, estimatedDate?: string, priority: string, status: string, items?: Array<Object>}} resource - Purchase order resource payload.
      * @returns {PurchaseOrder} Purchase order entity.
      */
     static toEntityFromResource(resource) {
@@ -24,7 +24,7 @@ export class PurchaseOrderAssembler {
     /**
      * Parses purchase order resources from a response and maps them into entities.
      *
-     * @param {import('axios').AxiosResponse<Array<Object>|{purchaseOrders:Array<Object>}>} response - HTTP response with purchase order resources.
+     * @param {import('axios').AxiosResponse<Array<Object>|{purchaseOrders:Array<Object>}|{'purchase-orders':Array<Object>}>} response - HTTP response with purchase order resources.
      * @returns {PurchaseOrder[]} Purchase order entities.
      */
     static toEntitiesFromResponse(response) {
@@ -33,9 +33,9 @@ export class PurchaseOrderAssembler {
             return [];
         }
 
-        let resources = response.data instanceof Array
+        const resources = response.data instanceof Array
             ? response.data
-            : response.data['purchaseOrders'];
+            : response.data.purchaseOrders ?? response.data['purchase-orders'] ?? [];
 
         return resources.map(resource => this.toEntityFromResource(resource));
     }

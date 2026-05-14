@@ -31,6 +31,8 @@ function getStatusLabel(status) {
     const translations = {
         'Pending': t('supply-and-purchasing.shared.status.pending'),
         'In Preparation': t('supply-and-purchasing.shared.status.in-preparation'),
+        'Confirmed': 'Confirmed',
+        'In Transit': 'In Transit',
         'Delivered': t('supply-and-purchasing.shared.status.delivered'),
         'Delayed': t('supply-and-purchasing.shared.status.delayed')
     };
@@ -40,14 +42,14 @@ function getStatusLabel(status) {
 
 function getStatusClass(status) {
     if (status === 'Pending') return 'orders-summary-card__badge--warning';
-    if (status === 'In Preparation') return 'orders-summary-card__badge--info';
+    if (status === 'In Preparation' || status === 'Confirmed' || status === 'In Transit') return 'orders-summary-card__badge--info';
     if (status === 'Delivered') return 'orders-summary-card__badge--success';
     if (status === 'Delayed') return 'orders-summary-card__badge--danger';
     return 'orders-summary-card__badge--secondary';
 }
 
-function formatCode(id) {
-    return `#PO-${String(id ?? '').padStart(4, '0')}`;
+function formatCode(purchaseOrder) {
+    return purchaseOrder.code ? `#${purchaseOrder.code}` : `#PO-${String(purchaseOrder.id ?? '').padStart(4, '0')}`;
 }
 
 function formatOrderDate(orderDate) {
@@ -101,7 +103,7 @@ function toTimestamp(orderDate) {
             </div>
 
             <div v-for="purchaseOrder in visiblePurchaseOrders" :key="purchaseOrder.id" class="orders-summary-card__row">
-                <strong>{{ formatCode(purchaseOrder.id) }}</strong>
+                <strong>{{ formatCode(purchaseOrder) }}</strong>
                 <span>{{ purchaseOrder.supplierName || '-' }}</span>
                 <span class="orders-summary-card__badge" :class="getStatusClass(purchaseOrder.status)">
                     {{ getStatusLabel(purchaseOrder.status) }}
@@ -114,7 +116,7 @@ function toTimestamp(orderDate) {
             </div>
         </div>
 
-        <RouterLink to="/orders" class="orders-summary-card__cta">
+        <RouterLink :to="{ name: 'restaurant-orders' }" class="orders-summary-card__cta">
             {{ t('supply-and-purchasing.summary-card.actions.view-history') }}
         </RouterLink>
     </section>

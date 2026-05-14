@@ -15,6 +15,8 @@ const isAuthRoute = computed(() => ['login', 'register'].includes(route.name));
 </script>
 
 <template>
-  <router-view v-if="isAuthRoute" />
-  <Layout v-else />
+  <Layout v-if="!isAuthRoute">
+    <router-view />
+  </Layout>
+  <router-view v-else />
 </template>

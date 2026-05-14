@@ -1,9 +1,10 @@
 import axios from 'axios';
 
-const platformApi = import.meta.env.VITE_SUPPLY_WOK_API_URL ?? '';
+const platformApi = import.meta.env.VITE_SUPPLY_WOK_API_URL ?? 'http://localhost:3000/api/v1';
 
 /**
  * Shared infrastructure base class that owns the configured Axios client.
+ * Bounded-context adapters extend this class to access a consistent HTTP gateway.
  *
  * @class BaseApi
  */

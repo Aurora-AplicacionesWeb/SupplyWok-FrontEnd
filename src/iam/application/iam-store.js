@@ -75,6 +75,7 @@ export const useIamStore = defineStore('iam', () => {
       const newUser = await api.createUser(userData);
       if (newUser) {
         users.value.push(newUser);
+        currentUser.value = newUser;
         return true;
       }
       return false;

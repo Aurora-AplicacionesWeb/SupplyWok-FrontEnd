@@ -11,6 +11,14 @@ const emit = defineEmits(['saved']);
 
 const { t } = useI18n();
 const store = usePurchaseOrderStore();
+const { validationErrors } = storeToRefs(store);
+const { addPurchaseOrder, clearValidationScope, validateOrderItem } = store;
+
+const supplierOptions = [
+    { id: 201, name: 'Golden Wok Produce' },
+    { id: 202, name: 'Andes Cold Chain' },
+    { id: 203, name: 'Orient Pantry Co.' }
+];
 const { validationErrors, supplierDirectory } = storeToRefs(store);
 const { addPurchaseOrder, clearValidationScope, validateOrderItem, ensureSuppliersLoaded } = store;
 
@@ -30,6 +38,10 @@ const form = reactive({
         hour: '2-digit',
         minute: '2-digit'
     }),
+    supplierId: supplierOptions[0].id,
+    supplierName: supplierOptions[0].name,
+    orderDate: formatLocalDate(new Date()),
+    estimatedDate: formatLocalDate(addDays(new Date(), 2)),
     priority: 'Medium'
 });
 
@@ -95,9 +107,12 @@ async function handleSubmit() {
     }
 
     const purchaseOrder = new PurchaseOrder({
-        supplierId: form.supplierId,
+        code: buildPurchaseOrderCode(),
+        supplierId: Number(form.supplierId),
         supplierName: form.supplierName,
+        restaurantName: 'Gran Dragon Chifa',
         orderDate: form.orderDate,
+        estimatedDate: form.estimatedDate,
         priority: form.priority,
         status: 'Pending',
         items: items
@@ -124,6 +139,23 @@ function getDraftFieldError(field) {
 function formatPrice(value) {
     const parsedValue = Number(value);
     return Number.isFinite(parsedValue) ? parsedValue.toFixed(2) : '0.00';
+}
+
+function addDays(date, days) {
+    const nextDate = new Date(date);
+    nextDate.setDate(nextDate.getDate() + days);
+    return nextDate;
+}
+
+function formatLocalDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
+function buildPurchaseOrderCode() {
+    return `PO-${String(Date.now()).slice(-5)}`;
 }
 
 watch(supplierDirectory, (options) => {
@@ -154,10 +186,9 @@ onMounted(() => {
                     v-model="form.supplierId"
                     class="purchase-order-form-panel__select"
                     :class="{ 'purchase-order-form-panel__select--invalid': getFieldError('supplierId') }"
-                    :disabled="!supplierDirectory.length"
                     @change="syncSupplierData"
                 >
-                    <option v-for="supplier in supplierDirectory" :key="supplier.id" :value="supplier.id">{{ supplier.name }}</option>
+                    <option v-for="supplier in supplierOptions" :key="supplier.id" :value="supplier.id">{{ supplier.name }}</option>
                 </select>
                 <small v-if="getFieldError('supplierId')" class="purchase-order-form-panel__error">{{ getFieldError('supplierId') }}</small>
             </label>
