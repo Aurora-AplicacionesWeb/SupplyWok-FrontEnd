@@ -3,6 +3,7 @@ import {computed, ref} from "vue";
 import { SupplyManagementApi } from "../infrastructure/supply-management-api.js";
 import {OrdersAssembler} from "../infrastructure/orders.assembler.js";
 import {CatalogItemAssembler} from "../infrastructure/catalog-item.assembler.js";
+import {ClientAssembler} from "../infrastructure/client.assembler.js";
 const supplierManagementApi = new SupplyManagementApi();
 
 /**
@@ -108,6 +109,8 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
 
     const catalogItems = ref([]);
     const catalogItemsLoaded = ref(false);
+    const clients = ref([]);
+    const clientsLoaded = ref(false);
 
     /**
      * Number of loaded catalog items.
@@ -118,6 +121,14 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
         computed(()=> catalogItemsLoaded.value ? catalogItems.value.length : 0);
 
     /**
+     * Number of loaded clients.
+     *
+     * @type {import('vue').ComputedRef<number>}
+     */
+    const clientsCount =
+        computed(() => clientsLoaded.value ? clients.value.length : 0);
+
+    /**
      * Loads the supplier's catalog items from infrastructure and updates local state.
      *
      * @returns {void}
@@ -126,6 +137,20 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
         supplierManagementApi.getCatalogItems().then(response=>{
             catalogItems.value = CatalogItemAssembler.toEntitiesFromResponse(response);
             catalogItemsLoaded.value = true;
+        }).catch(error=>{
+            errors.value.push(error);
+        });
+    }
+
+    /**
+     * Loads supplier clients from infrastructure and updates local state.
+     *
+     * @returns {void}
+     */
+    function fetchClients(){
+        supplierManagementApi.getClients().then(response=>{
+            clients.value = ClientAssembler.toEntitiesFromResponse(response);
+            clientsLoaded.value = true;
         }).catch(error=>{
             errors.value.push(error);
         });
@@ -210,7 +235,11 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
         catalogItems,
         catalogItemsLoaded,
         catalogItemsCount,
+        clients,
+        clientsLoaded,
+        clientsCount,
         fetchCatalogItems,
+        fetchClients,
         getCatalogItemById,
         addCatalogItem,
         updateCatalogItem,

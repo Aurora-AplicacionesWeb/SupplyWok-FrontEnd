@@ -3,14 +3,17 @@ import {BaseEndpoint} from "../../shared/infrastructure/base-endpoint.js";
 
 const ordersEndpointPath=import.meta.env.VITE_PURCHASE_ORDERS_ENDPOINT_PATH ?? '/purchase-orders';
 const catalogItemsEndpointPath=import.meta.env.VITE_CATALOG_ITEMS_ENDPOINT_PATH ?? '/catalog-items';
+const clientsEndpointPath=import.meta.env.VITE_CLIENTS_ENDPOINT_PATH ?? '/clients';
 
 export class SupplyManagementApi extends BaseApi {
     #supplyManagementEndpoint;
     #catalogItemsEndpoint;
+    #clientsEndpoint;
     constructor(){
         super();
         this.#supplyManagementEndpoint= new BaseEndpoint(this,ordersEndpointPath);
         this.#catalogItemsEndpoint= new BaseEndpoint(this,catalogItemsEndpointPath);
+        this.#clientsEndpoint= new BaseEndpoint(this,clientsEndpointPath);
     }
     getOrders(){
         return this.#supplyManagementEndpoint.getAll();
@@ -49,4 +52,8 @@ export class SupplyManagementApi extends BaseApi {
         return this.#catalogItemsEndpoint.delete(id);
     }
     // ── End Catalog Supplier section ──────────────────────────────────────────
+
+    getClients(){
+        return this.#clientsEndpoint.getAll();
+    }
 }
