@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 const useSessionStore = defineStore('session', () => {
-  const userRole = ref('supplier');
+  const userRole = ref(null);
 
   function setUserRole(role) {
     userRole.value = role;

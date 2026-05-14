@@ -188,7 +188,7 @@ onMounted(() => {
       <pv-input-text id="catalog-search" v-model="searchQuery" type="search" />
     </div>
 
-    <pv-data-table
+    <pv-datatable
       class="catalog-table"
       :loading="!catalogItemsLoaded"
       :value="filteredCatalogItems"
@@ -225,7 +225,7 @@ onMounted(() => {
       <template #empty>
         <span class="catalog-table__empty">{{ t('supplier-management.catalog.empty') }}</span>
       </template>
-    </pv-data-table>
+    </pv-datatable>
 
     <ConfirmDeleteDialog
       v-model:visible="isDeleteDialogVisible"

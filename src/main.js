@@ -10,7 +10,7 @@ import Aura from '@primeuix/themes/aura'
 import 'primeflex/primeflex.css'
 import 'primeicons/primeicons.css'
 
-import { Button, InputText, Card, SelectButton, Select, Checkbox, Menu, DataTable, Column, Tag, IconField, InputIcon, Dialog } from 'primevue'
+import { Button, InputText, Card, SelectButton, Select, Checkbox, Menu, DataTable, Column, Tag, IconField, InputIcon, Dialog, InputNumber } from 'primevue'
 
 import i18n from './i18n.js'
 

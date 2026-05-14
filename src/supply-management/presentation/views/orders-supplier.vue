@@ -164,7 +164,7 @@ onMounted(() => {
       </label>
     </section>
 
-    <pv-data-table
+    <pv-datatable
       class="orders-table"
       :loading="!purchaseOrdersLoaded"
       :value="filteredOrders"
@@ -232,7 +232,7 @@ onMounted(() => {
       <template #empty>
         <span class="orders-page__empty">{{ t('supplier-management.orders.empty') }}</span>
       </template>
-    </pv-data-table>
+    </pv-datatable>
 
     <p class="orders-page__visible-count">{{ visibleOrdersText }}</p>
 
@@ -271,7 +271,7 @@ onMounted(() => {
           </article>
         </section>
 
-        <pv-data-table class="orders-detail-table" :value="selectedOrder.items ?? []" responsive-layout="scroll">
+        <pv-datatable class="orders-detail-table" :value="selectedOrder.items ?? []" responsive-layout="scroll">
           <pv-column field="productName" :header="t('supplier-management.orders.details.columns.product')" />
           <pv-column field="quantity" :header="t('supplier-management.orders.details.columns.quantity')" />
           <pv-column field="unitType" :header="t('supplier-management.orders.details.columns.unit')" />
@@ -285,7 +285,7 @@ onMounted(() => {
               {{ formatCurrency((data.quantity ?? 0) * (data.unitPrice ?? 0)) }}
             </template>
           </pv-column>
-        </pv-data-table>
+        </pv-datatable>
       </template>
       <template #footer>
         <pv-button

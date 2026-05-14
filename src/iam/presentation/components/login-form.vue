@@ -3,10 +3,13 @@ import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useIamStore } from '../../application/iam-store.js';
 import { useI18n } from 'vue-i18n';
+import useSessionStore from '../../../shared/application/session.store.js';
+import { getHomeByRole, normalizeRole } from '../../../shared/application/role-routing.js';
 
 const { t } = useI18n();
 const router = useRouter();
 const iamStore = useIamStore();
+const sessionStore = useSessionStore();
 
 const email = ref('');
 const password = ref('');
@@ -33,7 +36,9 @@ const handleLogin = async () => {
   const success = await iamStore.login(email.value, password.value);
   
   if (success) {
-    router.push('/dashboard');
+    const role = normalizeRole(iamStore.currentUserRole);
+    sessionStore.setUserRole(role);
+    router.push(getHomeByRole(role));
   } else {
     errorMessage.value = iamStore.error || t('access.validation.invalid-credentials');
   }
