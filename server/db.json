@@ -867,36 +867,6 @@
           "trend": "stable",
           "summary": "Projected demand is steady with no urgent restock signal."
         }
-      ],
-      "clients": [
-        {
-          "clientId": 1,
-          "clientName": "Gran Dragon Chifa",
-          "value": 72,
-          "trend": "upward",
-          "summary": "Seafood and greens demand trending higher before weekends."
-        },
-        {
-          "clientId": 2,
-          "clientName": "Jade Express",
-          "value": 68,
-          "trend": "stable",
-          "summary": "Keep standard restock cadence; lunch traffic is stable."
-        },
-        {
-          "clientId": 3,
-          "clientName": "Pekin Lounge",
-          "value": 55,
-          "trend": "watch",
-          "summary": "Demand remains moderate with steady weekly orders."
-        },
-        {
-          "clientId": 4,
-          "clientName": "Ming Garden",
-          "value": 49,
-          "trend": "stable",
-          "summary": "Projected demand is steady with no urgent restock signal."
-        }
       ]
     }
   ],
@@ -1153,6 +1123,81 @@
       "detail": "New urgent order from Ming Garden",
       "date": "2026-04-20T18:00:00Z",
       "status": "acknowledged"
+    }
+  ],
+  "supplier-subscriptions": [
+    {
+      "id": 1,
+      "currentPlan": "enterprise",
+      "summary": [
+        {
+          "key": "current-plan",
+          "value": "Enterprise"
+        },
+        {
+          "key": "users",
+          "value": "Unlimited users"
+        },
+        {
+          "key": "locations",
+          "value": "Multi-location"
+        },
+        {
+          "key": "sensors",
+          "value": "Unlimited sensors"
+        }
+      ],
+      "plans": [
+        {
+          "id": "premium",
+          "name": "Premium",
+          "price": "$149/mo",
+          "isActive": false,
+          "features": [
+            "Core dashboards",
+            "IoT monitoring",
+            "Email support"
+          ]
+        },
+        {
+          "id": "enterprise",
+          "name": "Enterprise",
+          "price": "$399/mo",
+          "isActive": true,
+          "features": [
+            "Advanced analytics",
+            "Multi-location",
+            "Route optimization",
+            "Priority support"
+          ]
+        }
+      ]
+    }
+  ],
+  "supplier-settings": [
+    {
+      "id": 1,
+      "supplierName": "Golden Wok Produck",
+      "supportContact": "soporte@goldenwok.pe",
+      "notifications": {
+        "email": true,
+        "sms": true
+      },
+      "serviceZones": [
+        "Miraflores",
+        "Surco",
+        "La Molina"
+      ],
+      "contacts": [
+        {
+          "name": "Martin Lau",
+          "state": "active"
+        },
+        {
+          "name": "Carla Chen",
+          "state": "active"
+        }
+      ]
     }
   ]
 }

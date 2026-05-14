@@ -7,6 +7,8 @@ const clientsEndpointPath = import.meta.env.VITE_CLIENTS_ENDPOINT_PATH;
 const alertsEndpointPath = import.meta.env.VITE_ALERTS_ENDPOINT_PATH;
 const demandForecastsEndpointPath = import.meta.env.VITE_DEMAND_FORECASTS_ENDPOINT_PATH;
 const deliveryRoutesEndpointPath = import.meta.env.VITE_DELIVERY_ROUTES_ENDPOINT_PATH;
+const supplierSettingsEndpointPath = import.meta.env.VITE_SUPPLIER_SETTINGS_ENDPOINT_PATH;
+const supplierSubscriptionsEndpointPath = import.meta.env.VITE_SUPPLIER_SUBSCRIPTIONS_ENDPOINT_PATH;
 
 export class SupplyManagementApi extends BaseApi {
     #supplyManagementEndpoint;
@@ -15,6 +17,8 @@ export class SupplyManagementApi extends BaseApi {
     #alertsEndpoint;
     #demandForecastsEndpoint;
     #deliveryRoutesEndpoint;
+    #supplierSettingsEndpoint;
+    #supplierSubscriptionsEndpoint;
     constructor(){
         super();
         this.#supplyManagementEndpoint= new BaseEndpoint(this,ordersEndpointPath);
@@ -23,6 +27,8 @@ export class SupplyManagementApi extends BaseApi {
         this.#alertsEndpoint= new BaseEndpoint(this,alertsEndpointPath);
         this.#demandForecastsEndpoint= new BaseEndpoint(this,demandForecastsEndpointPath);
         this.#deliveryRoutesEndpoint= new BaseEndpoint(this,deliveryRoutesEndpointPath);
+        this.#supplierSettingsEndpoint= new BaseEndpoint(this,supplierSettingsEndpointPath);
+        this.#supplierSubscriptionsEndpoint= new BaseEndpoint(this,supplierSubscriptionsEndpointPath);
     }
     getOrders(){
         return this.#supplyManagementEndpoint.getAll();
@@ -80,5 +86,17 @@ export class SupplyManagementApi extends BaseApi {
 
     getDeliveryRoutes(){
         return this.#deliveryRoutesEndpoint.getAll();
+    }
+
+    getSupplierSettings(){
+        return this.#supplierSettingsEndpoint.getAll();
+    }
+
+    updateSupplierSettings(id, settings){
+        return this.#supplierSettingsEndpoint.update(id, settings);
+    }
+
+    getSupplierSubscription(){
+        return this.#supplierSubscriptionsEndpoint.getAll();
     }
 }
