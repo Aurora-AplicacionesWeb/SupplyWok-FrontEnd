@@ -136,6 +136,51 @@
       "empty": "No hay clientes que coincidan con tu búsqueda.",
       "visible-count": "Mostrando {visible} de {total} elementos totales"
     },
+    "alerts": {
+      "breadcrumb": "PROVEEDOR",
+      "title": "Alertas del proveedor",
+      "description": "Monitorea cambios urgentes, retrasos y senales compartidas por clientes.",
+      "search-label": "Buscar",
+      "search-placeholder": "Buscar alertas...",
+      "severity-label": "Severidad",
+      "severity-placeholder": "Filtrar por severidad",
+      "severity": {
+        "high": "Alta",
+        "medium": "Media",
+        "low": "Baja"
+      },
+      "status": {
+        "open": "Abierta",
+        "acknowledged": "Reconocida"
+      },
+      "table": {
+        "columns": {
+          "severity": "SEVERIDAD",
+          "detail": "DETALLE DE ALERTA",
+          "source": "ORIGEN",
+          "date": "FECHA",
+          "status": "ESTADO",
+          "actions": "ACCIONES"
+        },
+        "actions": {
+          "view-details": "VER DETALLES",
+          "acknowledge": "RECONOCER"
+        },
+        "footer": "Mostrando {first} a {last} de {total} alertas del proveedor"
+      },
+      "dialog": {
+        "header": "Detalle de la alerta",
+        "meta": {
+          "date": "Fecha",
+          "status": "Estado"
+        },
+        "actions": {
+          "close": "Cerrar",
+          "acknowledge": "Reconocer"
+        }
+      },
+      "empty": "No hay alertas que coincidan con tu busqueda."
+    },
     "catalog": {
       "breadcrumb": "PROVEEDOR",
       "title": "Catálogo de productos",

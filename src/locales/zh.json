@@ -136,6 +136,51 @@
       "empty": "没有符合搜索条件的客户。",
       "visible-count": "显示 {visible}/{total} 条记录"
     },
+    "alerts": {
+      "breadcrumb": "供应商",
+      "title": "供应商警报",
+      "description": "监控客户共享的紧急变更、延误和信号。",
+      "search-label": "搜索",
+      "search-placeholder": "搜索警报...",
+      "severity-label": "严重程度",
+      "severity-placeholder": "按严重程度筛选",
+      "severity": {
+        "high": "高",
+        "medium": "中",
+        "low": "低"
+      },
+      "status": {
+        "open": "开启",
+        "acknowledged": "已确认"
+      },
+      "table": {
+        "columns": {
+          "severity": "严重程度",
+          "detail": "警报详情",
+          "source": "来源",
+          "date": "日期",
+          "status": "状态",
+          "actions": "操作"
+        },
+        "actions": {
+          "view-details": "查看详情",
+          "acknowledge": "确认"
+        },
+        "footer": "显示第 {first} 至 {last} 条，共 {total} 条供应商警报"
+      },
+      "dialog": {
+        "header": "警报详情",
+        "meta": {
+          "date": "日期",
+          "status": "状态"
+        },
+        "actions": {
+          "close": "关闭",
+          "acknowledge": "确认"
+        }
+      },
+      "empty": "没有符合搜索条件的警报。"
+    },
     "catalog": {
       "breadcrumb": "供应商",
       "title": "产品目录",

@@ -866,7 +866,7 @@
       "severity": "low",
       "detail": "Client stock alert received",
       "date": "2026-04-21T08:42:00Z",
-      "status": "pending"
+      "status": "acknowledged"
     },
     {
       "id": 4,

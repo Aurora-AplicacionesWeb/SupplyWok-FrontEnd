@@ -136,6 +136,51 @@
       "empty": "No clients match your search.",
       "visible-count": "Showing {visible} of {total} total items"
     },
+    "alerts": {
+      "breadcrumb": "SUPPLIER",
+      "title": "Supplier alerts",
+      "description": "Monitor urgent changes, delays, and signals shared by clients.",
+      "search-label": "Search",
+      "search-placeholder": "Search alerts...",
+      "severity-label": "Severity",
+      "severity-placeholder": "Filter by Severity",
+      "severity": {
+        "high": "High",
+        "medium": "Medium",
+        "low": "Low"
+      },
+      "status": {
+        "open": "Open",
+        "acknowledged": "Acknowledged"
+      },
+      "table": {
+        "columns": {
+          "severity": "SEVERITY",
+          "detail": "ALERT DETAIL",
+          "source": "SOURCE",
+          "date": "DATE",
+          "status": "STATUS",
+          "actions": "ACTIONS"
+        },
+        "actions": {
+          "view-details": "VIEW DETAILS",
+          "acknowledge": "ACKNOWLEDGE"
+        },
+        "footer": "Showing {first} to {last} of {total} supplier alerts"
+      },
+      "dialog": {
+        "header": "Alert details",
+        "meta": {
+          "date": "Date",
+          "status": "Status"
+        },
+        "actions": {
+          "close": "Close",
+          "acknowledge": "Acknowledge"
+        }
+      },
+      "empty": "No alerts match your search."
+    },
     "catalog": {
       "breadcrumb": "SUPPLIER",
       "title": "Product catalog",
