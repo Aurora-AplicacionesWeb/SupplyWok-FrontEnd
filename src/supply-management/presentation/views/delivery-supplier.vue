@@ -20,7 +20,7 @@ const dateOptions = computed(() => {
 const statusOptions = computed(() => [
     { label: t('supplier-management.delivery.filters.all-statuses'), value: 'all' },
     { label: t('supplier-management.delivery.status.planned'), value: 'planned' },
-    { label: t('supplier-management.delivery.status.in-progress'), value: 'in_progress' },
+    { label: t('supplier-management.delivery.status.in-progress'), value: 'in-progress' },
     { label: t('supplier-management.delivery.status.completed'), value: 'completed' }
 ]);
 

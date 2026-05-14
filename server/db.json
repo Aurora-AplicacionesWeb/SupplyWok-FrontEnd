@@ -951,7 +951,7 @@
       "routeName": "Surco - La Molina PM",
       "supplierName": "Golden Wok Produce",
       "vehicle": "TRK-118",
-      "status": "in_progress",
+      "status": "in-progress",
       "totalStops": 2,
       "totalOrders": 2,
       "estimatedDeparture": "13:30",
