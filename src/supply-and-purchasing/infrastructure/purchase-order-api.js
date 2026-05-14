@@ -1,6 +1,7 @@
 import { BaseApi } from '../../shared/infrastructure/base-api.js';
 import { BaseEndpoint } from '../../shared/infrastructure/base-endpoint.js';
 
+const supplierCrudApiUrl = import.meta.env.VITE_SUPPLIER_CRUD_API_URL;
 const purchaseOrdersEndpointPath = import.meta.env.VITE_PURCHASE_ORDERS_ENDPOINT_PATH;
 
 /**
@@ -15,7 +16,7 @@ export class PurchaseOrderApi extends BaseApi {
 
     /** Creates the endpoint client for purchase orders when an endpoint path is available. */
     constructor() {
-        super();
+        super(supplierCrudApiUrl);
         this.#purchaseOrdersEndpoint = new BaseEndpoint(this, purchaseOrdersEndpointPath);
     }
 

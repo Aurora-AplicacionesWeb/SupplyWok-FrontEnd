@@ -1,6 +1,8 @@
 import {BaseApi} from "../../shared/infrastructure/base-api.js";
 import {BaseEndpoint} from "../../shared/infrastructure/base-endpoint.js";
 
+const supplierGetApiUrl = import.meta.env.VITE_SUPPLIER_GET_API_URL;
+const supplierCrudApiUrl = import.meta.env.VITE_SUPPLIER_CRUD_API_URL;
 const ordersEndpointPath = import.meta.env.VITE_PURCHASE_ORDERS_ENDPOINT_PATH;
 const catalogItemsEndpointPath = import.meta.env.VITE_CATALOG_ITEMS_ENDPOINT_PATH;
 const clientsEndpointPath = import.meta.env.VITE_CLIENTS_ENDPOINT_PATH;
@@ -21,14 +23,18 @@ export class SupplyManagementApi extends BaseApi {
     #supplierSubscriptionsEndpoint;
     constructor(){
         super();
-        this.#supplyManagementEndpoint= new BaseEndpoint(this,ordersEndpointPath);
-        this.#catalogItemsEndpoint= new BaseEndpoint(this,catalogItemsEndpointPath);
-        this.#clientsEndpoint= new BaseEndpoint(this,clientsEndpointPath);
-        this.#alertsEndpoint= new BaseEndpoint(this,alertsEndpointPath);
-        this.#demandForecastsEndpoint= new BaseEndpoint(this,demandForecastsEndpointPath);
-        this.#deliveryRoutesEndpoint= new BaseEndpoint(this,deliveryRoutesEndpointPath);
-        this.#supplierSettingsEndpoint= new BaseEndpoint(this,supplierSettingsEndpointPath);
-        this.#supplierSubscriptionsEndpoint= new BaseEndpoint(this,supplierSubscriptionsEndpointPath);
+        const supplierCrudApi = new BaseApi(supplierCrudApiUrl);
+        const supplierGetApi = new BaseApi(supplierGetApiUrl);
+
+        this.#supplyManagementEndpoint= new BaseEndpoint(supplierCrudApi, ordersEndpointPath);
+        this.#catalogItemsEndpoint= new BaseEndpoint(supplierCrudApi, catalogItemsEndpointPath);
+        this.#alertsEndpoint= new BaseEndpoint(supplierCrudApi, alertsEndpointPath);
+
+        this.#clientsEndpoint= new BaseEndpoint(supplierGetApi, clientsEndpointPath);
+        this.#demandForecastsEndpoint= new BaseEndpoint(supplierGetApi, demandForecastsEndpointPath);
+        this.#deliveryRoutesEndpoint= new BaseEndpoint(supplierGetApi, deliveryRoutesEndpointPath);
+        this.#supplierSettingsEndpoint= new BaseEndpoint(supplierGetApi, supplierSettingsEndpointPath);
+        this.#supplierSubscriptionsEndpoint= new BaseEndpoint(supplierGetApi, supplierSubscriptionsEndpointPath);
     }
     getOrders(){
         return this.#supplyManagementEndpoint.getAll();
