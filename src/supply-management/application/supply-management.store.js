@@ -7,6 +7,8 @@ import {ClientAssembler} from "../infrastructure/client.assembler.js";
 import {SupplierAlertAssembler} from "../infrastructure/supplier-alert.assembler.js";
 import {DemandForecastAssembler} from "../infrastructure/demand-forecast.assembler.js";
 import {DeliveryRouteAssembler} from "../infrastructure/delivery-route.assembler.js";
+import {SupplierSettingsAssembler} from "../infrastructure/supplier-settings.assembler.js";
+import {SupplierSubscriptionAssembler} from "../infrastructure/supplier-subscription.assembler.js";
 const supplierManagementApi = new SupplyManagementApi();
 
 /**
@@ -118,6 +120,10 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
     const demandForecastLoaded = ref(false);
     const deliveryRoutes = ref([]);
     const deliveryRoutesLoaded = ref(false);
+    const supplierSettings = ref(null);
+    const supplierSettingsLoaded = ref(false);
+    const supplierSubscription = ref(null);
+    const supplierSubscriptionLoaded = ref(false);
 
     /**
      * Number of loaded catalog items.
@@ -213,6 +219,57 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
         supplierManagementApi.getDeliveryRoutes().then(response=>{
             deliveryRoutes.value = DeliveryRouteAssembler.toEntitiesFromResponse(response);
             deliveryRoutesLoaded.value = true;
+        }).catch(error=>{
+            errors.value.push(error);
+        });
+    }
+
+    /**
+     * Loads supplier settings from infrastructure and updates local state.
+     *
+     * @returns {void}
+     */
+    function fetchSupplierSettings(){
+        supplierManagementApi.getSupplierSettings().then(response=>{
+            supplierSettings.value = SupplierSettingsAssembler.toEntityFromResponse(response);
+            supplierSettingsLoaded.value = true;
+        }).catch(error=>{
+            errors.value.push(error);
+        });
+    }
+
+    /**
+     * Persists supplier settings and replaces the local state with the saved entity.
+     *
+     * @param {import('../domain/model/supplier-settings.entity.js').SupplierSettings} settings - Settings to persist.
+     * @returns {Promise<void>}
+     */
+    async function updateSupplierSettings(settings){
+        if (!settings?.id) {
+            return;
+        }
+
+        try {
+            const response = await supplierManagementApi.updateSupplierSettings(
+                settings.id,
+                SupplierSettingsAssembler.toResourceFromEntity(settings)
+            );
+            supplierSettings.value = SupplierSettingsAssembler.toEntityFromResource(response.data);
+            supplierSettingsLoaded.value = true;
+        } catch (error) {
+            errors.value.push(error);
+        }
+    }
+
+    /**
+     * Loads supplier subscription information from infrastructure.
+     *
+     * @returns {void}
+     */
+    function fetchSupplierSubscription(){
+        supplierManagementApi.getSupplierSubscription().then(response=>{
+            supplierSubscription.value = SupplierSubscriptionAssembler.toEntityFromResponse(response);
+            supplierSubscriptionLoaded.value = true;
         }).catch(error=>{
             errors.value.push(error);
         });
@@ -341,11 +398,18 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
         deliveryRoutes,
         deliveryRoutesLoaded,
         deliveryRoutesCount,
+        supplierSettings,
+        supplierSettingsLoaded,
+        supplierSubscription,
+        supplierSubscriptionLoaded,
         fetchCatalogItems,
         fetchClients,
         fetchAlerts,
         fetchDemandForecast,
         fetchDeliveryRoutes,
+        fetchSupplierSettings,
+        updateSupplierSettings,
+        fetchSupplierSubscription,
         acknowledgeAlert,
         getCatalogItemById,
         addCatalogItem,

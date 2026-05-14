@@ -252,6 +252,98 @@
         "confirm": "删除"
       },
       "empty": "目录中还没有产品。"
+    },
+    "settings": {
+      "breadcrumb": "供应商",
+      "title": "供应商设置",
+      "subtitle": "商业资料、服务区域、联系人和运营偏好。",
+      "profile": {
+        "title": "供应商资料",
+        "supplier-name": "供应商资料",
+        "support-contact": "支持联系人",
+        "email": "邮件",
+        "sms": "短信",
+        "save": "保存",
+        "saving": "保存中...",
+        "saved": "设置已保存。"
+      },
+      "zones": {
+        "title": "服务区域",
+        "active": "启用",
+        "add-placeholder": "添加服务区域",
+        "remove": "移除区域"
+      }
+    },
+    "subscription": {
+      "breadcrumb": "供应商",
+      "title": "供应商订阅",
+      "subtitle": "商业容量、限制和企业功能。",
+      "active": "当前计划",
+      "summary": {
+        "current-plan": {
+          "label": "当前计划",
+          "value": "Enterprise"
+        },
+        "users": {
+          "label": "用户",
+          "value": "无限用户"
+        },
+        "locations": {
+          "label": "站点",
+          "value": "多站点"
+        },
+        "sensors": {
+          "label": "传感器",
+          "value": "无限传感器"
+        }
+      },
+      "plans": {
+        "premium": {
+          "name": "Premium",
+          "features": [
+            "核心仪表板",
+            "IoT 监控",
+            "邮件支持"
+          ]
+        },
+        "enterprise": {
+          "name": "Enterprise",
+          "features": [
+            "高级分析",
+            "多站点",
+            "路线优化",
+            "优先支持"
+          ]
+        }
+      }
+    },
+    "dashboard": {
+      "title": "供应商仪表板",
+      "subtitle": "传入订单、物流负载、客户与需求走势。",
+      "loading": "正在加载仪表板数据...",
+      "stats": {
+        "orders-received": "已接收订单",
+        "scheduled-deliveries": "已安排配送",
+        "demand-outlook": "需求走势",
+        "urgent-requests": "紧急请求",
+        "alert-badge": "警报"
+      },
+      "routes": {
+        "title": "今日活跃路线",
+        "schedule": "{stops} 站 · {departure} - {arrival}",
+        "date": "{date}",
+        "empty": "暂无活跃路线。"
+      },
+      "aggregate": {
+        "title": "汇总视图",
+        "summary": "图表摘要: {from} -> {to}",
+        "empty": "暂无预测数据。"
+      },
+      "priority": {
+        "high": "高",
+        "medium": "中",
+        "low": "低"
+      }
     }
   },
   "inventoryManagement": {

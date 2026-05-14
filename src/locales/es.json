@@ -252,6 +252,98 @@
         "confirm": "Eliminar"
       },
       "empty": "Aún no hay productos en el catálogo."
+    },
+    "settings": {
+      "breadcrumb": "PROVEEDOR",
+      "title": "Configuración del proveedor",
+      "subtitle": "Perfil comercial, zonas, contactos y preferencias operativas.",
+      "profile": {
+        "title": "Perfil del proveedor",
+        "supplier-name": "Perfil del proveedor",
+        "support-contact": "Contacto de soporte",
+        "email": "Correo",
+        "sms": "SMS",
+        "save": "Guardar",
+        "saving": "Guardando...",
+        "saved": "Configuración guardada."
+      },
+      "zones": {
+        "title": "Zonas de servicio",
+        "active": "Activo",
+        "add-placeholder": "Agregar zona de servicio",
+        "remove": "Quitar zona"
+      }
+    },
+    "subscription": {
+      "breadcrumb": "PROVEEDOR",
+      "title": "Suscripción del proveedor",
+      "subtitle": "Capacidad comercial, límites y funcionalidades empresariales.",
+      "active": "Plan activo",
+      "summary": {
+        "current-plan": {
+          "label": "Plan actual",
+          "value": "Enterprise"
+        },
+        "users": {
+          "label": "Usuarios",
+          "value": "Usuarios ilimitados"
+        },
+        "locations": {
+          "label": "Ubicaciones",
+          "value": "Multi-ubicación"
+        },
+        "sensors": {
+          "label": "Sensores",
+          "value": "Sensores ilimitados"
+        }
+      },
+      "plans": {
+        "premium": {
+          "name": "Premium",
+          "features": [
+            "Dashboards base",
+            "Monitoreo IoT",
+            "Soporte por correo"
+          ]
+        },
+        "enterprise": {
+          "name": "Enterprise",
+          "features": [
+            "Analítica avanzada",
+            "Multi-ubicación",
+            "Optimización de rutas",
+            "Soporte prioritario"
+          ]
+        }
+      }
+    },
+    "dashboard": {
+      "title": "Dashboard del proveedor",
+      "subtitle": "Pedidos entrantes, carga logística, clientes y perspectiva de demanda.",
+      "loading": "Cargando datos del dashboard...",
+      "stats": {
+        "orders-received": "Órdenes recibidas",
+        "scheduled-deliveries": "Entregas programadas",
+        "demand-outlook": "Perspectiva de demanda",
+        "urgent-requests": "Solicitudes urgentes",
+        "alert-badge": "Alerta"
+      },
+      "routes": {
+        "title": "Rutas activas de hoy",
+        "schedule": "{stops} Paradas · {departure} - {arrival}",
+        "date": "{date}",
+        "empty": "No hay rutas activas disponibles."
+      },
+      "aggregate": {
+        "title": "Vista agregada",
+        "summary": "Resumen del gráfico: {from} -> {to}",
+        "empty": "No hay datos de pronóstico disponibles."
+      },
+      "priority": {
+        "high": "Alta",
+        "medium": "Media",
+        "low": "Baja"
+      }
     }
   },
   "inventoryManagement": {
