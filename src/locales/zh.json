@@ -6,7 +6,7 @@
       "new-supply": "SupplyWok 新用户？",
       "sign-up-now": "立即注册",
       "email": "电子邮件",
-      "email-example": "example@email.com",
+      "email-example": "example{'@'}email.com",
       "password": "密码",
       "password-example": "Password123",
       "forgot-password": "忘记密码？",

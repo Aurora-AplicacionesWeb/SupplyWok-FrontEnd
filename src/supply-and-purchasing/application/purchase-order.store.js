@@ -2,9 +2,11 @@ import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import { PurchaseOrderApi } from '../infrastructure/purchase-order-api.js';
 import { PurchaseOrderAssembler } from '../infrastructure/purchase-order.assembler.js';
+import { SupplierApi } from '../infrastructure/supplier-api.js';
 import i18n from '../../i18n.js';
 
 const purchaseOrderApi = new PurchaseOrderApi();
+const supplierApi = new SupplierApi();
 const translate = (key) => i18n.global.t(key);
 
 /**
@@ -15,9 +17,11 @@ const translate = (key) => i18n.global.t(key);
  */
 const usePurchaseOrderStore = defineStore('supply-and-purchasing', () => {
     const purchaseOrders = ref([]);
+    const suppliers = ref([]);
     const errors = ref([]);
     const validationErrors = ref({});
     const purchaseOrdersLoaded = ref(false);
+    const suppliersLoaded = ref(false);
     const loading = ref(false);
 
     /**
@@ -48,6 +52,45 @@ const usePurchaseOrderStore = defineStore('supply-and-purchasing', () => {
     });
 
     /**
+     * Supplier options normalized for selects and cards.
+     *
+     * @type {import('vue').ComputedRef<Array<{id: string, name: string, contactName: string, phone: string, category: string}>>}
+     */
+    const supplierDirectory = computed(() => {
+        return suppliers.value.map((supplier) => ({
+            ...supplier,
+            id: String(supplier.id),
+            name: supplier.name ?? '',
+            contactName: supplier.contactName ?? '',
+            phone: supplier.phone ?? '',
+            category: supplier.category ?? ''
+        }));
+    });
+
+    /**
+     * Loads supplier records from infrastructure and updates the application state.
+     *
+     * @returns {Promise<void>}
+     */
+    async function fetchSuppliers() {
+        loading.value = true;
+        try {
+            const response = await supplierApi.getSuppliers();
+            const rawData = response?.data ?? [];
+            suppliers.value = Array.isArray(rawData)
+                ? rawData
+                : Array.isArray(rawData.suppliers)
+                    ? rawData.suppliers
+                    : [];
+            suppliersLoaded.value = true;
+        } catch (error) {
+            errors.value.push(error);
+        } finally {
+            loading.value = false;
+        }
+    }
+
+    /**
      * Loads purchase orders from infrastructure and updates the application state.
      *
      * @returns {Promise<void>}
@@ -73,6 +116,17 @@ const usePurchaseOrderStore = defineStore('supply-and-purchasing', () => {
     async function ensurePurchaseOrdersLoaded() {
         if (!purchaseOrdersLoaded.value && !loading.value) {
             await fetchPurchaseOrders();
+        }
+    }
+
+    /**
+     * Ensures suppliers are available before any directory or form tries to render them.
+     *
+     * @returns {Promise<void>}
+     */
+    async function ensureSuppliersLoaded() {
+        if (!suppliersLoaded.value && !loading.value) {
+            await fetchSuppliers();
         }
     }
 
@@ -218,13 +272,18 @@ const usePurchaseOrderStore = defineStore('supply-and-purchasing', () => {
 
     return {
         purchaseOrders,
+        suppliers,
         errors,
         validationErrors,
         purchaseOrdersLoaded,
+        suppliersLoaded,
         loading,
         purchaseOrdersCount,
         pendingPurchaseOrdersCount,
         highPriorityPurchaseOrdersCount,
+        supplierDirectory,
+        fetchSuppliers,
+        ensureSuppliersLoaded,
         ensurePurchaseOrdersLoaded,
         fetchPurchaseOrders,
         clearValidationErrors,

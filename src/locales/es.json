@@ -6,7 +6,7 @@
       "new-supply": "¿Nuevo en SupplyWok?",
       "sign-up-now": "Regístrate ahora",
       "email": "Correo electrónico",
-      "email-example": "ejemplo@email.com",
+      "email-example": "ejemplo{'@'}email.com",
       "password": "Contraseña",
       "password-example": "Contraseña123",
       "forgot-password": "¿Olvidaste tu contraseña?",

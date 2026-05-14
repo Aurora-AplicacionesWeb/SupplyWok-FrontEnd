@@ -4,16 +4,18 @@ import supplyAndPurchasingRoutes from './supply-and-purchasing/presentation/supp
 import { inventoryManagementRoutes } from './inventory-management/presentation/inventory-management-routes.js';
 
 const placeholderPage = () => import('./shared/presentation/views/placeholder-page.vue');
+const reportsPage = () => import('./shared/presentation/views/reports-page.vue');
+const configurationPage = () => import('./shared/presentation/views/configuration-page.vue');
+const subscriptionPage = () => import('./shared/presentation/views/subscription-page.vue');
 const pageNotFound = () => import('./shared/presentation/views/page-not-found.vue');
 const alertsPage = () => import('./iot-monitoring/presentation/views/alerts-view.vue');
 
-const placeholderRoutes = [
+const topLevelRoutes = [
     { path: '/dashboard', name: 'dashboard', component: placeholderPage, meta: { title: 'Dashboard' } },
     { path: '/alerts', name: 'alerts', component: alertsPage, meta: { title: 'Alerts' } },
-    { path: '/reports', name: 'reports', component: placeholderPage, meta: { title: 'Reports' } },
-    { path: '/configuration', name: 'configuration', component: placeholderPage, meta: { title: 'Configuration' } },
-    { path: '/subscription', name: 'subscription', component: placeholderPage, meta: { title: 'Subscription' } },
-
+    { path: '/reports', name: 'reports', component: reportsPage, meta: { title: 'Reports' } },
+    { path: '/configuration', name: 'configuration', component: configurationPage, meta: { title: 'Configuration' } },
+    { path: '/subscription', name: 'subscription', component: subscriptionPage, meta: { title: 'Subscription' } }
 ];
 
 const loginPage = () => import('./iam/presentation/views/login-view.vue');
@@ -23,7 +25,7 @@ const routes = [
     { path: '/', redirect: '/login' },
     { path: '/login', name: 'login', component: loginPage, meta: { title: 'Log in' } },
     { path: '/register', name: 'register', component: registerPage, meta: { title: 'Register' } },
-    ...placeholderRoutes,
+    ...topLevelRoutes,
     ...inventoryManagementRoutes,
     ...supplyAndPurchasingRoutes,
     ...restaurantManagementRoutes,
