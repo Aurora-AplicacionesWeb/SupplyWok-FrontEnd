@@ -2,10 +2,10 @@
 import { computed, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { RouterLink } from 'vue-router';
-import useInventoryManagementStore from '../../../inventory-management/application/inventory-management.store.js';
-import { iotStore } from '../../../iot-monitoring/application/iot-store.js';
-import usePurchaseOrderStore from '../../../supply-and-purchasing/application/purchase-order.store.js';
-import useRestaurantManagementStore from '../../../restaurant-management/application/restaurant-management.store.js';
+import useInventoryManagementStore from '../../../inventory/application/inventory-management.store.js';
+import { iotStore } from '../../../iot/application/iot-store.js';
+import usePurchaseOrderStore from '../../../purchasing/application/purchase-order.store.js';
+import useRestaurantManagementStore from '../../../operations/application/restaurant-management.store.js';
 
 const inventoryStore = useInventoryManagementStore();
 const monitoringStore = iotStore();
@@ -131,8 +131,8 @@ function getOrderStatusTone(status) {
             </div>
 
             <div class="dashboard-page__hero-actions">
-                <RouterLink to="/orders/new" class="dashboard-page__primary-action">Crear pedido</RouterLink>
-                <RouterLink to="/alerts" class="dashboard-page__secondary-action">Revisar alertas</RouterLink>
+                <RouterLink to="/purchasing/orders/new" class="dashboard-page__primary-action">Crear pedido</RouterLink>
+                <RouterLink to="/iot/alerts" class="dashboard-page__secondary-action">Revisar alertas</RouterLink>
             </div>
         </header>
 
@@ -169,7 +169,7 @@ function getOrderStatusTone(status) {
                         <span class="dashboard-card__eyebrow">Sensores</span>
                         <h2 class="dashboard-card__title">Panel operativo</h2>
                     </div>
-                    <RouterLink to="/alerts" class="dashboard-card__link">Ver incidencias</RouterLink>
+                    <RouterLink to="/iot/alerts" class="dashboard-card__link">Ver incidencias</RouterLink>
                 </div>
 
                 <div class="sensor-list">
@@ -199,7 +199,7 @@ function getOrderStatusTone(status) {
                         <span class="dashboard-card__eyebrow">Cocina</span>
                         <h2 class="dashboard-card__title">Comandas activas</h2>
                     </div>
-                    <RouterLink to="/kitchen-tickets" class="dashboard-card__link">Abrir cocina</RouterLink>
+                    <RouterLink to="/operations/kitchen" class="dashboard-card__link">Abrir cocina</RouterLink>
                 </div>
 
                 <div class="ticket-list">
@@ -229,7 +229,7 @@ function getOrderStatusTone(status) {
                         <span class="dashboard-card__eyebrow">Inventario</span>
                         <h2 class="dashboard-card__title">Productos con bajo stock</h2>
                     </div>
-                    <RouterLink to="/inventory" class="dashboard-card__link">Ir a inventario</RouterLink>
+                    <RouterLink to="/inventory/items" class="dashboard-card__link">Ir a inventario</RouterLink>
                 </div>
 
                 <div class="inventory-list">
@@ -256,7 +256,7 @@ function getOrderStatusTone(status) {
                         <span class="dashboard-card__eyebrow">Abastecimiento</span>
                         <h2 class="dashboard-card__title">Pedidos recientes</h2>
                     </div>
-                    <RouterLink to="/orders" class="dashboard-card__link">Abrir pedidos</RouterLink>
+                    <RouterLink to="/purchasing/orders" class="dashboard-card__link">Abrir pedidos</RouterLink>
                 </div>
 
                 <div class="order-list">

@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import restaurantManagementRoutes from './restaurant-management/presentation/restaurant-management-routes.js';
-import supplyAndPurchasingRoutes from './supply-and-purchasing/presentation/supply-and-purchasing-routes.js';
-import supplyManagementRoutes from './supply-management/presentation/supply-management-routes.js';
-import { inventoryManagementRoutes } from './inventory-management/presentation/inventory-management-routes.js';
+import restaurantManagementRoutes from './operations/presentation/restaurant-management-routes.js';
+import { inventoryManagementRoutes } from './inventory/presentation/inventory-management-routes.js';
+import supplyAndPurchasingRoutes from './purchasing/presentation/supply-and-purchasing-routes.js';
+import supplyManagementRoutes from './supplier/presentation/supply-management-routes.js';
+import iotRoutes from './iot/presentation/iot-routes.js';
 import { useIamStore } from './iam/application/iam-store.js';
 import useSessionStore from './shared/application/session.store.js';
 import { getHomeByRole, getRoleFromPath, getScopedPathByRole, normalizeRole } from './shared/application/role-routing.js';
@@ -22,33 +23,41 @@ function getActiveRole() {
     return normalizeRole(iamStore.currentUserRole) ?? normalizeRole(sessionStore.userRole);
 }
 
-const restaurantRoutes = [
-    ...restaurantManagementRoutes,
-    ...inventoryManagementRoutes,
-    ...supplyAndPurchasingRoutes
-];
-
 const legacyRedirectRoutes = [
     { path: '/dashboard', name: 'dashboard', redirect: () => getHomeByRole(getActiveRole() ?? 'restaurant') },
     { path: '/alerts', name: 'alerts', redirect: () => getScopedPathByRole(getActiveRole() ?? 'restaurant', 'alerts') },
-    { path: '/reports', name: 'reports', redirect: '/restaurant/reports' },
+    { path: '/reports', name: 'reports', redirect: '/operations/reports' },
     { path: '/configuration', name: 'configuration', redirect: () => getScopedPathByRole(getActiveRole() ?? 'restaurant', 'configuration') },
     { path: '/subscription', name: 'subscription', redirect: () => getScopedPathByRole(getActiveRole() ?? 'restaurant', 'subscription') },
-    { path: '/inventory', name: 'inventory', redirect: '/restaurant/inventory' },
-    { path: '/orders', name: 'orders', redirect: '/restaurant/orders' },
-    { path: '/orders/new', name: 'orders-new', redirect: '/restaurant/orders/new' },
-    { path: '/suppliers', name: 'suppliers', redirect: '/restaurant/suppliers' },
+    { path: '/inventory', name: 'inventory', redirect: '/inventory/items' },
+    { path: '/orders', name: 'orders', redirect: '/purchasing/orders' },
+    { path: '/orders/new', name: 'orders-new', redirect: '/purchasing/orders/new' },
+    { path: '/suppliers', name: 'suppliers', redirect: '/purchasing/suppliers' },
+    { path: '/restaurant/dashboard', redirect: '/operations/dashboard' },
+    { path: '/restaurant/kitchen', redirect: '/operations/kitchen' },
+    { path: '/restaurant/tables', redirect: '/operations/tables' },
+    { path: '/restaurant/alerts', redirect: '/iot/alerts' },
+    { path: '/restaurant/reports', redirect: '/operations/reports' },
+    { path: '/restaurant/configuration', redirect: '/operations/configuration' },
+    { path: '/restaurant/subscription', redirect: '/operations/subscription' },
+    { path: '/restaurant/inventory', redirect: '/inventory/items' },
+    { path: '/restaurant/orders', redirect: '/purchasing/orders' },
+    { path: '/restaurant/orders/new', redirect: '/purchasing/orders/new' },
+    { path: '/restaurant/suppliers', redirect: '/purchasing/suppliers' },
+    { path: '/restaurant/kitchen-tickets', redirect: '/operations/kitchen' },
+    { path: '/restaurant/create-kitchen-order', redirect: '/operations/kitchen/new' },
+    { path: '/restaurant/tables-and-occupancy', redirect: '/operations/tables' }
 ];
-
-const supplierView = () => import('./shared/presentation/views/supplier-view.vue');
-const restaurantView = () => import('./shared/presentation/views/restaurant-view.vue');
 
 const loginPage = () => import('./iam/presentation/views/login-view.vue');
 const registerPage = () => import('./iam/presentation/views/register-view.vue');
 
 const routes = [
-    { path: '/restaurant',      name: 'restaurant', component: restaurantView, redirect: '/restaurant/dashboard', meta: { role: 'restaurant' }, children: restaurantRoutes },
-    { path: '/supplier',        name: 'supplier',   component: supplierView,   redirect: '/supplier/dashboard', meta: { role: 'supplier' }, children: supplyManagementRoutes },
+    ...restaurantManagementRoutes,
+    ...inventoryManagementRoutes,
+    ...supplyAndPurchasingRoutes,
+    ...iotRoutes,
+    ...supplyManagementRoutes,
     { path: '/', redirect: '/login' },
     { path: '/login', name: 'login', component: loginPage, meta: { i18nKey: 'shared.titles.login' } },
     { path: '/register', name: 'register', component: registerPage, meta: { i18nKey: 'shared.titles.register' } },

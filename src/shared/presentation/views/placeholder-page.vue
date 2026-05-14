@@ -2,17 +2,17 @@
 import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import LowStockCard from '../../../iot-monitoring/presentation/components/stat-cards/low-stock-card.vue';
-import PendingOrdersCard from '../../../supply-and-purchasing/presentation/components/stat-cards/pending-orders-card.vue';
-import TempAlertCard from '../../../iot-monitoring/presentation/components/stat-cards/temp-alert-card.vue';
-import ActiveTablesCard from '../../../iot-monitoring/presentation/components/stat-cards/active-tables-card.vue';
-import ActiveCommandsCard from '../../../restaurant-management/presentation/components/stat-cards/active-commands-card.vue';
-import IotPanelCard from '../../../iot-monitoring/presentation/components/panel-cards/iot-panel-card.vue';
-import KitchenTicketsCard from '../../../restaurant-management/presentation/components/panel-cards/kitchen-tickets-card.vue';
-import HeaderAlertsPopup from '../../../iot-monitoring/presentation/components/alerts/header-alerts-popup.vue';
-import OrdersSummaryCard from '../../../supply-and-purchasing/presentation/components/orders-summary-card.vue';
-import BelowMinimumCard from '../../../inventory-management/presentation/components/below-minimum-card.vue';
-import useRestaurantManagementStore from '../../../restaurant-management/application/restaurant-management.store.js';
+import LowStockCard from '../../../iot/presentation/components/stat-cards/low-stock-card.vue';
+import PendingOrdersCard from '../../../purchasing/presentation/components/stat-cards/pending-orders-card.vue';
+import TempAlertCard from '../../../iot/presentation/components/stat-cards/temp-alert-card.vue';
+import ActiveTablesCard from '../../../iot/presentation/components/stat-cards/active-tables-card.vue';
+import ActiveCommandsCard from '../../../operations/presentation/components/stat-cards/active-commands-card.vue';
+import IotPanelCard from '../../../iot/presentation/components/panel-cards/iot-panel-card.vue';
+import KitchenTicketsCard from '../../../operations/presentation/components/panel-cards/kitchen-tickets-card.vue';
+import HeaderAlertsPopup from '../../../iot/presentation/components/alerts/header-alerts-popup.vue';
+import OrdersSummaryCard from '../../../purchasing/presentation/components/orders-summary-card.vue';
+import BelowMinimumCard from '../../../inventory/presentation/components/below-minimum-card.vue';
+import useRestaurantManagementStore from '../../../operations/application/restaurant-management.store.js';
 
 const route = useRoute();
 const { t } = useI18n();

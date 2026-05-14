@@ -4,17 +4,23 @@ import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import SidebarMenu from './sidebar-menu.vue';
 import LanguageSwitcher from './language-switcher.vue';
-import HeaderAlertsPopup from '../../../iot-monitoring/presentation/components/alerts/header-alerts-popup.vue';
+import HeaderAlertsPopup from '../../../iot/presentation/components/alerts/header-alerts-popup.vue';
+import useSessionStore from '../../application/session.store.js';
+import { normalizeRole } from '../../application/role-routing.js';
 
 const router = useRouter();
 const { t } = useI18n();
 const profileMenu = ref(null);
+const sessionStore = useSessionStore();
+
+const currentRole = () => normalizeRole(sessionStore.userRole) ?? 'restaurant';
+const getConfigurationPath = () => (currentRole() === 'supplier' ? '/supplier/configuration' : '/operations/configuration');
 
 const profileMenuOptions = ref([
   {
     label: () => t('header.settings'),
     icon: 'pi pi-cog',
-    command: () => router.push('/configuration')
+    command: () => router.push(getConfigurationPath())
   },
   {
     label: () => t('header.logout'),
