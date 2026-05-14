@@ -80,6 +80,19 @@
       },
       "actions": { "add": "添加" }
     },
+    "belowMinimum": {
+      "title": "低于最低库存",
+      "caption": "{count} 件产品低于最低库存水平",
+      "empty": "没有产品低于最低库存水平。",
+      "columns": {
+        "product": "产品",
+        "currentStock": "当前库存",
+        "status": "状态"
+      },
+      "actions": {
+        "sortAll": "全部排序"
+      }
+    },
     "stockStatus": { "critical": "紧急", "warning": "低库存", "healthy": "充足" },
     "units": { "kilograms": "千克", "liters": "升", "units": "单位", "grams": "克" }
   },
