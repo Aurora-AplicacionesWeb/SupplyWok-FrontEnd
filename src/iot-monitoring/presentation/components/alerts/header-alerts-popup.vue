@@ -3,8 +3,8 @@
     <!-- Icono de notificaciones -->
     <div class="notification-icon" @click="togglePanel">
       <img src="/images/icons/notify-icon.svg" alt="Alerts" />
-      <span v-if="store.topCriticalAlerts.length > 0" class="badge">
-        {{ store.topCriticalAlerts.length }}
+      <span v-if="displayAlerts.length > 0" class="badge">
+        {{ displayAlerts.length }}
       </span>
     </div>
 
@@ -15,11 +15,11 @@
         <button class="close-btn" @click="togglePanel">&times;</button>
       </div>
       <div class="alerts-popup-body">
-        <div v-if="store.topCriticalAlerts.length === 0" class="empty-state">
+        <div v-if="displayAlerts.length === 0" class="empty-state">
           {{ $t('iot.alerts.no-active-alerts') }}
         </div>
         <AlertItem 
-          v-for="alert in store.topCriticalAlerts" 
+          v-for="alert in displayAlerts" 
           :key="alert.id"
           :alert="alert"
         />
@@ -30,14 +30,25 @@
 
 <script setup>
 /**
- * Dropdown/Popup component for displaying critical IoT alerts in the application header.
- * Provides a notification icon with a badge and a scrollable list of recent alerts.
+ * Dropdown/Popup component for displaying critical alerts in the application header.
+ * Dynamically switches between IoT alerts (Restaurant) and Supplier alerts based on active role.
  */
-import { ref } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import AlertItem from './alert-item.vue';
 import { iotStore } from '../../../application/iot-store.js';
+import useSupplierManagementStore from '../../../../supply-management/application/supply-management.store.js';
+import { useIamStore } from '../../../../iam/application/iam-store.js';
+import useSessionStore from '../../../../shared/application/session.store.js';
+import { getRoleFromPath, normalizeRole } from '../../../../shared/application/role-routing.js';
 
-const store = iotStore();
+const route = useRoute();
+const { t } = useI18n();
+const iamStore = useIamStore();
+const sessionStore = useSessionStore();
+const restaurantIotStore = iotStore();
+const supplierStore = useSupplierManagementStore();
 
 /** Controls the visibility of the alerts popup. */
 const isOpen = ref(false);
@@ -46,6 +57,53 @@ const isOpen = ref(false);
 const togglePanel = () => {
   isOpen.value = !isOpen.value;
 };
+
+/** Calculates the current active role based on path or session. */
+const activeRole = computed(() => {
+  return getRoleFromPath(route.path)
+      ?? normalizeRole(iamStore.currentUserRole)
+      ?? normalizeRole(sessionStore.userRole)
+      ?? 'restaurant';
+});
+
+/** 
+ * Computes which alerts to show based on the active role.
+ * Maps supplier alerts to the interface expected by AlertItem.
+ */
+const displayAlerts = computed(() => {
+  if (activeRole.value === 'supplier') {
+    return supplierStore.alerts
+      .filter(a => a.status === 'pending')
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 5)
+      .map(a => {
+        let mappedSeverity = 'normal';
+        if (a.severity === 'high') mappedSeverity = 'critical';
+        else if (a.severity === 'medium') mappedSeverity = 'warning';
+
+        const translatedMessage = {
+          'Rush reorder request': t('supplier-management.alerts.messages.rush-reorder'),
+          'Route congestion detected': t('supplier-management.alerts.messages.route-congestion')
+        }[a.detail] || a.detail;
+        
+        return {
+          id: a.id,
+          title: t('supplier-management.alerts.notification-title'),
+          message: translatedMessage,
+          severity: mappedSeverity,
+          timestamp: new Date(a.date)
+        };
+      });
+  }
+  
+  return restaurantIotStore.topCriticalAlerts;
+});
+
+onMounted(() => {
+  if (activeRole.value === 'supplier' && !supplierStore.alertsLoaded) {
+    supplierStore.fetchAlerts();
+  }
+});
 </script>
 
 <style scoped>
@@ -75,6 +133,7 @@ const togglePanel = () => {
   padding: 2px 6px;
   font-size: 10px;
   font-weight: bold;
+  font-family: sans-serif;
 }
 
 .alerts-popup-panel {

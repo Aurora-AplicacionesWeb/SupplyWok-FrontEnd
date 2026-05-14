@@ -1,8 +1,8 @@
 <template>
   <div class="alert-item">
     <div class="alert-content">
-      <div class="alert-title">{{ $t(alert.titleKey, alert.messageParams) }}</div>
-      <div class="alert-message">{{ $t(alert.messageKey, alert.messageParams) }}</div>
+      <div class="alert-title">{{ alert.titleKey ? $t(alert.titleKey, alert.messageParams) : alert.title }}</div>
+      <div class="alert-message">{{ alert.messageKey ? $t(alert.messageKey, alert.messageParams) : alert.message }}</div>
     </div>
     <div class="alert-meta">
       <span class="alert-badge" :class="'badge-' + alert.severity.toLowerCase()">

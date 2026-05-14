@@ -1,9 +1,13 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { storeToRefs } from 'pinia';
+import useSessionStore from '../../application/session.store.js';
 
 const { t } = useI18n();
-const activePlan = ref('Premium');
+const sessionStore = useSessionStore();
+const { subscriptionPlan } = storeToRefs(sessionStore);
+
 const planUpdateMessage = ref('');
 
 const planCatalog = [
@@ -39,23 +43,23 @@ const planCatalog = [
     }
 ];
 
-const currentPlan = computed(() => {
-    return planCatalog.find((plan) => plan.id === activePlan.value) ?? planCatalog[0];
+const currentPlanData = computed(() => {
+    return planCatalog.find((plan) => plan.id === subscriptionPlan.value) ?? planCatalog[0];
 });
 
 const currentPlanSummary = computed(() => ([
-    { label: t('shared.subscriptionPage.summary.currentPlan'), value: currentPlan.value.name },
-    { label: t('shared.subscriptionPage.summary.users'), value: currentPlan.value.users },
-    { label: t('shared.subscriptionPage.summary.locations'), value: currentPlan.value.locations },
-    { label: t('shared.subscriptionPage.summary.sensors'), value: currentPlan.value.sensors }
+    { label: t('shared.subscriptionPage.summary.currentPlan'), value: currentPlanData.value.name },
+    { label: t('shared.subscriptionPage.summary.users'), value: currentPlanData.value.users },
+    { label: t('shared.subscriptionPage.summary.locations'), value: currentPlanData.value.locations },
+    { label: t('shared.subscriptionPage.summary.sensors'), value: currentPlanData.value.sensors }
 ]));
 
 function selectPlan(planId) {
-    if (planId === activePlan.value) {
+    if (planId === subscriptionPlan.value) {
         return;
     }
 
-    activePlan.value = planId;
+    sessionStore.setSubscriptionPlan(planId);
     planUpdateMessage.value = t('shared.subscriptionPage.messages.switchSuccess', { plan: planId });
 }
 </script>
@@ -81,7 +85,7 @@ function selectPlan(planId) {
             <article v-for="plan in planCatalog" :key="plan.id" class="plan-card" :class="`plan-card--${plan.tone}`">
                 <div class="plan-card__header">
                     <div>
-                        <span class="plan-card__eyebrow">{{ plan.id === activePlan.value ? t('shared.subscriptionPage.plans.eyebrowCurrent') : t('shared.subscriptionPage.plans.eyebrowAvailable') }}</span>
+                        <span class="plan-card__eyebrow">{{ plan.id === subscriptionPlan ? t('shared.subscriptionPage.plans.eyebrowCurrent') : t('shared.subscriptionPage.plans.eyebrowAvailable') }}</span>
                         <h2>{{ plan.name }}</h2>
                     </div>
                     <span class="plan-card__price">{{ plan.price }}</span>
@@ -100,10 +104,10 @@ function selectPlan(planId) {
                 <button
                     type="button"
                     class="plan-card__action"
-                    :disabled="plan.id === activePlan.value"
+                    :disabled="plan.id === subscriptionPlan"
                     @click="selectPlan(plan.id)"
                 >
-                    {{ plan.id === activePlan.value ? t('shared.subscriptionPage.plans.actionCurrent') : t('shared.subscriptionPage.plans.actionSelect') }}
+                    {{ plan.id === subscriptionPlan ? t('shared.subscriptionPage.plans.actionCurrent') : t('shared.subscriptionPage.plans.actionSelect') }}
                 </button>
             </article>
         </div>
@@ -113,7 +117,6 @@ function selectPlan(planId) {
 </template>
 
 <style scoped>
-/* styles remain the same */
 .subscription-page {
     display: flex;
     flex-direction: column;
