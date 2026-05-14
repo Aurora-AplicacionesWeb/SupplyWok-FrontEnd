@@ -4,16 +4,19 @@ import {BaseEndpoint} from "../../shared/infrastructure/base-endpoint.js";
 const ordersEndpointPath = import.meta.env.VITE_PURCHASE_ORDERS_ENDPOINT_PATH;
 const catalogItemsEndpointPath = import.meta.env.VITE_CATALOG_ITEMS_ENDPOINT_PATH;
 const clientsEndpointPath = import.meta.env.VITE_CLIENTS_ENDPOINT_PATH;
+const alertsEndpointPath = import.meta.env.VITE_ALERTS_ENDPOINT_PATH;
 
 export class SupplyManagementApi extends BaseApi {
     #supplyManagementEndpoint;
     #catalogItemsEndpoint;
     #clientsEndpoint;
+    #alertsEndpoint;
     constructor(){
         super();
         this.#supplyManagementEndpoint= new BaseEndpoint(this,ordersEndpointPath);
         this.#catalogItemsEndpoint= new BaseEndpoint(this,catalogItemsEndpointPath);
         this.#clientsEndpoint= new BaseEndpoint(this,clientsEndpointPath);
+        this.#alertsEndpoint= new BaseEndpoint(this,alertsEndpointPath);
     }
     getOrders(){
         return this.#supplyManagementEndpoint.getAll();
@@ -55,5 +58,13 @@ export class SupplyManagementApi extends BaseApi {
 
     getClients(){
         return this.#clientsEndpoint.getAll();
+    }
+
+    getAlerts(){
+        return this.#alertsEndpoint.getAll();
+    }
+
+    updateAlert(id, alert){
+        return this.#alertsEndpoint.update(id, alert);
     }
 }
