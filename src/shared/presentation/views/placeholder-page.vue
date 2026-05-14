@@ -1,15 +1,24 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import LowStockCard from '../../../iot-monitoring/presentation/components/stat-cards/low-stock-card.vue';
+import PendingOrdersCard from '../../../supply-and-purchasing/presentation/components/stat-cards/pending-orders-card.vue';
 import TempAlertCard from '../../../iot-monitoring/presentation/components/stat-cards/temp-alert-card.vue';
 import ActiveTablesCard from '../../../iot-monitoring/presentation/components/stat-cards/active-tables-card.vue';
+import ActiveCommandsCard from '../../../restaurant-management/presentation/components/stat-cards/active-commands-card.vue';
 import IotPanelCard from '../../../iot-monitoring/presentation/components/panel-cards/iot-panel-card.vue';
+import KitchenTicketsCard from '../../../restaurant-management/presentation/components/panel-cards/kitchen-tickets-card.vue';
 import HeaderAlertsPopup from '../../../iot-monitoring/presentation/components/alerts/header-alerts-popup.vue';
 import OrdersSummaryCard from '../../../supply-and-purchasing/presentation/components/orders-summary-card.vue';
+import useRestaurantManagementStore from '../../../restaurant-management/application/restaurant-management.store.js';
 
 const route = useRoute();
 const pageTitle = computed(() => route.meta?.title ?? 'Module');
+const restaurantStore = useRestaurantManagementStore();
+
+onMounted(() => {
+    restaurantStore.fetchKitchenOrders();
+});
 </script>
 
 <template>
@@ -21,13 +30,15 @@ const pageTitle = computed(() => route.meta?.title ?? 'Module');
         
         <div class="stat-cards-row">
             <LowStockCard />
+            <PendingOrdersCard />
             <TempAlertCard />
             <ActiveTablesCard />
+            <ActiveCommandsCard />
         </div>
 
         <div class="dashboard-grid">
             <IotPanelCard class="grid-item-tl" />
-            <div class="placeholder-box grid-item-tr"></div>
+            <KitchenTicketsCard class="grid-item-tr" />
             <div class="placeholder-box grid-item-bl"></div>
             <OrdersSummaryCard class="dashboard-orders-card grid-item-br" />
         </div>

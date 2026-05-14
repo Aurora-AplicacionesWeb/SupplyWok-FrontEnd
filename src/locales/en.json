@@ -327,6 +327,13 @@
     "failedAttempts": "Failed Attempts",
     "lockedUntil": "Locked Until"
   },
+  "supplyAndPurchasing": {
+    "dashboard": {
+      "pendingOrders": {
+        "label": "Pending Orders"
+      }
+    }
+  },
   "restaurantManagement": {
     "dishMenuPage": {
       "kicker": "Menu",
@@ -433,6 +440,15 @@
       "serviceType": {
         "table_service": "Table Service",
         "to_take_home": "To Take Home"
+      }
+    },
+    "dashboard": {
+      "kitchenTickets": {
+        "title": "Kitchen Tickets",
+        "seeAll": "See All Kitchen Tickets"
+      },
+      "activeCommands": {
+        "label": "Kitchen Commands"
       }
     }
   },

@@ -327,6 +327,13 @@
     "failedAttempts": "嘗試失敗次數",
     "lockedUntil": "鎖定直到"
   },
+  "supplyAndPurchasing": {
+    "dashboard": {
+      "pendingOrders": {
+        "label": "待處理訂單"
+      }
+    }
+  },
   "restaurantManagement": {
     "dishMenuPage": {
       "kicker": "菜單",
@@ -433,6 +440,15 @@
       "serviceType": {
         "table_service": "堂食",
         "to_take_home": "外賣"
+      }
+    },
+    "dashboard": {
+      "kitchenTickets": {
+        "title": "廚房票據",
+        "seeAll": "查看所有廚房票據"
+      },
+      "activeCommands": {
+        "label": "廚房指令"
       }
     }
   },
