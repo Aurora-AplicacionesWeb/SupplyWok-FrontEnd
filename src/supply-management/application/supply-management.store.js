@@ -5,6 +5,7 @@ import {OrdersAssembler} from "../infrastructure/orders.assembler.js";
 import {CatalogItemAssembler} from "../infrastructure/catalog-item.assembler.js";
 import {ClientAssembler} from "../infrastructure/client.assembler.js";
 import {SupplierAlertAssembler} from "../infrastructure/supplier-alert.assembler.js";
+import {DemandForecastAssembler} from "../infrastructure/demand-forecast.assembler.js";
 const supplierManagementApi = new SupplyManagementApi();
 
 /**
@@ -114,6 +115,8 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
     const clientsLoaded = ref(false);
     const alerts = ref([]);
     const alertsLoaded = ref(false);
+    const demandForecast = ref(null);
+    const demandForecastLoaded = ref(false);
 
     /**
      * Number of loaded catalog items.
@@ -138,6 +141,9 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
      */
     const alertsCount =
         computed(() => alertsLoaded.value ? alerts.value.length : 0);
+
+    const demandForecastClientCount =
+        computed(() => demandForecastLoaded.value ? demandForecast.value?.clients?.length ?? 0 : 0);
 
     /**
      * Loads the supplier's catalog items from infrastructure and updates local state.
@@ -176,6 +182,20 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
         supplierManagementApi.getAlerts().then(response=>{
             alerts.value = SupplierAlertAssembler.toEntitiesFromResponse(response);
             alertsLoaded.value = true;
+        }).catch(error=>{
+            errors.value.push(error);
+        });
+    }
+
+    /**
+     * Loads supplier demand forecast from infrastructure and updates local state.
+     *
+     * @returns {void}
+     */
+    function fetchDemandForecast(){
+        supplierManagementApi.getDemandForecast().then(response=>{
+            demandForecast.value = DemandForecastAssembler.toEntityFromResponse(response);
+            demandForecastLoaded.value = true;
         }).catch(error=>{
             errors.value.push(error);
         });
@@ -298,9 +318,13 @@ const useSupplierManagementStore = defineStore('supplierManagement', () => {
         alerts,
         alertsLoaded,
         alertsCount,
+        demandForecast,
+        demandForecastLoaded,
+        demandForecastClientCount,
         fetchCatalogItems,
         fetchClients,
         fetchAlerts,
+        fetchDemandForecast,
         acknowledgeAlert,
         getCatalogItemById,
         addCatalogItem,
