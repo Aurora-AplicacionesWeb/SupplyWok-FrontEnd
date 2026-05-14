@@ -10,6 +10,7 @@ import IotPanelCard from '../../../iot-monitoring/presentation/components/panel-
 import KitchenTicketsCard from '../../../restaurant-management/presentation/components/panel-cards/kitchen-tickets-card.vue';
 import HeaderAlertsPopup from '../../../iot-monitoring/presentation/components/alerts/header-alerts-popup.vue';
 import OrdersSummaryCard from '../../../supply-and-purchasing/presentation/components/orders-summary-card.vue';
+import BelowMinimumCard from '../../../inventory-management/presentation/components/below-minimum-card.vue';
 import useRestaurantManagementStore from '../../../restaurant-management/application/restaurant-management.store.js';
 
 const route = useRoute();
@@ -39,7 +40,7 @@ onMounted(() => {
         <div class="dashboard-grid">
             <IotPanelCard class="grid-item-tl" />
             <KitchenTicketsCard class="grid-item-tr" />
-            <div class="placeholder-box grid-item-bl"></div>
+            <BelowMinimumCard class="grid-item-bl" />
             <OrdersSummaryCard class="dashboard-orders-card grid-item-br" />
         </div>
     </div>

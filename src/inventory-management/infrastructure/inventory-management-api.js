@@ -36,6 +36,30 @@ const mockInventoryItems = [
     unitOfMeasure: 'GRAMS',
     currentStock: 500,
     minimumStockLevel: 300
+  },
+  {
+    id: 1004,
+    restaurantId: 1,
+    name: 'Jasmine rice',
+    unitOfMeasure: 'KILOGRAMS',
+    currentStock: 2,
+    minimumStockLevel: 5
+  },
+  {
+    id: 1005,
+    restaurantId: 1,
+    name: 'Sesame oil',
+    unitOfMeasure: 'LITERS',
+    currentStock: 1,
+    minimumStockLevel: 2
+  },
+  {
+    id: 1006,
+    restaurantId: 1,
+    name: 'Oyster sauce',
+    unitOfMeasure: 'LITERS',
+    currentStock: 3,
+    minimumStockLevel: 3
   }
 ];
 
