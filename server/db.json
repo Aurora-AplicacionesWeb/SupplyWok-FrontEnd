@@ -448,6 +448,82 @@
       "deliveryConditions": "Frozen route Tuesdays and Fridays"
     }
   ],
+  "inventory": [
+    {
+      "id": 1001,
+      "restaurantId": 1,
+      "name": "Tomatoes",
+      "unitOfMeasure": "KILOGRAMS",
+      "currentStock": 50,
+      "minimumStockLevel": 20
+    },
+    {
+      "id": 1002,
+      "restaurantId": 1,
+      "name": "Olive Oil",
+      "unitOfMeasure": "LITERS",
+      "currentStock": 15,
+      "minimumStockLevel": 10
+    },
+    {
+      "id": 1003,
+      "restaurantId": 1,
+      "name": "Salt",
+      "unitOfMeasure": "GRAMS",
+      "currentStock": 500,
+      "minimumStockLevel": 300
+    },
+    {
+      "id": 1004,
+      "restaurantId": 1,
+      "name": "Jasmine rice",
+      "unitOfMeasure": "KILOGRAMS",
+      "currentStock": 2,
+      "minimumStockLevel": 5
+    },
+    {
+      "id": 1005,
+      "restaurantId": 1,
+      "name": "Sesame oil",
+      "unitOfMeasure": "LITERS",
+      "currentStock": 1,
+      "minimumStockLevel": 2
+    },
+    {
+      "id": 1006,
+      "restaurantId": 1,
+      "name": "Oyster sauce",
+      "unitOfMeasure": "LITERS",
+      "currentStock": 3,
+      "minimumStockLevel": 3
+    }
+  ],
+  "stock-movements": [
+    {
+      "id": 1,
+      "inventoryItemId": 1001,
+      "type": "ENTRY",
+      "amount": 25,
+      "date": "2026-05-10T00:00:00.000Z",
+      "reason": "Weekly supply"
+    },
+    {
+      "id": 2,
+      "inventoryItemId": 1001,
+      "type": "EXIT",
+      "amount": 10,
+      "date": "2026-05-11T00:00:00.000Z",
+      "reason": "Daily usage"
+    },
+    {
+      "id": 3,
+      "inventoryItemId": 1002,
+      "type": "ENTRY",
+      "amount": 5,
+      "date": "2026-05-12T00:00:00.000Z",
+      "reason": "Restocking"
+    }
+  ],
   "purchase-orders": [
     {
       "id": 1,

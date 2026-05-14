@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import { IamApi } from '../infrastructure/iam.api.js';
+import useSessionStore from '../../shared/application/session.store.js';
 
 /**
  * Pinia store for managing Identity and Access Management state.
@@ -91,7 +92,9 @@ export const useIamStore = defineStore('iam', () => {
    * Clears the current user session.
    */
   const logout = () => {
+    const sessionStore = useSessionStore();
     currentUser.value = null;
+    sessionStore.clearUserRole();
   };
 
   return {

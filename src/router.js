@@ -23,7 +23,7 @@ function getActiveRole() {
     const iamStore = useIamStore();
     const sessionStore = useSessionStore();
 
-    return normalizeRole(iamStore.currentUserRole) ?? normalizeRole(sessionStore.userRole) ?? 'restaurant';
+    return normalizeRole(iamStore.currentUserRole) ?? normalizeRole(sessionStore.userRole);
 }
 
 /**
@@ -47,11 +47,11 @@ const restaurantRoutes = [
 ];
 
 const legacyRedirectRoutes = [
-    { path: '/dashboard', name: 'dashboard', redirect: () => getHomeByRole(getActiveRole()) },
-    { path: '/alerts', name: 'alerts', redirect: () => getScopedPathByRole(getActiveRole(), 'alerts') },
+    { path: '/dashboard', name: 'dashboard', redirect: () => getHomeByRole(getActiveRole() ?? 'restaurant') },
+    { path: '/alerts', name: 'alerts', redirect: () => getScopedPathByRole(getActiveRole() ?? 'restaurant', 'alerts') },
     { path: '/reports', name: 'reports', redirect: '/restaurant/reports' },
-    { path: '/configuration', name: 'configuration', redirect: () => getScopedPathByRole(getActiveRole(), 'configuration') },
-    { path: '/subscription', name: 'subscription', redirect: () => getScopedPathByRole(getActiveRole(), 'subscription') },
+    { path: '/configuration', name: 'configuration', redirect: () => getScopedPathByRole(getActiveRole() ?? 'restaurant', 'configuration') },
+    { path: '/subscription', name: 'subscription', redirect: () => getScopedPathByRole(getActiveRole() ?? 'restaurant', 'subscription') },
     { path: '/inventory', name: 'inventory', redirect: '/restaurant/inventory' },
     { path: '/orders', name: 'orders', redirect: '/restaurant/orders' },
     { path: '/orders/new', name: 'orders-new', redirect: '/restaurant/orders/new' },
@@ -95,6 +95,12 @@ router.beforeEach((to, from, next) => {
 
     const currentRole = getActiveRole();
     const requiredRole = getRoleFromPath(to.path);
+
+    if (!currentRole && requiredRole) {
+        const sessionStore = useSessionStore();
+        sessionStore.setUserRole(requiredRole);
+        return next();
+    }
 
     if (currentRole && requiredRole && currentRole !== requiredRole) {
         return next(getHomeByRole(currentRole));
