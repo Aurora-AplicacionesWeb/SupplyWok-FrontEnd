@@ -29,3 +29,6 @@ dist-ssr
 package-lock.json
 /copy-frontend-supplywok/
 /professor-reference/
+.firebaserc
+.firebase
+firebase.json
