@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import Chart from 'primevue/chart';
 import useAnalyticsStore from '../../application/analytics.store.js';
+import SupplierAggregateForecastCard from '../components/aggregate-forecast-card.vue';
 
 const { t } = useI18n();
 const store = useAnalyticsStore();
@@ -31,23 +32,6 @@ const clientSummary = computed(() => {
     });
 });
 
-const aggregateChartData = computed(() => ({
-    labels: aggregateSeries.value.map(point => point.period),
-    datasets: [
-        {
-            data: aggregateSeries.value.map(point => point.value),
-            borderColor: '#a97827',
-            backgroundColor: 'rgba(169, 120, 39, 0.18)',
-            pointBackgroundColor: '#a97827',
-            pointBorderColor: '#a97827',
-            pointRadius: 3,
-            borderWidth: 2,
-            fill: true,
-            tension: 0.32
-        }
-    ]
-}));
-
 const clientChartData = computed(() => ({
     labels: clientSeries.value.map(client => client.clientName),
     datasets: [
@@ -59,6 +43,10 @@ const clientChartData = computed(() => ({
         }
     ]
 }));
+
+const maxClientValue = computed(() => {
+    return clientSeries.value.reduce((max, client) => Math.max(max, Number(client.value ?? 0)), 0);
+});
 
 const commonChartOptions = {
     responsive: true,
@@ -97,37 +85,34 @@ const commonChartOptions = {
     }
 };
 
-const aggregateChartOptions = {
-    ...commonChartOptions,
-    scales: {
-        ...commonChartOptions.scales,
-        y: {
-            ...commonChartOptions.scales.y,
-            min: 240,
-            max: 320,
-            ticks: {
-                ...commonChartOptions.scales.y.ticks,
-                stepSize: 20
-            }
-        }
-    }
-};
+const clientChartOptions = computed(() => {
+    const roundedMax = Math.max(10, Math.ceil(maxClientValue.value / 10) * 10);
+    const stepSize = Math.max(5, Math.ceil(roundedMax / 25) * 5);
 
-const clientChartOptions = {
-    ...commonChartOptions,
-    scales: {
-        ...commonChartOptions.scales,
-        y: {
-            ...commonChartOptions.scales.y,
-            min: 45,
-            max: 75,
-            ticks: {
-                ...commonChartOptions.scales.y.ticks,
-                stepSize: 5
+    return {
+        ...commonChartOptions,
+        scales: {
+            ...commonChartOptions.scales,
+            x: {
+                ...commonChartOptions.scales.x,
+                ticks: {
+                    ...commonChartOptions.scales.x.ticks,
+                    maxRotation: 0,
+                    minRotation: 0
+                }
+            },
+            y: {
+                ...commonChartOptions.scales.y,
+                beginAtZero: true,
+                suggestedMax: roundedMax,
+                ticks: {
+                    ...commonChartOptions.scales.y.ticks,
+                    stepSize
+                }
             }
         }
-    }
-};
+    };
+});
 
 function formatTrend(trend) {
     return t(`supplier-management.forecast.trend.${trend}`, trend);
@@ -154,13 +139,12 @@ onMounted(() => {
 
         <template v-else>
             <section class="forecast-page__charts">
-                <article class="forecast-card forecast-card--chart">
-                    <h2>{{ t('supplier-management.forecast.aggregate-title') }}</h2>
-                    <div class="forecast-card__chart">
-                        <Chart type="line" :data="aggregateChartData" :options="aggregateChartOptions" />
-                    </div>
-                    <p>{{ aggregateSummary }}</p>
-                </article>
+                <SupplierAggregateForecastCard
+                    :title="t('supplier-management.forecast.aggregate-title')"
+                    :summary="aggregateSummary"
+                    :series="aggregateSeries"
+                    :empty-text="t('supplier-management.forecast.empty')"
+                />
 
                 <article class="forecast-card forecast-card--chart">
                     <h2>{{ t('supplier-management.forecast.clients-title') }}</h2>
@@ -223,7 +207,7 @@ onMounted(() => {
 .forecast-page__insights {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
+    gap: 24px;
 }
 
 .forecast-page__insights {
@@ -254,14 +238,14 @@ onMounted(() => {
 
 .forecast-card--chart {
     display: grid;
-    grid-template-rows: auto 176px auto;
-    gap: 12px;
-    min-height: 278px;
+    grid-template-rows: auto 220px auto;
+    gap: 16px;
+    min-height: 388px;
     padding: 18px;
 }
 
 .forecast-card__chart {
-    min-height: 176px;
+    min-height: 220px;
 }
 
 .forecast-card--insight {
@@ -289,7 +273,7 @@ onMounted(() => {
     color: #6f665d;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 980px) {
     .forecast-page__charts,
     .forecast-page__insights {
         grid-template-columns: 1fr;

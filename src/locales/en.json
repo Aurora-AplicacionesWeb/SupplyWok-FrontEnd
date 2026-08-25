@@ -424,6 +424,16 @@
       "subtitle": "Manage offer, price, unit, and delivery conditions.",
       "add": "Add",
       "search": "Search",
+      "filter": {
+        "category": "Category",
+        "all-categories": "All categories"
+      },
+      "categories": {
+        "grains": "Grains",
+        "protein": "Protein",
+        "sauces": "Sauces",
+        "seafood": "Seafood"
+      },
       "columns": {
         "product": "Product",
         "category": "Category",
@@ -439,6 +449,7 @@
       "form": {
         "product": "Product",
         "category": "Category",
+        "category-placeholder": "Select a category",
         "price": "Price",
         "unit": "Unit",
         "delivery-conditions": "Delivery conditions",
@@ -539,6 +550,11 @@
         "title": "Aggregate view",
         "summary": "Text summary for the chart: {from} -> {to}",
         "empty": "No forecast data available."
+      },
+      "orders": {
+        "title": "Recent orders",
+        "summary": "Estimated delivery: {estimatedDate} · {items} item(s)",
+        "empty": "No orders available to display."
       },
       "priority": {
         "high": "High",

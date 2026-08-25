@@ -35,9 +35,10 @@ const legacyRedirectRoutes = [
     { path: '/configuration', name: 'configuration', redirect: () => getScopedPathByRole(getActiveRole() ?? 'restaurant', 'configuration') },
     { path: '/subscription', name: 'subscription', redirect: () => getScopedPathByRole(getActiveRole() ?? 'restaurant', 'subscription') },
     { path: '/inventory', name: 'inventory', redirect: '/inventory/items' },
-    { path: '/orders', name: 'orders', redirect: '/purchasing/orders' },
+    { path: '/orders', name: 'orders', redirect: () => getScopedPathByRole(getActiveRole() ?? 'restaurant', 'orders') },
     { path: '/orders/new', name: 'orders-new', redirect: '/purchasing/orders/new' },
     { path: '/suppliers', name: 'suppliers', redirect: '/purchasing/suppliers' },
+    { path: '/supplier', redirect: '/supplier/dashboard' },
     { path: '/restaurant/dashboard', redirect: '/operations/dashboard' },
     { path: '/restaurant/kitchen', redirect: '/operations/kitchen' },
     { path: '/restaurant/tables', redirect: '/operations/tables' },
@@ -51,7 +52,9 @@ const legacyRedirectRoutes = [
     { path: '/restaurant/suppliers', redirect: '/purchasing/suppliers' },
     { path: '/restaurant/kitchen-tickets', redirect: '/operations/kitchen' },
     { path: '/restaurant/create-kitchen-order', redirect: '/operations/kitchen/new' },
-    { path: '/restaurant/tables-and-occupancy', redirect: '/operations/tables' }
+    { path: '/restaurant/tables-and-occupancy', redirect: '/operations/tables' },
+    { path: '/supplier/delivery', redirect: '/supplier/dashboard' },
+    { path: '/supplier/delivery-planning', redirect: '/supplier/dashboard' }
 ];
 
 const loginPage = () => import('./iam/presentation/views/login-view.vue');

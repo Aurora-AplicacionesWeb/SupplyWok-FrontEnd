@@ -54,7 +54,6 @@ const menuItems = {
     { id: 'dashboard', i18nKey: 'shared.sidebar.dashboard', iconOff: '/images/icons/dashboard-icon.svg', iconOn: '/images/icons/dashboard-on-icon.svg', path: '/supplier/dashboard' },
     { id: 'orders', i18nKey: 'shared.sidebar.orders', iconOff: '/images/icons/orders-icon.svg', iconOn: '/images/icons/orders-on-icon.svg', path: '/supplier/orders' },
     { id: 'clients', i18nKey: 'shared.sidebar.clients', iconOff: '/images/icons/clients-icon.svg', iconOn: '/images/icons/clients-icon.svg', path: '/supplier/clients' },
-    { id: 'delivery', i18nKey: 'shared.sidebar.delivery', iconOff: '/images/icons/delivery-icon.svg', iconOn: '/images/icons/delivery-icon.svg', path: '/supplier/delivery' },
     { id: 'forecast', i18nKey: 'shared.sidebar.forecast', iconOff: '/images/icons/forecast-icon.svg', iconOn: '/images/icons/forecast-icon.svg', path: '/supplier/forecast' },
     { id: 'catalog', i18nKey: 'shared.sidebar.catalog', iconOff: '/images/icons/catalog-icon.svg', iconOn: '/images/icons/catalog-icon.svg', path: '/supplier/catalog' },
     { id: 'alerts', i18nKey: 'shared.sidebar.alerts', iconOff: '/images/icons/alerts-icon.svg', iconOn: '/images/icons/alerts-on-icon.svg', path: '/supplier/alerts' },
@@ -76,12 +75,50 @@ const activeRole = computed(() => {
 
 const visibleMenuItems = computed(() => menuItems[activeRole.value] ?? []);
 
+const routeAliases = {
+  supplier: {
+    dashboard: ['/supplier/dashboard'],
+    orders: ['/supplier/orders'],
+    clients: ['/supplier/clients'],
+    forecast: ['/supplier/forecast'],
+    catalog: ['/supplier/catalog'],
+    alerts: ['/supplier/alerts'],
+    configuration: ['/supplier/configuration'],
+    subscription: ['/supplier/subscription']
+  },
+  restaurant: {
+    dashboard: ['/operations/dashboard'],
+    inventory: ['/inventory/items'],
+    orders: ['/purchasing/orders'],
+    'kitchen-tickets': ['/operations/kitchen'],
+    suppliers: ['/purchasing/suppliers'],
+    'tables-and-occupancy': ['/operations/tables'],
+    alerts: ['/iot/alerts'],
+    reports: ['/operations/reports'],
+    configuration: ['/operations/configuration'],
+    subscription: ['/operations/subscription']
+  }
+};
+
+const matchesRoutePath = (currentPath, candidatePath) => {
+  return currentPath === candidatePath || currentPath.startsWith(`${candidatePath}/`);
+};
+
 const activeItem = computed(() => {
   if (route.path.startsWith('/iot/')) {
     return 'alerts';
   }
-  const currentItem = visibleMenuItems.value.find((item) => route.path.startsWith(item.path));
-  return currentItem?.id ?? 'dashboard';
+
+  if (route.path === '/supplier') {
+    return 'dashboard';
+  }
+
+  const aliases = routeAliases[activeRole.value] ?? {};
+  const aliasedItem = visibleMenuItems.value.find((item) => {
+    return (aliases[item.id] ?? [item.path]).some((candidatePath) => matchesRoutePath(route.path, candidatePath));
+  });
+
+  return aliasedItem?.id ?? 'dashboard';
 });
 
 /**

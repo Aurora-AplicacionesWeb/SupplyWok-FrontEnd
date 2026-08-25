@@ -15,10 +15,10 @@ const ROLE_SECTION_PATHS = {
     suppliers: '/purchasing/suppliers'
   },
   supplier: {
+    home: '/supplier/dashboard',
     dashboard: '/supplier/dashboard',
     orders: '/supplier/orders',
     clients: '/supplier/clients',
-    delivery: '/supplier/delivery',
     forecast: '/supplier/forecast',
     catalog: '/supplier/catalog',
     alerts: '/supplier/alerts',

@@ -1,16 +1,16 @@
-﻿{
+{
   "welcome": "Bienvenido a SupplyWok",
   "access": {
     "log-in": {
-      "welcome": "Â¡Bienvenido!",
-      "new-supply": "Â¿Nuevo en SupplyWok?",
-      "sign-up-now": "RegÃ­strate ahora",
-      "email": "Correo electrÃ³nico",
+      "welcome": "Bienvenido!",
+      "new-supply": "Nuevo en SupplyWok?",
+      "sign-up-now": "Registrate ahora",
+      "email": "Correo electronico",
       "email-example": "ejemplo{'@'}email.com",
-      "password": "ContraseÃ±a",
-      "password-example": "ContraseÃ±a123",
-      "forgot-password": "Â¿Olvidaste tu contraseÃ±a?",
-      "login": "Iniciar sesiÃ³n"
+      "password": "Contrasena",
+      "password-example": "Contrasena123",
+      "forgot-password": "Olvidaste tu contrasena?",
+      "login": "Iniciar sesion"
     },
     "register": {
       "get-started": "Comenzar",
@@ -19,29 +19,29 @@
       "subscription-premium": "Premium",
       "subscription-enterprise": "Enterprise",
       "registration-failed": "Registro fallido",
-      "phone": "NÃºmero de telÃ©fono",
+      "phone": "Numero de telefono",
       "phone-example": "999 666 333",
       "role": "Rol",
-      "subscription": "SuscripciÃ³n",
+      "subscription": "Suscripcion",
       "select-one": "Selecciona uno",
-      "no-plans": "Â¿No conoces nuestros planes?",
-      "click-here": "Haz clic aquÃ­",
+      "no-plans": "No conoces nuestros planes?",
+      "click-here": "Haz clic aqui",
       "terms-accept": "Acepto los {terms} y la {policy}",
-      "terms": "tÃ©rminos",
-      "policy": "polÃ­tica de privacidad",
+      "terms": "terminos",
+      "policy": "politica de privacidad",
       "go-to-pay": "Ir a pagar"
     },
     "languages": {
-      "english": "InglÃ©s (US)",
-      "spanish": "EspaÃ±ol (ES)",
+      "english": "Ingles (US)",
+      "spanish": "Espanol (ES)",
       "chinese": "Chino (ZH)"
     },
     "validation": {
-      "email-invalid": "El correo electrÃ³nico no es vÃ¡lido.",
-      "password-min": "La contraseÃ±a debe tener al menos 8 caracteres.",
-      "phone-invalid": "El nÃºmero de telÃ©fono no es vÃ¡lido.",
-      "terms-required": "Debes aceptar los tÃ©rminos para continuar.",
-      "invalid-credentials": "Correo o contraseÃ±a invÃ¡lidos."
+      "email-invalid": "El correo electronico no es valido.",
+      "password-min": "La contrasena debe tener al menos 8 caracteres.",
+      "phone-invalid": "El numero de telefono no es valido.",
+      "terms-required": "Debes aceptar los terminos para continuar.",
+      "invalid-credentials": "Correo o contrasena invalidos."
     }
   },
   "shared": {
@@ -54,15 +54,15 @@
       "orders": "Pedidos",
       "kitchen-tickets": "Comandas",
       "suppliers": "Proveedores",
-      "tables-and-occupancy": "Mesas y ocupaciÃ³n",
+      "tables-and-occupancy": "Mesas y ocupacion",
       "alerts": "Alertas",
       "reports": "Reportes",
-      "configuration": "ConfiguraciÃ³n",
-      "subscription": "SuscripciÃ³n",
+      "configuration": "Configuracion",
+      "subscription": "Suscripcion",
       "clients": "Mis Clientes",
-      "forecast": "PronÃ³stico de Demanda",
-      "catalog": "CatÃ¡logo de Productos",
-      "delivery": "PlanificaciÃ³n de Entregas"
+      "forecast": "Pronostico de Demanda",
+      "catalog": "Catalogo de Productos",
+      "delivery": "Planificacion de Entregas"
     },
     "titles": {
       "dashboard": "Dashboard",
@@ -75,28 +75,28 @@
       "alerts": "Alertas",
       "sensors": "Sensores",
       "reports": "Reportes",
-      "configuration": "ConfiguraciÃ³n",
-      "subscription": "SuscripciÃ³n",
+      "configuration": "Configuracion",
+      "subscription": "Suscripcion",
       "dish-menu": "Carta de platos",
       "create-kitchen-order": "Crear pedido de cocina",
-      "tables-and-occupancy": "Mesas y ocupaciÃ³n",
-      "login": "Iniciar sesiÃ³n",
+      "tables-and-occupancy": "Mesas y ocupacion",
+      "login": "Iniciar sesion",
       "register": "Registrarse",
-      "not-found": "PÃ¡gina no encontrada"
+      "not-found": "Pagina no encontrada"
     },
     "placeholder": {
-      "kicker": "Primera versiÃ³n frontend",
-      "description": "Este mÃ³dulo estÃ¡ reservado y podrÃ¡ completarse en las tareas del prÃ³ximo sprint.",
+      "kicker": "Primera version frontend",
+      "description": "Este modulo esta reservado y podra completarse en las tareas del proximo sprint.",
       "dashboardTitle": "Dashboard de Cocina",
       "dashboardDesc": "Monitoreo de la planta y cadena de suministro en tiempo real."
     },
     "errors": {
-      "pageNotFoundTitle": "PÃ¡gina no encontrada",
-      "pageNotFoundDesc": "La ruta solicitada no existe en la versiÃ³n actual del frontend."
+      "pageNotFoundTitle": "Pagina no encontrada",
+      "pageNotFoundDesc": "La ruta solicitada no existe en la version actual del frontend."
     },
     "configurationPage": {
       "kicker": "Restaurante",
-      "title": "ConfiguraciÃ³n del restaurante",
+      "title": "Configuracion del restaurante",
       "description": "Perfil operativo, horarios, notificaciones, umbrales y accesos.",
       "profile": {
         "title": "Perfil del restaurante",
@@ -111,12 +111,12 @@
           "street": "Calle",
           "district": "Distrito",
           "city": "Ciudad",
-          "country": "PaÃ­s",
-          "phone": "TelÃ©fono",
-          "category": "CategorÃ­a",
-          "hours": "Horario de atenciÃ³n",
-          "thresholds": "Umbrales mÃ­nimos de stock",
-          "days": "DÃ­as de operaciÃ³n",
+          "country": "Pais",
+          "phone": "Telefono",
+          "category": "Categoria",
+          "hours": "Horario de atencion",
+          "thresholds": "Umbrales minimos de stock",
+          "days": "Dias de operacion",
           "contact": "Contacto de soporte",
           "email": "Correo",
           "sms": "SMS"
@@ -138,27 +138,27 @@
       "lock": {
         "title": "Modo bloqueo de empleado",
         "restrictedMode": "Activar modo restringido",
-        "password": "ContraseÃ±a de desbloqueo",
-        "callout": "Solo el dueÃ±o puede cambiar la configuraciÃ³n del modo restringido."
+        "password": "Contrasena de desbloqueo",
+        "callout": "Solo el dueno puede cambiar la configuracion del modo restringido."
       }
     },
     "dashboardPage": {
       "hero": {
         "kicker": "Centro operativo",
         "title": "Dashboard principal",
-        "description": "Resume inventario, sensores, comandas y pedidos abiertos en una sola vista para reaccionar rÃ¡pido.",
+        "description": "Resume inventario, sensores, comandas y pedidos abiertos en una sola vista para reaccionar rapido.",
         "createOrder": "Crear pedido",
         "reviewAlerts": "Revisar alertas"
       },
       "metrics": {
         "healthyItems": "Items saludables",
-        "replenishmentHint": "{count} productos requieren reposiciÃ³n",
+        "replenishmentHint": "{count} productos requieren reposicion",
         "activeAlerts": "Alertas activas",
-        "alertsHint": "Temperatura, stock y ocupaciÃ³n fuera de rango",
+        "alertsHint": "Temperatura, stock y ocupacion fuera de rango",
         "occupiedTables": "Mesas ocupadas",
         "tablesHint": "{count} mesas en servicio ahora",
         "pendingOrders": "Pedidos pendientes",
-        "ordersHint": "Seguimiento rÃ¡pido a proveedores prioritarios"
+        "ordersHint": "Seguimiento rapido a proveedores prioritarios"
       },
       "sensors": {
         "eyebrow": "Sensores",
@@ -176,7 +176,7 @@
         "empty": "No hay comandas activas para mostrar.",
         "status": {
           "pending": "Pendiente",
-          "inPreparation": "En preparaciÃ³n",
+          "inPreparation": "En preparacion",
           "ready": "Lista",
           "delivered": "Entregada",
           "cancelled": "Anulada"
@@ -186,8 +186,8 @@
         "eyebrow": "Inventario",
         "title": "Productos con bajo stock",
         "link": "Ir a inventario",
-        "stockInfo": "{stock} disponibles de {minimum} mÃ­nimos",
-        "empty": "No hay productos crÃ­ticos por ahora."
+        "stockInfo": "{stock} disponibles de {minimum} minimos",
+        "empty": "No hay productos criticos por ahora."
       },
       "purchasing": {
         "eyebrow": "Abastecimiento",
@@ -204,7 +204,7 @@
       }
     },
     "subscriptionPage": {
-      "kicker": "SuscripciÃ³n",
+      "kicker": "Suscripcion",
       "title": "Planes disponibles",
       "description": "Compara capacidad, alcance operativo y beneficios antes de mover el restaurante a un plan superior.",
       "summary": {
@@ -226,24 +226,24 @@
             "Dashboard principal con monitoreo IoT",
             "Inventario, pedidos y proveedores",
             "Alertas operativas en tiempo real",
-            "ExportaciÃ³n de reportes en CSV y PDF"
+            "Exportacion de reportes en CSV y PDF"
           ]
         },
         "enterprise": {
           "features": [
             "Multi local y trazabilidad extendida",
             "Mayor capacidad de sensores y usuarios",
-            "PriorizaciÃ³n para soporte y auditorÃ­as",
+            "Priorizacion para soporte y auditorias",
             "Escalamiento avanzado para equipos operativos"
           ]
         }
       },
       "messages": {
-        "switchSuccess": "La vista ahora refleja el plan {plan}. ConÃ©ctalo al flujo de pago cuando el mÃ³dulo comercial estÃ© listo."
+        "switchSuccess": "La vista ahora refleja el plan {plan}. Conectalo al flujo de pago cuando el modulo comercial este listo."
       },
       "stripe": {
         "eyebrow": "Stripe Checkout",
-        "title": "Elige y paga tu suscripciÃ³n",
+        "title": "Elige y paga tu suscripcion",
         "loading": "Cargando opciones de pago...",
         "error": "No se pudo cargar la tabla de precios de Stripe.",
         "setupTitle": "Falta configurar Stripe",
@@ -256,13 +256,13 @@
   "supplier-management": {
     "orders": {
       "breadcrumb": "PROVEEDOR",
-      "title": "Ã“rdenes de compra",
+      "title": "Ordenes de compra",
       "subtitle": "Monitorea pedidos de restaurantes y compromisos de entrega.",
       "search": "Buscar",
       "stats": {
-        "total": "Ã“rdenes totales",
+        "total": "Ordenes totales",
         "pending": "Pendientes",
-        "in-transit": "En trÃ¡nsito",
+        "in-transit": "En transito",
         "delivered": "Entregadas"
       },
       "filters": {
@@ -270,7 +270,7 @@
         "all": "Todos los estados",
         "confirmed": "Confirmada",
         "pending": "Pendiente",
-        "in-transit": "En trÃ¡nsito",
+        "in-transit": "En transito",
         "delivered": "Entregada",
         "delayed": "Retrasada"
       },
@@ -286,7 +286,7 @@
       },
       "actions": {
         "confirm": "Confirmar",
-        "mark-in-transit": "Marcar en trÃ¡nsito",
+        "mark-in-transit": "Marcar en transito",
         "mark-delivered": "Marcar entregada",
         "view": "Ver detalle"
       },
@@ -305,8 +305,8 @@
           "subtotal": "Subtotal"
         }
       },
-      "empty": "No hay Ã³rdenes que coincidan con tu bÃºsqueda.",
-      "visible-count": "Mostrando {visible} de {total} Ã³rdenes totales"
+      "empty": "No hay ordenes que coincidan con tu busqueda.",
+      "visible-count": "Mostrando {visible} de {total} ordenes totales"
     },
     "clients": {
       "breadcrumb": "PROVEEDOR",
@@ -323,31 +323,31 @@
         "district": "Distrito",
         "frequency": "Frecuencia",
         "ticket": "Ticket",
-        "demand": "ProyecciÃ³n de demanda",
+        "demand": "Proyeccion de demanda",
         "status": "Estado",
-        "last-order-date": "Ãšltima orden"
+        "last-order-date": "Ultima orden"
       },
-      "empty": "No hay clientes que coincidan con tu bÃºsqueda.",
+      "empty": "No hay clientes que coincidan con tu busqueda.",
       "visible-count": "Mostrando {visible} de {total} elementos totales"
     },
     "forecast": {
       "breadcrumb": "PROVEEDOR",
-      "title": "PronÃ³stico de demanda",
-      "subtitle": "Combina demanda agregada y pronÃ³sticos por cliente para planificar el suministro.",
+      "title": "Pronostico de demanda",
+      "subtitle": "Combina demanda agregada y pronosticos por cliente para planificar el suministro.",
       "aggregate-title": "Vista agregada",
       "clients-title": "Por cliente",
-      "chart-summary": "Resumen del grÃ¡fico: {from} -> {to}",
-      "top-client-summary": "Resumen del grÃ¡fico: {value}",
-      "empty": "No hay datos de pronÃ³stico disponibles.",
+      "chart-summary": "Resumen del grafico: {from} -> {to}",
+      "top-client-summary": "Resumen del grafico: {value}",
+      "empty": "No hay datos de pronostico disponibles.",
       "trend": {
         "upward": "Al alza",
         "stable": "Estable",
-        "watch": "En observaciÃ³n"
+        "watch": "En observacion"
       }
     },
     "delivery": {
       "breadcrumb": "PROVEEDOR",
-      "title": "PlanificaciÃ³n de entregas",
+      "title": "Planificacion de entregas",
       "subtitle": "Planifica entregas agrupadas por fecha y secuencia de ruta para restaurantes cercanos.",
       "filters": {
         "date": "Fecha",
@@ -358,7 +358,7 @@
       "stats": {
         "routes": "Rutas",
         "stops": "Paradas",
-        "orders": "Ã“rdenes"
+        "orders": "Ordenes"
       },
       "status": {
         "planned": "Planificada",
@@ -412,21 +412,31 @@
         }
       },
       "empty": "No hay alertas que coincidan con tu busqueda.",
-      "notification-title": "NotificaciÃ³n de Proveedor",
+      "notification-title": "Notificacion de Proveedor",
       "messages": {
         "rush-reorder": "Pedido de reabastecimiento urgente",
-        "route-congestion": "CongestiÃ³n en la ruta detectada"
+        "route-congestion": "Congestion en la ruta detectada"
       }
     },
     "catalog": {
       "breadcrumb": "PROVEEDOR",
-      "title": "CatÃ¡logo de productos",
+      "title": "Catalogo de productos",
       "subtitle": "Gestiona oferta, precio, unidad y condiciones de entrega.",
       "add": "Agregar",
       "search": "Buscar",
+      "filter": {
+        "category": "Categoria",
+        "all-categories": "Todas las categorias"
+      },
+      "categories": {
+        "grains": "Granos",
+        "protein": "Proteina",
+        "sauces": "Salsas",
+        "seafood": "Mariscos"
+      },
       "columns": {
         "product": "Producto",
-        "category": "CategorÃ­a",
+        "category": "Categoria",
         "price": "Precio",
         "unit": "Unidad",
         "delivery-conditions": "Condiciones de entrega",
@@ -438,7 +448,8 @@
       },
       "form": {
         "product": "Producto",
-        "category": "CategorÃ­a",
+        "category": "Categoria",
+        "category-placeholder": "Selecciona una categoria",
         "price": "Precio",
         "unit": "Unidad",
         "delivery-conditions": "Condiciones de entrega",
@@ -447,16 +458,16 @@
       },
       "delete-dialog": {
         "title": "Eliminar producto",
-        "message": "Â¿Seguro que quieres eliminar {product} del catÃ¡logo?",
+        "message": "Seguro que quieres eliminar {product} del catalogo?",
         "confirm": "Eliminar"
       },
-      "empty": "AÃºn no hay productos en el catÃ¡logo."
+      "empty": "Aun no hay productos en el catalogo."
     },
     "settings": {
       "breadcrumb": "PROVEEDOR",
-      "title": "ConfiguraciÃ³n del proveedor",
+      "title": "Configuracion del proveedor",
       "subtitle": "Perfil comercial, zonas, contactos y preferencias operativas.",
-      "loading": "Cargando configuraciÃ³n...",
+      "loading": "Cargando configuracion...",
       "profile": {
         "title": "Perfil del proveedor",
         "supplier-name": "Perfil del proveedor",
@@ -465,8 +476,8 @@
         "sms": "SMS",
         "save": "Guardar",
         "saving": "Guardando...",
-        "saved": "ConfiguraciÃ³n guardada.",
-        "error": "No se pudo guardar la configuraciÃ³n."
+        "saved": "Configuracion guardada.",
+        "error": "No se pudo guardar la configuracion."
       },
       "zones": {
         "title": "Zonas de servicio",
@@ -477,8 +488,8 @@
     },
     "subscription": {
       "breadcrumb": "PROVEEDOR",
-      "title": "SuscripciÃ³n del proveedor",
-      "subtitle": "Capacidad comercial, lÃ­mites y funcionalidades empresariales.",
+      "title": "Suscripcion del proveedor",
+      "subtitle": "Capacidad comercial, limites y funcionalidades empresariales.",
       "active": "Plan activo",
       "summary": {
         "current-plan": {
@@ -491,7 +502,7 @@
         },
         "locations": {
           "label": "Ubicaciones",
-          "value": "Multi-ubicaciÃ³n"
+          "value": "Multi-ubicacion"
         },
         "sensors": {
           "label": "Sensores",
@@ -510,9 +521,9 @@
         "enterprise": {
           "name": "Enterprise",
           "features": [
-            "AnalÃ­tica avanzada",
-            "Multi-ubicaciÃ³n",
-            "OptimizaciÃ³n de rutas",
+            "Analitica avanzada",
+            "Multi-ubicacion",
+            "Optimizacion de rutas",
             "Soporte prioritario"
           ]
         }
@@ -520,10 +531,10 @@
     },
     "dashboard": {
       "title": "Dashboard del proveedor",
-      "subtitle": "Pedidos entrantes, carga logÃ­stica y clientes vinculados.",
+      "subtitle": "Pedidos entrantes, carga logistica y clientes vinculados.",
       "loading": "Cargando datos del dashboard...",
       "stats": {
-        "orders-received": "Ã“rdenes recibidas",
+        "orders-received": "Ordenes recibidas",
         "scheduled-deliveries": "Entregas programadas",
         "demand-outlook": "Perspectiva de demanda",
         "urgent-requests": "Solicitudes urgentes",
@@ -531,14 +542,19 @@
       },
       "routes": {
         "title": "Rutas activas de hoy",
-        "schedule": "{stops} Paradas Â· {departure} - {arrival}",
+        "schedule": "{stops} Paradas  -  {departure} - {arrival}",
         "date": "{date}",
         "empty": "No hay rutas activas disponibles."
       },
       "aggregate": {
         "title": "Vista agregada",
-        "summary": "Resumen del grÃ¡fico: {from} -> {to}",
-        "empty": "No hay datos de pronÃ³stico disponibles."
+        "summary": "Resumen del grafico: {from} -> {to}",
+        "empty": "No hay datos de pronostico disponibles."
+      },
+      "orders": {
+        "title": "Ordenes recientes",
+        "summary": "Entrega estimada: {estimatedDate} · {items} item(s)",
+        "empty": "No hay ordenes disponibles para mostrar."
       },
       "priority": {
         "high": "Alta",
@@ -551,7 +567,7 @@
     "page": {
       "kicker": "Restaurante",
       "title": "Inventario",
-      "description": "Gestiona niveles de stock, mÃ­nimos y movimientos.",
+      "description": "Gestiona niveles de stock, minimos y movimientos.",
     "actions": {
       "add": "Agregar insumo"
     },
@@ -560,20 +576,20 @@
     "metrics": {
       "items": "Productos",
       "totalStock": "Stock total",
-      "critical": "CrÃ­ticos",
+      "critical": "Criticos",
       "movements": "Movimientos"
     },
     "table": {
       "title": "Inventario",
       "search": "Buscar",
-      "searchPlaceholder": "Buscar producto, categorÃ­a o proveedor...",
-      "category": "CategorÃ­a",
-      "allCategories": "Todas las categorÃ­as",
+      "searchPlaceholder": "Buscar producto, categoria o proveedor...",
+      "category": "Categoria",
+      "allCategories": "Todas las categorias",
       "filterUnit": "Filtrar por unidad",
       "minimum": "MIN",
       "idLabel": "ID: {id}",
       "minimumLabel": "MIN: {value}",
-      "empty": "No hay productos de inventario que coincidan con tu bÃºsqueda.",
+      "empty": "No hay productos de inventario que coincidan con tu busqueda.",
       "error": "No se pudo cargar el inventario.",
       "unassignedSupplier": "Proveedor sin asignar",
       "columns": {
@@ -582,7 +598,7 @@
         "stockLevels": "Niveles de stock",
         "unit": "Unidad",
         "restaurant": "Restaurante",
-        "category": "CategorÃ­a",
+        "category": "Categoria",
         "supplier": "Proveedor",
         "actions": "Acciones"
       },
@@ -600,9 +616,9 @@
       }
     },
     "belowMinimum": {
-      "title": "Por debajo del mÃ­nimo",
-      "caption": "{count} producto(s) por debajo del nivel mÃ­nimo de stock",
-      "empty": "No hay productos por debajo del nivel mÃ­nimo de stock.",
+      "title": "Por debajo del minimo",
+      "caption": "{count} producto(s) por debajo del nivel minimo de stock",
+      "empty": "No hay productos por debajo del nivel minimo de stock.",
       "columns": {
         "product": "PRODUCTO",
         "currentStock": "STOCK ACTUAL",
@@ -613,7 +629,7 @@
       }
     },
     "stockStatus": {
-      "critical": "CrÃ­tico",
+      "critical": "Critico",
       "warning": "Bajo",
       "healthy": "Saludable"
     },
@@ -636,9 +652,9 @@
       },
       "status": {
         "pending": "Pendiente",
-        "in-preparation": "En preparaciÃ³n",
+        "in-preparation": "En preparacion",
         "confirmed": "Confirmado",
-        "in-transit": "En trÃ¡nsito",
+        "in-transit": "En transito",
         "delivered": "Entregado",
         "delayed": "Retrasado"
       }
@@ -646,27 +662,27 @@
     "orders-page": {
       "kicker": "Restaurante",
       "title": "Pedidos",
-      "description": "Controla stock, mÃ­nimos y relaciones con proveedores."
+      "description": "Controla stock, minimos y relaciones con proveedores."
     },
     "purchase-order-form-page": {
       "kicker": "Supply and Purchasing",
       "title": "Crear pedido",
-      "description": "Usa esta pantalla independiente cuando quieras enfocarte solo en la creaciÃ³n del pedido."
+      "description": "Usa esta pantalla independiente cuando quieras enfocarte solo en la creacion del pedido."
     },
     "suppliers-page": {
       "kicker": "Restaurante",
       "title": "Proveedores",
-      "description": "Visibilidad de contactos, categorÃ­as suministradas y rendimiento reciente.",
+      "description": "Visibilidad de contactos, categorias suministradas y rendimiento reciente.",
       "table": {
         "headers": {
           "supplier": "PROVEEDOR",
           "contact": "CONTACTO",
-          "categories": "CATEGORÃAS SUMINISTRADAS",
+          "categories": "CATEGORIAS SUMINISTRADAS",
           "street": "CALLE"
         },
         "categories": {
           "grains": "Granos",
-          "protein": "ProteÃ­nas",
+          "protein": "Proteinas",
           "sauces": "Salsas",
           "seafood": "Pescados y Mariscos"
         }
@@ -674,9 +690,9 @@
       "noContact": "Sin contacto",
       "noEmail": "Sin correo",
       "noStreet": "Sin calle",
-      "noPhone": "Sin telÃ©fono",
+      "noPhone": "Sin telefono",
       "footer": {
-        "showing": "Mostrando {count} de {total} Ã­tems totales",
+        "showing": "Mostrando {count} de {total} items totales",
         "previous": "Anterior",
         "next": "Siguiente"
       }
@@ -688,21 +704,21 @@
         "estimated-date": "Fecha estimada",
         "priority": "Prioridad",
         "product": "Producto",
-        "product-placeholder": "Ejemplo: Arroz jazmÃ­n",
+        "product-placeholder": "Ejemplo: Arroz jazmin",
         "quantity": "Cant.",
         "unit": "Unidad",
         "price": "Precio"
       },
       "actions": {
-        "add-line": "Agregar lÃ­nea",
+        "add-line": "Agregar linea",
         "create-order": "Crear pedido"
       }
     },
     "table": {
       "title": "Seguimiento del pedido",
-      "search-placeholder": "Buscar por proveedor, estado o cÃ³digo",
+      "search-placeholder": "Buscar por proveedor, estado o codigo",
       "columns": {
-        "code": "CÃ³digo",
+        "code": "Codigo",
         "status": "Estado",
         "actions": "Acciones"
       },
@@ -749,16 +765,16 @@
       "supplier-required": "El proveedor es obligatorio.",
       "order-date-required": "La fecha estimada es obligatoria.",
       "priority-required": "La prioridad es obligatoria.",
-      "items-required": "Agrega al menos una lÃ­nea de producto.",
+      "items-required": "Agrega al menos una linea de producto.",
       "product-name-required": "El nombre del producto es obligatorio.",
-      "quantity-invalid": "La cantidad debe ser un nÃºmero vÃ¡lido mayor que cero.",
+      "quantity-invalid": "La cantidad debe ser un numero valido mayor que cero.",
       "unit-required": "La unidad es obligatoria.",
-      "unit-price-invalid": "El precio debe ser un nÃºmero vÃ¡lido mayor que cero."
+      "unit-price-invalid": "El precio debe ser un numero valido mayor que cero."
     }
   },
   "iot": {
     "stat-cards": {
-      "low-stock-items": "ARTÃCULOS CON BAJO STOCK",
+      "low-stock-items": "ARTICULOS CON BAJO STOCK",
       "temp-alerts": "ALERTAS TEMP.",
       "active-tables": "MESAS ACTIVAS",
       "urgent": "Urgente",
@@ -766,29 +782,29 @@
     },
     "panel": {
       "title": "Panel IoT listo para sensores reales",
-      "description": "Lecturas de cocina, almacÃ©n y ocupaciÃ³n con umbrales y eventos recientes.",
+      "description": "Lecturas de cocina, almacen y ocupacion con umbrales y eventos recientes.",
       "kitchen": "COCINA",
-      "cold-storage": "ALMACÃ‰N FRÃO",
+      "cold-storage": "ALMACEN FRIO",
       "dining-room": "COMEDOR",
-      "optimal-range": "Rango Ã³ptimo: {min}-{max}Â°C",
-      "occupancy-rate": "Tasa de ocupaciÃ³n"
+      "optimal-range": "Rango optimo: {min}-{max}C",
+      "occupancy-rate": "Tasa de ocupacion"
     },
     "alerts": {
       "defaultTitle": "Alerta",
       "supplierTitle": "Alerta de Proveedor",
       "notifications": "Notificaciones",
       "no-active-alerts": "No hay alertas activas.",
-      "severity-critical": "CrÃ­tico",
+      "severity-critical": "Critico",
       "severity-high": "Alta",
       "severity-medium": "Media",
       "severity-low": "Baja",
-      "cold-storage-breach-title": "Incumplimiento del umbral en almacÃ©n frÃ­o",
-      "kitchen-temp-breach-title": "Temperatura de cocina fuera de lÃ­mites",
-      "temp-exceeded-msg": "{sensorName} excediÃ³ el rango mÃ¡ximo permitido ({lastValue} Â°C). El Ã³ptimo es de {minValue} a {maxValue} Â°C.",
-      "temp-dropped-msg": "{sensorName} cayÃ³ por debajo del rango mÃ­nimo permitido ({lastValue} Â°C). El Ã³ptimo es de {minValue} a {maxValue} Â°C.",
+      "cold-storage-breach-title": "Incumplimiento del umbral en almacen frio",
+      "kitchen-temp-breach-title": "Temperatura de cocina fuera de limites",
+      "temp-exceeded-msg": "{sensorName} excedio el rango maximo permitido ({lastValue} C). El optimo es de {minValue} a {maxValue} C.",
+      "temp-dropped-msg": "{sensorName} cayo por debajo del rango minimo permitido ({lastValue} C). El optimo es de {minValue} a {maxValue} C.",
       "low-stock-title": "Advertencia de bajo stock",
-      "low-stock-msg": "{sensorName} ha caÃ­do a {lastValue} unidades (MÃ­nimo: {minValue}). Requiere reposiciÃ³n.",
-      "high-occupancy-title": "{sensorName} alcanzÃ³ una alta ocupaciÃ³n",
+      "low-stock-msg": "{sensorName} ha caido a {lastValue} unidades (Minimo: {minValue}). Requiere reposicion.",
+      "high-occupancy-title": "{sensorName} alcanzo una alta ocupacion",
       "high-occupancy-msg": "Carga concentrada en {sensorName} ({lastValue}% ocupado).",
       "severity-warning": "Advertencia",
       "severity-normal": "Normal"
@@ -841,15 +857,15 @@
       }
     },
     "sensors": {
-      "title": "SupervisiÃ³n de Sensores",
+      "title": "Supervision de Sensores",
       "description": "Administra y supervisa en tiempo real los dispositivos y sensores IoT instalados en tu local.",
       "create-button": "Crear Sensor",
       "view-button": "Ver Sensores",
       "types": {
         "kitchen-temperature": "Temperatura de Cocina",
-        "storage-temperature": "Temperatura de AlmacÃ©n",
-        "table-pressure": "PresiÃ³n de Mesa (OcupaciÃ³n)",
-        "storage-pressure": "PresiÃ³n de AlmacÃ©n (Stock)",
+        "storage-temperature": "Temperatura de Almacen",
+        "table-pressure": "Presion de Mesa (Ocupacion)",
+        "storage-pressure": "Presion de Almacen (Stock)",
         "Temperature": "Temperatura",
         "Weight": "Peso"
       },
@@ -857,9 +873,9 @@
         "id": "ID",
         "name": "Nombre",
         "type": "Tipo de Sensor",
-        "min": "Valor MÃ­nimo",
-        "max": "Valor MÃ¡ximo",
-        "last": "Ãšltimo Valor",
+        "min": "Valor Minimo",
+        "max": "Valor Maximo",
+        "last": "Ultimo Valor",
         "status": "Estado",
         "enabled": "Activo",
         "disabled": "Inactivo",
@@ -874,12 +890,12 @@
         "name": "Nombre del Sensor",
         "name-placeholder": "Ej. Parrilla 1, Refrigerador Carnes...",
         "type": "Tipo de Sensor",
-        "min-value": "MÃ­nimo",
-        "max-value": "MÃ¡ximo",
+        "min-value": "Minimo",
+        "max-value": "Maximo",
         "last-value": "Lectura Inicial (Valor)",
         "enabled": "Sensor Habilitado / Activo",
         "cancel": "Cancelar",
-        "submit": "Confirmar CreaciÃ³n"
+        "submit": "Confirmar Creacion"
       },
       "edit-dialog": {
         "title": "Editar sensor",
@@ -890,9 +906,9 @@
   "tables": {
     "title": "Mesas",
     "id": "ID",
-    "number": "NÃºmero",
+    "number": "Numero",
     "capacity": "Capacidad",
-    "location": "UbicaciÃ³n",
+    "location": "Ubicacion",
     "state": "Estado",
     "active": "Activo",
     "kitchenOrderCurrentId": "ID Comanda Actual"
@@ -900,14 +916,14 @@
   "dishes": {
     "title": "Platos",
     "id": "ID",
-    "code": "CÃ³digo",
+    "code": "Codigo",
     "name": "Nombre",
-    "description": "DescripciÃ³n",
+    "description": "Descripcion",
     "price": "Precio",
     "outstanding": "Destacado"
   },
   "dishesCategories": {
-    "title": "CategorÃ­as de Platos",
+    "title": "Categorias de Platos",
     "id": "ID",
     "name": "Nombre",
     "order": "Orden",
@@ -916,17 +932,17 @@
   "kitchenOrders": {
     "title": "Comandas de Cocina",
     "id": "ID",
-    "number": "NÃºmero",
+    "number": "Numero",
     "tableId": "ID Mesa",
-    "tableNumber": "NÃºmero Mesa",
+    "tableNumber": "Numero Mesa",
     "typeService": "Tipo Servicio",
     "state": "Estado",
     "observations": "Observaciones",
     "userId": "ID Usuario",
-    "dateCreated": "Fecha CreaciÃ³n",
+    "dateCreated": "Fecha Creacion",
     "hourReady": "Hora Listo",
     "hourDelivered": "Hora Entregado",
-    "preparationTime": "Tiempo PreparaciÃ³n"
+    "preparationTime": "Tiempo Preparacion"
   },
   "kitchenOrderItems": {
     "title": "Items de Comanda Cocina",
@@ -945,30 +961,30 @@
     "id": "ID",
     "restaurantId": "ID Restaurante",
     "stateLocked": "Estado Bloqueado",
-    "hashPassword": "Hash ContraseÃ±a",
-    "lastLocked": "Ãšltimo Bloqueo",
-    "lastUnlocked": "Ãšltimo Desbloqueo",
+    "hashPassword": "Hash Contrasena",
+    "lastLocked": "Ultimo Bloqueo",
+    "lastUnlocked": "Ultimo Desbloqueo",
     "failedAttempts": "Intentos Fallidos",
     "lockedUntil": "Bloqueado Hasta"
   },
   "supplyAndPurchasing": {
     "dashboard": {
       "pendingOrders": {
-        "label": "Ã“rdenes Pendientes"
+        "label": "Ordenes Pendientes"
       }
     }
   },
   "operations": {
     "dishMenuPage": {
-      "kicker": "MenÃº",
-      "title": "MenÃº de Platos",
+      "kicker": "Menu",
+      "title": "Menu de Platos",
       "description": "Explora todos los platos disponibles. Haz clic en un plato para agregarlo a una nueva orden.",
       "searchPlaceholder": "Buscar platos...",
       "addToOrder": "Agregar a Orden",
       "price": "Precio",
       "outstanding": "Destacado",
       "noDishes": "No hay platos disponibles",
-      "category": "CategorÃ­a",
+      "category": "Categoria",
       "categories": {
         "rice": "Arroz",
         "noodles": "Fideos",
@@ -995,7 +1011,7 @@
       "kicker": "Nueva Orden",
       "title": "Crear Comanda de Cocina",
       "description": "Crea una nueva comanda para mesa o para llevar.",
-      "tableSelection": "SelecciÃ³n de Mesa",
+      "tableSelection": "Seleccion de Mesa",
       "serviceType": "Tipo de Servicio",
       "tableService": "Servicio en Mesa",
       "toTakeHome": "Para Llevar",
@@ -1008,8 +1024,8 @@
       "totalItems": "Total Items",
       "totalAmount": "Monto Total",
       "createOrder": "Crear Comanda",
-      "noItems": "AÃºn no hay platos agregados",
-      "addDishes": "Agregar del MenÃº",
+      "noItems": "Aun no hay platos agregados",
+      "addDishes": "Agregar del Menu",
       "quantity": "Cant",
       "item": "Producto",
       "unitPrice": "Precio",
@@ -1022,12 +1038,12 @@
       "title": "Comandas de Cocina",
       "description": "Gestiona las comandas y actualiza su estado.",
       "pending": "Pendientes",
-      "inPreparation": "En PreparaciÃ³n",
+      "inPreparation": "En Preparacion",
       "ready": "Listas",
       "delivered": "Entregadas",
       "cancelled": "Anuladas",
-      "allOrders": "Todas las Ã“rdenes",
-      "markInPreparation": "Iniciar PreparaciÃ³n",
+      "allOrders": "Todas las Ordenes",
+      "markInPreparation": "Iniciar Preparacion",
       "markReady": "Marcar como Listo",
       "markDelivered": "Marcar como Entregado",
       "cancel": "Anular",
@@ -1058,33 +1074,33 @@
       "dateCreated": "Creado",
       "edit": "Editar",
       "delete": "Eliminar",
-      "confirmDelete": "Â¿EstÃ¡s seguro de eliminar esta orden?",
-      "confirmHeader": "Confirmar eliminaciÃ³n"
+      "confirmDelete": "Estas seguro de eliminar esta orden?",
+      "confirmHeader": "Confirmar eliminacion"
     },
     "tablesAndOccupancyPage": {
       "kicker": "Mesas",
-      "title": "Mesas y OcupaciÃ³n",
-      "description": "Visualiza el estado de ocupaciÃ³n de todas las mesas del restaurante.",
+      "title": "Mesas y Ocupacion",
+      "description": "Visualiza el estado de ocupacion de todas las mesas del restaurante.",
       "free": "Disponible",
       "occupied": "Ocupado",
       "all": "Todas",
       "capacity": "Capacidad",
-      "location": "UbicaciÃ³n",
+      "location": "Ubicacion",
       "tableNumber": "Mesa",
       "state": "Estado",
       "noTables": "No hay mesas disponibles",
       "totalTables": "Total Mesas",
       "freeTables": "Disponibles",
       "occupiedTables": "Ocupadas",
-      "searchPlaceholder": "Buscar mesas por nÃºmero o ubicaciÃ³n...",
+      "searchPlaceholder": "Buscar mesas por numero o ubicacion...",
       "allLocations": "Todas las Ubicaciones",
       "addTable": "Agregar Mesa",
       "confirmAddTable": "Agregar",
-      "confirmDeleteTable": "Â¿EstÃ¡s seguro de eliminar esta mesa?",
+      "confirmDeleteTable": "Estas seguro de eliminar esta mesa?",
       "confirmUpdateTable": "Actualizar Mesa",
       "cancel": "Cancelar",
       "locations": {
-        "main_hall": "SalÃ³n Principal",
+        "main_hall": "Salon Principal",
         "terrace": "Terraza",
         "bar": "Bar"
       },
@@ -1099,7 +1115,7 @@
     "shared": {
       "status": {
         "pending": "Pendiente",
-        "in_preparation": "En PreparaciÃ³n",
+        "in_preparation": "En Preparacion",
         "ready": "Listo",
         "delivered": "Entregado",
         "cancelled": "Anulado"
@@ -1121,19 +1137,19 @@
     "reportsPage": {
       "kicker": "Restaurante",
       "title": "Reportes",
-      "description": "EvoluciÃ³n de inventario, consumo, pedidos a proveedores, demanda e incidentes tÃ©rmicos.",
+      "description": "Evolucion de inventario, consumo, pedidos a proveedores, demanda e incidentes termicos.",
       "actions": {
         "exportCsv": "Exportar CSV",
         "exportPdf": "Exportar PDF"
       },
       "charts": {
-        "inventoryTitle": "EvoluciÃ³n de inventario",
-        "consumptionTitle": "Consumo por perÃ­odo",
+        "inventoryTitle": "Evolucion de inventario",
+        "consumptionTitle": "Consumo por periodo",
         "ordersTitle": "Pedidos por proveedor",
         "tempTitle": "Incidentes de temperatura",
         "summary": "Resumen de texto:",
-        "summaryDesc": "Resumen de texto del grÃ¡fico: {from} -> {to}",
-        "summaryValue": "Resumen de texto del grÃ¡fico: {value}",
+        "summaryDesc": "Resumen de texto del grafico: {from} -> {to}",
+        "summaryValue": "Resumen de texto del grafico: {value}",
         "month": "Mes"
       }
     }
@@ -1145,13 +1161,12 @@
     "previousState": "Estado Anterior",
     "newState": "Estado Nuevo",
     "dateChange": "Fecha Cambio",
-    "observation": "ObservaciÃ³n"
+    "observation": "Observacion"
   },
   "header": {
-    "settings": "ConfiguraciÃ³n",
-    "logout": "Cerrar sesiÃ³n",
+    "settings": "Configuracion",
+    "logout": "Cerrar sesion",
     "help": "Ayuda",
     "adminProfile": "Perfil de Administrador"
   }
 }
-

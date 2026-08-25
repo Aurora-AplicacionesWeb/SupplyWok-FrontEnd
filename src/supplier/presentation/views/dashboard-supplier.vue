@@ -7,7 +7,7 @@ import useOrdersStore from '../../../purchasing/application/orders.store.js';
 import useAnalyticsStore from '../../../analytics/application/analytics.store.js';
 import { iotStore } from '../../../iot/application/iot-store.js';
 import StatCard from '../../../shared/presentation/components/stat-card.vue';
-import SupplierActiveRoutesPanel from '../components/supplier-active-routes-panel.vue';
+import SupplierOrdersPanel from '../components/supplier-orders-panel.vue';
 import SupplierAggregateForecastCard from '../../../analytics/presentation/components/aggregate-forecast-card.vue';
 
 const { t } = useI18n();
@@ -76,44 +76,30 @@ const aggregateSummary = computed(() => {
     });
 });
 
-const activeRoutes = computed(() => {
+const highlightedOrders = computed(() => {
     const priorityWeight = {
         High: 3,
         Medium: 2,
         Low: 1
     };
 
-    return deliveryRoutes.value
-        .filter((route) => ['planned', 'in-progress'].includes(route.status))
+    return [...purchaseOrders.value]
         .sort((left, right) => {
-            const leftKey = `${left.date ?? ''} ${left.estimatedDeparture ?? ''}`;
-            const rightKey = `${right.date ?? ''} ${right.estimatedDeparture ?? ''}`;
-            return leftKey.localeCompare(rightKey);
+            const priorityGap = (priorityWeight[right.priority] ?? 0) - (priorityWeight[left.priority] ?? 0);
+            if (priorityGap !== 0) return priorityGap;
+
+            return String(right.orderDate ?? '').localeCompare(String(left.orderDate ?? ''));
         })
-        .slice(0, 3)
-        .map((route) => {
-            const matchedOrders = route.stops.flatMap((stop) => {
-                return purchaseOrders.value.filter((order) => stop.orderCodes?.includes(order.code));
-            });
-
-            const priority = matchedOrders.reduce((currentPriority, order) => {
-                return priorityWeight[order.priority] > priorityWeight[currentPriority] ? order.priority : currentPriority;
-            }, 'Low');
-
-            return {
-                id: route.id,
-                routeName: route.routeName,
-                priority: t(`supplier-management.dashboard.priority.${priority.toLowerCase()}`),
-                schedule: t('supplier-management.dashboard.routes.schedule', {
-                    stops: route.totalStops,
-                    departure: route.estimatedDeparture,
-                    arrival: route.estimatedArrival
-                }),
-                timestamp: t('supplier-management.dashboard.routes.date', {
-                    date: route.date
-                })
-            };
-        });
+        .slice(0, 4)
+        .map((order) => ({
+            id: order.id,
+            code: order.code,
+            restaurantName: order.restaurantName,
+            priority: order.priority,
+            status: order.status,
+            estimatedDate: order.estimatedDate,
+            itemsCount: order.items.length
+        }));
 });
 
 const isLoaded = computed(() => {
@@ -170,10 +156,10 @@ onMounted(() => {
         </section>
 
         <section class="dashboard-page__panels">
-            <SupplierActiveRoutesPanel
-                :title="t('supplier-management.dashboard.routes.title')"
-                :routes="activeRoutes"
-                :empty-text="isLoaded ? t('supplier-management.dashboard.routes.empty') : t('supplier-management.dashboard.loading')"
+            <SupplierOrdersPanel
+                :title="t('supplier-management.dashboard.orders.title')"
+                :orders="highlightedOrders"
+                :empty-text="isLoaded ? t('supplier-management.dashboard.orders.empty') : t('supplier-management.dashboard.loading')"
             />
 
             <SupplierAggregateForecastCard

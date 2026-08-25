@@ -409,6 +409,16 @@
       "subtitle": "管理报价、价格、单位和配送条件。",
       "add": "添加",
       "search": "搜索",
+      "filter": {
+        "category": "类别",
+        "all-categories": "所有类别"
+      },
+      "categories": {
+        "grains": "谷物",
+        "protein": "蛋白质",
+        "sauces": "酱料",
+        "seafood": "海鲜"
+      },
       "columns": {
         "product": "产品",
         "category": "类别",
@@ -424,6 +434,7 @@
       "form": {
         "product": "产品",
         "category": "类别",
+        "category-placeholder": "选择类别",
         "price": "价格",
         "unit": "单位",
         "delivery-conditions": "配送条件",
@@ -524,6 +535,11 @@
         "title": "汇总视图",
         "summary": "图表摘要: {from} -> {to}",
         "empty": "暂无预测数据。"
+      },
+      "orders": {
+        "title": "最近订单",
+        "summary": "预计交付: {estimatedDate} · {items} 个项目",
+        "empty": "暂无可显示订单。"
       },
       "priority": {
         "high": "高",

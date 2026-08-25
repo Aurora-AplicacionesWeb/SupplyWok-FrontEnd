@@ -15,10 +15,12 @@ const { catalogItems, catalogItemsLoaded } = storeToRefs(store);
 const { fetchCatalogItems, addCatalogItem, updateCatalogItem, deleteCatalogItem } = store;
 
 const searchQuery = ref('');
+const selectedCategory = ref('');
 const isFormOpen = ref(false);
 const isEditing = ref(false);
 const isDeleteDialogVisible = ref(false);
 const pendingDeleteItem = ref(null);
+const CATEGORY_VALUES = ['GRAINS', 'PROTEIN', 'SAUCES', 'SEAFOOD'];
 const unitOptions = [
   { label: 'KG', value: 'KG' },
   { label: 'LTR', value: 'LTR' },
@@ -33,13 +35,50 @@ const form = reactive({
   deliveryConditions: ''
 });
 
+function getCategoryValue(category) {
+  const rawCategory = String(category ?? '').trim();
+  const normalizedCategory = rawCategory.toUpperCase();
+  return CATEGORY_VALUES.includes(normalizedCategory) ? normalizedCategory : rawCategory;
+}
+
+function getCategoryLabel(category) {
+  const normalizedCategory = String(category ?? '').trim().toUpperCase();
+  const categoryLabels = {
+    GRAINS: t('supplier-management.catalog.categories.grains'),
+    PROTEIN: t('supplier-management.catalog.categories.protein'),
+    SAUCES: t('supplier-management.catalog.categories.sauces'),
+    SEAFOOD: t('supplier-management.catalog.categories.seafood')
+  };
+
+  return categoryLabels[normalizedCategory] ?? String(category ?? '').trim();
+}
+
+const categoryOptions = computed(() => {
+  const dynamicCategories = [...new Set(
+    catalogItems.value
+      .map((item) => getCategoryValue(item.category))
+      .filter((category) => category && !CATEGORY_VALUES.includes(category))
+  )];
+
+  return [
+    ...CATEGORY_VALUES,
+    ...dynamicCategories
+  ].map((value) => ({
+    value,
+    label: getCategoryLabel(value)
+  }));
+});
+
 const filteredCatalogItems = computed(() => {
   const query = searchQuery.value.trim().toLowerCase();
-  if (!query) return catalogItems.value;
+  const categoryFilter = selectedCategory.value;
 
   return catalogItems.value.filter((item) => {
-    return [item.name, item.category, item.unit, item.deliveryConditions]
+    const matchesCategory = !categoryFilter || getCategoryValue(item.category) === categoryFilter;
+    const matchesQuery = !query || [item.name, item.category, getCategoryLabel(item.category), item.unit, item.deliveryConditions]
       .some((value) => String(value).toLowerCase().includes(query));
+
+    return matchesCategory && matchesQuery;
   });
 });
 
@@ -75,7 +114,7 @@ function openEditForm(item) {
 function hydrateEditForm(item) {
   form.id = item.id;
   form.name = item.name;
-  form.category = item.category;
+  form.category = getCategoryValue(item.category);
   form.price = item.price;
   form.unit = item.unit;
   form.deliveryConditions = item.deliveryConditions;
@@ -94,7 +133,7 @@ async function saveCatalogItem() {
   const item = new CatalogItem({
     id: form.id,
     name: form.name.trim(),
-    category: form.category.trim(),
+    category: getCategoryValue(form.category),
     price: Number(form.price),
     unit: form.unit.trim(),
     deliveryConditions: form.deliveryConditions.trim()
@@ -189,7 +228,12 @@ watch(
         </label>
         <label class="catalog-form__field">
           <span>{{ t('supplier-management.catalog.form.category') }}</span>
-          <pv-input-text v-model="form.category" />
+          <select v-model="form.category">
+            <option disabled value="">{{ t('supplier-management.catalog.form.category-placeholder') }}</option>
+            <option v-for="option in categoryOptions" :key="option.value" :value="option.value">
+              {{ option.label }}
+            </option>
+          </select>
         </label>
         <label class="catalog-form__field">
           <span>{{ t('supplier-management.catalog.form.price') }}</span>
@@ -233,8 +277,21 @@ watch(
     </form>
 
     <div class="catalog-page__search">
-      <label for="catalog-search">{{ t('supplier-management.catalog.search') }}</label>
-      <pv-input-text id="catalog-search" v-model="searchQuery" type="search" />
+      <div class="catalog-page__filters">
+        <label class="catalog-page__search-field" for="catalog-search">
+          <span>{{ t('supplier-management.catalog.search') }}</span>
+          <pv-input-text id="catalog-search" v-model="searchQuery" type="search" />
+        </label>
+        <label class="catalog-page__search-field" for="catalog-category-filter">
+          <span>{{ t('supplier-management.catalog.filter.category') }}</span>
+          <select id="catalog-category-filter" v-model="selectedCategory">
+            <option value="">{{ t('supplier-management.catalog.filter.all-categories') }}</option>
+            <option v-for="option in categoryOptions" :key="option.value" :value="option.value">
+              {{ option.label }}
+            </option>
+          </select>
+        </label>
+      </div>
     </div>
 
     <pv-datatable
@@ -244,7 +301,11 @@ watch(
       responsive-layout="scroll"
     >
       <pv-column field="name" :header="t('supplier-management.catalog.columns.product')" />
-      <pv-column field="category" :header="t('supplier-management.catalog.columns.category')" />
+      <pv-column :header="t('supplier-management.catalog.columns.category')">
+        <template #body="{ data }">
+          {{ getCategoryLabel(data.category) }}
+        </template>
+      </pv-column>
       <pv-column :header="t('supplier-management.catalog.columns.price')">
         <template #body="{ data }">
           {{ formatPrice(data.price) }}
@@ -391,14 +452,36 @@ watch(
 
 .catalog-page__search label {
   display: block;
-  margin-bottom: 8px;
   color: #312820;
   font-size: 12px;
   font-weight: 800;
 }
 
+.catalog-page__filters {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
+  gap: 14px;
+}
+
+.catalog-page__search-field {
+  display: flex !important;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.catalog-page__search-field span {
+  display: block;
+}
+
 .catalog-page__search :deep(.p-inputtext) {
   min-height: 42px;
+}
+
+.catalog-page__search select {
+  width: 100%;
+  min-height: 42px;
+  color: #344457;
+  font: inherit;
 }
 
 .catalog-table :deep(.p-datatable-table) {
@@ -445,6 +528,10 @@ watch(
 
   .catalog-form__field--wide {
     grid-column: span 1;
+  }
+
+  .catalog-page__filters {
+    grid-template-columns: 1fr;
   }
 }
 </style>
